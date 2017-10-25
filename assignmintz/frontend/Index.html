@@ -1,3 +1,5 @@
+@model 2017-group-11.assignmintz.frontend.Models
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,9 +117,20 @@
         </div>
 
 
-
+        <div class="classesContainer">
+            <ul class="list-unstyled components">
+                <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
+                @{
+                    foreach(var course in myClasses)
+                    {
+                        <li>
+                            <a> @course </a>
+                        </li>
+                    }
+                }
+            </ul>
         <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
+        <!--<ul class="list-unstyled components">
             <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
             <li>
                 <a id="class1">Class 1</a>
@@ -134,7 +147,8 @@
             <li>
                 <a>Class 5</a>
             </li>
-        </ul>
+        </ul>-->
+        </div>
     </nav>
 
     <div id="content">
@@ -157,7 +171,7 @@
         $('#sidebar').niceScroll({
             cursorcolor: '#53619d', // Changing the scrollbar color
             cursorwidth: 4, // Changing the scrollbar width
-            cursorborder: 'none', // Rempving the scrollbar border
+            cursorborder: 'none' // Rempving the scrollbar border
         });
 /*
         $('#sidebarCollapse').on('click', function () {
