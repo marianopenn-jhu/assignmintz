@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>AssignMintz</title>
 
     <meta name="author" content="Emily Johnson; Group 11" />
     <meta name="description" content="Basic menu page." />
 
-
     <style>
-
         :root{
             --proPicSize: 50px;
         }
@@ -68,10 +66,8 @@
             background: #6d7fcc;
         }
 
-
         a[data-toggle="collapse"] {
             position: relative;
-
         }
 
         a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
@@ -88,97 +84,85 @@
             color: pink;
         }
 
-
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
             background: #6d7fcc;
         }
-
     </style>
 
 </head>
 <body>
 
-<div class="wrapper">
+  <div class="wrapper">
 
-    <nav id="sidebar">
-        <div id="userPicture">
+      <nav id="sidebar">
+          <div id="userPicture">
 
-        </div>
-        <div id="settings logo">
+          </div>
+          <div id="settings logo">
 
-        </div>
-        <!-- Sidebar Header -->
-        <div class="sidebar-header">
-            <h3 style="color: white"> Welcome <span id="username"> </span> </h3>
-            <div id="app"></div>
-            <div id="root"></div>
-        </div>
+          </div>
+          <!-- Sidebar Header -->
+          <div class="sidebar-header">
+              <h3 style="color: white"> Welcome <span id="username"> </span> </h3>
+          </div>
 
+          <!-- Sidebar Links -->
+          <ul class="list-unstyled components">
+              <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
+              <li>
+                  <a id="class1">Class 1</a>
+              </li>
+              <li>
+                  <a>Class 2</a>
+              </li>
+              <li>
+                  <a>Class 3</a>
+              </li>
+              <li>
+                  <a>Class 4</a>
+              </li>
+              <li>
+                  <a>Class 5</a>
+              </li>
+          </ul>
+      </nav>
 
+      <div id="content">
+        <div id = "app"></div>
+      </div>
+  </div>
 
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
-            <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
-            <li>
-                <a id="class1">Class 1</a>
-            </li>
-            <li>
-                <a>Class 2</a>
-            </li>
-            <li>
-                <a>Class 3</a>
-            </li>
-            <li>
-                <a>Class 4</a>
-            </li>
-            <li>
-                <a>Class 5</a>
-            </li>
-        </ul>
-    </nav>
+  <script src="./app/index.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
-    <div id="content">
+  <script type="text/javascript"  >
+      $(document).ready(function () {
 
-    </div>
+          $('#sidebar').niceScroll({
+              cursorcolor: '#53619d', // Changing the scrollbar color
+              cursorwidth: 4, // Changing the scrollbar width
+              cursorborder: 'none', // Rempving the scrollbar border
+          });
+  /*
+          $('#sidebarCollapse').on('click', function () {
+              // open or close navbar
+              $('#sidebar').toggleClass('active');
+              // close dropdowns
+              $('.collapse.in').toggleClass('in');
+              // and also adjust aria-expanded attributes we use for the open/closed arrows
+              // in our CSS
+              $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+          });*/
 
-</div>
-
-<script src="./test.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
-
-<script type="text/javascript"  >
-
-    $(document).ready(function () {
-
-        $('#sidebar').niceScroll({
-            cursorcolor: '#53619d', // Changing the scrollbar color
-            cursorwidth: 4, // Changing the scrollbar width
-            cursorborder: 'none', // Rempving the scrollbar border
-        });
-/*
-        $('#sidebarCollapse').on('click', function () {
-            // open or close navbar
-            $('#sidebar').toggleClass('active');
-            // close dropdowns
-            $('.collapse.in').toggleClass('in');
-            // and also adjust aria-expanded attributes we use for the open/closed arrows
-            // in our CSS
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });*/
-
-    $('#username').text("Username");
-    $('#class1').text("First Class");
+      $('#username').text("Username");
+      $('#class1').text("First Class");
 
 
-    });
-
-</script>
-<script type="text/javascript" src="transformed.js"></script></body>
+      });
+  </script>
+<script type="text/javascript" src="index.js"></script></body>
 </html>
