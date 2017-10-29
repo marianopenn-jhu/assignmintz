@@ -6,4 +6,5 @@ This script will create and initialize a virtual environment with all the
 required packages. It will also create a database named 'assignmintz' and 
 initialize the database with the required tables.
 You must also have the react framework installed.
+You must also have install npm.
 
