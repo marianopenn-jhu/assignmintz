@@ -1,9 +1,6 @@
-var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: __dirname + '/app/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
+var path = require('path')
+var webpack = require('webpack')
+var BundleTracker = require('webpack-bundle-tracker')
 
 var config = {
    entry: __dirname + '/app/index.js',
@@ -32,7 +29,21 @@ var config = {
       ]
    },
 
-   plugins: [HTMLWebpackPluginConfig]
+   plugins: [
+        new BundleTracker({filename: './webpack-stats.json'}),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        })
+    ],
+
+    resolve: {
+        //tells webpack where to look for modules
+        modulesDirectories: ['node_modules'],
+        //extensions that should be used to resolve modules
+        extensions: ['', '.js', '.jsx']
+    }  
 }
 
 module.exports = config;
