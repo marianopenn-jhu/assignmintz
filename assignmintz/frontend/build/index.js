@@ -967,13 +967,13 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(32);
+var _UserInfoForm = __webpack_require__(32);
 
-var _App2 = _interopRequireDefault(_App);
+var _UserInfoForm2 = _interopRequireDefault(_UserInfoForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_UserInfoForm2.default, null), document.getElementById('user_info'));
 
 /***/ }),
 /* 16 */
@@ -21182,7 +21182,7 @@ module.exports = function() {
 
 
 Object.defineProperty(exports, "__esModule", {
-   value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21199,31 +21199,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-   _inherits(App, _React$Component);
+var UserInfoForm = function (_React$Component) {
+  _inherits(UserInfoForm, _React$Component);
 
-   function App() {
-      _classCallCheck(this, App);
+  function UserInfoForm(props) {
+    _classCallCheck(this, UserInfoForm);
 
-      return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-   }
+    var _this = _possibleConstructorReturn(this, (UserInfoForm.__proto__ || Object.getPrototypeOf(UserInfoForm)).call(this, props));
 
-   _createClass(App, [{
-      key: 'render',
-      value: function render() {
-         return _react2.default.createElement(
-            'div',
-            null,
-            'Hello World ',
-            1 + 1
-         );
-      }
-   }]);
+    _this.state = { user: {} };
+    _this.onSubmit = _this.onSubmit.bind(_this);
+    return _this;
+  }
 
-   return App;
+  _createClass(UserInfoForm, [{
+    key: 'onSubmit',
+    value: function onSubmit(e) {
+      var url = 'http://localhost:8000/backend/v1/user/';
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_name: selfs.ref.user_name,
+          name: self.refs.name,
+          email: self.refs.email,
+          passwd_hash: self.refs.passwd_hash,
+          role: self.refs.role
+        })
+      }).then(function (response) {
+        if (response >= 400) {
+          throw new Error("Bad response code!");
+        }
+        return results.json();
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.onSubmit },
+          _react2.default.createElement('input', { type: 'text', placeholder: 'User Name', ref: 'user_name' }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Name', ref: 'name' }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Email', ref: 'email' }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Password', ref: 'passwd_hash' }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Role', ref: 'role' }),
+          _react2.default.createElement('input', { type: 'submit' })
+        )
+      );
+    }
+  }]);
+
+  return UserInfoForm;
 }(_react2.default.Component);
 
-exports.default = App;
+exports.default = UserInfoForm;
 
 /***/ })
 /******/ ]);
