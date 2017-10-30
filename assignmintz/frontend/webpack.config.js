@@ -33,13 +33,7 @@ var config = {
    },
 
    plugins: [
-        HTMLWebpackPluginConfig,
-        new BundleTracker({filename: './webpack-stats.json'}),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery'
-        })
+        HTMLWebpackPluginConfig
     ]
 }
 
