@@ -10,7 +10,7 @@ class UserResource(ModelResource):
             queryset = User.objects.all()
             resource_name = 'user'
             authorization = Authorization()
-            allowed_methods = ['post']
+            allowed_methods = ['post', 'get']
             validation = UserValidation()
 
 class AssignmentResource(ModelResource):
@@ -19,7 +19,7 @@ class AssignmentResource(ModelResource):
             resource_name = 'professor/assignment'
             authorization = Authorization()
             allowed_methods = ['get', 'post', 'delete']
-            excludes = ['actual_difficulty', 'actual_time', 'priority', 'percent_complete', 'visible', 'description']
+            excludes = ['due_date', 'actual_difficulty', 'actual_time', 'priority', 'percent_complete', 'visible', 'description']
 
 class SubTaskResource(ModelResource):
     class Meta:
