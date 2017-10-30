@@ -5,6 +5,7 @@ import psycopg2
 class UserValidation(Validation):
     def is_valid(self, bundle, request):
         print(str(bundle.data.get('user_name')))
+        errs = {}
         #print(str(bundle.data.keys()[0]))
         # for key, value in bundle.data.items():
         #     print(str(value))
@@ -15,6 +16,8 @@ class UserValidation(Validation):
         #sql = 'SELECT user_name from backend_user where user_name=%s'
         cur.execute('SELECT * from backend_user where user_name=\''+query_name+'\';')
         if cur.fetchone() is not None:
-            return 'User name already exists'
+            errs[0]='User name already exists'
+            return errs
         cur.close()
         conn.close()
+        return errs

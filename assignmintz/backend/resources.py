@@ -11,5 +11,4 @@ class UserResource(ModelResource):
             resource_name = 'user'
             authorization = Authorization()
             allowed_methods = ['post']
-            print('in here')
             validation = UserValidation()
