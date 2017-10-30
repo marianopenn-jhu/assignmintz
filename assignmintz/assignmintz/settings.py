@@ -79,8 +79,13 @@ WSGI_APPLICATION = 'assignmintz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+<<<<<<< HEAD
         'NAME': 'emilyjohnson',
         'USER': 'emilyjohnson',
+=======
+        'NAME': 'assignmintz',
+        'USER': 'postgres',
+>>>>>>> d464f9ed21a1221292cb80fa13c6844b892b1707
         'HOST': 'localhost',
         'PORT': '5432',
     }
