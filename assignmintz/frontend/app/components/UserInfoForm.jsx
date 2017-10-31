@@ -8,20 +8,18 @@ class UserInfoForm extends React.Component {
   }
 
   onSubmit(event) {
-    fetch("http://localhost:8000/backend/v1/user/", {
-      mode: 'no-cors',
+    fetch("https://cors-anywhere.herokuapp.com/" + "http://localhost:8000/backend/v1/user/", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      credentials: 'same-origin',
       body: JSON.stringify({
-        user_name: "ronnie5",
+        user_name: "ro",
       	name: "testname",
       	email: "testemail@asdasd.com",
       	passwd_hash: "pass",
-      	role: "student",
+      	role: "student"
       })
     })
     .then((response) => {
@@ -34,11 +32,13 @@ class UserInfoForm extends React.Component {
       }
     })
     .then((responseText) => {
-      alert(responseText);
+      console.log(responseText);
+      return responseText;
     })
     .catch((error) =>
     {
       alert(error);
+      return error;
     });
   }
 
