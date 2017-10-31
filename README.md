@@ -12,7 +12,6 @@ To build the frontend:
 (3) Type 'npm run build' in your terminal
 (4) Type 'npm run start' in your terminal
 (5) Navigate to localhost:8080/build in your browser to see the running app.
-Disclaimer: Due to some issue with CORS, the application will NOT talk to the
-server in Google Chrome. It will still run, but it will not function as
-it is intended to. This problem will be resolved by the next iteration,
-but we caught it too late for this iteration.
+Disclaimer: Due to some issue with CORS, the front-end will NOT talk to the
+backend in common browsers. However, we are able to make queries to the back-end with POSTMAN.
+This problem will be resolved by the next iteration.
