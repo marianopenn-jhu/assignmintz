@@ -15,3 +15,15 @@ To build and run through command line:
 You must also have the react framework installed.
 You must also have install npm.
 
+
+
+To build the frontend:
+(1) Install npm onto your machine
+(2) Navigate to assignmintz/frontend
+(3) Type 'npm run build' in your terminal
+(4) Type 'npm run start' in your terminal
+(5) Navigate to localhost:8080/build in your browser to see the running app.
+Disclaimer: Due to some issue with CORS, the application will NOT talk to the
+server in Google Chrome. It will still run, but it will not function as
+it is intended to. This problem will be resolved by the next iteration,
+but we caught it too late for this iteration.

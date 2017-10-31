@@ -21207,29 +21207,43 @@ var UserInfoForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (UserInfoForm.__proto__ || Object.getPrototypeOf(UserInfoForm)).call(this, props));
 
-    _this.state = { code: 0 };
+    _this.state = {
+      user_name: '',
+      name: '',
+      email: '',
+      passwd_has: '',
+      role: ''
+    };
     _this.onSubmit = _this.onSubmit.bind(_this);
+    _this.onChange = _this.onChange.bind(_this);
     return _this;
   }
 
   _createClass(UserInfoForm, [{
+    key: 'onChange',
+    value: function onChange(event) {
+      var state = this.states;
+      state[e.target.name] = e.target.value;
+      this.setState(state);
+    }
+  }, {
     key: 'onSubmit',
     value: function onSubmit(event) {
+      var _state = this.state,
+          user_name = _state.user_name,
+          name = _state.name,
+          email = _state.email,
+          passwd_hash = _state.passwd_hash,
+          role = _state.role;
+
+
       fetch("http://localhost:8000/backend/v1/user/", {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        credentials: 'same-origin',
-        body: JSON.stringify({
-          user_name: "ronnie5",
-          name: "testname",
-          email: "testemail@asdasd.com",
-          passwd_hash: "pass",
-          role: "student"
-        })
+        body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd_hash: passwd_hash, role: role })
       }).then(function (response) {
         if (response.status >= 400) {
           var error = new Error(response.statusText);
@@ -21239,26 +21253,27 @@ var UserInfoForm = function (_React$Component) {
           return response.json();
         }
       }).then(function (responseText) {
-        alert(responseText);
+        console.log(responseText);
+        return responseText;
       }).catch(function (error) {
         alert(error);
+        return error;
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      console.log("Rendering...");
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'form',
           { onSubmit: this.onSubmit },
-          _react2.default.createElement('input', { type: 'text', placeholder: 'User Name', ref: 'user_name' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Name', ref: 'name' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Email', ref: 'email' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Password', ref: 'passwd_hash' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Role', ref: 'role' }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'User Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Email', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Password', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', placeholder: 'Role', onChange: this.onChange }),
           _react2.default.createElement('input', { type: 'submit' })
         ),
         _react2.default.createElement(

@@ -3,24 +3,33 @@ import React from 'react';
 class UserInfoForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { code : 0 };
+    this.state = {
+      user_name: '',
+      name: '',
+      email: '',
+      passwd_has: '',
+      role: ''
+    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(event) {
+    const state = this.states
+    state[e.target.name] = e.target.value;
+    this.setState(state);
   }
 
   onSubmit(event) {
-    fetch("https://cors-anywhere.herokuapp.com/" + "http://localhost:8000/backend/v1/user/", {
+    const {user_name, name, email, passwd_hash, role} = this.state;
+
+    fetch("http://localhost:8000/backend/v1/user/", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        user_name: "ro",
-      	name: "testname",
-      	email: "testemail@asdasd.com",
-      	passwd_hash: "pass",
-      	role: "student"
-      })
+      body: JSON.stringify({user_name, name, email, passwd_hash, role})
     })
     .then((response) => {
       if(response.status >= 400){
@@ -43,15 +52,14 @@ class UserInfoForm extends React.Component {
   }
 
    render() {
-     console.log("Rendering...")
       return (
         <div>
            <form onSubmit={this.onSubmit}>
-             <input type="text" placeholder="User Name" ref="user_name"/>
-             <input type="text" placeholder="Name" ref="name"/>
-             <input type="text" placeholder="Email" ref="email"/>
-             <input type="text" placeholder="Password" ref="passwd_hash"/>
-             <input type="text" placeholder="Role" ref="role"/>
+             <input type="text" placeholder="User Name" onChange={this.onChange}/>
+             <input type="text" placeholder="Name" onChange={this.onChange}/>
+             <input type="text" placeholder="Email" onChange={this.onChange}/>
+             <input type="text" placeholder="Password" onChange={this.onChange}/>
+             <input type="text" placeholder="Role" onChange={this.onChange}/>
              <input type="submit" />
            </form>
            <p> {this.state.code} </p>
