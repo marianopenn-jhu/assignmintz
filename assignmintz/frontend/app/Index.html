@@ -11,7 +11,7 @@
     <style>
 
         :root{
-            --proPicSize: 50px;
+            --proPicSize: 55px;
         }
 
         .wrapper {
@@ -32,13 +32,13 @@
             height: var(--proPicSize);
             background-color: #1b6d85;
             margin: 5%;
-
+            display: inline-block;
+            
         }
 
         #viewPanel{
-            background-color: red;
+            background-color: mintcream;
             width: 100%;
-            margin:10px;
         }
 
         #logIn{
@@ -106,26 +106,64 @@
             margin: 10px;
         }
         #loginSpan{
+            top: 50%;
             float: right;
             display: inline-block;
+            transform: translateY(50%);
+            margin: 10px;
         }
+        #mainHeader{
+            width: inherit;
+            background-color: #e5ffeb;
+            padding: 5px;
+        }
+        button{
+            width: 100%;
+        }
+        #addNewClass{
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            cursor:pointer;
+            overflow: hidden;
+            outline:none;
+            transform: translateY(-20%);
+        }
+        #newClassDiv{
+            position: relative;
+            top: 40%;
+            bottom: 10px;
+        }
+        #settingsLogo{
+            top: 50%;
+            float: left;
+            display: inline-block;
+            transform: translateY(50%);
+            margin: 10px;        }
 
     </style>
 
 </head>
 
 <body>
+
 <div class="wrapper">
 
     <nav id="sidebar">
-        <div>
+        <span style="width: inherit">
+            <div id="settingsLogo">
+                <button type="button" class="btn">
+                    <span class="glyphicon glyphicon-cog">
+                    </span>
+                </button>
+            </div>
             <div id="userPicture">
 
             </div>
             <span id="loginSpan">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Login</button>
+                <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Login</button>
             </span>
-        </div>
+        </span>
 
         <!-- Sidebar Header -->
         <div class="sidebar-header">
@@ -133,8 +171,9 @@
             <div id="app"></div>
             <div id="root"></div>
         </div>
-
-
+        <div style="background-color: mintcream">
+            <br>
+        </div>
         <div class="classesContainer">
             <ul class="list-unstyled components">
                 <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
@@ -142,6 +181,14 @@
                             <a id="class1"> @course </a>
                         </li>
             </ul>
+        </div>
+
+        <div id="newClassDiv" style="background-color: #848484">
+            <button id="addNewClass">
+                <br>
+                <span class="glyphicon glyphicon-plus"></span>
+                <br>
+            </button>
         </div>
     </nav>
 
@@ -157,7 +204,6 @@
                 </div>
                 <div class="modal-body">
                   <div id="user_info"></div>
-                  <!--
                         <form id="logInForm"}>
                             <div class="form-group input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -175,40 +221,44 @@
                             </div>
 
                         </form>
-                      -->
-
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
         </div>
+        </div>
     </div>
 
     <div id="viewPanel">
 
-<!--
-            <div id="logIn">
+        <header id="mainHeader">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                    <input id="checkBox" type="checkbox"> Show Tests
+                </div>
+                <div class="btn-group">
+                    <input id="checkBox" type="checkbox"> Show Quizzes
+                </div>
+                <div class="btn-group">
+                    <input id="checkBox" type="checkbox"> Show Projects
+                </div>
+                <div class="btn-group">
+                    <input id="checkBox" type="checkbox"> Show Class Schedule
+                </div>
+                <div class="btn-group">
+                    <SearchBar
+                            noIcon
+                            onChangeText={someMethod}
+                            placeholder='Type Here...' >
+                        searchbar should go here
+                    </SearchBar>
+                </div>
+            </div>
 
-                <form>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input class="form-control" type="text" name='username' placeholder="username"/>
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input class="form-control" type="password" name='password' placeholder="password"/>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-def btn-block">Login</button>
-                    </div>
-                    <div class="form-group text-center">
-                        <a href="#">Forgot Password</a>
-                    </div>
 
-                </form>
-            </div>-->
+        </header>
+
     </div>
 
 </div>
@@ -220,6 +270,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
 <script type="text/javascript">
+
+    import { SearchBar } from 'react-native-elements'
 
     $(document).ready(function () {
 
