@@ -14,7 +14,7 @@ To build and run through command line:  <br />
 %	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source run.sh <br />
 
 
-If you also have npm installed, <br />
+You can also build using npm <br />
 To build the frontend: <br />
 (1) Install npm onto your machine <br />
 (2) Navigate to assignmintz/frontend <br />
