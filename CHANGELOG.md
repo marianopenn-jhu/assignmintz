@@ -1,7 +1,7 @@
-## Iteration 1: 2017-10-03
+## Iteration 3: 10-30-2017
 ### Added
 - Build automation for both backend and frontend
-- ReactJS to the project
+- ReactJS added to the project
 - Server code for:
   - User Creation/Retrieval/Validation
   - Assignment Creation
