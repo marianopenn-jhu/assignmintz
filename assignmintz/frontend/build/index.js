@@ -21213,18 +21213,16 @@ var UserInfoForm = function (_React$Component) {
   }
 
   _createClass(UserInfoForm, [{
-    key: 'onSubmit',
+    key: "onSubmit",
     value: function onSubmit(event) {
-      fetch("http://localhost:8000/backend/v1/user/", {
-        mode: 'no-cors',
+      fetch("https://cors-anywhere.herokuapp.com/" + "http://localhost:8000/backend/v1/user/", {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        credentials: 'same-origin',
         body: JSON.stringify({
-          user_name: "ronnie5",
+          user_name: "ro",
           name: "testname",
           email: "testemail@asdasd.com",
           passwd_hash: "pass",
@@ -21239,34 +21237,36 @@ var UserInfoForm = function (_React$Component) {
           return response.json();
         }
       }).then(function (responseText) {
-        alert(responseText);
+        console.log(responseText);
+        return responseText;
       }).catch(function (error) {
         alert(error);
+        return error;
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       console.log("Rendering...");
       return _react2.default.createElement(
-        'div',
+        "div",
         null,
         _react2.default.createElement(
-          'form',
+          "form",
           { onSubmit: this.onSubmit },
-          _react2.default.createElement('input', { type: 'text', placeholder: 'User Name', ref: 'user_name' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Name', ref: 'name' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Email', ref: 'email' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Password', ref: 'passwd_hash' }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Role', ref: 'role' }),
-          _react2.default.createElement('input', { type: 'submit' })
+          _react2.default.createElement("input", { type: "text", placeholder: "User Name", ref: "user_name" }),
+          _react2.default.createElement("input", { type: "text", placeholder: "Name", ref: "name" }),
+          _react2.default.createElement("input", { type: "text", placeholder: "Email", ref: "email" }),
+          _react2.default.createElement("input", { type: "text", placeholder: "Password", ref: "passwd_hash" }),
+          _react2.default.createElement("input", { type: "text", placeholder: "Role", ref: "role" }),
+          _react2.default.createElement("input", { type: "submit" })
         ),
         _react2.default.createElement(
-          'p',
+          "p",
           null,
-          ' ',
+          " ",
           this.state.code,
-          ' '
+          " "
         )
       );
     }
