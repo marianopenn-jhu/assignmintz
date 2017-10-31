@@ -3,3 +3,5 @@
 assignmintz/backend/__pycache__/
 assignmintz/assignmintz/__pycache__/
 assignmintz/backend/migrations/
+*.pyc
+*.pyo
