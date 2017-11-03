@@ -1,5 +1,8 @@
 deploy:
   language: python
+  python:
+      - "3.4"
+      - "3.6"
   provider: heroku
   api_key:
     secure: gNfVsa61RlWz7C4FZ9w0zK6YmEsNVtrsYu0c1xICM+/QIDxTrSs93BmTx40VJDBsM0jN2yAn9yVYr20XmNfP/T/v07EEtEWx5WckUMdEgn6b2bihLA4YIsCvIddLqAZoMC7su7NIBXvezLurPwEZiY1cB0BlwPyvyXYV3pJS6m6y/7lscgJK9DYcwHG6Fwrl9Dbs32ae0Yy/b1dkdRlgTmAtik1E/j/+M2Gq5fC5O4crgJZ/let+Cg39aOpCPUDoQhJGnzlZ9NsoMdidNSh2lbloxBsz5svWL2znVXmq+3x+ByKWK2asL+k2iyrkyIfwccPoYvyEr/NvzCZoPOWxNOBZrFA+uf2UooYF9hrl//xVTK4jgyioxyFsnF0WY120zmZ1pS771CgpBWQHoLXuJECtKrE24/t7SKAs2GzUurdTGPX8MV/G/unycz6f549LDeAX4y+mF7yqp3XsawISx4intG/+CTEsuj+Oef/NSecX6tfo/rZ3E+z0nz5c80XLQt6JIJKQWyspJrMq0k5Pz18fhPJhu3hqo10j1QvA+4I8RMsD9hT3YiWnvazlOtWBqVg327Q4Hx7KT1iu7k5i7sDe7SSGNxA+xwrNjVzcUd5wAh9xTt+YJSPOZrWZ9qKHTZpB4ASP0r2yZ42WJ16w5GzYL8pwsfig+WHleHmE7GE=
@@ -7,6 +10,8 @@ deploy:
     - postgresql
   before_script:
     - psql -c 'create database assignmintz;' -U postgres
+  install:
+    - source install.sh
   app: assignmintz
   on:
     repo: jhu-oose/2017-group-11
