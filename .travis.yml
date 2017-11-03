@@ -11,7 +11,5 @@ deploy:
   repo: jhu-oose/2017-group-11
 services:
 - postgresql
-before_script:
-- psql -c 'create database assignmintz;' -U postgres
 install:
 - source install.sh
