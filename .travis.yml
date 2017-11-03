@@ -12,8 +12,6 @@ deploy:
     - psql -c 'create database assignmintz;' -U postgres
   install:
     - source install.sh
-  script:
-    - pytest
   app: assignmintz
   on:
     repo: jhu-oose/2017-group-11
