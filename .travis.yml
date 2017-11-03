@@ -12,6 +12,6 @@ deploy:
 services:
 - postgresql
 install:
-- source install.sh
+- source test-install.sh
 script:
 - python3 assignmintz/backend/tests.py
