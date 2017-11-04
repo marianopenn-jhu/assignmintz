@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Landing Page</title>
+<meta charset="UTF-8">
+<title>Landing Page</title>
     <!--class: cont_centrar-->
     <link rel="stylesheet" href="content/landing.css">
 
@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
 </head>
 <body>
 
@@ -24,15 +28,15 @@
 
         <div class="AccountChooser">
             <ul class="nav nav-pills nav-justified">
-                <li style="width: 300px;"><a href="#">Student</a></li>
+                <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
                 <li></li>
-                <li style="width: 300px;"><a href="#">Professor</a></li>
+                <li id="professor" style="width: 300px;"><a href="#">Professor</a></li>
             </ul>
         </div>
 
     </div>
 
-    <div class="cont_centrar" style="visibility: hidden">
+    <div id="StudentLogin" class="cont_centrar" style="visibility: hidden">
         <div class="cont_login">
             <form action="">
                 <div class="cont_tabs_login">
@@ -71,6 +75,13 @@
 
 </div>
 
+<script>
+    function studentClick() {
+        document.getElementById("StudentLogin").style.visibility = "visible";
+    }
+
+
+</script>
 
 
 </body>
