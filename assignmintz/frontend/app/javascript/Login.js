@@ -1,3 +1,4 @@
+
 function sign_up() {
   var inputs = document.querySelectorAll('.input_form_sign');
   document.querySelectorAll('.ul_tabs > li')[0].className="";
