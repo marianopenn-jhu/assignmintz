@@ -5,24 +5,14 @@
     <meta name="author" content="Emily Johnson and Matt Kosarek; Group 11" />
 <title>Landing Page</title>
     <!--class: cont_centrar-->
-    <link rel="stylesheet" href="content/landing.css">
+    <link rel="stylesheet" href="../css/landing.css">
 
     <!--class: AccountChooser-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/Login.css">
+    <link rel="stylesheet" href="../css/Login.css">
 
 
     <script>
-        /*$(document).ready(function(){
-    $("button").click(function(){
-        $("div").animate({
-            top: '50px',
-            opacity: '0.5',
-            height: '150px',
-            width: '150px'
-        });
-    });
-});*/
         function studentClick() {
 
             document.getElementById("accountSelect").style.visibility = "hidden";
@@ -39,13 +29,29 @@
                     /*elem.style.left = pos + 'px';*/
                 }
             }
-            setTimeout(logginVisible, 1000);
+            setTimeout(loginVisible, 1000);
 
         }
-        function logginVisible() {
+        function loginVisible() {
             document.getElementById("StudentLogin").style.visibility = "visible";
         }
-
+        function professorClick() {
+            //need to clarify PROFESSOR
+            document.getElementById("accountSelect").style.visibility = "hidden";
+            var elem = document.getElementById("landing");
+            var pos = 200;
+            var id = setInterval(frame, 5);
+            function frame() {
+                if (pos == 40) {
+                    clearInterval(id);
+                } else {
+                    pos--;
+                    elem.style.top = pos + 'px';
+                    /*elem.style.left = pos + 'px';*/
+                }
+            }
+            setTimeout(loginVisible, 1000);
+        }
 
     </script>
 
@@ -65,7 +71,7 @@
             <ul class="nav nav-pills nav-justified">
                 <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
                 <li></li>
-                <li id="professor" style="width: 300px;"><a href="#">Professor</a></li>
+                <li id="professor" onclick="professorClick()" style="width: 300px;"><a href="#">Professor</a></li>
             </ul>
         </div>
 
