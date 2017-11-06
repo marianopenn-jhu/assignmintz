@@ -1,0 +1,123 @@
+
+* {
+    margin: 0px auto;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root{
+    --proPicSize: 55px;
+}
+
+.wrapper {
+    display: flex;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);
+    /*background-color: rgb(177, 217, 231);*/
+}
+h3 {
+    text-align: center;
+}
+#userPicture {
+    width: var(--proPicSize);
+    height: var(--proPicSize);
+    background-color: #1b6d85;
+    margin: 5%;
+    display: inline-block;
+
+}
+
+#viewPanel{
+    background-color: mintcream;
+    /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
+    width: 100%;
+}
+
+/*bootsrtap example*/
+
+#sidebar ul.components {
+    padding: 20px 0;
+    /*border-bottom: 1px solid #47748b;*/
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    margin: 3px;
+    background: pink;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.header > a, a[aria-expanded="true"] {
+    font-size: larger;
+    color: #fff;
+    background: #6d7fcc;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+    color: #ff0000;
+}
+a[aria-expanded="true"]::before {
+    content: '\e260';
+    color: pink;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+#mainHeader{
+    width: inherit;
+    background-color: rgba(167,224,165,1);
+    padding: 5px;
+}
+button{
+    width: 100%;
+}
+#addNewClass{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transform: translateY(-20%);
+}
+#newClassDiv{
+    position: relative;
+    /*top: 40%;*/
+    bottom: 10px;
+}
+#settingsLogo{
+    top: 50%;
+    float: left;
+    display: inline-block;
+    transform: translateY(50%);
+    margin: 10px;
+}
