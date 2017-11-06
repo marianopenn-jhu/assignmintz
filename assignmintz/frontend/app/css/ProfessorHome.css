@@ -2,7 +2,7 @@
 * {
     margin: 0px auto;
     padding: 0px;
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;*/
 }
 
 :root{
@@ -35,7 +35,9 @@ h3 {
 #viewPanel{
     background-color: mintcream;
     /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
-    width: 100%;
+    /*width: 100%;*/
+    left: 250px;
+    position: relative;
 }
 
 /*bootsrtap example*/
@@ -92,6 +94,9 @@ ul ul a {
     padding-left: 30px !important;
     background: #6d7fcc;
 }
+/*end bootstrap example css*/
+
+
 #mainHeader{
     width: inherit;
     background-color: rgba(167,224,165,1);
@@ -120,4 +125,13 @@ button{
     display: inline-block;
     transform: translateY(50%);
     margin: 10px;
+}
+
+nav{
+    font-family: Roboto;
+    position: fixed;
+}
+
+#main{
+
 }
