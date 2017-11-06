@@ -132,6 +132,7 @@ nav{
     position: fixed;
 }
 
-#main{
-
+.bordered{
+    border: 10px solid;
+    border-image: repeating-linear-gradient(45deg,rgba(229, 57, 53, 0.64),rgba(171, 0, 13, 0.64) 10px,#ffebee 10px, #ffffff 20px) 12/10px;
 }
