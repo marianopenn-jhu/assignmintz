@@ -50,7 +50,27 @@
                 }
             }
             setTimeout(loginVisible, 1000);
+        }/*
+        function landingHome() {
+
+            document.getElementById("StudentLogin").style.visibility = "hidden";
+            var elem = document.getElementById("landing");
+            var pos = elem.style.top;
+            var id = setInterval(frame, 5);
+            function frame() {
+                if (pos == 200) {
+                    clearInterval(id);
+                } else {
+                    pos++;
+                    elem.style.top = pos + 'px';
+                    /!*elem.style.left = pos + 'px';*!/
+                }
+            }
+            setTimeout(accountVisible, 1000);
         }
+        function accountVisible() {
+            document.getElementById("accountSelect").style.visibility = "visible";
+        }*/
 
     </script>
 
@@ -60,7 +80,7 @@
 <div class="cont_principal">
 
     <div class="Landing" id = "landing" style="top: 200px; position:absolute">
-        <div id="p-1-box-13" data-component-type="text" class="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text">
+        <div id="p-1-box-13" data-component-type="text" class="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text"> <!--onclick="landingHome()"-->
             <div class="text-contents  liveUpdate-backgroundColor changeProperty-backgroundColor" style="background-color: rgba(0,0,0,0);">
                 <span data-editableproperty="text">Assign<span style="color:rgba(167,224,165,1);">Mintz</span></span>
             </div>
