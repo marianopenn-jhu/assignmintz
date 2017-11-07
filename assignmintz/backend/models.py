@@ -9,8 +9,8 @@ class User(models.Model):
     passwd = models.CharField(max_length=36, default='')
     role = models.CharField(max_length=36, default='')
 
-    def create(self, request):
-        
+    #def create(self, request):
+
 
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
