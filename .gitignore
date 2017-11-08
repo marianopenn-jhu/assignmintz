@@ -1,6 +1,5 @@
 *virtualEnv/
 
-
 # Created by https://www.gitignore.io/api/django
 
 ### Django ###
@@ -24,3 +23,6 @@ media
 assignmintz/backend/__pycache__/
 assignmintz/assignmintz/__pycache__/
 assignmintz/backend/migrations/
+
+*.pyc
+*.pyo
