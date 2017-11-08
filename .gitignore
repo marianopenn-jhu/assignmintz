@@ -5,3 +5,4 @@ assignmintz/assignmintz/__pycache__/
 assignmintz/backend/migrations/
 *.pyc
 *.pyo
+*.DS_Store
