@@ -21193,6 +21193,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -21211,7 +21213,7 @@ var UserInfoForm = function (_React$Component) {
       user_name: '',
       name: '',
       email: '',
-      passwd_has: '',
+      passwd: '',
       role: ''
     };
     _this.onSubmit = _this.onSubmit.bind(_this);
@@ -21221,10 +21223,9 @@ var UserInfoForm = function (_React$Component) {
 
   _createClass(UserInfoForm, [{
     key: 'onChange',
-    value: function onChange(event) {
-      var state = this.states;
-      state[e.target.name] = e.target.value;
-      this.setState(state);
+    value: function onChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      console.log("Changed value of " + e.target.name);
     }
   }, {
     key: 'onSubmit',
@@ -21243,7 +21244,7 @@ var UserInfoForm = function (_React$Component) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd_hash: passwd_hash, role: role })
+        body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd: passwd, role: role })
       }).then(function (response) {
         if (response.status >= 400) {
           var error = new Error(response.statusText);
@@ -21269,11 +21270,11 @@ var UserInfoForm = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { onSubmit: this.onSubmit },
-          _react2.default.createElement('input', { type: 'text', placeholder: 'User Name', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Name', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Email', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Password', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', placeholder: 'Role', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'user_name', placeholder: 'User Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: 'Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'email', placeholder: 'Email', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'passwd', placeholder: 'Password', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', name: 'role', placeholder: 'Role', onChange: this.onChange }),
           _react2.default.createElement('input', { type: 'submit' })
         ),
         _react2.default.createElement(
