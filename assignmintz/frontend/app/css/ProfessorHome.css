@@ -20,9 +20,8 @@ h4 {
 #userPicture {
     width: var(--proPicSize);
     height: var(--proPicSize);
-    background-color: #1b6d85;
-    margin: 5%;
-    display: inline-block;
+    background-color: #e0e0e0;
+    /*display: inline-block;*/
 
 }
 
@@ -42,7 +41,8 @@ h4 {
 }
 
 #viewPanel{
-    background-color: mintcream;
+    /*background-color: mintcream;*/
+    background-color: #FAFAFA;
     /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
     /*width: 100%;*/
     font-family: 'Trebuchet MS';
@@ -56,7 +56,7 @@ h4 {
 /*bootsrtap example*/
 
 #sidebar ul.components {
-    padding: 20px 0;
+    padding: 10px 0;
     /*border-bottom: 1px solid #47748b;*/
 }
 
@@ -70,19 +70,20 @@ h4 {
     padding: 10px;
     font-size: 1.1em;
     display: block;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    background: pink;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(29, 75, 147, 1);
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #E0FEF4;
+    box-shadow: 0px 0px 2px 2px rgb(19, 49, 95);
+    background-color: rgba(109, 127, 204, 0.7)
 }
 
 #sidebar ul li.header > a, a[aria-expanded="true"] {
     font-size: larger;
     color: #fff;
-    background: #6d7fcc;
+    background-color: #EC695F;
 }
 
 a[data-toggle="collapse"] {
@@ -106,16 +107,17 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: rgba(109, 127, 204, 1);
 }
 /*end bootstrap example css*/
 
 
 #mainHeader{
     width: inherit;
-    background-color: rgba(167,224,165,1);
+    /*background-color: rgba(167,224,165,1);*/
     padding: 5px;
-
+    background-color: #424242;
+    color: #BEE6CC;
 }
 
 button{
@@ -136,10 +138,9 @@ button{
     bottom: 10px;
 }
 #settingsLogo{
-    top: 50%;
     float: left;
     display: inline-block;
-    transform: translateY(50%);
+    /*transform: translateY(50%);*/
     margin: 10px;
 }
 
@@ -163,12 +164,10 @@ nav{
     border: 10px solid;
     border-image: repeating-linear-gradient(-45deg, rgba(109, 76, 65, 0.64), rgba(75, 44, 32, 0.64) 10px, #fffffb 10px, #ffffff 20px) 12/12px;
 }*/
+
 .panel-contents{
     /*background-color: rgb(242, 234, 213);*/
     padding: 3px;
-}
-.panel-heading{
-    color: #45c9f7;
 }
 .panel-heading-title{
     font-family: Arial,sans-serif;
@@ -200,7 +199,8 @@ nav{
 }
 
 .card{
-    background-color: white;
+    background-color: #FFFFFF;
+    padding-bottom: 1px;
     /*border-style: solid;*/
     box-shadow: 0px 0px 3px 2px rgba(4, 44, 108, 0.2);
     border-radius: 8px;
@@ -209,9 +209,13 @@ nav{
 .card-header{
     margin-top: 3px;
     font-family: Arial, sans-serif;
+    background-color: #E0E0E0;
 }
 .card-block{
-    margin: 5px;
+    margin: 10px;
+    background-color: #F5F5F5;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 .row{
     display: inline;
