@@ -135,7 +135,7 @@ button{
 }
 #newClassDiv{
     position: relative;
-    /*top: 40%;*/
+    color: black;
     bottom: 10px;
 }
 #newClassDiv:hover{
