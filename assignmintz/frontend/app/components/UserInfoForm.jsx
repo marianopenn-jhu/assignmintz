@@ -27,7 +27,7 @@ class UserInfoForm extends React.Component {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({user_name, name, email, passwd_hash, role})
     })
