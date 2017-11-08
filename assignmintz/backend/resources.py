@@ -1,8 +1,9 @@
 # backend/resources.py
 
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from backend.models import User, Assignment, SubTask, Course, OfficeHours
 from tastypie.authorization import Authorization
+from tastypie import fields
 from backend.validation import UserValidation
 
 class UserResource(ModelResource):
@@ -30,6 +31,8 @@ class SubTaskResource(ModelResource):
             excludes = ['description']
 
 class CourseResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+
     class Meta:
             queryset = Course.objects.all()
             resource_name = 'class'
@@ -37,7 +40,7 @@ class CourseResource(ModelResource):
             allowed_methods = ['get', 'post', 'delete']
             excludes = ['description']
 
-class OffieHoursResource(ModelResource):
+class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
