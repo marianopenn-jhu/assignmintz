@@ -53,14 +53,23 @@ class UserInfoForm extends React.Component {
       return (
         <div>
            <form onSubmit={this.onSubmit}>
-             <input type="text" name="user_name" placeholder="User Name" onChange={this.onChange}/>
-             <input type="text" name="name" placeholder="Name" onChange={this.onChange}/>
-             <input type="text" name="email" placeholder="Email" onChange={this.onChange}/>
-             <input type="text" name="passwd" placeholder="Password" onChange={this.onChange}/>
-             <input type="text" name="role" placeholder="Role" onChange={this.onChange}/>
-             <input type="submit" />
+             <input type="text" class="input_form_sign d_block active_inp" name="user_name" placeholder="User Name" onChange={this.onChange}/>
+             <input type="text" class="input_form_sign d_block active_inp" name="name" placeholder="Name" onChange={this.onChange}/>
+             <input type="text" class="input_form_sign" name="email" placeholder="Email" onChange={this.onChange}/>
+             <input type="text" class="input_form_sign d_block  active_inp" name="passwd" placeholder="Password" onChange={this.onChange}/>
+             <input type="text" class="input_form_sign" name="role" placeholder="Role" onChange={this.onChange}/>
+             <div class="terms_and_cons d_none">
+                 <p>
+                    <input type="checkbox" name="terms_and_cons"></input>
+                    <label for="terms_and_cons">   Accept Terms and Conditions.</label>
+                </p>
+             </div>
+             <div class="cont_btn">
+                <input class="btn_sign" type="submit" />
+             </div>
            </form>
-           <p> {this.state.code} </p>
+           <a href="#" class="link_forgot_pass d_block">Forgot Password ?</a>
+
          </div>
       );
    }
