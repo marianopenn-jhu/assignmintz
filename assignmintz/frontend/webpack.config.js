@@ -1,16 +1,14 @@
-var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-  template: __dirname + '/app/Index.html',
-  filename: 'Index.html',
-  inject: 'body'
-})
+var webpack = require('webpack');
+var path = require('path');
+var BUILD_DIR = path.resolve(__dirname, 'src/public');
+var APP_DIR = path.resolve(__dirname, 'src/app');
 
 var config = {
-   entry: __dirname + '/app/index.js',
+   entry: APP_DIR + '/index.js',
 
    output: {
-      path:__dirname + '/build/',
-      filename: 'index.js',
+      path: BUILD_DIR,
+      filename: 'transformed.js',
    },
 
    devServer: {
@@ -21,20 +19,25 @@ var config = {
    module: {
       loaders: [
          {
-            test: /\.jsx?$/,
+            test: /\.(js|jsx)$/,
+            include: APP_DIR,
             exclude: /node_modules/,
             loader: 'babel-loader',
-
-            query: {
-               presets: ['es2015', 'react']
-            }
-         }
+         },
+         {
+            test: /\.css$/,
+            loader: 'style-loader'
+         },
+         {
+          test: /\.css$/,
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        }
       ]
-   },
-
-   plugins: [
-        HTMLWebpackPluginConfig
-    ]
+   }
 }
 
 module.exports = config;

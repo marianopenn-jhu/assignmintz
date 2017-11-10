@@ -1,1 +1,9 @@
-{"status":"done","chunks":{"main":[{"name":"index.js","path":"/Users/MatthewKosarek/Desktop/oosejhu/2017-group-11/assignmintz/frontend/build/index.js"}]}}
+{"status":"done","chunks":
+  {"main":
+    [
+      {"name":"index.js",
+        "path":"/Users/MatthewKosarek/Desktop/oosejhu/2017-group-11/assignmintz/frontend/build/index.js"
+      }
+    ]
+  }
+}
