@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+    <meta name="author" content="Emily Johnson and Matt Kosarek; Group 11" />
+<title>Landing Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Landing.css">
+    <link rel="stylesheet" href="../css/Login.css">
+    <script>
+        function studentClick() {
+            document.getElementById("accountSelect").style.visibility = "hidden";
+            //document.getElementById("p-1-box-13").style.color = "red";
+            var elem = document.getElementById("landing");
+            var pos = 200;
+            var id = setInterval(frame, 5);
+            function frame() {
+                if (pos == 40) {
+                    clearInterval(id);
+                } else {
+                    pos--;
+                    elem.style.top = pos + 'px';
+                    /*elem.style.left = pos + 'px';*/
+                }
+            }
+            setTimeout(loginVisible, 1000);
+
+        }
+        function loginVisible() {
+            document.getElementById("StudentLogin").style.visibility = "visible";
+        }
+        function professorClick() {
+            //need to clarify PROFESSOR
+            document.getElementById("accountSelect").style.visibility = "hidden";
+            var elem = document.getElementById("landing");
+            var pos = 200;
+            var id = setInterval(frame, 5);
+            function frame() {
+                if (pos == 40) {
+                    clearInterval(id);
+                } else {
+                    pos--;
+                    elem.style.top = pos + 'px';
+                    /*elem.style.left = pos + 'px';*/
+                }
+            }
+            setTimeout(loginVisible, 1000);
+        }/*
+        function landingHome() {
+
+            document.getElementById("StudentLogin").style.visibility = "hidden";
+            var elem = document.getElementById("landing");
+            var pos = elem.style.top;
+            var id = setInterval(frame, 5);
+            function frame() {
+                if (pos == 200) {
+                    clearInterval(id);
+                } else {
+                    pos++;
+                    elem.style.top = pos + 'px';
+                    /!*elem.style.left = pos + 'px';*!/
+                }
+            }
+            setTimeout(accountVisible, 1000);
+        }
+        function accountVisible() {
+            document.getElementById("accountSelect").style.visibility = "visible";
+        }*/
+
+    </script>
+
+</head>
+<body>
+
+<div class="cont_principal">
+
+    <div class="Landing" id = "landing" style="top: 200px; position:absolute">
+        <div id="p-1-box-13" data-component-type="text" class="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text"> <!--onclick="landingHome()"-->
+            <div class="text-contents  liveUpdate-backgroundColor changeProperty-backgroundColor" style="background-color: rgba(0,0,0,0);">
+                <span data-editableproperty="text">Assign<span style="color:rgba(167,224,165,1);">Mintz</span></span>
+            </div>
+        </div>
+
+        <div class="AccountChooser" id="accountSelect" style="visibility: visible">
+            <ul class="nav nav-pills nav-justified">
+                <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
+                <li></li>
+                <li id="professor" onclick="professorClick()" style="width: 300px;"><a href="#">Professor</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="StudentLogin" class="cont_centrar cent_active" style="visibility: hidden">
+        <div class="cont_login">
+            <div class="cont_tabs_login">
+                <ul class="ul_tabs">
+                    <li class="active"><a href="#" onclick="sign_in()">SIGN IN</a>
+                        <span class="linea_bajo_nom"></span>
+                    </li>
+                    <li>
+                        <a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="cont_text_inputs">
+                <div id="user_info"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+<script src="../javascript/Login.js"></script>
+<script src="../transformed.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+</body>
+</html>
