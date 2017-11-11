@@ -19,34 +19,11 @@ class UserInfoForm extends React.Component {
   }
 
   onSubmit(event) {
-    const {user_name, name, email, passwd_hash, role} = this.state;
-
-    fetch("http://localhost:8000/backend/v1/user/", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({user_name, name, email, passwd, role})
-    })
-    .then((response) => {
-      if(response.status >= 400){
-        var error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-      }else{
-        return response.json();
-      }
-    })
-    .then((responseText) => {
-      console.log(responseText);
-      return responseText;
-    })
-    .catch((error) =>
-    {
-      alert(error);
-      return error;
-    });
+    try {
+      createUser(this.state);
+    } catch (e) {
+      
+    }
   }
 
    render() {
