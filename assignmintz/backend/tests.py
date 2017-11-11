@@ -10,6 +10,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
 
+    #PUT method is not allowed for User resource
     def test_bad_method(self):
         self.user_post_data = {
             'user_name':'harrypotter',
@@ -18,7 +19,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'passwd':'1234',
             'role':'student'
         }
-        self.assertHttpMethodNotAllowed(self.api_client.get('/backend/v1/user/', format='json', data=self.user_post_data))
+        self.assertHttpMethodNotAllowed(self.api_client.put('/backend/v1/user/', format='json'))
         print('Method not allowed test passed')
 
     def test_invalid_email(self):
@@ -68,15 +69,15 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
 
         resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
-        self.assertHttpNotAccepted(resp1)
+        self.assertHttpBadRequest(resp1)
         resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpNotAccepted(resp2)
+        self.assertHttpBadRequest(resp2)
         respValid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpAccpted(respValid)
+        self.assertHttpCreated(respValid)
         resp3 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpNotAccepted(resp3)
+        self.assertHttpBadRequest(resp3)
         respValid2 = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data_2)
-        self.assertHttpAccpted(respValid2)
+        self.assertHttpCreated(respValid2)
 
     def test_invalid_role(self):
         #role is teacher
@@ -116,13 +117,13 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
 
         resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
-        self.assertHttpNotAccepted(resp1)
+        self.assertHttpBadRequest(resp1)
         resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpNotAccepted(resp2)
+        self.assertHttpBadRequest(resp2)
         resp_valid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpAccpted(resp_valid)
+        self.assertHttpCreated(resp_valid)
         resp_valid_2 = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data_2)
-        self.assertHttpAccpted(resp_valid_2)
+        self.assertHttpCreated(resp_valid_2)
 
     def test_empty_field(self):
         # forgot name
@@ -153,11 +154,11 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
 
         resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
-        self.assertHttpNotAccepted(resp1)
+        self.assertHttpBadRequest(resp1)
         resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpNotAccepted(resp2)
+        self.assertHttpBadRequest(resp2)
         resp_valid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpAccpted(resp_valid)
+        self.assertHttpCreated(resp_valid)
 
     # def test_duplicate_user(self):
         # c = Client()
