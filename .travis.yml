@@ -14,4 +14,4 @@ services:
 install:
 - source test-install.sh
 script:
-- python3 assignmintz/backend/tests.py
+- python3 assignmintz/manage.py test backend.tests
