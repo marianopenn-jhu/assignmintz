@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
-    name = models.CharField(max_length=36, default='')
+    name = models.CharField(max_length=40, default='')
     email = models.EmailField(max_length=256, default='')
     passwd = models.CharField(max_length=36, default='')
 
