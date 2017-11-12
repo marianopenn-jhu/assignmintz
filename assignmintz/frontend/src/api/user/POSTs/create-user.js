@@ -1,6 +1,7 @@
 const ERROR_STATUS = 400;
-const USER_UTIL = require('../user-util.js');
-const URL = USER_UTIL.API_PATH;
+const URL = "http://localhost:8000/backend/v1/user/";
+
+export {createUser};
 
 function CreateException(message, response)
 {
@@ -11,7 +12,7 @@ function CreateException(message, response)
 
 function createUser(info)
 {
-  const {user_name, name, email, passwd_hash, role} = info;
+  const {user_name, name, email, passwd, role} = info;
 
   fetch(URL, {
     method: 'POST',
@@ -19,20 +20,17 @@ function createUser(info)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, name, email, passwd_hash, role})
+    body: JSON.stringify({user_name, name, email, passwd, role})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
       // Create a new CreateException
-      var error = new CreateException(response.statusText, response);
-      throw error;
+      throw new CreateException(response.statusText, response);
     } else {
       // Return the response
-      return response.json();
+      return JSON.parse(response.json());
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    alert(error.name + ": " + error.message);
   });
-
 }

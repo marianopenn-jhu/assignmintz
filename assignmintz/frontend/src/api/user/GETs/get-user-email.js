@@ -1,6 +1,5 @@
 const ERROR_STATUS = 400;
-const USER_UTIL = require('../user-util.js');
-const URL = USER_UTIL.API_PATH + "email/";
+const URL = "http://localhost:8000/backend/v1/user/email/";
 
 function GetEmailException(message, response)
 {
