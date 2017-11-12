@@ -967,13 +967,16 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _SideBar = __webpack_require__(32);
+var _UserInfoForm = __webpack_require__(32);
 
-var _SideBar2 = _interopRequireDefault(_SideBar);
+var _UserInfoForm2 = _interopRequireDefault(_UserInfoForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_SideBar2.default, null), document.getElementById('side_bar'));
+//import SideBar from './components/SideBar.jsx';
+
+_reactDom2.default.render(_react2.default.createElement(_UserInfoForm2.default, null), document.getElementById('user_info'));
+//ReactDOM.render(<SideBar />, document.getElementById('side_bar'));
 
 /***/ }),
 /* 16 */
@@ -21181,15 +21184,21 @@ module.exports = function() {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _getCourses = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../api/user/GETs/get-courses.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _createUser = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21197,66 +21206,142 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SideBar = function (_React$components) {
-  _inherits(SideBar, _React$components);
+var UserInfoForm = function (_React$Component) {
+  _inherits(UserInfoForm, _React$Component);
 
-  function SideBar(props) {
-    _classCallCheck(this, SideBar);
+  function UserInfoForm(props) {
+    _classCallCheck(this, UserInfoForm);
 
-    var _this = _possibleConstructorReturn(this, (SideBar.__proto__ || Object.getPrototypeOf(SideBar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (UserInfoForm.__proto__ || Object.getPrototypeOf(UserInfoForm)).call(this, props));
 
-    _this.state = { courses: [] };
+    _this.state = {
+      user_name: '',
+      name: '',
+      email: '',
+      passwd: '',
+      role: ''
+    };
+    _this.onSubmit = _this.onSubmit.bind(_this);
+    _this.onChange = _this.onChange.bind(_this);
     return _this;
   }
 
-  _createClass(SideBar, [{
-    key: 'getCourseList',
-    value: function getCourseList() {
-      var _this2 = this;
-
-      var user_name = this.props;
-      (0, _getCourses.getCourses)(userName).then(function (_ref) {
-        var courses = _ref.courses;
-
-        _this2.setState(courses);
-      });
+  _createClass(UserInfoForm, [{
+    key: 'onChange',
+    value: function onChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      getCourseList();
+    key: 'onSubmit',
+    value: function onSubmit(event) {
+      try {
+        (0, _createUser.createUser)(this.state);
+      } catch (e) {
+        alert(e);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var courses = this.state.courses;
-
-
       return _react2.default.createElement(
-        'ul',
-        { 'class': 'list-unstyled components' },
+        'div',
+        null,
         _react2.default.createElement(
-          'li',
-          { 'class': 'header', style: 'color: white; text-align: center' },
+          'form',
+          { onSubmit: this.onSubmit },
+          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block active_inp', name: 'user_name', placeholder: 'User Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block active_inp', name: 'name', placeholder: 'Name', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign', name: 'email', placeholder: 'Email', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block  active_inp', name: 'passwd', placeholder: 'Password', onChange: this.onChange }),
+          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign', name: 'role', placeholder: 'Role', onChange: this.onChange }),
           _react2.default.createElement(
-            'a',
-            null,
-            'Classes'
+            'div',
+            { 'class': 'terms_and_cons d_none' },
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement('input', { type: 'checkbox', name: 'terms_and_cons' }),
+              _react2.default.createElement(
+                'label',
+                { 'for': 'terms_and_cons' },
+                '   Accept Terms and Conditions.'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { 'class': 'cont_btn' },
+            _react2.default.createElement('input', { 'class': 'btn_sign', type: 'submit' })
           )
         ),
-        courses.map(function (listValue) {
-          return _react2.default.createElement(
-            'li',
-            null,
-            listValue.name
-          );
-        })
+        _react2.default.createElement(
+          'a',
+          { href: '#', 'class': 'link_forgot_pass d_block' },
+          'Forgot Password ?'
+        )
       );
     }
   }]);
 
-  return SideBar;
-}(_react2.default.components);
+  return UserInfoForm;
+}(_react2.default.Component);
+
+exports.default = UserInfoForm;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ERROR_STATUS = 400;
+var USER_UTIL = __webpack_require__(34);
+var URL = USER_UTIL.API_PATH;
+
+function CreateException(message, response) {
+  this.message = message;
+  this.response = response;
+  this.name = 'CreateException';
+}
+
+function createUser(info) {
+  var user_name = info.user_name,
+      name = info.name,
+      email = info.email,
+      passwd_hash = info.passwd_hash,
+      role = info.role;
+
+
+  fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd_hash: passwd_hash, role: role })
+  }).then(function (response) {
+    if (ERROR_STATUS >= 400) {
+      // Create a new CreateException
+      var error = new CreateException(response.statusText, response);
+      throw error;
+    } else {
+      // Return the response
+      return response.json();
+    }
+  }).catch(function (error) {
+    throw error;
+  });
+}
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var API_PATH = "http://localhost:8000/backend/v1/user/";
 
 /***/ })
 /******/ ]);

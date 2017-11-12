@@ -1,18 +1,16 @@
-
 const ERROR_STATUS = 400;
-const USER_UTIL = require('../user-util.js');
-const URL = USER_UTIL.API_PATH + "logout/";
+const URL = "http://localhost:8000/backend/v1/user/login/";
 
-function LogoutException(message, response)
+function LoginException(message, response)
 {
   this.message = message;
   this.response = response;
-  this.name = 'LogoutException';
+  this.name = 'LoginException';
 }
 
-function logoutUser(info)
+function loginUser(info)
 {
-  const {user_id, session_id} = info;
+  const {user_name, passwd_hash} = info;
 
   fetch(URL, {
     method: 'POST',
@@ -24,8 +22,8 @@ function logoutUser(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new LogoutException
-      var error = new LogoutException(response.statusText, response);
+      // Create a new LoginException
+      var error = new LoginException(response.statusText, response);
       throw error;
     } else {
       // Return the sessionId
@@ -33,6 +31,6 @@ function logoutUser(info)
     }
   }).catch((error) =>
   {
-    throw error;
+    alert(error.name + ": " + error.message);
   });
 }
