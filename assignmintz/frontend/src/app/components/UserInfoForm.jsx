@@ -22,7 +22,7 @@ class UserInfoForm extends React.Component {
     try {
       createUser(this.state);
     } catch (e) {
-      
+
     }
   }
 

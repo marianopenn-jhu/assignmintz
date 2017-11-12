@@ -967,13 +967,13 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _UserInfoForm = __webpack_require__(32);
+var _SideBar = __webpack_require__(32);
 
-var _UserInfoForm2 = _interopRequireDefault(_UserInfoForm);
+var _SideBar2 = _interopRequireDefault(_SideBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(UserInfoForm, null), document.getElementById('user_info'));
+_reactDom2.default.render(_react2.default.createElement(_SideBar2.default, null), document.getElementById('side_bar'));
 
 /***/ }),
 /* 16 */
@@ -21181,19 +21181,15 @@ module.exports = function() {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _getCourses = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../api/user/GETs/get-courses.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21201,112 +21197,66 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var UserInfoForm = function (_React$Component) {
-  _inherits(UserInfoForm, _React$Component);
+var SideBar = function (_React$components) {
+  _inherits(SideBar, _React$components);
 
-  function UserInfoForm(props) {
-    _classCallCheck(this, UserInfoForm);
+  function SideBar(props) {
+    _classCallCheck(this, SideBar);
 
-    var _this = _possibleConstructorReturn(this, (UserInfoForm.__proto__ || Object.getPrototypeOf(UserInfoForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SideBar.__proto__ || Object.getPrototypeOf(SideBar)).call(this, props));
 
-    _this.state = {
-      user_name: '',
-      name: '',
-      email: '',
-      passwd: '',
-      role: ''
-    };
-    _this.onSubmit = _this.onSubmit.bind(_this);
-    _this.onChange = _this.onChange.bind(_this);
+    _this.state = { courses: [] };
     return _this;
   }
 
-  _createClass(UserInfoForm, [{
-    key: 'onChange',
-    value: function onChange(e) {
-      this.setState(_defineProperty({}, e.target.name, e.target.value));
+  _createClass(SideBar, [{
+    key: 'getCourseList',
+    value: function getCourseList() {
+      var _this2 = this;
+
+      var user_name = this.props;
+      (0, _getCourses.getCourses)(userName).then(function (_ref) {
+        var courses = _ref.courses;
+
+        _this2.setState(courses);
+      });
     }
   }, {
-    key: 'onSubmit',
-    value: function onSubmit(event) {
-      var _state = this.state,
-          user_name = _state.user_name,
-          name = _state.name,
-          email = _state.email,
-          passwd_hash = _state.passwd_hash,
-          role = _state.role;
-
-
-      fetch("http://localhost:8000/backend/v1/user/", {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd: passwd, role: role })
-      }).then(function (response) {
-        if (response.status >= 400) {
-          var error = new Error(response.statusText);
-          error.response = response;
-          throw error;
-        } else {
-          return response.json();
-        }
-      }).then(function (responseText) {
-        console.log(responseText);
-        return responseText;
-      }).catch(function (error) {
-        alert(error);
-        return error;
-      });
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      getCourseList();
     }
   }, {
     key: 'render',
     value: function render() {
+      var courses = this.state.courses;
+
+
       return _react2.default.createElement(
-        'div',
-        null,
+        'ul',
+        { 'class': 'list-unstyled components' },
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.onSubmit },
-          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block active_inp', name: 'user_name', placeholder: 'User Name', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block active_inp', name: 'name', placeholder: 'Name', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign', name: 'email', placeholder: 'Email', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign d_block  active_inp', name: 'passwd', placeholder: 'Password', onChange: this.onChange }),
-          _react2.default.createElement('input', { type: 'text', 'class': 'input_form_sign', name: 'role', placeholder: 'Role', onChange: this.onChange }),
+          'li',
+          { 'class': 'header', style: 'color: white; text-align: center' },
           _react2.default.createElement(
-            'div',
-            { 'class': 'terms_and_cons d_none' },
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement('input', { type: 'checkbox', name: 'terms_and_cons' }),
-              _react2.default.createElement(
-                'label',
-                { 'for': 'terms_and_cons' },
-                '   Accept Terms and Conditions.'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { 'class': 'cont_btn' },
-            _react2.default.createElement('input', { 'class': 'btn_sign', type: 'submit' })
+            'a',
+            null,
+            'Classes'
           )
         ),
-        _react2.default.createElement(
-          'a',
-          { href: '#', 'class': 'link_forgot_pass d_block' },
-          'Forgot Password ?'
-        )
+        courses.map(function (listValue) {
+          return _react2.default.createElement(
+            'li',
+            null,
+            listValue.name
+          );
+        })
       );
     }
   }]);
 
-  return UserInfoForm;
-}(_react2.default.Component);
-
-exports.default = UserInfoForm;
+  return SideBar;
+}(_react2.default.components);
 
 /***/ })
 /******/ ]);
