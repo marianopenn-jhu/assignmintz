@@ -1,5 +1,5 @@
 import React from 'react';
-import {createUser} from '../../api/user/POSTs/create-user';
+import {createUser} from '../../api/user/posts/create-user';
 
 class UserInfoForm extends React.Component {
   constructor(props) {

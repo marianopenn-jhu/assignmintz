@@ -1,6 +1,6 @@
 const ERROR_STATUS = 400;
 const USER_UTIL = require('../professor-util.js');
-const URL = USER_UTIL.API_PATH + "assignment/";
+const URL = "http://localhost:8000/backend/v1/professor/assignment/";
 
 function DeleteAssignmentException(message, response)
 {

@@ -1,6 +1,5 @@
 const ERROR_STATUS = 400;
-const CLASS_UTIL = require('../class-util.js');
-const URL = CLASS_UTIL.API_PATH;
+const URL = "http://localhost:8000/backend/v1/class/";
 
 function AddClassException(message, response)
 {

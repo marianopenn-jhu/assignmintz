@@ -1,6 +1,5 @@
 const ERROR_STATUS = 400;
-const USER_UTIL = require('../student-util.js');
-const URL = USER_UTIL.API_PATH + "assignment/";
+const URL = "http://localhost:8000/backend/v1/student/assignment/";
 
 function StudentAddEditAssignmentException(message, response)
 {
