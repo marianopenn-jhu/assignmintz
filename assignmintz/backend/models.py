@@ -1,36 +1,27 @@
 from django.db import models
+#from django.contrib.auth.models import User
 
 # Create your models here.
+
+# class TeachingAssistant(models.Model):
+#     user = models.OneToOneField(User)
+#     office_hours = models.ForeignKey('OfficeHours', null=True)
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
     name = models.CharField(max_length=40, default='')
     email = models.EmailField(max_length=256, default='')
     passwd = models.CharField(max_length=36, default='')
-
-    class Meta:
-        abstract = True
-
-    def __unicode__(self):
-        return self.name
-
-class Professor(User):
-    courses = models.ForeignKey('Course', null=True)
-    students = models.ForeignKey('Student', null=True)
-
-class Student(User):
-    courses = models.ForeignKey('Course', null=True)
-
-class TeachingAssistant(User):
-    office_hours = models.ForeignKey('OfficeHours', null=True)
+    role = models.CharField(max_length=10, default='')
 
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
-    prof_name = models.CharField(max_length=36, default='')
+    professor = models.ForeignKey(User, related_name='professor', null=True)
+    students = models.ManyToManyField(User, related_name='students')
     course_title = models.CharField(max_length=36, default='')
     visible = models.BooleanField(default=True)
     description = models.TextField()
-    assignments = models.ForeignKey('Assignment')
-    teaching_assistants = models.ForeignKey('TeachingAssistant')
+    assignments = models.ForeignKey('Assignment', related_name='assignments', null=True)
+    #teaching_assistants = models.ForeignKey('TeachingAssistant')
 
     def __unicode__(self):
         return self.course_title
