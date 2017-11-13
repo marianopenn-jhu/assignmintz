@@ -17,25 +17,6 @@ class UserResource(ModelResource):
             allowed_methods = ['get', 'post']
             validation = UserValidation()
 
-class AssignmentResource(ModelResource):
-    class Meta:
-        queryset = Assignment.objects.all()
-        resource_name = 'professor/assignment'
-        authorization = Authorization()
-        allowed_methods = ['get', 'post', 'delete']
-        excludes = ['assignment_id', 'due_date', 'actual_difficulty', 'actual_time', 'priority', 'percent_complete', 'visible', 'description']
-
-    def dehydrate(self, bundle):
-        bundle.data["professor"]=bundle.obj.professor.user_name
-        return bundle
-
-class SubTaskResource(ModelResource):
-    class Meta:
-            queryset = SubTask.objects.all()
-            resource_name = 'subtask'
-            authorization = Authorization()
-            allowed_methods = ['get', 'post', 'delete']
-            excludes = ['description']
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -88,6 +69,33 @@ class CourseResource(ModelResource):
 #         bundle.data["students"]=bundle.obj.students[user_name]
 #         return bundle
 
+class AssignmentResource(ModelResource):
+    course = fields.ForeignKey(CourseResource, 'course')
+
+    class Meta:
+        queryset = Assignment.objects.all()
+        resource_name = 'professor/assignment'
+        authorization = Authorization()
+        allowed_methods = ['get', 'post', 'delete']
+        excludes = ['assignment_id', 'due_date', 'actual_difficulty', 'actual_time', 'priority', 'percent_complete', 'visible', 'description']
+
+    def dehydrate(self, bundle):
+        bundle.data["course"]=bundle.obj.course.course_id
+        return bundle
+
+class SubTaskResource(ModelResource):
+    assignment = fields.ForeignKey(AssignmentResource, 'assignment')
+
+    class Meta:
+            queryset = SubTask.objects.all()
+            resource_name = 'subtask'
+            authorization = Authorization()
+            allowed_methods = ['get', 'post', 'delete']
+            excludes = ['description']
+
+    def dehydrate(self, bundle):
+        bundle.data["assignment"]=bundle.obj.assignment.assignment_id
+        return bundle
 
 class OfficeHoursResource(ModelResource):
     class Meta:
