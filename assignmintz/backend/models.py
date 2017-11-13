@@ -13,23 +13,33 @@ class User(models.Model):
     passwd = models.CharField(max_length=36, default='')
     role = models.CharField(max_length=10, default='')
 
+    def __unicode__(self):
+        return self.user_name
+
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
-    professor = models.ForeignKey(User, related_name='professor', null=True)
-    students = models.ManyToManyField(User, related_name='students')
+    #professor_id = models.CharField()
+    professor = models.ForeignKey(User, related_name='professor', null=True, on_delete=models.CASCADE)
+    #students = models.ManyToManyField(User, related_name='students')
+    student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
     course_title = models.CharField(max_length=36, default='')
     visible = models.BooleanField(default=True)
     description = models.TextField()
-    assignments = models.ForeignKey('Assignment', related_name='assignments', null=True)
     #teaching_assistants = models.ForeignKey('TeachingAssistant')
 
     def __unicode__(self):
         return self.course_title
+#
+# class CourseStudents(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     course_id = models.CharField(max_length=36)
+#     user_id = models.CharField(max_length=36, default='')
 
 class Assignment(models.Model):
     assignment_id = models.AutoField(primary_key=True)
     assignment_name = models.CharField(max_length=36, default='')
     assignment_type = models.CharField(max_length=5, default='')
+    course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
     due_date = models.DateField(auto_now=True)
     due_time = models.TimeField(auto_now=True)
     expected_difficulty = models.IntegerField(default=0)
@@ -49,7 +59,7 @@ class SubTask(models.Model):
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
     description = models.TextField()
-    assignment = models.ForeignKey('Assignment')
+    assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
 
 class OfficeHours(models.Model):
     professor_id = models.CharField(max_length=36, primary_key=True)
