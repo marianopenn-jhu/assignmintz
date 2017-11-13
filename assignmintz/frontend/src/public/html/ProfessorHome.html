@@ -50,16 +50,16 @@
             <div class="classesContainer">
                 <ul class="list-unstyled components">
                     <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
-                    <li>
-                        <a id="class1"> course </a>
+                    <li data-selected="true">
+                        <a data-selected="true" id="class1"> course </a>
                     </li>
-                    <li>
+                    <li data-selected="false">
                         <a> course </a>
                     </li>
-                    <li>
+                    <li data-selected="false">
                         <a> course </a>
                     </li>
-                    <li>
+                    <li data-selected="false">
                         <a> course </a>
                     </li>
                 </ul>
@@ -140,10 +140,11 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="panel panel-info">
-                            <div class="panel-heading">Type: Assignment Name</div>
-                            <div class="panel-body">
+                        <br>
+                        <div class="panel panel-warning">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#theId2">Type: Assignment Name
+                                <span class="badge" style="float: right;">status</span> </div>
+                            <div id ="theId2" class="panel-body collapse">
                                 <h4 class="card-title">Due Date</h4>
                                 <div class="row">
                                     <div class="col-sm-8" style="border: solid gainsboro;">
@@ -171,39 +172,10 @@
                             </div>
                         </div>
                         <br>
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">Panel with panel-warning class</div>
-                            <div class="panel-body">
-                                <h4 class="card-title">Due Date</h4>
-                                <div class="row">
-                                    <div class="col-sm-8" style="border: solid gainsboro;">
-                                        Description:
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="row">
-                                            Expected Time:
-                                        </div>
-                                        <div class="row">
-                                            Average Progress:
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                                                    70%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
                         <div class="panel panel-danger">
-                            <div class="panel-heading">Panel with panel-danger class</div>
-                            <div class="panel-body">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#theId3">Type: Assignment Name
+                                <span class="badge" style="float: right;">status</span> </div>
+                            <div id ="theId3" class="panel-body collapse">
                                 <h4 class="card-title">Due Date</h4>
                                 <div class="row">
                                     <div class="col-sm-8" style="border: solid gainsboro;">
@@ -232,8 +204,9 @@
                         </div>
                         <br>
                         <div class="panel panel-default">
-                            <div class="panel-heading">Panel with panel-default class</div>
-                            <div class="panel-body">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#theId4">Type: Assignment Name
+                                <span class="badge" style="float: right;">status</span> </div>
+                            <div id ="theId4" class="panel-body collapse">
                                 <h4 class="card-title">Due Date</h4>
                                 <div class="row">
                                     <div class="col-sm-8" style="border: solid gainsboro;">
@@ -262,8 +235,9 @@
                         </div>
                         <br>
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Panel with panel-primary class</div>
-                            <div class="panel-body">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#theId5">Type: Assignment Name
+                                <span class="badge" style="float: right;">status</span> </div>
+                            <div id ="theId5" class="panel-body collapse">
                                 <h4 class="card-title">Due Date</h4>
                                 <div class="row">
                                     <div class="col-sm-8" style="border: solid gainsboro;">
@@ -292,8 +266,9 @@
                         </div>
                         <br>
                         <div class="panel panel-success">
-                            <div class="panel-heading">Panel with panel-success class</div>
-                            <div class="panel-body">
+                            <div class="panel-heading" data-toggle="collapse" data-target="#theId6">Type: Assignment Name
+                                <span class="badge" style="float: right;">status</span> </div>
+                            <div id ="theId6" class="panel-body collapse">
                                 <h4 class="card-title">Due Date</h4>
                                 <div class="row">
                                     <div class="col-sm-8" style="border: solid gainsboro;">
@@ -320,6 +295,8 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+
                     </div>
 
                 </div>
@@ -337,6 +314,7 @@
 
 <script type="text/javascript">
 
+/*
     import { SearchBar } from 'react-native-elements';
 
     var items = $(document).getElementsByClassName("grid-item");
@@ -357,6 +335,7 @@
     $('#class1').text("First Class");
 
 
+*/
 
 
 </script>
