@@ -23,5 +23,7 @@ media
 assignmintz/backend/__pycache__/
 assignmintz/assignmintz/__pycache__/
 
+assignmintz/frontend/node_modules/
+
 *.pyc
 *.pyo
