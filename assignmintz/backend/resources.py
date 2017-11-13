@@ -3,17 +3,18 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from backend.models import User, Assignment, SubTask, Course, OfficeHours
 from tastypie.authorization import Authorization
+from tastypie.authentication import BasicAuthentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation
 from django.db import IntegrityError
 #from django.contrib.auth.models import User
-
 
 class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
             authorization = Authorization()
+            authentication = BasicAuthentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
 
