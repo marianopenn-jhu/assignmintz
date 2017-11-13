@@ -3,6 +3,10 @@ from django.db import models
 
 # Create your models here.
 
+class LogIn(models.Model):
+    user_name = models.CharField(max_length=36, default='', primary_key=True)
+    passwd = models.CharField(max_length=36, default='')
+
 # class TeachingAssistant(models.Model):
 #     user = models.OneToOneField(User)
 #     office_hours = models.ForeignKey('OfficeHours', null=True)

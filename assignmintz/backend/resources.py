@@ -1,13 +1,20 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours
+from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation
 from django.db import IntegrityError
 #from django.contrib.auth.models import User
+
+class LogInResource(ModelResource):
+    class Meta:
+        queryset = LogIn.objects.all()
+        resource_name = 'login'
+        authorization = Authorization()
+        allowed_methods = ['post']
 
 class UserResource(ModelResource):
     class Meta:
