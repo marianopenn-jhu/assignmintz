@@ -12,11 +12,7 @@ class UserValidation(Validation):
 
         #ensure username is unique
         query_name = str(bundle.data.get('user_name'))
-        cur.execute('SELECT * from backend_student where user_name=\''+query_name+'\';')
-        if cur.fetchone() is not None:
-            errs['dup_user_name']='User name already exists'
-
-        cur.execute('SELECT * from backend_professor where user_name=\''+query_name+'\';')
+        cur.execute('SELECT * from backend_user where user_name=\''+query_name+'\';')
         if cur.fetchone() is not None:
             errs['dup_user_name']='User name already exists'
 
@@ -30,11 +26,7 @@ class UserValidation(Validation):
         if not '@jhu.edu' in email:
             errs['invalid email']='Must use @jhu.edu email'
 
-        cur.execute('SELECT * from backend_student where email=\'' + email + '\';')
-        if cur.fetchone() is not None:
-            errs['dup_email'] = 'User with this email already exists'
-
-        cur.execute('SELECT * from backend_professor where email=\'' + email + '\';')
+        cur.execute('SELECT * from backend_user where email=\'' + email + '\';')
         if cur.fetchone() is not None:
             errs['dup_email'] = 'User with this email already exists'
 
