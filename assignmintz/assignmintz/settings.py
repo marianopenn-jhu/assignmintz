@@ -56,6 +56,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'assignmintz.urls'
 
+LOGIN_REDIRECT_URL = 'v1/assignmintz/home/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

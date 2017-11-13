@@ -1,44 +1,45 @@
 from django.db import models
+#from django.contrib.auth.models import User
 
 # Create your models here.
+
+# class TeachingAssistant(models.Model):
+#     user = models.OneToOneField(User)
+#     office_hours = models.ForeignKey('OfficeHours', null=True)
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
     name = models.CharField(max_length=40, default='')
     email = models.EmailField(max_length=256, default='')
     passwd = models.CharField(max_length=36, default='')
-
-    class Meta:
-        abstract = True
+    role = models.CharField(max_length=10, default='')
 
     def __unicode__(self):
-        return self.name
-
-class Professor(User):
-    courses = models.ForeignKey('Course', null=True)
-    students = models.ForeignKey('Student', null=True)
-
-class Student(User):
-    courses = models.ForeignKey('Course', null=True)
-
-class TeachingAssistant(User):
-    office_hours = models.ForeignKey('OfficeHours', null=True)
+        return self.user_name
 
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
-    prof_name = models.CharField(max_length=36, default='')
+    #professor_id = models.CharField()
+    professor = models.ForeignKey(User, related_name='professor', null=True, on_delete=models.CASCADE)
+    #students = models.ManyToManyField(User, related_name='students')
+    student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
     course_title = models.CharField(max_length=36, default='')
     visible = models.BooleanField(default=True)
     description = models.TextField()
-    assignments = models.ForeignKey('Assignment')
-    teaching_assistants = models.ForeignKey('TeachingAssistant')
+    #teaching_assistants = models.ForeignKey('TeachingAssistant')
 
     def __unicode__(self):
         return self.course_title
+#
+# class CourseStudents(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     course_id = models.CharField(max_length=36)
+#     user_id = models.CharField(max_length=36, default='')
 
 class Assignment(models.Model):
     assignment_id = models.AutoField(primary_key=True)
     assignment_name = models.CharField(max_length=36, default='')
     assignment_type = models.CharField(max_length=5, default='')
+    course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
     due_date = models.DateField(auto_now=True)
     due_time = models.TimeField(auto_now=True)
     expected_difficulty = models.IntegerField(default=0)
@@ -58,7 +59,7 @@ class SubTask(models.Model):
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
     description = models.TextField()
-    assignment = models.ForeignKey('Assignment')
+    assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
 
 class OfficeHours(models.Model):
     professor_id = models.CharField(max_length=36, primary_key=True)
