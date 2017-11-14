@@ -50,7 +50,7 @@ transition: all 0.5s;
 }
 
   .ul_tabs > .active > a  {
-color: #69FF7A;
+color: #a7e0a5;
 
 }
 
@@ -66,7 +66,7 @@ color: #69FF7A;
   position: relative;
   width: 100%;
   float: left;
-  background-color: #69FF7A;
+  background-color: #a7e0a5;
   height: 2px;
 }
 
@@ -82,7 +82,7 @@ position: relative;
   float: left;
   width: 90%;
   border: none;
-  border-bottom: 1px solid #69FF7A ;
+  border-bottom: 1px solid #a7e0a5 ;
   background-color: transparent;
   font-size: 14px;
   outline: none;
@@ -104,7 +104,7 @@ height: 5px;
 
 
 .input_form_sign:focus {
-  border-bottom: 1px solid #3f9949 ;}
+  border-bottom: 1px solid #7DA87C ;}
 
 .link_forgot_pass {
 position: relative;
@@ -123,8 +123,8 @@ position: relative;
 }
 
 .btn_sign {
-  background: #69FF7A;
-  box-shadow: 0px 2px 10px 2px #3f9949;
+  background: #a7e0a5;
+  box-shadow: 0px 2px 10px 2px #7DA87C;
   border-radius: 8px;
   padding: 15px 30px;
   border: none;
