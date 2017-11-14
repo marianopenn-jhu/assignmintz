@@ -1,1 +1,1 @@
-web: python assignmintz/manage.py runserver
+web: python assignmintz-settings/manage.py runserver
