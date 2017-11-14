@@ -92,3 +92,14 @@
     font-family: Roboto;
 
 }
+
+
+#StudentLogin{
+    top: 330px;
+    position: absolute;
+}
+
+#ProfessorLogin{
+    top: 330px;
+    position: absolute;
+}
