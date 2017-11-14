@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --content-base src/public"
+    "start": "webpack-dev-server --content-base assignmintz-settings/frontend/src/public"
   },
   "author": "",
   "license": "ISC",
