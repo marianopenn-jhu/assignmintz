@@ -67,11 +67,21 @@
             </div>
 
             <div id="newClassDiv" style="background-color: #424242">
-                <button id="addNewClass">
+                <button id="addNewClass" data-toggle="modal" data-target=".add-course-modal-lg">
                     <br>
                     <span class="glyphicon glyphicon-plus"></span>
                     <br>
                 </button>
+            </div>
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        This is my modal content
+                        <br>
+                        cool
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -82,16 +92,16 @@
                 <header id="mainHeader">
                     <div class="btn-group btn-group-justified">
                         <div class="btn-group">
-                            <input type="checkbox"> Show Tests
+                            <input type="checkbox" checked> Show Tests
                         </div>
                         <div class="btn-group">
-                            <input type="checkbox"> Show Quizzes
+                            <input type="checkbox" checked> Show Quizzes
                         </div>
                         <div class="btn-group">
-                            <input type="checkbox"> Show Projects
+                            <input type="checkbox" checked> Show Projects
                         </div>
                         <div class="btn-group">
-                            <input type="checkbox"> Show Class Schedule
+                            <input type="checkbox" checked> Show Class Schedule
                         </div>
                         <div class="btn-group">
                             <SearchBar
@@ -327,6 +337,9 @@
         </div>
     </div>
 </div>
+
+
+
 </body>
 
 <script src="./test.js"></script>
@@ -337,6 +350,10 @@
 
 <script type="text/javascript">
 
+    function createNewClass() {
+        //this could be react
+
+    }
 /*
     import { SearchBar } from 'react-native-elements';
 

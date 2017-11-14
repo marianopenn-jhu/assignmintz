@@ -23,11 +23,14 @@
                     /*elem.style.left = pos + 'px';*/
                 }
             }
-            setTimeout(loginVisible, 1000);
+            setTimeout(studentLoginVisible, 1000);
 
         }
-        function loginVisible() {
+        function studentLoginVisible() {
             document.getElementById("StudentLogin").style.visibility = "visible";
+        }
+        function professorLoginVisible() {
+            document.getElementById("ProfessorLogin").style.visibility = "visible";
         }
         function professorClick() {
             //need to clarify PROFESSOR
@@ -44,28 +47,8 @@
                     /*elem.style.left = pos + 'px';*/
                 }
             }
-            setTimeout(loginVisible, 1000);
-        }/*
-        function landingHome() {
-
-            document.getElementById("StudentLogin").style.visibility = "hidden";
-            var elem = document.getElementById("landing");
-            var pos = elem.style.top;
-            var id = setInterval(frame, 5);
-            function frame() {
-                if (pos == 200) {
-                    clearInterval(id);
-                } else {
-                    pos++;
-                    elem.style.top = pos + 'px';
-                    /!*elem.style.left = pos + 'px';*!/
-                }
-            }
-            setTimeout(accountVisible, 1000);
+            setTimeout(professorLoginVisible, 1000);
         }
-        function accountVisible() {
-            document.getElementById("accountSelect").style.visibility = "visible";
-        }*/
 
     </script>
 
@@ -108,10 +91,26 @@
             </div>
         </div>
     </div>
+
+    <div id="ProfessorLogin" class="cont_centrar cent_active" style="visibility: hidden">
+        <div class="cont_login">
+            <div class="cont_tabs_login">
+                <ul class="ul_tabs">
+                    <li class="active"><a href="#" onclick="sign_in()">SIGN IN</a>
+                        <span class="linea_bajo_nom"></span>
+                    </li>
+                    <li>
+                        <a href="#up" onclick="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="cont_text_inputs">
+                <div id="user_info"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
