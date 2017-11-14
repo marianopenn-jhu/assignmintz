@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserInfoForm from './components/UserInfoForm.jsx';
-//import SideBar from './components/SideBar.jsx';
+import LoginView from './components/LoginView.jsx';
 
-ReactDOM.render(<UserInfoForm />, document.getElementById('user_info'));
-//ReactDOM.render(<SideBar />, document.getElementById('side_bar'));
+ReactDOM.render(<LoginView />, document.getElementById('log_in_view'));

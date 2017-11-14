@@ -1,5 +1,5 @@
 import React from 'react';
-import {getCourses} from '../api/user/GETs/get-courses.js';
+import {getCourses} from '../../api/user/gets/get-courses.js';
 
 class SideBar extends React.components {
   constructor(props) {
