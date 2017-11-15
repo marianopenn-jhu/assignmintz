@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tab from './util/Tab.jsx';
-import {createUser} from '../../../api/user/posts/create-user.js';
-import {loginUser} from '../../../api/user/posts/login-user.js';
+import {createUser} from '../../../../api/user/posts/create-user.js';
+import {loginUser} from '../../../../api/user/posts/login-user.js';
 
 const LoginWrapper = styled.div`
   position: relative;
@@ -69,7 +69,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-class LoginView extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,7 +80,6 @@ class LoginView extends React.Component {
       email: '',
       password: '',
       confirm_password: '',
-      role: ''
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -94,7 +93,8 @@ class LoginView extends React.Component {
   }
 
   onSubmit(event) {
-    const {sign_in, user_name, first_name, last_name, email, password, confirm_password, role} = this.state;
+    const {sign_in, user_name, first_name, last_name, email, password, confirm_password} = this.state;
+    const role = this.props.role;
 
     if (sign_in == true)
     {
@@ -142,4 +142,4 @@ class LoginView extends React.Component {
   }
 }
 
-export default LoginView;
+export default LoginForm;

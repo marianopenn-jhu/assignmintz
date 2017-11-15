@@ -6,96 +6,10 @@
   <title>Landing Page</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./css/Landing.css">
-
-  <script>
-    function studentClick() {
-        document.getElementById("student").classList.add('selectedAccountType');
-        document.getElementById("professor").classList.remove('selectedAccountType');
-        document.getElementById("accountSelect").style.visibility = "hidden";
-        //document.getElementById("p-1-box-13").style.color = "red";
-        var elem = document.getElementById("landing");
-        var pos = 200;
-        var id = setInterval(frame, 5);
-        function frame() {
-            if (pos == 40) {
-                clearInterval(id);
-            } else {
-                pos--;
-                elem.style.top = pos + 'px';
-                /*elem.style.left = pos + 'px';*/
-            }
-        }
-        setTimeout(loginVisible, 1000);
-
-    }
-    function loginVisible() {
-        document.getElementById("LoginView").style.visibility = "visible";
-    }
-    function professorClick() {
-        document.getElementById("student").classList.remove('selectedAccountType');
-        document.getElementById("professor").classList.add('selectedAccountType');
-        document.getElementById("accountSelect").style.visibility = "hidden";
-        var elem = document.getElementById("landing");
-        var pos = 200;
-        var id = setInterval(frame, 5);
-        function frame() {
-            if (pos == 40) {
-                clearInterval(id);
-            } else {
-                pos--;
-                elem.style.top = pos + 'px';
-                /*elem.style.left = pos + 'px';*/
-            }
-        }
-        setTimeout(loginVisible, 1000);
-    }/*
-    function landingHome() {
-
-        document.getElementById("LoginView").style.visibility = "hidden";
-        var elem = document.getElementById("landing");
-        var pos = elem.style.top;
-        var id = setInterval(frame, 5);
-        function frame() {
-            if (pos == 200) {
-                clearInterval(id);
-            } else {
-                pos++;
-                elem.style.top = pos + 'px';
-                /!*elem.style.left = pos + 'px';*!/
-            }
-        }
-        setTimeout(accountVisible, 1000);
-    }
-    function accountVisible() {
-        document.getElementById("accountSelect").style.visibility = "visible";
-    }*/
-  </script>
 </head>
 
 <body>
-  <div class="cont_principal">
-    <div class="Landing" id = "landing" style="top: 200px; position:absolute">
-        <div id="p-1-box-13" data-component-type="text" class="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text"> <!--onclick="landingHome()"-->
-            <div class="text-contents  liveUpdate-backgroundColor changeProperty-backgroundColor" style="background-color: rgba(0,0,0,0);">
-                <span data-editableproperty="text">Assign<span style="color:rgba(167,224,165,1);">Mintz</span></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Start LOGIN -->
-    <div class="AccountChooser" id="accountSelect" style="visibility: visible">
-        <ul class="nav nav-pills nav-justified">
-            <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
-            <li></li>
-            <li id="professor" onclick="professorClick()" style="width: 300px;"><a href="#">Professor</a></li>
-        </ul>
-    </div>
-    <div id="LoginView" class="cont_centrar cent_active" style="visibility: hidden">
-      <div id="log_in_view"></div>
-    </div>
-    <!-- END LOGIN -->
-  </div>
+  <div id="app"></div>
 
   <script type="text/javascript" src="./transformed.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
