@@ -10,6 +10,8 @@
 
   <script>
     function studentClick() {
+        document.getElementById("student").classList.add('selectedAccountType');
+        document.getElementById("professor").classList.remove('selectedAccountType');
         document.getElementById("accountSelect").style.visibility = "hidden";
         //document.getElementById("p-1-box-13").style.color = "red";
         var elem = document.getElementById("landing");
@@ -31,7 +33,8 @@
         document.getElementById("LoginView").style.visibility = "visible";
     }
     function professorClick() {
-        //need to clarify PROFESSOR
+        document.getElementById("student").classList.remove('selectedAccountType');
+        document.getElementById("professor").classList.add('selectedAccountType');
         document.getElementById("accountSelect").style.visibility = "hidden";
         var elem = document.getElementById("landing");
         var pos = 200;
@@ -78,17 +81,16 @@
                 <span data-editableproperty="text">Assign<span style="color:rgba(167,224,165,1);">Mintz</span></span>
             </div>
         </div>
-
-        <div class="AccountChooser" id="accountSelect" style="visibility: visible">
-            <ul class="nav nav-pills nav-justified">
-                <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
-                <li></li>
-                <li id="professor" onclick="professorClick()" style="width: 300px;"><a href="#">Professor</a></li>
-            </ul>
-        </div>
     </div>
 
     <!-- Start LOGIN -->
+    <div class="AccountChooser" id="accountSelect" style="visibility: visible">
+        <ul class="nav nav-pills nav-justified">
+            <li id="student" onclick="studentClick()" style="width: 300px;"><a href="#">Student</a></li>
+            <li></li>
+            <li id="professor" onclick="professorClick()" style="width: 300px;"><a href="#">Professor</a></li>
+        </ul>
+    </div>
     <div id="LoginView" class="cont_centrar cent_active" style="visibility: hidden">
       <div id="log_in_view"></div>
     </div>

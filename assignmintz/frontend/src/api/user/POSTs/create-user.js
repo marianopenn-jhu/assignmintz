@@ -10,10 +10,8 @@ function CreateException(message, response)
   this.name = 'CreateException';
 }
 
-function createUser(info)
+function createUser(user_name, name, email, passwd, role)
 {
-  const {user_name, name, email, passwd, role} = info;
-
   fetch(URL, {
     method: 'POST',
     headers: {

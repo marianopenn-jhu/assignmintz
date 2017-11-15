@@ -103,9 +103,9 @@ class LoginView extends React.Component {
     }
     else {
       if (password == confirm_password) {
-        var full_name = first_name + " " + last_name;
-        const params = {user_name, full_name, email, password, role};
-        createUser(params);
+        var passwd = password;
+        var name = first_name + " " + last_name;
+        createUser(user_name, name, email, passwd, role);
       }
     }
   }
@@ -129,12 +129,12 @@ class LoginView extends React.Component {
           <Tab title="Sign Up" selected='false' onClicked={this.signUpSelected}/>
         </TabWrapper>
         <InputWrapper>
-      		<Input name="user_name" placeholder="User Name" type="text" />
-      		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField}/>
-          <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} />
-          <Input name="email" placeholder="JHED@jhu.edu" type="text" className={hiddenField} />
-          <Input name="password" placeholder="Password" type="password" />
-          <Input name="confirm_password" placeholder="Confirm Password" type="password" className={hiddenField} />
+      		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
+      		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
+          <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
+          <Input name="email" placeholder="JHED@jhu.edu" type="text" className={hiddenField} onChange={this.onChange}/>
+          <Input name="password" placeholder="Password" type="password" onChange={this.onChange}/>
+          <Input name="confirm_password" placeholder="Confirm Password" type="password" className={hiddenField} onChange={this.onChange}/>
           <Button onClick={this.onSubmit}>{buttonText}</Button>
         </InputWrapper>
       </LoginWrapper>
