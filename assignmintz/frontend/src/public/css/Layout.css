@@ -1,0 +1,168 @@
+
+* {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+:root{
+    --proPicSize: 55px;
+}
+
+.wrapper {
+    display: flex;
+}
+h3 {
+    text-align: center;
+}
+h4 {
+    color: #EC695F;
+}
+#userPicture {
+    width: var(--proPicSize);
+    height: var(--proPicSize);
+    background-color: #e0e0e0;
+    /*display: inline-block;*/
+
+}
+#sidebar {
+    left: 0px;
+    float: right;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
+    background-color: #303030;
+}
+
+#fullPage{
+    height: auto;
+    overflow: hidden;
+}
+
+#viewPanel{
+    /*background-color: mintcream;*/
+    background-color: #FAFAFA;
+    /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
+    /*width: 100%;*/
+    font-family: 'Trebuchet MS';
+    left: 250px;
+    right: inherit;
+    position: absolute;
+    width: auto;
+    overflow: hidden;
+    height:100vh;
+}
+
+/*bootstrap sidebar code*/
+
+#sidebar ul.components {
+    padding: 10px 0;
+    /*border-bottom: 1px solid #47748b;*/
+}
+
+#sidebar ul p {
+    color: #E0FEF4;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /*background-color: rgba(29, 75, 147, 1);*/
+    background-color: #424242;
+}
+#sidebar ul li a:hover {
+    color: #BEE6CC;
+    box-shadow: 0px 4px 2px #212121, 0px -4px 2px #212121;
+    background-color: #686868;
+}
+
+#sidebar ul li.header > a, a[aria-expanded="true"] {
+    font-size: larger;
+    color: #fff;
+    background-color: #EC695F;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+    color: #ff0000;
+}
+a[aria-expanded="true"]::before {
+    content: '\e260';
+    color: red;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: rgba(109, 127, 204, 1);
+}
+/*end bootstrap example css*/
+
+/* top bar header */
+#mainHeader{
+    width: inherit;
+    /*background-color: rgba(167,224,165,1);*/
+    padding: 5px;
+    background-color: #424242;
+    color: #BEE6CC;
+}
+
+#main{
+    height: 100vh;
+}
+
+button{
+    width: 100%;
+}
+#addNewClass{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transform: translateY(-20%);
+}
+#newClassDiv{
+    position: relative;
+    color: black;
+    bottom: 10px;
+}
+#newClassDiv:hover{
+    color: #BEE6CC;
+    box-shadow: 0px 5px 2px #212121, 0px -5px 2px #212121;
+    background-color: #686868;
+}
+#settingsLogo{
+    float: left;
+    display: inline-block;
+    /*transform: translateY(50%);*/
+    margin: 10px;
+}
+
+nav{
+    font-family: Roboto;
+    position: fixed;
+
+}
+/* end top bar header and nav idk */
+
+
+
+h4 {
+    color: #EC695F;
+}

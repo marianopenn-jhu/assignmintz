@@ -1,0 +1,19 @@
+#calendarSpot{
+    margin: 10px auto;
+    width: 70%;
+}
+
+
+
+.panel-default >.mintz
+{
+    background-color: rgba(167,224,165,0.4);
+}
+
+#main{
+    overflow: scroll;
+    /*margin-bottom: 40px;*/
+}
+.panel-group{
+    margin-bottom: 50px;
+}

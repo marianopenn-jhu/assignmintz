@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../css/Layout.css">
+    <link rel="stylesheet" href="../css/Landing.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fullcalendar/full-calendar.min.css">
+    <link rel="stylesheet" href="../css/Calendar.css">
+    <link rel="stylesheet" href="../css/StudentHome.css">
+
+    <script src='http://fullcalendar.io/js/fullcalendar-3.6.2/lib/jquery.min.js'></script>
+    <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-3.6.2/lib/moment.min.js'></script>
+    <script src='http://fullcalendar.io/js/fullcalendar-3.6.2/fullcalendar.min.js'></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+
+    <script>
+
+    </script>
+
+    <style>
+        h4 {
+            color: #EC695F;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="wrapper">
+
+    <div id="fullPage">
+        <nav id="sidebar">
+
+            <div style="width: inherit; font-size: 40px;" id="p-1-box-13" data-component-type="text" class="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text">
+                <div class="text-contents  liveUpdate-backgroundColor changeProperty-backgroundColor" style="background-color: rgba(0,0,0,0);">
+                    <span data-editableproperty="text">Assign<span style="color:rgba(167,224,165,1);">Mintz</span></span>
+                </div>
+            </div>
+
+            <span style="width: inherit">
+                <div id="settingsLogo">
+                    <button type="button" class="btn btn-xs">
+                        <span class="glyphicon glyphicon-cog">
+                        </span>
+                    </button>
+                </div>
+                <div id="userPicture">
+
+                </div>
+            </span>
+
+            <!-- Sidebar Header -->
+            <div class="sidebar-header">
+                <h3 style="color: white"> Welcome <span id="username"> </span> </h3>
+                <div id="app"></div>
+                <div id="root"></div>
+            </div>
+            <div class="classesContainer">
+                <ul class="list-unstyled components">
+                    <li class="header" style="color: white; text-align: center"><a>Classes</a></li>
+                    <li>
+                        <a id="class1"> course </a>
+                    </li>
+                    <li>
+                        <a> course </a>
+                    </li>
+                    <li>
+                        <a> course </a>
+                    </li>
+                    <li>
+                        <a> course </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="newClassDiv" style="background-color: #424242">
+                <button id="addNewClass">
+                    <br>
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <br>
+                </button>
+            </div>
+        </nav>
+
+        <div id="viewPanel">
+
+            <div id="relativeContainer">
+
+                <header id="mainHeader">
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <input type="checkbox"> Show Tests
+                        </div>
+                        <div class="btn-group">
+                            <input type="checkbox"> Show Quizzes
+                        </div>
+                        <div class="btn-group">
+                            <input type="checkbox"> Show Projects
+                        </div>
+                        <div class="btn-group">
+                            <input type="checkbox"> Show Class Schedule
+                        </div>
+                        <div class="btn-group">
+                            <SearchBar
+                                    noIcon
+                                    onChangeText={someMethod}
+                                    placeholder='Type Here...' >
+                                searchbar should go here
+                            </SearchBar>
+                        </div>
+                    </div>
+                </header>
+
+                <div id="main" style="display: block">
+
+                    <h2 style="margin: 10px; text-align: center"> Assignment Schedule </h2>
+                    <div id='calendarSpot'>
+
+                        <div class="calendar fc fc-ltr fc-unthemed week-calendar">
+                            <div class="fc-toolbar no-print">
+                                <div class="fc-left"><!-- react-empty: 66 --></div>
+                                <div class="fc-center"></div>
+                                <div class="fc-clear"></div></div>
+                            <div class="fc-view-container" style="position: relative;">
+                                <div class="fc-view fc-settimana-view fc-agenda-view">
+                                    <table>
+                                    <thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header"><table><thead><tr><th class="fc-axis fc-widget-header" style="width: 49px;"></th><th class="fc-day-header fc-widget-header fc-mon">Mon</th><th class="fc-day-header fc-widget-header fc-tue">Tue</th><th class="fc-day-header fc-widget-header fc-wed">Wed</th><th class="fc-day-header fc-widget-header fc-thu">Thu</th><th class="fc-day-header fc-widget-header fc-fri">Fri</th></tr></thead></table></div></td></tr>
+                                    </thead>
+                                    <tbody class="fc-body"><tr><td class="fc-widget-content"><hr class="fc-divider fc-widget-header"><div class="fc-time-grid-container"><div class="fc-time-grid"><div class="fc-bg"><table><tbody><tr><td class="fc-axis fc-widget-content" style="width: 49px;"></td><td class="fc-day fc-widget-content fc-mon"></td><td class="fc-day fc-widget-content fc-tue"></td><td class="fc-day fc-widget-content fc-wed"></td><td class="fc-day fc-widget-content fc-thu"></td><td class="fc-day fc-widget-content fc-fri"></td></tr>
+                                    </tbody></table></div>
+                                        <div class="fc-slats">
+                                            <table><tbody><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>8:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>9:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>10:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>11:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>12:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>1:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>2:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>3:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>4:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>5:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>6:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>7:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>8:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>9:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>10:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>11:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"><span>12:00</span></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr><tr><td class="fc-axis fc-time fc-widget-content cal-row"></td><td class="fc-widget-content"><div class="week-col"><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div><div class="cal-cell" draggable="true"></div></div></td></tr></tbody>
+                                            </table></div>
+                                        <div class="fc-timeline" style="display: none;"></div>
+                                        <div class="fc-content-skeleton">
+                                            <table><tbody><tr><td class="fc-axis" style="width: 49px;"></td><td><div class="fc-content-col"></div></td><td><div class="fc-content-col"></div></td><td><div class="fc-content-col"></div></td><td><div class="fc-content-col"></div></td><td><div class="fc-content-col"></div></td></tr></tbody>
+                                            </table>
+                                        </div>
+                                        <hr class="fc-divider fc-widget-header" style="display: none;"></div></div></td></tr></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel-group" style="padding: 10px; margin-left: 10%; margin-right: 10%;">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading mintz" data-toggle="collapse" data-target="#theId03"> Class: OOSE
+                                <!--<span class="badge" style="float: right;">2 mints</span>-->
+                            </div>
+                            <div id ="theId03" class="panel-body collapse">
+                                <h4 class="card-title">Professor: Scott Smith</h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading mintz" data-toggle="collapse" data-target="#theId04"> Class: Computer Graphics
+                                <!--<span class="badge" style="float: right;">2 mints</span>-->
+                            </div>
+                            <div id ="theId04" class="panel-body collapse">
+                                <h4 class="card-title">Professor: Michael Kazhdan</h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default ">
+                            <div class="panel-heading mintz" data-toggle="collapse" data-target="#theId05"> Class: Modern Alchemy
+                                <!--<span class="badge" style="float: right;">2 mints</span>-->
+                            </div>
+                            <div id ="theId05" class="panel-body collapse">
+                                <h4 class="card-title">Professor: Merlin</h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default ">
+                            <div class="panel-heading mintz" data-toggle="collapse" data-target="#theId06"> Class: Flower Arrangement
+                                <!--<span class="badge" style="float: right;">2 mints</span>-->
+                            </div>
+                            <div id ="theId06" class="panel-body collapse">
+                                <h4 class="card-title">Professor: Patty Patterson</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>
