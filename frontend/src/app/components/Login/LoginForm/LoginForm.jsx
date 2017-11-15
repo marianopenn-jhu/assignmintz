@@ -5,19 +5,13 @@ import {createUser} from '../../../../api/user/posts/create-user.js';
 import {loginUser} from '../../../../api/user/posts/login-user.js';
 
 const LoginWrapper = styled.div`
-  position: relative;
-  width: 320px;
+  position: absolute;
+  width: 300px;
   float: left;
   background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);
   border-radius: 8px;
   transition: all 0.5s;
   box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);
-`;
-
-const TabWrapper = styled.ul`
-  position: relative;
-  float: left;
-  width: 100%;
 `;
 
 const InputWrapper = styled.div`
@@ -124,10 +118,8 @@ class LoginForm extends React.Component {
 
     return (
       <LoginWrapper>
-        <TabWrapper>
-          <Tab title="Sign In" selected='true' onClicked={this.signInSelected}/>
-          <Tab title="Sign Up" selected='false' onClicked={this.signUpSelected}/>
-        </TabWrapper>
+        <Tab title="Sign In" selected='true' onClicked={this.signInSelected}/>
+        <Tab title="Sign Up" selected='false' onClicked={this.signUpSelected}/>
         <InputWrapper>
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>

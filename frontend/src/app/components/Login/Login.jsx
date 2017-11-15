@@ -4,7 +4,7 @@ import LoginForm from './LoginForm/LoginForm.jsx';
 
 const LoginWrapper = styled.div`
   position: absolute;
-  width: 320px;
+  width: 300px;
   left:50%;
   top:50%;
   margin-left: -160px;
@@ -32,6 +32,7 @@ const AccountButton = styled.button`
   border-radius: 4px;
   background-color: #424242;
   width: 300px;
+  margin: 15px;
 
   &:hover, &:focus, &:active {
     color: #BEE6CC;

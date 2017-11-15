@@ -10,7 +10,7 @@ const ApplicationContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 15%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -21,20 +21,21 @@ const TitleContainer = styled.div`
 
 const TextOne = styled.span`
   color: rgb(177, 217, 231);
-  font-family: Roboto;
-  font-style: italic;
+  font-family: Avenir;
+  font-style: regular;
   font-weight: lighter;
   font-size: 100px;
   text-align: center;
 `;
 
 const TextTwo = styled.span`
+  font-style: italic;
   font-family: Consolas;
   color:rgba(167,224,165,1);
 `;
 
 const LoginContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
