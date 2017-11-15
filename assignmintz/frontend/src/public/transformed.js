@@ -21228,6 +21228,7 @@ var LoginView = function (_React$Component) {
       passwd: '',
       role: ''
     };
+
     _this.onSubmit = _this.onSubmit.bind(_this);
     _this.onChange = _this.onChange.bind(_this);
     return _this;
@@ -21250,10 +21251,13 @@ var LoginView = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(Input, { placeholder: 'User Name', type: 'text' }),
-        _react2.default.createElement(Input, { value: 'First Name', type: 'text' }),
-        _react2.default.createElement(Input, { value: 'Last Name', type: 'text' }),
-        _react2.default.createElement(Input, { value: 'Last asdasdasd', type: 'text' })
+        _react2.default.createElement(Input, { name: 'user_name', placeholder: 'User Name', type: 'text' }),
+        _react2.default.createElement(Input, { name: 'first_name', value: 'First Name', type: 'text' }),
+        _react2.default.createElement(Input, { name: 'last_name', value: 'Last Name', type: 'text' }),
+        _react2.default.createElement(Input, { name: 'email', value: 'JHED@jhu.edu', type: 'text' }),
+        _react2.default.createElement(Input, { name: 'password', type: 'password' }),
+        _react2.default.createElement(Input, { name: 'confirm_password', type: 'password' }),
+        _react2.default.createElement(Input, { name: 'role', type: 'text' })
       );
     }
   }]);
