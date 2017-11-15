@@ -25,7 +25,7 @@ assignmintz/assignmintz/__pycache__/
 
 # Front-end ignores
 assignmintz/frontend/node_modules/
-assignmintz/frontend/public/transformed.js
+frontend/public/transformed.js
 
 *.pyc
 *.pyo
