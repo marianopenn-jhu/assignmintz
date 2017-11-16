@@ -25464,8 +25464,7 @@ var LoginForm = function (_React$Component) {
       var role = this.props.role;
 
       if (sign_in == true) {
-        var params = { user_name: user_name, password: password };
-        (0, _loginUser.loginUser)(params);
+        (0, _loginUser.loginUser)(user_name, password);
       } else {
         if (password == confirm_password) {
           var passwd = password;
@@ -25624,88 +25623,85 @@ exports.default = Tab;
 
 /***/ }),
 /* 42 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
-const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/user/";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://localhost:8000/backend/v1/user/";
 
-function CreateException(message, response)
-{
+exports.createUser = createUser;
+
+
+function CreateException(message, response) {
   this.message = message;
   this.response = response;
   this.name = 'CreateException';
 }
 
-function createUser(user_name, name, email, passwd, role)
-{
+function createUser(user_name, name, email, passwd, role) {
   fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, name, email, passwd, role})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
+    body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd: passwd, role: role })
+  }).then(function (response) {
+    if (response.status >= ERROR_STATUS) {
       // Create a new CreateException
       throw new CreateException(response.statusText, response);
     } else {
       // Return the response
       return JSON.parse(response.json());
     }
-  }).catch((error) => {
+  }).catch(function (error) {
     alert(error.name + ": " + error.message);
   });
 }
 
-
 /***/ }),
 /* 43 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/user/login/";
+"use strict";
 
-function LoginException(message, response)
-{
+
+var ERROR_STATUS = 400;
+var URL = "http://localhost:8000/backend/v1/user/login/";
+
+function LoginException(message, response) {
   this.message = message;
   this.response = response;
   this.name = 'LoginException';
 }
 
-function loginUser(info)
-{
-  const {user_name, passwd_hash} = info;
-
+function loginUser(user_name, passwd_hash) {
   fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, passwd_hash})
-  }) .then((response) => {
-    if(ERROR_STATUS >= 400)
-    {
+    body: JSON.stringify({ user_name: user_name, passwd_hash: passwd_hash })
+  }).then(function (response) {
+    if (ERROR_STATUS >= 400) {
       // Create a new LoginException
       var error = new LoginException(response.statusText, response);
       throw error;
     } else {
       // Return the sessionId
+      console.log(JSON.parse(response.json()));
       return JSON.parse(response.json());
     }
-  }).catch((error) =>
-  {
+  }).catch(function (error) {
     alert(error.name + ": " + error.message);
   });
 }
-
 
 /***/ }),
 /* 44 */

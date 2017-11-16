@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/student/assignment/";
 
-function StudentAddEditAssignmentException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'StudentAddEditAssignmentException';
-}
+export {addEditAssignment};
 
-function addAssignment(info)
+function addEditAssignment(student_id, priority, difficulty, assignment_id)
 {
-  const {student_id, priority, difficulty, assignment_id} = info;
-
-  fetch(URL + assignment_id + "/", {
+  return fetch(URL + assignment_id + "/", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,16 +15,12 @@ function addAssignment(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new StudentAddEditAssignmentException
-      var error = new StudentAddEditAssignmentException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in addEditAssignment()");
     } else {
-      // Return the the JSON
-      return response.json();
+      return {status: true, result: response};
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
 
 }

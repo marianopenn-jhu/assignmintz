@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/professor/assignment/";
 
-function OfficeHoursAssignmentException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'OfficeHoursAssignmentException';
-}
+export {createOfficeHours};
 
-function addAssignment(info)
+function createOfficeHours(professor_id, class_id, ta_name, times, assignment_id)
 {
-  const {professor_id, class_id, ta_name, times, assignment_id} = info;
-
-  fetch(URL + assignment_id + "/", {
+  return fetch(URL + assignment_id + "/", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,16 +15,11 @@ function addAssignment(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new OfficeHoursAssignmentException
-      var error = new OfficeHoursAssignmentException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in createOfficeHours()");
     } else {
-      // Return the JSON
-      return response.json();
+      return {status: true, result: response};
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
-
 }

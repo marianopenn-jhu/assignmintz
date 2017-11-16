@@ -2,18 +2,9 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/user/logout/";
 
-function LogoutException(message, response)
+function logoutUser(user_id, sesson_id)
 {
-  this.message = message;
-  this.response = response;
-  this.name = 'LogoutException';
-}
-
-function logoutUser(info)
-{
-  const {user_id, session_id} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -23,15 +14,11 @@ function logoutUser(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new LogoutException
-      var error = new LogoutException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
     } else {
-      // Return the sessionId
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
-  }).catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
 }

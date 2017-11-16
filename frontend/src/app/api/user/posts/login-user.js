@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/user/login/";
 
-function LoginException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'LoginException';
-}
+export {loginUser};
 
-function loginUser(info)
+function loginUser(user_name, passwd_hash)
 {
-  const {user_name, passwd_hash} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,16 +15,13 @@ function loginUser(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new LoginException
-      var error = new LoginException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in loginUser()");
     } else {
       // Return the sessionId
-      console.log(JSON.parse(response.json()));
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
   }).catch((error) =>
   {
-    alert(error.name + ": " + error.message);
+    return {status: false, result: error};
   });
 }

@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/professor/assignment/";
 
-function AddAssignmentException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'AddAssignmentException';
-}
+export {addAssignment};
 
-function addAssignment(info)
+function addAssignment(professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate)
 {
-  const {professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,16 +15,11 @@ function addAssignment(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new AddAssignmentException
-      var error = new AddAssignmentException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in addAssignment()");
     } else {
-      // Return the Assignment ID
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
-
 }

@@ -1,19 +1,11 @@
 const ERROR_STATUS = 400;
-const USER_UTIL = require('../professor-util.js');
 const URL = "http://localhost:8000/backend/v1/professor/assignment/";
 
-function DeleteAssignmentException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'DeleteAssignmentException';
-}
+export {deleteAssignment};
 
-function addAssignment(info)
+function deleteAssignment(professor_id, assignment_id)
 {
-  const {professor_id, assignment_id} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -23,16 +15,11 @@ function addAssignment(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new DeleteAssignmentException
-      var error = new DeleteAssignmentException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in deleteAssignment()");
     } else {
-      // Return the Assignment ID
-      return response.json();
+      return {status: true, result: response};
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
-
 }

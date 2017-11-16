@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/user/email/";
 
-function GetEmailException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'GetEmailException';
-}
+export {getUserEmail};
 
-function loginUser(info)
+function getUserEmail(user_name)
 {
-  const {user_name} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -22,15 +15,11 @@ function loginUser(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new GetEmailException
-      var error = new GetEmailException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in getUserEmail()");
     } else {
-      // Return the user's email
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
-  }).catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
 }

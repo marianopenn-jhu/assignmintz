@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/class/";
 
-function AddClassException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'AddClassException';
-}
+export {deleteClass};
 
-function deleteClass(info)
+function deleteClass(user_name, class_id)
 {
-  const {user_name, class_id} = info;
-
-  fetch(URL, {
+  return fetch(URL, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
@@ -22,14 +15,11 @@ function deleteClass(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new AddClassException
-      var error = new AddClassException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in deleteClass()");
     } else {
-      return response.json();
+      return {status: true, result: response};
     }
-  }).catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
 }

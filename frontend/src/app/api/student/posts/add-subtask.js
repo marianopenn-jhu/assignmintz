@@ -1,18 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/student/subtask/";
 
-function AddSubtaskException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'AddSubtaskException';
-}
+export {addSubtask};
 
-function addAssignment(info)
+function addSubtask(student_id, assignment_id)
 {
-  const {student_id, assignment_id} = info;
-
-  fetch(URL + assignment_id + "/", {
+  return fetch(URL + assignment_id + "/", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,16 +15,12 @@ function addAssignment(info)
   }) .then((response) => {
     if(ERROR_STATUS >= 400)
     {
-      // Create a new AddSubtaskException
-      var error = new AddSubtaskException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in addSubtask()");
     } else {
-      // Return the the new subtasks
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
-  }) .catch((error) =>
-  {
-    throw error;
+  }).catch((error) => {
+    return {status: false, result: error};
   });
 
 }

@@ -92,14 +92,16 @@ class LoginForm extends React.Component {
 
     if (sign_in == true)
     {
-      const params = {user_name, password};
-      loginUser(params);
+      loginUser(user_name, password);
     }
     else {
       if (password == confirm_password) {
         var passwd = password;
         var name = first_name + " " + last_name;
-        createUser(user_name, name, email, passwd, role);
+        createUser(user_name, name, email, passwd, role).then((answer) =>
+        {
+          console.log(answer);
+        });
       }
     }
   }

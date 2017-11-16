@@ -3,16 +3,9 @@ const URL = "http://localhost:8000/backend/v1/user/";
 
 export {createUser};
 
-function CreateException(message, response)
-{
-  this.message = message;
-  this.response = response;
-  this.name = 'CreateException';
-}
-
 function createUser(user_name, name, email, passwd, role)
 {
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -22,13 +15,11 @@ function createUser(user_name, name, email, passwd, role)
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      // Create a new CreateException
-      throw new CreateException(response.statusText, response);
+      throw new Error(response.status + ": " + response.statusText + " in createUser()")
     } else {
-      // Return the response
-      return JSON.parse(response.json());
+      return {status: true, result: response};
     }
   }).catch((error) => {
-    alert(error.name + ": " + error.message);
+    return {status: false, result: error};
   });
 }
