@@ -25381,7 +25381,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n'], ['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n'], ['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n'], ['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n'], ['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  float: center;\n  left:15%;\n  width: 100%;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n'], ['\n  position: relative;\n  float: center;\n  left:15%;\n  width: 100%;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n'], ['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -25417,7 +25418,9 @@ var InputWrapper = _styledComponents2.default.div(_templateObject2);
 
 var Input = _styledComponents2.default.input(_templateObject3);
 
-var Button = _styledComponents2.default.button(_templateObject4);
+var Error = _styledComponents2.default.h3(_templateObject4);
+
+var Button = _styledComponents2.default.button(_templateObject5);
 
 var LoginForm = function (_React$Component) {
   _inherits(LoginForm, _React$Component);
@@ -25434,7 +25437,8 @@ var LoginForm = function (_React$Component) {
       last_name: '',
       email: '',
       password: '',
-      confirm_password: ''
+      confirm_password: '',
+      errorMessage: ''
     };
 
     _this.onSubmit = _this.onSubmit.bind(_this);
@@ -25452,6 +25456,8 @@ var LoginForm = function (_React$Component) {
   }, {
     key: 'onSubmit',
     value: function onSubmit(event) {
+      var _this2 = this;
+
       var _state = this.state,
           sign_in = _state.sign_in,
           user_name = _state.user_name,
@@ -25464,13 +25470,19 @@ var LoginForm = function (_React$Component) {
       var role = this.props.role;
 
       if (sign_in == true) {
-        (0, _loginUser.loginUser)(user_name, password);
+        (0, _loginUser.loginUser)(user_name, password).then(function (answer) {
+          if (answer.status == false) {
+            console.log(answer.result.message);
+          }
+        });
       } else {
         if (password == confirm_password) {
           var passwd = password;
           var name = first_name + " " + last_name;
           (0, _createUser.createUser)(user_name, name, email, passwd, role).then(function (answer) {
-            console.log(answer);
+            if (answer.status == false) {
+              _this2.setState(_defineProperty({}, 'errorMessage', answer.result.message));
+            }
           });
         }
       }
@@ -25479,11 +25491,13 @@ var LoginForm = function (_React$Component) {
     key: 'signInSelected',
     value: function signInSelected() {
       this.setState(_defineProperty({}, 'sign_in', true));
+      this.setState(_defineProperty({}, 'errorMessage', ''));
     }
   }, {
     key: 'signUpSelected',
     value: function signUpSelected() {
       this.setState(_defineProperty({}, 'sign_in', false));
+      this.setState(_defineProperty({}, 'errorMessage', ''));
     }
   }, {
     key: 'render',
@@ -25510,6 +25524,11 @@ var LoginForm = function (_React$Component) {
             { onClick: this.onSubmit },
             buttonText
           )
+        ),
+        _react2.default.createElement(
+          Error,
+          null,
+          this.state['errorMessage']
         )
       );
     }

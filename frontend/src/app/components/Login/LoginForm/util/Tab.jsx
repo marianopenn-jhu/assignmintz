@@ -41,36 +41,20 @@ const TabLink = styled.a`
 class Tab extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      selected: false
-    }
-  }
-
-  componentWillMount() {
-    if (this.props.selected == 'true') {
-      this.onFocus();
-    }
   }
 
   onFocus()
   {
-    this.setState({selected: true});
     if (this.props.onClicked != null)
     {
         this.props.onClicked();
     }
   }
 
-  onBlur()
-  {
-    this.setState({selected: false});
-  }
-
   render()
   {
     var currentBorder;
-    if (this.state.selected) {
+    if (this.props.selected) {
       currentBorder = {backgroundColor: '#69FF7A'};
     } else {
       currentBorder = {backgroundColor: '#999'};
@@ -78,7 +62,7 @@ class Tab extends React.Component {
 
     return (
       <TabElement>
-        <TabLink href="#" onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)}>{this.props.title}</TabLink>
+        <TabLink href="#" onFocus={this.onFocus.bind(this)} >{this.props.title}</TabLink>
         <TabBorder style={currentBorder}></TabBorder>
       </TabElement>
     );

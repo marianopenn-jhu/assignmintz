@@ -42,37 +42,82 @@ const AccountButton = styled.button`
   }
 `;
 
+const UserCreatedMessage = styled.p`
+  color: #999;
+  font-size: 20px;
+  font-family: Avenir;
+  width:100%;
+  text-align: center;
+
+  & > a {
+    color:#69FF7A;
+  }
+  & > a:hover {
+    color:#3f9949;
+    cursor:pointer;
+  }
+`;
+
 class AccountChooser extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      enteringInfo: false,
-      selectedRole: ""
+      currentState: 'accountChooser',
+      selectedRole: "",
+      userName: "<NOT FOUND>",
+      email: "<NOT FOUND>"
     }
 
     this.onClick = this.onClick.bind(this);
+    this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   onClick(e) {
-    this.setState({['enteringInfo']: true});
+    this.setState({['currentState']: 'loginScreen'});
     this.setState({['selectedRole']: e.target.name});
+  }
+
+  onSignUpSuccess(userName, email) {
+    this.setState({['currentState']: 'createdUser'});
+    this.setState({['userName']: userName});
+    this.setState({['email']: email});
+  }
+
+  resetState() {
+    this.setState({['currentState']: 'accountChooser'});
+    this.setState({['selectedRole']: ''});
+    this.setState({['userName']: '<NOT FOUND>'});
+    this.setState({['email']: '<NOT FOUND>'});
   }
 
   render () {
     let current = null;
-    if (this.state.enteringInfo == false) {
-      current = (
-        <ButtonWrapper>
-          <AccountButton name="student" onClick={this.onClick}>Student</AccountButton>
-          <AccountButton name="professor" onClick={this.onClick}>Professor</AccountButton>
-        </ButtonWrapper>
-      );
-    }
-    else {
-      current= (
-        <LoginForm role={this.state.selectedRole}/>
-      );
+
+    switch (this.state.currentState) {
+      case 'accountChooser':
+        current = (
+          <ButtonWrapper>
+            <AccountButton name="student" onClick={this.onClick}>Student</AccountButton>
+            <AccountButton name="professor" onClick={this.onClick}>Professor</AccountButton>
+          </ButtonWrapper>
+        );
+        break;
+      case 'loginScreen':
+        current = (
+          <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess}/>
+        );
+        break;
+      case 'createdUser':
+        current = (
+          <UserCreatedMessage>
+            Thanks for signing up {this.state.userName}! You're now one step closer to optimizing your week and achieving your goals. We've sent an email to {this.state.email} for you to confirm. Once you've confirmed, you can sign in <a onClick={this.resetState}>here</a>!
+          </UserCreatedMessage>
+        );
+        break;
+      default:
+        break;
     }
 
     return (

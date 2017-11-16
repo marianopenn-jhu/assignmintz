@@ -12,6 +12,7 @@ const LoginWrapper = styled.div`
   border-radius: 8px;
   transition: all 0.5s;
   box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);
+  text-align:center;
 `;
 
 const InputWrapper = styled.div`
@@ -49,9 +50,6 @@ const Input = styled.input`
 
 const Error = styled.h3`
   position: relative;
-  float: center;
-  left:15%;
-  width: 100%;
   margin-bottom: 15px;
   font-size:14px;
   font-family: Avenir;
@@ -107,7 +105,9 @@ class LoginForm extends React.Component {
       loginUser(user_name, password).then((answer) =>
       {
         if (answer.status == false) {
-            console.log(answer.result.message);
+          this.setState({['errorMessage']: answer.result.message});
+        } else if (this.props.onSignIn != null) {
+          this.props.onSignIn(answer.result);
         }
       });
     }
@@ -119,6 +119,8 @@ class LoginForm extends React.Component {
         {
           if (answer.status == false) {
             this.setState({['errorMessage']: answer.result.message});
+          } else if (this.props.onSignUp != null) {
+            this.props.onSignUp(name, email);
           }
         });
       }
@@ -141,8 +143,8 @@ class LoginForm extends React.Component {
 
     return (
       <LoginWrapper>
-        <Tab title="Sign In" selected='true' onClicked={this.signInSelected}/>
-        <Tab title="Sign Up" selected='false' onClicked={this.signUpSelected}/>
+        <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
+        <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
@@ -150,9 +152,9 @@ class LoginForm extends React.Component {
           <Input name="email" placeholder="JHED@jhu.edu" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="password" placeholder="Password" type="password" onChange={this.onChange}/>
           <Input name="confirm_password" placeholder="Confirm Password" type="password" className={hiddenField} onChange={this.onChange}/>
+          <Error>{this.state['errorMessage']}</Error>
           <Button onClick={this.onSubmit}>{buttonText}</Button>
         </InputWrapper>
-        <Error>{this.state['errorMessage']}</Error>
       </LoginWrapper>
     );
   }
