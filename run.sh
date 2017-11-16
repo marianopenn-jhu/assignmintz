@@ -1,1 +1,1 @@
-python3 assignmintz/manage.py runserver
+python3 assignmintz-settings/manage.py runserver

@@ -25,7 +25,7 @@ SECRET_KEY = 'wlh8f-vfq+l)_xz!@x9zi@+(c(=49_!np2_wl+rk6jqfmsrl$d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 APPEND_SLASH=False
 
@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'assignmintz.urls'
 
-LOGIN_REDIRECT_URL = 'v1/assignmintz/home/'
+# LOGIN_REDIRECT_URL = '/home/'
 
 TEMPLATES = [
     {
@@ -73,6 +73,10 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'staticfiles'),
+)
 
 WSGI_APPLICATION = 'assignmintz.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
@@ -110,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
