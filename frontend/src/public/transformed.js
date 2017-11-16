@@ -25469,7 +25469,9 @@ var LoginForm = function (_React$Component) {
         if (password == confirm_password) {
           var passwd = password;
           var name = first_name + " " + last_name;
-          (0, _createUser.createUser)(user_name, name, email, passwd, role);
+          (0, _createUser.createUser)(user_name, name, email, passwd, role).then(function (answer) {
+            console.log(answer);
+          });
         }
       }
     }
@@ -25637,14 +25639,8 @@ var URL = "http://localhost:8000/backend/v1/user/";
 exports.createUser = createUser;
 
 
-function CreateException(message, response) {
-  this.message = message;
-  this.response = response;
-  this.name = 'CreateException';
-}
-
 function createUser(user_name, name, email, passwd, role) {
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25653,14 +25649,12 @@ function createUser(user_name, name, email, passwd, role) {
     body: JSON.stringify({ user_name: user_name, name: name, email: email, passwd: passwd, role: role })
   }).then(function (response) {
     if (response.status >= ERROR_STATUS) {
-      // Create a new CreateException
-      throw new CreateException(response.statusText, response);
+      throw new Error(response.status + ": " + response.statusText + " in createUser()");
     } else {
-      // Return the response
-      return JSON.parse(response.json());
+      return { status: true, result: response };
     }
   }).catch(function (error) {
-    alert(error.name + ": " + error.message);
+    return { status: false, result: error };
   });
 }
 
@@ -25671,17 +25665,17 @@ function createUser(user_name, name, email, passwd, role) {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var ERROR_STATUS = 400;
 var URL = "http://localhost:8000/backend/v1/user/login/";
 
-function LoginException(message, response) {
-  this.message = message;
-  this.response = response;
-  this.name = 'LoginException';
-}
+exports.loginUser = loginUser;
+
 
 function loginUser(user_name, passwd_hash) {
-  fetch(URL, {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25690,16 +25684,13 @@ function loginUser(user_name, passwd_hash) {
     body: JSON.stringify({ user_name: user_name, passwd_hash: passwd_hash })
   }).then(function (response) {
     if (ERROR_STATUS >= 400) {
-      // Create a new LoginException
-      var error = new LoginException(response.statusText, response);
-      throw error;
+      throw new Error(response.status + ": " + response.statusText + " in loginUser()");
     } else {
       // Return the sessionId
-      console.log(JSON.parse(response.json()));
-      return JSON.parse(response.json());
+      return { status: true, result: response };
     }
   }).catch(function (error) {
-    alert(error.name + ": " + error.message);
+    return { status: false, result: error };
   });
 }
 

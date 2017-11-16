@@ -47,6 +47,17 @@ const Input = styled.input`
   }
 `;
 
+const Error = styled.h3`
+  position: relative;
+  float: center;
+  left:15%;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size:14px;
+  font-family: Avenir;
+  color:red;
+`;
+
 const Button = styled.button`
   background: #69FF7A;
   box-shadow: 0px 2px 10px 2px #3f9949;
@@ -74,6 +85,7 @@ class LoginForm extends React.Component {
       email: '',
       password: '',
       confirm_password: '',
+      errorMessage: '',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -92,7 +104,12 @@ class LoginForm extends React.Component {
 
     if (sign_in == true)
     {
-      loginUser(user_name, password);
+      loginUser(user_name, password).then((answer) =>
+      {
+        if (answer.status == false) {
+            console.log(answer.result.message);
+        }
+      });
     }
     else {
       if (password == confirm_password) {
@@ -100,7 +117,9 @@ class LoginForm extends React.Component {
         var name = first_name + " " + last_name;
         createUser(user_name, name, email, passwd, role).then((answer) =>
         {
-          console.log(answer);
+          if (answer.status == false) {
+            this.setState({['errorMessage']: answer.result.message});
+          }
         });
       }
     }
@@ -108,10 +127,12 @@ class LoginForm extends React.Component {
 
   signInSelected() {
     this.setState({['sign_in']: true});
+    this.setState({['errorMessage']: ''});
   }
 
   signUpSelected() {
     this.setState({['sign_in']: false});
+    this.setState({['errorMessage']: ''});
   }
 
   render () {
@@ -131,6 +152,7 @@ class LoginForm extends React.Component {
           <Input name="confirm_password" placeholder="Confirm Password" type="password" className={hiddenField} onChange={this.onChange}/>
           <Button onClick={this.onSubmit}>{buttonText}</Button>
         </InputWrapper>
+        <Error>{this.state['errorMessage']}</Error>
       </LoginWrapper>
     );
   }
