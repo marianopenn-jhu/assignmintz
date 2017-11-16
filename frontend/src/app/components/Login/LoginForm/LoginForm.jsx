@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tab from './util/Tab.jsx';
-import {createUser} from '../../../../api/user/posts/create-user.js';
-import {loginUser} from '../../../../api/user/posts/login-user.js';
+import {createUser} from '../../../api/user/posts/create-user.js';
+import {loginUser} from '../../../api/user/posts/login-user.js';
 
 const LoginWrapper = styled.div`
   position: absolute;

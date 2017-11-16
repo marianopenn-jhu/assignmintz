@@ -23439,10 +23439,10 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-image: linear-gradient(-87deg, #212121 08%, #303030 100%);\n'], ['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-image: linear-gradient(-87deg, #212121 08%, #303030 100%);\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: fixed;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n'], ['\n  position: fixed;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  color: rgb(177, 217, 231);\n  font-family: Roboto;\n  font-style: italic;\n  font-weight: lighter;\n  font-size: 100px;\n  text-align: center;\n'], ['\n  color: rgb(177, 217, 231);\n  font-family: Roboto;\n  font-style: italic;\n  font-weight: lighter;\n  font-size: 100px;\n  text-align: center;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  font-family: Consolas;\n  color:rgba(167,224,165,1);\n'], ['\n  font-family: Consolas;\n  color:rgba(167,224,165,1);\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n'], ['\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n'], ['\n  position: absolute;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  font-style: regular;\n  font-weight: lighter;\n  font-size: 100px;\n  text-align: center;\n'], ['\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  font-style: regular;\n  font-weight: lighter;\n  font-size: 100px;\n  text-align: center;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  font-style: italic;\n  font-family: Consolas;\n  color:rgba(167,224,165,1);\n'], ['\n  font-style: italic;\n  font-family: Consolas;\n  color:rgba(167,224,165,1);\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n'], ['\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n']);
 
 var _react = __webpack_require__(1);
 
@@ -25267,9 +25267,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 320px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n'], ['\n  position: absolute;\n  width: 320px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n'], ['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n'], ['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n'], ['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n'], ['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n']);
 
 var _react = __webpack_require__(1);
 
@@ -25282,6 +25282,10 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 var _LoginForm = __webpack_require__(40);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+var _backarrow = __webpack_require__(44);
+
+var _backarrow2 = _interopRequireDefault(_backarrow);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25374,11 +25378,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  width: 320px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n'], ['\n  position: relative;\n  width: 320px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  width: 100%;\n'], ['\n  position: relative;\n  float: left;\n  width: 100%;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n'], ['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n'], ['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n'], ['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n'], ['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n'], ['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n'], ['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n'], ['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -25410,13 +25413,11 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var LoginWrapper = _styledComponents2.default.div(_templateObject);
 
-var TabWrapper = _styledComponents2.default.ul(_templateObject2);
+var InputWrapper = _styledComponents2.default.div(_templateObject2);
 
-var InputWrapper = _styledComponents2.default.div(_templateObject3);
+var Input = _styledComponents2.default.input(_templateObject3);
 
-var Input = _styledComponents2.default.input(_templateObject4);
-
-var Button = _styledComponents2.default.button(_templateObject5);
+var Button = _styledComponents2.default.button(_templateObject4);
 
 var LoginForm = function (_React$Component) {
   _inherits(LoginForm, _React$Component);
@@ -25492,12 +25493,8 @@ var LoginForm = function (_React$Component) {
       return _react2.default.createElement(
         LoginWrapper,
         null,
-        _react2.default.createElement(
-          TabWrapper,
-          null,
-          _react2.default.createElement(_Tab2.default, { title: 'Sign In', selected: 'true', onClicked: this.signInSelected }),
-          _react2.default.createElement(_Tab2.default, { title: 'Sign Up', selected: 'false', onClicked: this.signUpSelected })
-        ),
+        _react2.default.createElement(_Tab2.default, { title: 'Sign In', selected: 'true', onClicked: this.signInSelected }),
+        _react2.default.createElement(_Tab2.default, { title: 'Sign Up', selected: 'false', onClicked: this.signUpSelected }),
         _react2.default.createElement(
           InputWrapper,
           null,
@@ -25709,6 +25706,12 @@ function loginUser(info)
   });
 }
 
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "src/app/components/Login/assets/backarrow-b89fbf5d.png";
 
 /***/ })
 /******/ ]);

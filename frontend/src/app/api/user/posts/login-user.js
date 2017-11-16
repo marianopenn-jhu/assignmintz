@@ -27,6 +27,7 @@ function loginUser(info)
       throw error;
     } else {
       // Return the sessionId
+      console.log(JSON.parse(response.json()));
       return JSON.parse(response.json());
     }
   }).catch((error) =>

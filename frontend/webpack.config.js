@@ -29,13 +29,24 @@ var config = {
             loader: 'style-loader'
          },
          {
-          test: /\.css$/,
-          loader: 'css-loader',
-          query: {
-            modules: true,
-            localIdentName: '[name]__[local]___[hash:base64:5]'
-          }
-        }
+            test: /\.css$/,
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+         },
+         {
+             test: /\.(jpg|png|gif|svg|pdf|ico)$/,
+             use: [
+                 {
+                     loader: 'file-loader',
+                     options: {
+                         name: '[path][name]-[hash:8].[ext]'
+                     },
+                 },
+             ]
+         }
       ]
    }
 }
