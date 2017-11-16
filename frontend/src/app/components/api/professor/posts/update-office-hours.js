@@ -13,7 +13,7 @@ function updateOfficeHours(professor_id, class_id, ta_name, old_time, new_time, 
     },
     body: JSON.stringify({professor_id, class_id, ta_name, old_time, new_time})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in updateOfficeHours()");
     } else {

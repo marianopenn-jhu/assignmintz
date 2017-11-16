@@ -13,7 +13,7 @@ function deleteAssignment(professor_id, assignment_id)
     },
     body: JSON.stringify({professor_id, assignment_id})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in deleteAssignment()");
     } else {

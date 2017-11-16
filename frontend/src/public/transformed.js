@@ -25269,7 +25269,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n'], ['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n'], ['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n'], ['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n'], ['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n'], ['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n']);
 
 var _react = __webpack_require__(1);
 
@@ -25305,6 +25306,8 @@ var ButtonWrapper = _styledComponents2.default.div(_templateObject2);
 
 var AccountButton = _styledComponents2.default.button(_templateObject3);
 
+var UserCreatedMessage = _styledComponents2.default.p(_templateObject4);
+
 var AccountChooser = function (_React$Component) {
   _inherits(AccountChooser, _React$Component);
 
@@ -25314,41 +25317,83 @@ var AccountChooser = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AccountChooser.__proto__ || Object.getPrototypeOf(AccountChooser)).call(this, props));
 
     _this.state = {
-      enteringInfo: false,
-      selectedRole: ""
+      currentState: 'accountChooser',
+      selectedRole: "",
+      userName: "<NOT FOUND>",
+      email: "<NOT FOUND>"
     };
 
     _this.onClick = _this.onClick.bind(_this);
+    _this.onSignUpSuccess = _this.onSignUpSuccess.bind(_this);
+    _this.resetState = _this.resetState.bind(_this);
     return _this;
   }
 
   _createClass(AccountChooser, [{
     key: 'onClick',
     value: function onClick(e) {
-      this.setState(_defineProperty({}, 'enteringInfo', true));
+      this.setState(_defineProperty({}, 'currentState', 'loginScreen'));
       this.setState(_defineProperty({}, 'selectedRole', e.target.name));
+    }
+  }, {
+    key: 'onSignUpSuccess',
+    value: function onSignUpSuccess(userName, email) {
+      this.setState(_defineProperty({}, 'currentState', 'createdUser'));
+      this.setState(_defineProperty({}, 'userName', userName));
+      this.setState(_defineProperty({}, 'email', email));
+    }
+  }, {
+    key: 'resetState',
+    value: function resetState() {
+      this.setState(_defineProperty({}, 'currentState', 'accountChooser'));
+      this.setState(_defineProperty({}, 'selectedRole', ''));
+      this.setState(_defineProperty({}, 'userName', '<NOT FOUND>'));
+      this.setState(_defineProperty({}, 'email', '<NOT FOUND>'));
     }
   }, {
     key: 'render',
     value: function render() {
       var current = null;
-      if (this.state.enteringInfo == false) {
-        current = _react2.default.createElement(
-          ButtonWrapper,
-          null,
-          _react2.default.createElement(
-            AccountButton,
-            { name: 'student', onClick: this.onClick },
-            'Student'
-          ),
-          _react2.default.createElement(
-            AccountButton,
-            { name: 'professor', onClick: this.onClick },
-            'Professor'
-          )
-        );
-      } else {
-        current = _react2.default.createElement(_LoginForm2.default, { role: this.state.selectedRole });
+
+      switch (this.state.currentState) {
+        case 'accountChooser':
+          current = _react2.default.createElement(
+            ButtonWrapper,
+            null,
+            _react2.default.createElement(
+              AccountButton,
+              { name: 'student', onClick: this.onClick },
+              'Student'
+            ),
+            _react2.default.createElement(
+              AccountButton,
+              { name: 'professor', onClick: this.onClick },
+              'Professor'
+            )
+          );
+          break;
+        case 'loginScreen':
+          current = _react2.default.createElement(_LoginForm2.default, { role: this.state.selectedRole, onSignUp: this.onSignUpSuccess });
+          break;
+        case 'createdUser':
+          current = _react2.default.createElement(
+            UserCreatedMessage,
+            null,
+            'Thanks for signing up ',
+            this.state.userName,
+            '! You\'re now one step closer to optimizing your week and achieving your goals. We\'ve sent an email to ',
+            this.state.email,
+            ' for you to confirm. Once you\'ve confirmed, you can sign in ',
+            _react2.default.createElement(
+              'a',
+              { onClick: this.resetState },
+              'here'
+            ),
+            '!'
+          );
+          break;
+        default:
+          break;
       }
 
       return _react2.default.createElement(
@@ -25378,10 +25423,10 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n'], ['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n  text-align:center;\n'], ['\n  position: absolute;\n  width: 300px;\n  float: left;\n  background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);\n  border-radius: 8px;\n  transition: all 0.5s;\n  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);\n  text-align:center;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n'], ['\n  position: relative;\n  float: left;\n  width: 100%;\n  margin-top: 20px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n'], ['\n\tpadding: relative;\n\tfloat:left;\n  width:90%;\n  border: none;\n  border-bottom: 1px solid #3f9949;\n  background-color: transparent;\n  font-size:16px;\n  transition: all 0.5s;\n  height: 5px;\n  margin: 5% 5%;\n  padding: 10px 0px;\n  opacity: 1;\n  outline: none;\n  font-family: Avenir;\n\n  &:focus {\n    border-bottom: 1px solid #3f9949;\n  }\n\n  .hidden {\n    display: none;\n    transition: opacity 500ms ease-in;\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  float: center;\n  left:15%;\n  width: 100%;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n'], ['\n  position: relative;\n  float: center;\n  left:15%;\n  width: 100%;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: relative;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n'], ['\n  position: relative;\n  margin-bottom: 15px;\n  font-size:14px;\n  font-family: Avenir;\n  color:red;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n'], ['\n  background: #69FF7A;\n  box-shadow: 0px 2px 10px 2px #3f9949;\n  border-radius: 8px;\n  padding: 15px 30px;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  position: relative;\n  float: left;\n  margin-left: 100px;\n  margin-top: 20px;\n  margin-bottom: 20px;\n  cursor: pointer;\n']);
 
 var _react = __webpack_require__(1);
@@ -25472,7 +25517,9 @@ var LoginForm = function (_React$Component) {
       if (sign_in == true) {
         (0, _loginUser.loginUser)(user_name, password).then(function (answer) {
           if (answer.status == false) {
-            console.log(answer.result.message);
+            _this2.setState(_defineProperty({}, 'errorMessage', answer.result.message));
+          } else if (_this2.props.onSignIn != null) {
+            _this2.props.onSignIn(answer.result);
           }
         });
       } else {
@@ -25482,6 +25529,8 @@ var LoginForm = function (_React$Component) {
           (0, _createUser.createUser)(user_name, name, email, passwd, role).then(function (answer) {
             if (answer.status == false) {
               _this2.setState(_defineProperty({}, 'errorMessage', answer.result.message));
+            } else if (_this2.props.onSignUp != null) {
+              _this2.props.onSignUp(name, email);
             }
           });
         }
@@ -25508,8 +25557,8 @@ var LoginForm = function (_React$Component) {
       return _react2.default.createElement(
         LoginWrapper,
         null,
-        _react2.default.createElement(_Tab2.default, { title: 'Sign In', selected: 'true', onClicked: this.signInSelected }),
-        _react2.default.createElement(_Tab2.default, { title: 'Sign Up', selected: 'false', onClicked: this.signUpSelected }),
+        _react2.default.createElement(_Tab2.default, { title: 'Sign In', selected: this.state.sign_in, onClicked: this.signInSelected }),
+        _react2.default.createElement(_Tab2.default, { title: 'Sign Up', selected: !this.state.sign_in, onClicked: this.signUpSelected }),
         _react2.default.createElement(
           InputWrapper,
           null,
@@ -25520,15 +25569,15 @@ var LoginForm = function (_React$Component) {
           _react2.default.createElement(Input, { name: 'password', placeholder: 'Password', type: 'password', onChange: this.onChange }),
           _react2.default.createElement(Input, { name: 'confirm_password', placeholder: 'Confirm Password', type: 'password', className: hiddenField, onChange: this.onChange }),
           _react2.default.createElement(
+            Error,
+            null,
+            this.state['errorMessage']
+          ),
+          _react2.default.createElement(
             Button,
             { onClick: this.onSubmit },
             buttonText
           )
-        ),
-        _react2.default.createElement(
-          Error,
-          null,
-          this.state['errorMessage']
         )
       );
     }
@@ -25586,39 +25635,21 @@ var Tab = function (_React$Component) {
   function Tab(props) {
     _classCallCheck(this, Tab);
 
-    var _this = _possibleConstructorReturn(this, (Tab.__proto__ || Object.getPrototypeOf(Tab)).call(this, props));
-
-    _this.state = {
-      selected: false
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Tab.__proto__ || Object.getPrototypeOf(Tab)).call(this, props));
   }
 
   _createClass(Tab, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      if (this.props.selected == 'true') {
-        this.onFocus();
-      }
-    }
-  }, {
     key: 'onFocus',
     value: function onFocus() {
-      this.setState({ selected: true });
       if (this.props.onClicked != null) {
         this.props.onClicked();
       }
     }
   }, {
-    key: 'onBlur',
-    value: function onBlur() {
-      this.setState({ selected: false });
-    }
-  }, {
     key: 'render',
     value: function render() {
       var currentBorder;
-      if (this.state.selected) {
+      if (this.props.selected) {
         currentBorder = { backgroundColor: '#69FF7A' };
       } else {
         currentBorder = { backgroundColor: '#999' };
@@ -25629,7 +25660,7 @@ var Tab = function (_React$Component) {
         null,
         _react2.default.createElement(
           TabLink,
-          { href: '#', onFocus: this.onFocus.bind(this), onBlur: this.onBlur.bind(this) },
+          { href: '#', onFocus: this.onFocus.bind(this) },
           this.props.title
         ),
         _react2.default.createElement(TabBorder, { style: currentBorder })
@@ -25688,7 +25719,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "http://localhost:8000/backend/v1/user/login/";
+var URL = "http://localhost:8000/backend/v1/login/";
 
 exports.loginUser = loginUser;
 
@@ -25702,7 +25733,7 @@ function loginUser(user_name, passwd_hash) {
     },
     body: JSON.stringify({ user_name: user_name, passwd_hash: passwd_hash })
   }).then(function (response) {
-    if (ERROR_STATUS >= 400) {
+    if (response.status >= ERROR_STATUS) {
       throw new Error(response.status + ": " + response.statusText + " in loginUser()");
     } else {
       // Return the sessionId

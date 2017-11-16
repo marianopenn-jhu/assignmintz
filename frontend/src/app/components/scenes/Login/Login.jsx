@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from './LoginForm/LoginForm.jsx';
+import LoginForm from './Form/Form.jsx';
 import BackArrow from './assets/backarrow.png';
 
 const LoginWrapper = styled.div`
@@ -71,6 +71,7 @@ class AccountChooser extends React.Component {
 
     this.onClick = this.onClick.bind(this);
     this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
+    this.onSignInSuccess = this.onSignInSuccess.bind(this);
     this.resetState = this.resetState.bind(this);
   }
 
@@ -83,6 +84,10 @@ class AccountChooser extends React.Component {
     this.setState({['currentState']: 'createdUser'});
     this.setState({['userName']: userName});
     this.setState({['email']: email});
+  }
+
+  onSignInSuccess(answer) {
+    this.props.onLogin();
   }
 
   resetState() {
@@ -106,7 +111,7 @@ class AccountChooser extends React.Component {
         break;
       case 'loginScreen':
         current = (
-          <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess}/>
+          <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
         );
         break;
       case 'createdUser':

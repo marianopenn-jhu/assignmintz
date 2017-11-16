@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Tab from './util/Tab.jsx';
+import Tab from './Tab/Tab.jsx';
 import {createUser} from '../../../api/user/posts/create-user.js';
 import {loginUser} from '../../../api/user/posts/login-user.js';
 
-const LoginWrapper = styled.div`
+const FormWrapper = styled.div`
   position: absolute;
   width: 300px;
   float: left;
@@ -72,7 +72,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-class LoginForm extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -142,7 +142,7 @@ class LoginForm extends React.Component {
     var buttonText = this.state.sign_in ? 'Sign In' : 'Sign Up';
 
     return (
-      <LoginWrapper>
+      <FormWrapper>
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
@@ -155,9 +155,9 @@ class LoginForm extends React.Component {
           <Error>{this.state['errorMessage']}</Error>
           <Button onClick={this.onSubmit}>{buttonText}</Button>
         </InputWrapper>
-      </LoginWrapper>
+      </FormWrapper>
     );
   }
 }
 
-export default LoginForm;
+export default Form;

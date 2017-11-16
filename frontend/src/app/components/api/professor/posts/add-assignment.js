@@ -13,7 +13,7 @@ function addAssignment(professor_id, assignment_name, type, description, expecte
     },
     body: JSON.stringify({professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in addAssignment()");
     } else {

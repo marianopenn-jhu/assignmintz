@@ -1,9 +1,8 @@
+
 const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/user/login/";
+const URL = "http://localhost:8000/backend/v1/user/logout/";
 
-export {loginUser};
-
-function loginUser(user_name, passwd_hash)
+function logoutUser(user_id, sesson_id)
 {
   return fetch(URL, {
     method: 'POST',
@@ -13,15 +12,13 @@ function loginUser(user_name, passwd_hash)
     },
     body: JSON.stringify({user_name, passwd_hash})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in loginUser()");
+      throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
     } else {
-      // Return the sessionId
       return {status: true, result: response};
     }
-  }).catch((error) =>
-  {
+  }).catch((error) => {
     return {status: false, result: error};
   });
 }

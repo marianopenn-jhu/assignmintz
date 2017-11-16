@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Login from './Login/Login.jsx';
+import Login from './scenes/Login/Login.jsx';
 
 const ApplicationContainer = styled.div`
   position: absolute;
@@ -19,7 +19,7 @@ const TitleContainer = styled.div`
   letter-spacing: 0px;
 `;
 
-const TextOne = styled.span`
+const HeaderOne = styled.span`
   color: rgb(177, 217, 231);
   font-family: Avenir;
   font-style: regular;
@@ -28,7 +28,7 @@ const TextOne = styled.span`
   text-align: center;
 `;
 
-const TextTwo = styled.span`
+const HeaderTwo = styled.span`
   font-style: italic;
   font-family: Consolas;
   color:rgba(167,224,165,1);
@@ -46,21 +46,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      
-    }
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onLogin() {
+    console.log("Logged in");
   }
 
   render() {
     return (
       <ApplicationContainer>
         <TitleContainer>
-          <TextOne data-editableproperty="text">Assign
-            <TextTwo>Mintz</TextTwo>
-          </TextOne>
+          <HeaderOne data-editableproperty="text">Assign
+            <HeaderTwo>Mintz</HeaderTwo>
+          </HeaderOne>
         </TitleContainer>
         <LoginContainer>
-          <Login />
+          <Login onLogin={this.onLogin}/>
         </LoginContainer>
       </ApplicationContainer>
     );

@@ -13,7 +13,7 @@ function updateAssignment(professor_id, updated_date, assignment_id)
     },
     body: JSON.stringify({professor_id, updated_date})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
     } else {

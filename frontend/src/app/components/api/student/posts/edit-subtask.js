@@ -1,26 +1,25 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/student/subtask/";
 
-export {addSubtask};
+export {editSubtask};
 
-function addSubtask(student_id, assignment_id)
+function editSubtask(student_id, new_title, new_description, assignment_id, subtask_id)
 {
-  return fetch(URL + assignment_id + "/", {
+  return fetch(URL + assignment_id + "/" + subtask_id + "/", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({student_id})
+    body: JSON.stringify({student_id, new_title, new_description})
   }) .then((response) => {
-    if(ERROR_STATUS >= 400)
+    if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in addSubtask()");
+      throw new Error(response.status + ": " + response.statusText + " in editSubtask()");
     } else {
       return {status: true, result: response};
     }
   }).catch((error) => {
     return {status: false, result: error};
   });
-
 }
