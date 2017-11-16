@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from './Form/Form.jsx';
+import LoginForm from './components/Form/index.jsx';
 import BackArrow from './assets/backarrow.png';
 
 const LoginWrapper = styled.div`

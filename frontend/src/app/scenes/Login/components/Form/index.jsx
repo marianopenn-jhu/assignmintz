@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Tab from './Tab/Tab.jsx';
-import {createUser} from '../../../api/user/posts/create-user.js';
-import {loginUser} from '../../../api/user/posts/login-user.js';
+import Tab from './components/Tab/index.jsx';
+import {createUser} from '../../../../services/api/user/posts/create-user.js';
+import {loginUser} from '../../../../services/api/user/posts/login-user.js';
 
 const FormWrapper = styled.div`
   position: absolute;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Login from './scenes/Login/Login.jsx';
+import Login from './Login/index.jsx';
 
 const ApplicationContainer = styled.div`
   position: absolute;

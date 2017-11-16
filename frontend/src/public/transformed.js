@@ -23470,9 +23470,9 @@ var ApplicationContainer = _styledComponents2.default.div(_templateObject);
 
 var TitleContainer = _styledComponents2.default.div(_templateObject2);
 
-var TextOne = _styledComponents2.default.span(_templateObject3);
+var HeaderOne = _styledComponents2.default.span(_templateObject3);
 
-var TextTwo = _styledComponents2.default.span(_templateObject4);
+var HeaderTwo = _styledComponents2.default.span(_templateObject4);
 
 var LoginContainer = _styledComponents2.default.div(_templateObject5);
 
@@ -23484,11 +23484,16 @@ var App = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = {};
+    _this.onLogin = _this.onLogin.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'onLogin',
+    value: function onLogin() {
+      console.log("Logged in");
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -23498,11 +23503,11 @@ var App = function (_React$Component) {
           TitleContainer,
           null,
           _react2.default.createElement(
-            TextOne,
+            HeaderOne,
             { 'data-editableproperty': 'text' },
             'Assign',
             _react2.default.createElement(
-              TextTwo,
+              HeaderTwo,
               null,
               'Mintz'
             )
@@ -23511,7 +23516,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           LoginContainer,
           null,
-          _react2.default.createElement(_Login2.default, null)
+          _react2.default.createElement(_Login2.default, { onLogin: this.onLogin })
         )
       );
     }
@@ -25280,9 +25285,9 @@ var _styledComponents = __webpack_require__(7);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _LoginForm = __webpack_require__(40);
+var _Form = __webpack_require__(40);
 
-var _LoginForm2 = _interopRequireDefault(_LoginForm);
+var _Form2 = _interopRequireDefault(_Form);
 
 var _backarrow = __webpack_require__(44);
 
@@ -25325,6 +25330,7 @@ var AccountChooser = function (_React$Component) {
 
     _this.onClick = _this.onClick.bind(_this);
     _this.onSignUpSuccess = _this.onSignUpSuccess.bind(_this);
+    _this.onSignInSuccess = _this.onSignInSuccess.bind(_this);
     _this.resetState = _this.resetState.bind(_this);
     return _this;
   }
@@ -25341,6 +25347,11 @@ var AccountChooser = function (_React$Component) {
       this.setState(_defineProperty({}, 'currentState', 'createdUser'));
       this.setState(_defineProperty({}, 'userName', userName));
       this.setState(_defineProperty({}, 'email', email));
+    }
+  }, {
+    key: 'onSignInSuccess',
+    value: function onSignInSuccess(answer) {
+      this.props.onLogin();
     }
   }, {
     key: 'resetState',
@@ -25373,7 +25384,7 @@ var AccountChooser = function (_React$Component) {
           );
           break;
         case 'loginScreen':
-          current = _react2.default.createElement(_LoginForm2.default, { role: this.state.selectedRole, onSignUp: this.onSignUpSuccess });
+          current = _react2.default.createElement(_Form2.default, { role: this.state.selectedRole, onSignUp: this.onSignUpSuccess, onSignIn: this.onSignInSuccess });
           break;
         case 'createdUser':
           current = _react2.default.createElement(
@@ -25457,7 +25468,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var LoginWrapper = _styledComponents2.default.div(_templateObject);
+var FormWrapper = _styledComponents2.default.div(_templateObject);
 
 var InputWrapper = _styledComponents2.default.div(_templateObject2);
 
@@ -25467,13 +25478,13 @@ var Error = _styledComponents2.default.h3(_templateObject4);
 
 var Button = _styledComponents2.default.button(_templateObject5);
 
-var LoginForm = function (_React$Component) {
-  _inherits(LoginForm, _React$Component);
+var Form = function (_React$Component) {
+  _inherits(Form, _React$Component);
 
-  function LoginForm(props) {
-    _classCallCheck(this, LoginForm);
+  function Form(props) {
+    _classCallCheck(this, Form);
 
-    var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
     _this.state = {
       sign_in: true,
@@ -25493,7 +25504,7 @@ var LoginForm = function (_React$Component) {
     return _this;
   }
 
-  _createClass(LoginForm, [{
+  _createClass(Form, [{
     key: 'onChange',
     value: function onChange(e) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
@@ -25555,7 +25566,7 @@ var LoginForm = function (_React$Component) {
       var buttonText = this.state.sign_in ? 'Sign In' : 'Sign Up';
 
       return _react2.default.createElement(
-        LoginWrapper,
+        FormWrapper,
         null,
         _react2.default.createElement(_Tab2.default, { title: 'Sign In', selected: this.state.sign_in, onClicked: this.signInSelected }),
         _react2.default.createElement(_Tab2.default, { title: 'Sign Up', selected: !this.state.sign_in, onClicked: this.signUpSelected }),
@@ -25583,10 +25594,10 @@ var LoginForm = function (_React$Component) {
     }
   }]);
 
-  return LoginForm;
+  return Form;
 }(_react2.default.Component);
 
-exports.default = LoginForm;
+exports.default = Form;
 
 /***/ }),
 /* 41 */
@@ -25748,7 +25759,7 @@ function loginUser(user_name, passwd_hash) {
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/components/Login/assets/backarrow-b89fbf5d.png";
+module.exports = __webpack_require__.p + "src/app/components/scenes/Login/assets/backarrow-b89fbf5d.png";
 
 /***/ })
 /******/ ]);
