@@ -1,1 +1,1 @@
-web: gunicorn assignmintz.wsgi:application
+web: gunicorn assignmintz-settings.assignmintz.wsgi:application
