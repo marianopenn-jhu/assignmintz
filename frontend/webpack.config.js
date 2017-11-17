@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var BUILD_DIR = path.resolve(__dirname, 'src/public');
-var STATIC_DIR = path.resolve('../assignmintz-settings/backend/', 'static/')
+var STATIC_DIR = path.resolve('../backend/static/backend/')
 var APP_DIR = path.resolve(__dirname, 'src/app');
 
 var config = {
