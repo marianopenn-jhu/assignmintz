@@ -1,29 +1,80 @@
 from django.test import TestCase
-from django.test import Client
 from tastypie.test import ResourceTestCaseMixin
-from backend.validation import UserValidation
-from tastypie.bundle import Bundle
-import datetime
 
 # Create your tests here.
 class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
-
-    #PUT method is not allowed for User resource
-    def test_bad_method(self):
-        self.user_post_data = {
-            'user_name':'harrypotter',
-            'name':'harry',
-            'email':'harrypotter@jhu.edu',
-            'passwd':'1234',
-            'role':'student'
+        self.student_user = {
+            'user_name': 'harrypotter',
+            'name': 'harry',
+            'email': 'harrypotter@jhu.edu',
+            'passwd': '1234',
+            'role': 'student'
         }
-        self.assertHttpMethodNotAllowed(self.api_client.put('/backend/v1/user/', format='json'))
+        self.professor_user = {
+            'user_name': 'dumbledore',
+            'name': 'Albus',
+            'email': 'albusdumbledore@jhu.edu',
+            'passwd': 'chocolate_frogs',
+            'role': 'professor'
+        }
+        self.oose_course = {
+            "course_id": "601.421",
+            "course_title": "OOSE",
+            "visible": "True",
+            "description": "A series of project iterations.",
+            "professor": "/backend/v1/user/harrypotter/",
+            "student": "/backend/v1/user/dumbledore/"
+        }
+        self.oose_assignment_1 = {
+            "assignment_id": "1",
+            "assignment_name": "Iteration 1",
+            "assignment_type": "hw",
+            "course":  "/backend/v1/course/601.421/",
+            "due_date": "11/17/17",
+            "due_time": "11:59 PM",
+            "expected_difficulty": "3",
+            "actual_difficulty": "4",
+            "expected_time": "3.4",
+            "actual_time": "5.4",
+            "priority": "5",
+            "percent_complete": "85.3",
+            "visible": "True",
+            "description": "Complete the iteration before time runs out"
+        }
+        self.oose_subtask_1 = {
+            "subtask_id": "testing",
+            "subtask_name": "Implement Testing",
+            "visible": "True",
+            "description": "Implement extensive testing",
+            "assignment": "/backend/v1/professor/assignment/1/"
+        }
+        self.user_url = '/backend/v1/user/'
+        self.course_url = '/backend/v1/course/'
+        self.assignment_url = '/backend/v1/professor/assignment/'
+        self.subtask_url = '/backend/v1/subtask/'
+
+    # PUT method is not allowed for User resource
+    def test_bad_method(self):
+        self.assertHttpMethodNotAllowed(self.api_client.put(self.user_url, format='json', data=self.student_user))
         print('Method not allowed test passed')
 
+    def test_valid_post(self):
+        resp1 = self.api_client.post(self.user_url, format='json', data=self.student_user)
+        self.assertHttpCreated(resp1)
+        resp2 = self.api_client.post(self.user_url, format='json', data=self.professor_user)
+        self.assertHttpCreated(resp2)
+        resp3 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
+        self.assertHttpCreated(resp3)
+        resp4 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1)
+        self.assertHttpCreated(resp4)
+        resp5 = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
+        self.assertHttpCreated(resp5)
+        print('Valid post test passed')
+
     def test_invalid_email(self):
-        #not @jhu.edu
+        # not @jhu.edu
         self.invalid_user_post_data = {
             'user_name': 'harrypotter',
             'name': 'harry',
@@ -32,7 +83,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'role': 'student'
         }
 
-        #JHED instead of email
+        # JHED instead of email
         self.invalid_user_post_data_2 = {
             'user_name': 'harrypotter1',
             'name': 'harry',
@@ -41,89 +92,47 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'role': 'student'
         }
 
-        #valid
-        self.valid_user_post_data = {
-            'user_name': 'harrypotter1',
-            'name': 'harry',
-            'email': 'harrypotter2@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        #duplicate email
+        # duplicate email
         self.invalid_user_post_data_3 = {
             'user_name': 'harrypotter1',
             'name': 'harry',
-            'email': 'harrypotter2@jhu.edu',
+            'email': 'harrypotter@jhu.edu',
             'passwd': '1234',
             'role': 'student'
         }
 
-        #valid
-        self.valid_user_post_data_2 = {
-            'user_name': 'harrypotter2',
-            'name': 'harry',
-            'email': 'harrypotter2@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
+        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
         self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
+        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
         self.assertHttpBadRequest(resp2)
-        respValid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpCreated(respValid)
-        resp3 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
+        resp3 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
         self.assertHttpBadRequest(resp3)
-        respValid2 = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data_2)
-        self.assertHttpCreated(respValid2)
+        print('Invalid email test passed')
 
     def test_invalid_role(self):
-        #role is teacher
+        # role is teacher
         self.invalid_user_post_data = {
             'user_name': 'harrypotter',
             'name': 'harry',
-            'email': 'harrypotter@gmail.edu',
+            'email': 'test@gmail.edu',
             'passwd': '1234',
             'role': 'teacher'
         }
 
-        #role is students
+        # role is students
         self.invalid_user_post_data_2 = {
             'user_name': 'harrypotter1',
             'name': 'harry',
-            'email': 'harrypotter1@jhu.edu',
+            'email': 'test1@jhu.edu',
             'passwd': '1234',
             'role': 'students'
         }
 
-        #valid
-        self.valid_user_post_data = {
-            'user_name': 'harrypotter2',
-            'name': 'harry',
-            'email': 'harrypotter2@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        #valid
-        self.valid_user_post_data_2 = {
-            'user_name': 'harrypotter21',
-            'name': 'harry',
-            'email': 'harrypotter3@jhu.edu',
-            'passwd': '1234',
-            'role': 'PRoFEsSOR'
-        }
-
-        resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
+        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
         self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
+        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
         self.assertHttpBadRequest(resp2)
-        resp_valid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpCreated(resp_valid)
-        resp_valid_2 = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data_2)
-        self.assertHttpCreated(resp_valid_2)
+        print('Invalid role tests passed')
 
     def test_empty_field(self):
         # forgot name
@@ -144,34 +153,9 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'role': 'student'
         }
 
-        # valid
-        self.valid_user_post_data = {
-            'user_name': 'harrypotter2',
-            'name': 'harry',
-            'email': 'harrypotter2@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        resp1 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data)
+        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
         self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post('/backend/v1/user/', format='json', data=self.invalid_user_post_data_2)
+        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
         self.assertHttpBadRequest(resp2)
-        resp_valid = self.api_client.post('/backend/v1/user/', format='json', data=self.valid_user_post_data)
-        self.assertHttpCreated(resp_valid)
+        print('Empty field test passed')
 
-    # def test_duplicate_user(self):
-        # c = Client()
-        # user_name = datetime.datetime.now()
-        # self.user_post_data = {
-        #     'user_name': 'harrypotter',
-        #     'name':'harry',
-        #     'email':'harrypotter@jhu.edu',
-        #     'passwd':'1234',
-        #     'role':'student'
-        # }
-        #
-        # resp = c.post('/backend/v1/user/', format='json', data=self.user_post_data)
-        # print(str(resp))
-        # resp2 = c.post('/backend/v1/user/', format='json', data=self.user_post_data)
-        # print(str(resp2))
