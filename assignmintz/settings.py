@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'assignmintz',
         'USER': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'mighty-mountain-99483.herokuapp.com',
         'PORT': '5432',
     }
 }
