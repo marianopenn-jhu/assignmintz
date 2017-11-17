@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,16 +86,17 @@ CORS_ALLOW_CREDENTIALS = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+db_from_env = dj_database_url.config()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'assignmintz',
         'USER': 'postgres',
-        'HOST': 'mighty-mountain-99483.herokuapp.com',
-        'PORT': '5432',
     }
 }
+
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
