@@ -1,11 +1,11 @@
 const ERROR_STATUS = 400;
 const URL = "http://localhost:8000/backend/v1/user/";
-
+const DEPLOYMENT_URL = "https://mighty-mountain-99483.herokuapp.com/backend/v1/user/"
 export {createUser};
 
 function createUser(user_name, name, email, passwd, role)
 {
-  return fetch(URL, {
+  return fetch(DEPLOYMENT_URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
