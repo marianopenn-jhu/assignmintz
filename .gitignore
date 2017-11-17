@@ -23,7 +23,9 @@ media
 assignmintz/backend/__pycache__/
 assignmintz/assignmintz/__pycache__/
 
+# Front-end ignores
 assignmintz/frontend/node_modules/
+frontend/public/transformed.js
 
 *.pyc
 *.pyo
