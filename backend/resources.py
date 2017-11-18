@@ -5,9 +5,9 @@ from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
-from backend.validation import UserValidation
-from django.db import IntegrityError
-#from django.contrib.auth.models import User
+from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation
+# from django.contrib.auth.models import User
+
 
 class LogInResource(ModelResource):
     class Meta:
@@ -15,6 +15,7 @@ class LogInResource(ModelResource):
         resource_name = 'login'
         authorization = Authorization()
         allowed_methods = ['post']
+
 
 class UserResource(ModelResource):
     class Meta:
@@ -28,19 +29,21 @@ class UserResource(ModelResource):
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
-    #students = fields.ManyToManyField(UserResource, 'students')
+    # students = fields.ManyToManyField(UserResource, 'students')
     student = fields.ForeignKey(UserResource, 'student')
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
         authorization = Authorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
+        validation = CourseValidation()
         excludes = []
 
     def dehydrate(self, bundle):
-        bundle.data["professor"]=bundle.obj.professor.user_name
-        bundle.data["student"]=bundle.obj.student.user_name
+        bundle.data["professor"] = bundle.obj.professor.user_name
+        bundle.data["student"] = bundle.obj.student.user_name
         return bundle
+
 
 class AssignmentResource(ModelResource):
     course = fields.ForeignKey(CourseResource, 'course')
@@ -50,12 +53,14 @@ class AssignmentResource(ModelResource):
         resource_name = 'professor/assignment'
         authorization = Authorization()
         allowed_methods = ['get', 'post', 'delete']
+        validation = AssignmentValidation();
         excludes = ['assignment_id', 'due_date', 'actual_difficulty', 'actual_time', \
-        'priority', 'percent_complete', 'visible', 'description']
+                    'priority', 'percent_complete', 'visible', 'description']
 
     def dehydrate(self, bundle):
-        bundle.data["course"]=bundle.obj.course.course_id
+        bundle.data["course"] = bundle.obj.course.course_id
         return bundle
+
 
 class SubTaskResource(ModelResource):
     assignment = fields.ForeignKey(AssignmentResource, 'assignment')
@@ -65,11 +70,13 @@ class SubTaskResource(ModelResource):
             resource_name = 'subtask'
             authorization = Authorization()
             allowed_methods = ['get', 'post', 'delete']
+            validation = SubtaskValidation()
             excludes = ['description']
 
     def dehydrate(self, bundle):
-        bundle.data["assignment"]=bundle.obj.assignment.assignment_id
+        bundle.data["assignment"] = bundle.obj.assignment.assignment_id
         return bundle
+
 
 class OfficeHoursResource(ModelResource):
     class Meta:

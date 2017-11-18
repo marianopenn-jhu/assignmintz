@@ -1,11 +1,13 @@
 from django.db import models
-#from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 # Create your models here.
+
 
 class LogIn(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
     passwd = models.CharField(max_length=36, default='')
+
 
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
@@ -17,6 +19,7 @@ class User(models.Model):
     def __unicode__(self):
         return self.user_name
 
+
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
     professor = models.ForeignKey(User, related_name='professor', null=True, on_delete=models.CASCADE)
@@ -27,6 +30,7 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.course_title
+
 
 class Assignment(models.Model):
     assignment_id = models.AutoField(primary_key=True)
@@ -47,6 +51,7 @@ class Assignment(models.Model):
     def __unicode__(self):
         return self.assignment_name
 
+
 class SubTask(models.Model):
     subtask_id = models.CharField(max_length=36, primary_key=True)
     subtask_name = models.CharField(max_length=36)
@@ -54,10 +59,12 @@ class SubTask(models.Model):
     description = models.TextField()
     assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
 
+
 class OfficeHours(models.Model):
     professor_id = models.CharField(max_length=36, primary_key=True)
     ta_name = models.CharField(max_length=36)
     office_hours = models.ForeignKey('OfficeHours')
+
 
 class OfficeHour(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
