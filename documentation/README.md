@@ -23,7 +23,9 @@ To build the frontend: <br />
 (3) Type 'npm run build' in your terminal <br />
 
 The app should now be ready to go!
-Navigate to 'localhost:8000/home/' to create a user.
+Navigate to 'localhost:8000/' to create a user. NOTE: On the Heroku deployed app.
+user creation is currently failing. So, if you desire to check this functionality,
+you MUST run from localhost.
 
 Alternatively, you can check out the deployed app at:
 'https://mighty-mountain-99483.herokuapp.com/home/'
