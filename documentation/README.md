@@ -13,6 +13,10 @@ To build and run for local development:  <br />
 % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source install.sh <br />
 %	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source run.sh <br />
 
+To build and run for tests locally:  <br />
+% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source install.sh <br />
+%	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source test_run.sh <br />
+
 To build the frontend: <br />
 (1) Install npm onto your machine <br />
 (2) Navigate to assignmintz/frontend <br />
