@@ -13,9 +13,8 @@ To build and run for local development:  <br />
 % &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source install.sh <br />
 %	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source run.sh <br />
 
-To build and run for tests locally:  <br />
-% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source install.sh <br />
-%	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source test_run.sh <br />
+To run tests locally:  <br />
+% python3 manage.py test backend.tests <br />
 
 To build the frontend: <br />
 (1) Install npm onto your machine <br />
@@ -23,13 +22,10 @@ To build the frontend: <br />
 (3) Type 'npm run build' in your terminal <br />
 
 The app should now be ready to go!
-Navigate to 'localhost:8000/' to create a user. NOTE: On the Heroku deployed app.
-user creation is currently failing. So, if you desire to check this functionality,
-you MUST run from localhost.
-
+Navigate to 'localhost:8000/home/' to begin using the app. 
 Alternatively, you can check out the deployed app at:
 'https://mighty-mountain-99483.herokuapp.com/home/'
-
+NOTE: On the Heroku deployed app. User creation is currently failing. 
 Our deploy process is as follows:
     -Make changes to current branch
     -commit changes
