@@ -14,7 +14,7 @@ To build and run for local development:  <br />
 %	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source run.sh <br />
 
 To run tests locally:  <br />
-% python3 manage.py test backend.tests <br />
+% source run_tests.sh <br />
 
 To build the frontend: <br />
 (1) Install npm onto your machine <br />
