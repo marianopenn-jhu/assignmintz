@@ -1,1 +1,1 @@
-python3 ../manage.py test backend
+python3 manage.py test backend
