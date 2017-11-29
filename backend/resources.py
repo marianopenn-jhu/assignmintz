@@ -16,7 +16,6 @@ class LogInResource(ModelResource):
         authorization = Authorization()
         allowed_methods = ['post']
 
-
 class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
@@ -24,7 +23,12 @@ class UserResource(ModelResource):
             authorization = Authorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
-            validation = UserValidation()
+            validation = UserValidation
+            filtering = {
+                'user_name': ALL,
+                'name': ALL,
+                'role':ALL
+            }
 
 
 class CourseResource(ModelResource):
@@ -38,6 +42,12 @@ class CourseResource(ModelResource):
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
+        filtering = {
+            'course_id': ALL,
+            'professor':ALL,
+            'student': ALL,
+            'course_title': ALL
+        }
 
     def dehydrate(self, bundle):
         bundle.data["professor"] = bundle.obj.professor.user_name
@@ -56,6 +66,13 @@ class AssignmentResource(ModelResource):
         validation = AssignmentValidation();
         excludes = ['assignment_id', 'due_date', 'actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
+        filters = {
+            'assignment_id':ALL,
+            'assignment_name':ALL,
+            'assignment_type':ALL,
+            'course':ALL,
+            'due_date':ALL
+        }
 
     def dehydrate(self, bundle):
         bundle.data["course"] = bundle.obj.course.course_id
@@ -72,6 +89,11 @@ class SubTaskResource(ModelResource):
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
+            filters = {
+                'subtask_id':ALL,
+                'subtask_name':ALL,
+                'assignment':ALL
+            }
 
     def dehydrate(self, bundle):
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
@@ -84,3 +106,7 @@ class OfficeHoursResource(ModelResource):
             resource_name = 'officehours'
             authorization = Authorization()
             allowed_methods = ['get', 'post', 'delete']
+            filters = {
+                'professor_id':ALL,
+                'ta_name':ALL
+            }
