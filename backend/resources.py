@@ -23,7 +23,7 @@ class UserResource(ModelResource):
             authorization = Authorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
-            validation = UserValidation
+            validation = UserValidation()
             filtering = {
                 'user_name': ALL,
                 'name': ALL,
