@@ -1,7 +1,7 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
+from backend.models import Profile, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
@@ -16,25 +16,26 @@ class LogInResource(ModelResource):
         authorization = Authorization()
         allowed_methods = ['post']
 
-class UserResource(ModelResource):
+class ProfileResource(ModelResource):
     class Meta:
-            queryset = User.objects.all()
+            queryset = Profile.objects.all()
             resource_name = 'user'
             authorization = Authorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
             filtering = {
-                'user_name': ALL,
-                'name': ALL,
+                'username': ALL,
+                'first_name': ALL,
+                'last_name': ALL,
                 'role':ALL
             }
 
 
 class CourseResource(ModelResource):
-    professor = fields.ForeignKey(UserResource, 'professor')
+    professor = fields.ForeignKey(ProfileResource, 'professor')
     # students = fields.ManyToManyField(UserResource, 'students')
-    student = fields.ForeignKey(UserResource, 'student')
+    student = fields.ForeignKey(ProfileResource, 'student')
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'

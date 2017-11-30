@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -9,11 +9,8 @@ class LogIn(models.Model):
     passwd = models.CharField(max_length=36, default='')
 
 
-class User(models.Model):
-    user_name = models.CharField(max_length=36, default='', primary_key=True)
-    name = models.CharField(max_length=40, default='')
-    email = models.EmailField(max_length=256, default='')
-    passwd = models.CharField(max_length=36, default='')
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, default='')
 
     def __unicode__(self):
