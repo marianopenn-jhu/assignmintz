@@ -87,7 +87,7 @@ class AccountChooser extends React.Component {
   }
 
   onSignInSuccess(answer) {
-    this.props.onLogin();
+    this.props.onLogin(answer);
   }
 
   resetState() {

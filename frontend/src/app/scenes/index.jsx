@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Login from './Login/index.jsx';
+import StudentView from './Student/index.jsx';
 
 const ApplicationContainer = styled.div`
   position: absolute;
@@ -47,13 +48,51 @@ class App extends React.Component {
     super(props);
 
     this.onLogin = this.onLogin.bind(this);
+    this.state = {
+      user_state:0 // 0 = Login, 1 = Student, 2 = Teacher
+    };
   }
 
-  onLogin() {
-    console.log("Logged in");
+  componentWillMount() {
+    this.setState({['user_state']: 0})
+  }
+
+  onLogin(answer) {
+    console.log(answer);
   }
 
   render() {
+    let current = null;
+
+    // Find next main state
+    switch (this.state.user_state) {
+      // Login view
+      case 0:
+        current = (
+          <LoginContainer>
+            <Login onLogin={this.onLogin}/>
+          </LoginContainer>
+        );
+        break;
+      // Student view
+      case 1:
+        current = (
+          <div>Unimplemented</div>
+        );
+        break;
+      // Teacher view
+      case 2:
+        current = (
+          <div>Unimplemented</div>
+        );
+        break;
+      default:
+        current = (
+          <div>Error State!</div>
+        );
+        break;
+    }
+
     return (
       <ApplicationContainer>
         <TitleContainer>
@@ -61,9 +100,7 @@ class App extends React.Component {
             <HeaderTwo>Mintz</HeaderTwo>
           </HeaderOne>
         </TitleContainer>
-        <LoginContainer>
-          <Login onLogin={this.onLogin}/>
-        </LoginContainer>
+        {current}
       </ApplicationContainer>
     );
   }
