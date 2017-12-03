@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'wlh8f-vfq+l)_xz!@x9zi@+(c(=49_!np2_wl+rk6jqfmsrl$d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 APPEND_SLASH=False
 
@@ -56,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'assignmintz.urls'
 
-LOGIN_REDIRECT_URL = 'v1/assignmintz/home/'
+# LOGIN_REDIRECT_URL = '/home/'
 
 TEMPLATES = [
     {
@@ -74,6 +75,10 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'staticfiles'),
+)
+
 WSGI_APPLICATION = 'assignmintz.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
@@ -81,16 +86,17 @@ CORS_ALLOW_CREDENTIALS = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+db_from_env = dj_database_url.config()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'assignmintz',
         'USER': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
     }
 }
+
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -110,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
