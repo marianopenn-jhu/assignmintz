@@ -1,16 +1,31 @@
 from django.shortcuts import render, render_to_response
-from backend.api.resources import  CourseResource
+from backend.api.models import  Profile, Course
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.contrib.auth.decorators import login_required
 import psycopg2
 
-# Create your views here.
-# def student_detail(request, username):
-#     res = StudentResource()
-#     request_bundle = res.build_bundle
-#
-# def student_course_list(request, username):
-#     res = CourseResource()
-#     request_bundle = res.build_bundle(request=request)
-#     conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-#     cur = conn.cursor()
-#     cur.execute('SELECT courses_id from backend_student where user_name=\''+username+'\';')
-#     student = res.obj_get(request_bundle, username=username)
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        return render()
+    else:
+        # Return an 'invalid login' error message.
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.
+
+
+def add_course(request, course_id):
+    course = Course.objects.get(course_id=course_id)
+    is_logged_in = request.user.is_authenticated()
+    if is_logged_in and Profile.objects.filter(user=request.user).exists():
+        student = Profile.objects.get(user=request.profile)
+        course.students.add(student)
+    course.save()
+    return HttpResponse()

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -13,14 +14,24 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, default='')
 
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
     def __unicode__(self):
         return self.user_name
 
 
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
-    professor = models.ForeignKey(User, related_name='professor', null=True, on_delete=models.CASCADE)
-    student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
+    professor = models.ForeignKey(Profile, related_name='professor', null=True, on_delete=models.CASCADE)
+    students = models.ManyToManyField(Profile, related_name='students')
+    # student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
     course_title = models.CharField(max_length=36, default='')
     visible = models.BooleanField(default=True)
     description = models.TextField()

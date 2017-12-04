@@ -34,8 +34,8 @@ class ProfileResource(ModelResource):
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(ProfileResource, 'professor')
-    # students = fields.ManyToManyField(UserResource, 'students')
-    student = fields.ForeignKey(ProfileResource, 'student')
+    students = fields.ManyToManyField(ProfileResource, 'students')
+    # student = fields.ForeignKey(ProfileResource, 'student')
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
