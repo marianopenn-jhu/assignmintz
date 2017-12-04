@@ -1,1 +1,1 @@
-web: bin/runsvdir-dyno
+web: gunicorn assignmintz.wsgi:application

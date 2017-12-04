@@ -1,5 +1,5 @@
 #!/bin/bash
-pip install -r assignmintz/assignmintz/requirements/requirements.txt
+pip install -r requirements.txt
 createdb -h localhost -p 5432 -U postgres assignmintz
-python3 assignmintz/manage.py makemigrations
-python3 assignmintz/manage.py migrate
+python3 manage.py makemigrations
+python3 manage.py migrate

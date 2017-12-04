@@ -27,5 +27,7 @@ assignmintz/assignmintz/__pycache__/
 assignmintz/frontend/node_modules/
 frontend/public/transformed.js
 
+virtualEnv/
+
 *.pyc
 *.pyo
