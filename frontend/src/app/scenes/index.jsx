@@ -58,7 +58,10 @@ class App extends React.Component {
   }
 
   onLogin(answer) {
+    // TODO: User user info in next scene
     console.log(answer);
+
+    this.setState({['user_state']: 1})
   }
 
   render() {
@@ -69,9 +72,16 @@ class App extends React.Component {
       // Login view
       case 0:
         current = (
-          <LoginContainer>
-            <Login onLogin={this.onLogin}/>
-          </LoginContainer>
+          <div>
+            <TitleContainer>
+              <HeaderOne data-editableproperty="text">Assign
+                <HeaderTwo>Mintz</HeaderTwo>
+              </HeaderOne>
+            </TitleContainer>
+            <LoginContainer>
+              <Login onLogin={this.onLogin}/>
+            </LoginContainer>
+          </div>
         );
         break;
       // Student view
@@ -95,11 +105,7 @@ class App extends React.Component {
 
     return (
       <ApplicationContainer>
-        <TitleContainer>
-          <HeaderOne data-editableproperty="text">Assign
-            <HeaderTwo>Mintz</HeaderTwo>
-          </HeaderOne>
-        </TitleContainer>
+
         {current}
       </ApplicationContainer>
     );
