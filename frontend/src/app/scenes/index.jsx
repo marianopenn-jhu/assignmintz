@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
+import ProfessorView from './Professor/index.jsx';
 
 const ApplicationContainer = styled.div`
   position: absolute;
@@ -49,12 +50,12 @@ class App extends React.Component {
 
     this.onLogin = this.onLogin.bind(this);
     this.state = {
-      user_state:0 // 0 = Login, 1 = Student, 2 = Teacher
+      user_state:0 // 0 = Login, 1 = Student, 2 = Professor
     };
   }
 
   componentWillMount() {
-    this.setState({['user_state']: 0})
+    this.setState({['user_state']: 2})
   }
 
   onLogin(answer) {
@@ -87,13 +88,15 @@ class App extends React.Component {
       // Student view
       case 1:
         current = (
-          <div>Unimplemented</div>
+          <div>
+            <div>Unimplemented</div>
+          </div>
         );
         break;
       // Teacher view
       case 2:
         current = (
-          <div>Unimplemented</div>
+          <ProfessorView/>
         );
         break;
       default:
@@ -105,7 +108,6 @@ class App extends React.Component {
 
     return (
       <ApplicationContainer>
-
         {current}
       </ApplicationContainer>
     );
