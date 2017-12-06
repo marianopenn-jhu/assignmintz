@@ -96,7 +96,7 @@ class App extends React.Component {
       // Teacher view
       case 2:
         current = (
-          <ProfessorView/>
+          <ProfessorView user_name="ronnie7"/>
         );
         break;
       default:

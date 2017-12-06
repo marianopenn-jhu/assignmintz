@@ -5,7 +5,7 @@ export {loginUser};
 
 function loginUser(user_name, passwd_hash)
 {
-  return fetch(URL, {
+  return (fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -17,9 +17,10 @@ function loginUser(user_name, passwd_hash)
     {
       throw new Error(response.status + ": " + response.statusText + " in loginUser()");
     } else {
-      // Return the sessionId
-      return {status: true, result: response};
+      return response.json();
     }
+  })).then((json) => {
+    return {status: true, result: json};
   }).catch((error) =>
   {
     return {status: false, result: error};

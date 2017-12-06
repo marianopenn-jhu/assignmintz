@@ -5,7 +5,7 @@ export {createUser};
 
 function createUser(user_name, name, email, passwd, role)
 {
-  return fetch(DEPLOYMENT_URL, {
+  return (fetch(DEPLOYMENT_URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -17,8 +17,10 @@ function createUser(user_name, name, email, passwd, role)
     {
       throw new Error(response.status + ": " + response.statusText + " in createUser()")
     } else {
-      return {status: true, result: response};
+      return response.json();
     }
+  })).then((json) => {
+    return {status: true, result: json};
   }).catch((error) => {
     return {status: false, result: error};
   });

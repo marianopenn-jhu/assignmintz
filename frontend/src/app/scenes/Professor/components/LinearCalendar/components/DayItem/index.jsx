@@ -1,32 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import AssignmentsContainer from './components/AssignmentsContainer/index.jsx';
 
 const Day = styled.li`
-  background-color:	#D3D3D3;
+  background-color:	#808080;
   color: black;
 
   font-family:Avenir;
   font-size:16px;
   list-style:none;
-  padding:25px;
+  padding:15px;
 
   &:hover {
-    background-color:white;
-    cursor: pointer;
-  }
-`;
-
-const Item = styled.li`
-  background-color:	white;
-  color: black;
-
-  font-family:Avenir;
-  font-size:16px;
-  list-style:none;
-  padding:25px;
-
-  &:hover {
-    background-color:#D3D3D3;
+    background-color:#A9A9A9;
     cursor: pointer;
   }
 `;
@@ -37,7 +23,7 @@ class DayItem extends React.Component {
 
     this.onClick = this.onClick.bind(this);
     this.state={
-      hidden:true
+      hidden:false,
     };
   }
 
@@ -49,8 +35,8 @@ class DayItem extends React.Component {
   render() {
     return(
       <div>
-      <Day onClick={this.onClick}>{this.props.day}</Day>
-      <Item style={{visibility: this.state.hidden ? 'visible' : 'hidden' }}>Test Item 1</Item>
+        <Day onClick={this.onClick}>{this.props.day}</Day>
+        <AssignmentsContainer hidden={this.state.hidden} assignments={this.props.assignments}/>
       </div>
     );
   }

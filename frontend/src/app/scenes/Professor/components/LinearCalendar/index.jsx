@@ -10,6 +10,12 @@ const ScrollableList=styled.ul`
   max-height:auto;
 `;
 
+var obj = {
+  title: "title",
+  info:"info"
+}
+
+// TODO: Send the Calendar its items via props
 class LinearCalendar extends React.Component {
   constructor(props) {
     super(props);
@@ -22,20 +28,20 @@ class LinearCalendar extends React.Component {
   render() {
     return(
       <ScrollableList>
-        <DayItem day="Sunday"/>
-        <DayItem day="Monday"/>
-        <DayItem day="Tuesday"/>
-        <DayItem day="Wednesday"/>
-        <DayItem day="Thursday"/>
-        <DayItem day="Friday"/>
-        <DayItem day="Saturday"/>
-        <DayItem day="Sunday"/>
-        <DayItem day="Monday"/>
-        <DayItem day="Tuesday"/>
-        <DayItem day="Wednesday"/>
-        <DayItem day="Thursday"/>
-        <DayItem day="Friday"/>
-        <DayItem day="Saturday"/>
+        <DayItem day="Sunday December 10th, 2017"/>
+        <DayItem day="Monday December 11th, 2017"/>
+        <DayItem day="Tuesday December 12th, 2017"/>
+        <DayItem day="Wednesday December 13th, 2017"/>
+        <DayItem day="Thursday December 14th, 2017"/>
+        <DayItem day="Friday December 15th, 2017"/>
+        <DayItem day="Saturday December 16th, 2017"/>
+        <DayItem day="Sunday December 17th, 2017"/>
+        <DayItem day="Monday December 18th, 2017"/>
+        <DayItem day="Tuesday December 19th, 2017"/>
+        <DayItem day="Wednesday December 20th, 2017"/>
+        <DayItem day="Thursday December 21th, 2017"/>
+        <DayItem day="Friday December 22th, 2017"/>
+        <DayItem day="Saturday December 23th, 2017"/>
       </ScrollableList>
     );
   }
