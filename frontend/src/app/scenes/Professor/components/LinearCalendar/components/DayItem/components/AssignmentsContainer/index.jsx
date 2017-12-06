@@ -22,9 +22,9 @@ class AssignmentsContainer extends React.Component {
     {
       var that = this;
 
-      var assignmentNodes = this.props.assignments.map(function(a){
+      var assignmentNodes = this.props.assignments.map(function(a, i){
         return (
-          <AssignmentItem data={a}/>
+          <AssignmentItem key={i} data={a}/>
         );
       });
 

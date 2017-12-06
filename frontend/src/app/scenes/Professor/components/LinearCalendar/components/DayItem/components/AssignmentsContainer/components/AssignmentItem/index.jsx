@@ -32,8 +32,8 @@ class AssignmentItem extends React.Component {
   render() {
     return(
       <Item>
-        <Header>{this.props.data.title}</Header>
-        <Body>{this.props.data.info}</Body>
+        <Header>{this.props.data.assignment_name}</Header>
+        <Body>{this.props.data.assignment_type}</Body>
       </Item>
     )
   }

@@ -20,22 +20,21 @@ var obj = {
   as its data. Props:
     data
 */
-
-// TODO: For now, we assume that the due data is December 9th
 class LinearCalendar extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    // TODO: For now, we assume that the due data is December 9th
     if (this.props.data != null) {
-      var current = this.props.data.map((e) => {
+      var current = this.props.data.map((e, i) => {
         return (
-          <DayItem day="December 9th, 2017"/>
+          <DayItem key={i} day="December 9th, 2017" assignments={[e]}/>
         )
       });
     } else {
-      current = <DayItem day="Invalid"/>
+      current = <DayItem day="Your schedule is free!"/>
     }
 
     return(
