@@ -33,7 +33,7 @@ class ProfessorView extends React.Component {
             this.setState({['courses']: obj.objects})
           }
           else {
-            console.log(response);
+            console.log("Failed to retrieve courses!");
           }
         }
       );
@@ -41,8 +41,6 @@ class ProfessorView extends React.Component {
   }
 
   render() {
-
-
     return(
       <Container>
         <LinearCalendar/>

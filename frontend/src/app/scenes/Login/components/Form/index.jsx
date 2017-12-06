@@ -105,9 +105,9 @@ class Form extends React.Component {
       loginUser(user_name, password).then((answer) =>
       {
         if (answer.status == false) {
-          this.setState({['errorMessage']: answer.result.message});
+          this.setState({['errorMessage']: answer.body.message});
         } else if (this.props.onSignIn != null) {
-          this.props.onSignIn(answer.result);
+          this.props.onSignIn(answer.body, user_name);
         }
       });
     }
@@ -118,7 +118,7 @@ class Form extends React.Component {
         createUser(user_name, name, email, passwd, role).then((answer) =>
         {
           if (answer.status == false) {
-            this.setState({['errorMessage']: answer.result.message});
+            this.setState({['errorMessage']: answer.body.message});
           } else if (this.props.onSignUp != null) {
             this.props.onSignUp(name, email);
           }

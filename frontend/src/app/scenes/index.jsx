@@ -50,19 +50,26 @@ class App extends React.Component {
 
     this.onLogin = this.onLogin.bind(this);
     this.state = {
-      user_state:0 // 0 = Login, 1 = Student, 2 = Professor
+      user_state:0, // 0 = Login, 1 = Student, 2 = Professor
+      current_user:"",
+      session_key:null
     };
   }
 
-  componentWillMount() {
-    this.setState({['user_state']: 2})
-  }
-
-  onLogin(answer) {
-    // TODO: User user info in next scene
-    console.log(answer);
-
-    this.setState({['user_state']: 1})
+  onLogin(answer, user_name, role) {
+    if (role == "student") {
+        this.setState({
+          'user_state': 1,
+          'current_user': user_name,
+          'session_key': "TODO: Replace this!"
+        })
+    }  else if (role == "professor") {
+      this.setState({
+        'user_state': 2,
+        'current_user': user_name,
+        'session_key': "TODO: Replace this!"
+      })
+    }
   }
 
   render() {
@@ -95,9 +102,16 @@ class App extends React.Component {
         break;
       // Teacher view
       case 2:
-        current = (
-          <ProfessorView user_name="ronnie7"/>
-        );
+        if (this.state.session_key != null)
+        {
+          current = (
+            <ProfessorView user_name={this.state.current_user}/>
+          );
+        }
+        else {
+            current = (<div></div>);
+            alert("Null session key!");
+        }
         break;
       default:
         current = (

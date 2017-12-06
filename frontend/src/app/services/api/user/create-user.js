@@ -20,8 +20,8 @@ function createUser(user_name, name, email, passwd, role)
       return response.json();
     }
   })).then((json) => {
-    return {status: true, result: json};
+    return {status: true, body: json};
   }).catch((error) => {
-    return {status: false, result: error};
+    return {status: false, body: error};
   });
 }
