@@ -21,19 +21,17 @@ class ProfessorView extends React.Component {
 
     this.state = {
       courses:[],
-      assignments:[]
+      assignments:[],
+      meow:"High"
     };
-  }
 
-  componentWillMount() {
     if (this.props.user_name) {
-      const state = this.state;
 
       // Retrieve courses
       getCourses("teacher=" + this.props.user_name).then((response) => {
           if (response.status == true) {
             var obj = response.body;
-            state.courses = obj.objects;
+            this.setState({courses: obj.objects});
           } else {
             console.log("Failed to retrieve courses!");
           }
@@ -44,23 +42,21 @@ class ProfessorView extends React.Component {
       getAssignment("teacher=" + this.props.user_name).then((response) => {
           if (response.status == true) {
             var obj = response.body;
-            state.assignments = obj.objects;
+            this.setState({assignments: obj.objects});
           } else {
             console.log("Failed to retrieve assignments");
           }
         }
       )
-
-      // Set final State
-      this.setState(state);
-      console.log(this.state);
     }
   }
 
   render() {
+    const state = this.state;
+
     return(
       <Container>
-        <LinearCalendar/>
+        <LinearCalendar data={state.assignments}/>
       </Container>
     );
   }

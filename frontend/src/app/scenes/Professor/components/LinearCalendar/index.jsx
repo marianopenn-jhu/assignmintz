@@ -15,20 +15,32 @@ var obj = {
   info:"info"
 }
 
-// TODO: Send the Calendar its items via props
+/*
+  A linear calendar, expecting a props list of assignments
+  as its data. Props:
+    data
+*/
+
+// TODO: For now, we assume that the due data is December 9th
 class LinearCalendar extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-
-    };
   }
 
   render() {
+    if (this.props.data != null) {
+      var current = this.props.data.map((e) => {
+        return (
+          <DayItem day="December 9th, 2017"/>
+        )
+      });
+    } else {
+      current = <DayItem day="Invalid"/>
+    }
+
     return(
       <ScrollableList>
-        
+        {current}
       </ScrollableList>
     );
   }
