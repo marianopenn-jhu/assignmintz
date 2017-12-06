@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LinearCalendar from './components/LinearCalendar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
+import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
 
 const Container = styled.div`
   position: absolute;
@@ -19,24 +20,40 @@ class ProfessorView extends React.Component {
     super(props);
 
     this.state = {
-      courses:[]
+      courses:[],
+      assignments:[]
     };
   }
 
   componentWillMount() {
-    // Load courses
     if (this.props.user_name) {
-      getCourses("teacher=" + this.props.user_name).then((response) =>
-      {
+      const state = this.state;
+
+      // Retrieve courses
+      getCourses("teacher=" + this.props.user_name).then((response) => {
           if (response.status == true) {
             var obj = response.body;
-            this.setState({['courses']: obj.objects})
-          }
-          else {
+            state.courses = obj.objects;
+          } else {
             console.log("Failed to retrieve courses!");
           }
         }
       );
+
+      // Retrieve assignments
+      getAssignment("teacher=" + this.props.user_name).then((response) => {
+          if (response.status == true) {
+            var obj = response.body;
+            state.assignments = obj.objects;
+          } else {
+            console.log("Failed to retrieve assignments");
+          }
+        }
+      )
+
+      // Set final State
+      this.setState(state);
+      console.log(this.state);
     }
   }
 
