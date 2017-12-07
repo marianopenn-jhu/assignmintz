@@ -76,7 +76,6 @@ class Sidebar extends React.Component {
 
         classes = (
             <ul class="list-unstyled components">
-            <!-- unique -->
                 <li classname="header" style={{{"color: ''}} white; text-align: center"}><a>Classes</a></li>
                 <li data-selected="true">
                     <a data-selected="true" id="class1"> course </a>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Login from './Login/index.jsx';
-import StudentView from './Student/index.jsx';
+
 
 const ApplicationContainer = styled.div`
   position: absolute;
