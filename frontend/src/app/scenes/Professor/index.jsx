@@ -21,8 +21,7 @@ class ProfessorView extends React.Component {
 
     this.state = {
       courses:[],
-      assignments:[],
-      meow:"High"
+      assignments:[]
     };
 
     if (this.props.user_name) {
