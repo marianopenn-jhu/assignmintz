@@ -6,16 +6,32 @@ from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation, LoginValidation
+import uuid
+import hashlib
 # from django.contrib.auth.models import User
 
 
 class LogInResource(ModelResource):
+    session_key = uuid.uuid4().hex
     class Meta:
         queryset = LogIn.objects.all()
         resource_name = 'login'
         authorization = Authorization()
         validation = LoginValidation()
         allowed_methods = ['post']
+        always_return_data = True
+        include_resource_uri = False
+
+    def hydrate(self, bundle):
+        print(self.session_key)
+        bundle.data['session_key'] = self.session_key
+        return bundle
+
+    def dehydrate(self, bundle):
+        print(self.session_key)
+        bundle.data.pop('passwd', None)
+        bundle.data['session_key'] = self.session_key
+        return bundle
 
 class UserResource(ModelResource):
     class Meta:
@@ -31,6 +47,10 @@ class UserResource(ModelResource):
                 'role':ALL
             }
 
+    def hydrate(self, bundle):
+        salt = uuid.uuid4().hex
+        bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
+        return bundle
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
