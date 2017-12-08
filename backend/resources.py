@@ -49,14 +49,6 @@ class CourseResource(ModelResource):
             'course_title': ALL
         }
 
-    # def dehydrate(self, bundle):
-    #     bundle.data["professor"] = bundle.obj.professor.user_name
-    #     studs = []
-    #     for bundle in bundle.data["students"]:
-    #         studs.append(bundle.obj.user_name)
-    #     bundle.data.students = studs
-    #     return bundle
-
 
 class AssignmentResource(ModelResource):
     course = fields.ForeignKey(CourseResource, 'course')
