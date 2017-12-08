@@ -11,12 +11,12 @@ const SidebarPanel = styled.nav`
     /*background-image: linear-gradient(-87deg, #042c6c 08%, #053787 100%);*/
     background-color: #303030;
     `;
-const SidebarComponents = style.ul`
+const SidebarComponents = styled.ul`
     padding: 10px 0;
     /*border-bottom: 1px solid #47748b;*/
 `;
 
-const NewClass = style.div`
+const NewClass = styled.div`
     position: relative;
     color: black;
     bottom: 10px;

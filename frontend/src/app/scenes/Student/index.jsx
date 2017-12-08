@@ -8,7 +8,7 @@ const Wrapper= styled.div`
     display: flex;
 `;
 
-const FullPage = syled.div`
+const FullPage = styled.div`
     height: auto;
     overflow: hidden;
 `;
