@@ -1,6 +1,7 @@
 # backend/validation.py
 from tastypie.validation import Validation
 import psycopg2
+import hashlib
 
 
 class LoginValidation(Validation):
@@ -14,9 +15,14 @@ class LoginValidation(Validation):
         # ensure username is unique
         query_name = str(bundle.data.get('user_name'))
         query_pass = str(bundle.data.get('passwd'))
-        cur.execute('SELECT * FROM backend_user WHERE user_name=\'' + query_name + '\' AND passwd=\'' + query_pass + '\';')
-        if cur.fetchone() is None:
-            errs['invalid_user_name'] = 'Invalid username/password combination'
+        cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
+        fetched = cur.fetchone()
+        if fetched is None:
+            errs['login'] = 'Invalid username/password combination'
+        else:
+            password, salt = fetched[0].split(':')
+            if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
+                errs['passwd'] = 'Invalid password.'
 
         cur.close()
         conn.close()
