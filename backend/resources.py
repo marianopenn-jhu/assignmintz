@@ -33,8 +33,8 @@ class UserResource(ModelResource):
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
-    # students = fields.ManyToManyField(UserResource, 'students')
-    student = fields.ForeignKey(UserResource, 'student')
+    students = fields.ManyToManyField(UserResource, 'students')
+    #student = fields.ForeignKey(UserResource, 'student')
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
@@ -45,14 +45,9 @@ class CourseResource(ModelResource):
         filtering = {
             'course_id': ALL,
             'professor':ALL,
-            'student': ALL,
+            'students': ALL,
             'course_title': ALL
         }
-
-    def dehydrate(self, bundle):
-        bundle.data["professor"] = bundle.obj.professor.user_name
-        bundle.data["student"] = bundle.obj.student.user_name
-        return bundle
 
 
 class AssignmentResource(ModelResource):
