@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Sidebar from '../Layout/index.jsx';
-import Header from '../Layout/Header';
+import Header from '../Layout/Header.jsx';
 
 
 const Wrapper= styled.div`
@@ -28,7 +28,7 @@ class StudentView extends React.Component {
   constructor(props) {
     super(props);
 
-    
+
   }
 
   render() {
