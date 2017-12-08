@@ -25,8 +25,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course_title": "OOSE",
             "visible": "True",
             "description": "A series of project iterations.",
-            "professor": "/backend/v1/user/harrypotter/",
-            "students": "/backend/v1/user/dumbledore/"
+            "professor": "/backend/v1/user/dumbledore/",
+            "students": ["/backend/v1/user/harrypotter/"]
         }
         self.oose_assignment_1 = {
             "assignment_id": "3",
