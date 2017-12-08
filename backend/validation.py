@@ -12,8 +12,8 @@ class UserValidation(Validation):
         cur = conn.cursor()
 
         # ensure username is unique
-        query_name = str(bundle.data.get('user_name'))
-        cur.execute('SELECT * from backend_user where user_name=\'' + query_name + '\';')
+        query_name = str(bundle.data.get('username'))
+        cur.execute('SELECT * from backend_user where username=\'' + query_name + '\';')
         if cur.fetchone() is not None:
             errs['dup_user_name'] = 'User name already exists'
 

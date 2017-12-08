@@ -3,7 +3,7 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
-from tastypie.authentication import Authentication
+from tastypie.authentication import BasicAuthentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation
 # from django.contrib.auth.models import User
@@ -16,17 +16,19 @@ class LogInResource(ModelResource):
         authorization = Authorization()
         allowed_methods = ['post']
 
+
 class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
             authorization = Authorization()
-            authentication = Authentication()
+            authentication = BasicAuthentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
             filtering = {
-                'user_name': ALL,
-                'name': ALL,
+                'username': ALL,
+                'first_name': ALL,
+                'last_name': ALL,
                 'role':ALL
             }
 

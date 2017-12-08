@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
 
@@ -9,12 +9,15 @@ class LogIn(models.Model):
     passwd = models.CharField(max_length=36, default='')
 
 
-class User(models.Model):
-    user_name = models.CharField(max_length=36, default='', primary_key=True)
-    name = models.CharField(max_length=40, default='')
-    email = models.EmailField(max_length=256, default='')
-    passwd = models.CharField(max_length=36, default='')
+class User(AbstractUser):
+    username = models.CharField(max_length=36, default='', primary_key=True)
+    first_name = models.CharField(max_length=36, default='')
+    last_name = models.CharField(max_length=36, default='')
+    password = models.CharField(max_length=36, default='')
+    email = models.CharField(max_length=36, default='')
     role = models.CharField(max_length=10, default='')
+    groups = models.ManyToManyField(Group, related_name='group')
+    user_permissions = models.ManyToManyField(Permission, related_name='user_permissions')
 
     def __unicode__(self):
         return self.user_name
