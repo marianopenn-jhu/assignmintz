@@ -5,7 +5,7 @@ from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
-from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation
+from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation, LoginValidation
 # from django.contrib.auth.models import User
 
 
@@ -14,6 +14,7 @@ class LogInResource(ModelResource):
         queryset = LogIn.objects.all()
         resource_name = 'login'
         authorization = Authorization()
+        validation = LoginValidation()
         allowed_methods = ['post']
 
 class UserResource(ModelResource):

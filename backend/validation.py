@@ -3,6 +3,26 @@ from tastypie.validation import Validation
 import psycopg2
 
 
+class LoginValidation(Validation):
+    def is_valid(self, bundle, request=None):
+        errs = {}
+
+        # connect to database
+        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        cur = conn.cursor()
+
+        # ensure username is unique
+        query_name = str(bundle.data.get('user_name'))
+        query_pass = str(bundle.data.get('passwd'))
+        cur.execute('SELECT * FROM backend_user WHERE user_name=\'' + query_name + '\' AND passwd=\'' + query_pass + '\';')
+        if cur.fetchone() is None:
+            errs['invalid_user_name'] = 'Invalid username/password combination'
+
+        cur.close()
+        conn.close()
+        return errs
+
+
 class UserValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
