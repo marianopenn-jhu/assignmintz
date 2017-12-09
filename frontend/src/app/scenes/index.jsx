@@ -58,8 +58,8 @@ class App extends React.Component {
   componentWillMount() {
     this.setState({
       'user_state': 2,
-      'current_user': 'ronnie7',
-      'session_key': "TODO: Replace this!"
+      'current_user':"ronnie7",
+      'session_key':'NOT NULL'
     })
   }
 

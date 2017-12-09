@@ -3,9 +3,7 @@ const URL = "http://localhost:8000/backend/v1/login/";
 
 export {loginUser};
 
-
-// TODO: Make the json return
-function loginUser(user_name, passwd_hash)
+function loginUser(user_name, passwd)
 {
   return fetch(URL, {
     method: 'POST',
@@ -13,7 +11,7 @@ function loginUser(user_name, passwd_hash)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, passwd_hash})
+    body: JSON.stringify({user_name, passwd})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
