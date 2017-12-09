@@ -49,6 +49,10 @@ const DropdownElement = styled.a`
   }
 `;
 
+const ElipseSpan = styled.span`
+  font-size:20px;
+`;
+
 var styles = {
   hidden: {
     display:'none'
@@ -92,7 +96,7 @@ class SidebarElement extends React.Component {
 
       return (
           <Element>
-            {course_info.course_title} ({course_info.course_id}) <FaEllipsis/>
+            {course_info.course_title} ({course_info.course_id}) <ElipseSpan><FaEllipsis/></ElipseSpan>
 
             <Dropdown style={this.state.hidden ? styles.hidden : styles.none}>
               <DropdownElement href="#">Edit</DropdownElement>

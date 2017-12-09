@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
+import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
 
 const SidebarPanel = styled.div`
     background:#BEE6CC;
@@ -62,6 +63,7 @@ class Sidebar extends React.Component {
               </SidebarTitleContainer>
               <SidebarElementContainer>
                 <SidebarUserInfo data={this.props.user_data}/>
+                <SidebarClassesTitle triggerEvent={this.props.addClass}/>
                 {classes}
               </SidebarElementContainer>
             </SidebarPanel>

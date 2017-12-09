@@ -4,6 +4,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+//import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
   display:inline-block
@@ -19,9 +20,11 @@ class ProfessorView extends React.Component {
   constructor(props) {
     super(props);
 
+    this.createClass = this.createClass.bind(this);
     this.state = {
       courses:[],
-      assignments:[]
+      assignments:[],
+      viewState: 0 // 0 = Calendar, 1 = Creating Class
     };
 
     if (this.props.user_name) {
@@ -50,13 +53,23 @@ class ProfessorView extends React.Component {
     }
   }
 
+  createClass() {
+    this.setState({viewState : 1});
+  }
+
   render() {
-    const state = this.state;
+    const viewState = this.state.viewState;
+
+    let currentView = null;
+    if (viewState == 0) {
+      currentView = (
+        <LinearCalendar data={state.assignments}/>
+      );
+    }
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_data={this.props.user_name}/>
-        <LinearCalendar data={state.assignments}/>
+        <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.createClass}/>
       </Container>
     );
   }

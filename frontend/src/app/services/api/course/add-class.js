@@ -5,7 +5,7 @@ export {addClass};
 
 function addClass(user_name, class_id)
 {
-  return fetch(URL, {
+  return (fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -17,8 +17,10 @@ function addClass(user_name, class_id)
     {
       throw new Error(response.status + ": " + response.statusText + " in addClass()");
     } else {
-      return {status: true, result: response};
+      return response.json();
     }
+  })).then((json) => {
+    return {status: true, result: json};
   }).catch((error) => {
     return {status: false, result: error};
   });
