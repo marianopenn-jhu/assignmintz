@@ -7,8 +7,8 @@ import hashlib
 def valid_session_key(cur, session_key, user_name):
     cur.execute('SELECT * FROM backend_login WHERE user_name=\'' + user_name + '\' AND session_key=\'' + session_key + ';')
     if cur.fetchone is None:
-        return 'Invalid username/session key combo'
-    return
+        return False
+    return True
 
 
 class LoginValidation(Validation):
