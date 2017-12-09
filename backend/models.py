@@ -47,7 +47,7 @@ class Assignment(models.Model):
     priority = models.IntegerField(default=0)
     percent_complete = models.FloatField(default=0.0)
     visible = models.BooleanField(default=True)
-    description = models.TextField(null=True)
+    description = models.TextField(default='')
 
     def __unicode__(self):
         return self.assignment_name
