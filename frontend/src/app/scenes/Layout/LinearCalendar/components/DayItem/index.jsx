@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import AssignmentsContainer from './components/AssignmentsContainer/index.jsx';
 
 const Container = styled.div`
-  width:100%;
+  width:95%;
   background:white;
+  margin: 0 auto;
+  text-align: left;
 `;
 
 const Day = styled.li`

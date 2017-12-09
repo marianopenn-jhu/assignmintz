@@ -15,6 +15,7 @@ const Element = styled.li`
   &:hover {
     background: #80cc9b;
     color: #170912;
+    cursor:pointer;
   }
 `;
 
