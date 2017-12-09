@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --content-base src/public"
+    "start": "webpack-dev-server --content-base src/public",
+    "static": "webpack --output-path ../backend/static/backend"
   },
   "author": "",
   "license": "ISC",
