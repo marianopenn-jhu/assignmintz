@@ -55,14 +55,6 @@ class App extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      'user_state': 2,
-      'current_user': 'ronnie7',
-      'session_key': "TODO: Replace this!"
-    })
-  }
-
   onLogin(answer, user_name, role) {
     if (role == "student") {
         this.setState({
