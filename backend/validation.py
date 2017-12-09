@@ -109,11 +109,21 @@ class CourseValidation(Validation):
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
         cur = conn.cursor()
 
-        # ensure course id is unique
-        query_name = str(bundle.data.get('course_id'))
-        cur.execute('SELECT * from backend_course where course_id=\'' + query_name + '\';')
-        if cur.fetchone() is not None:
-            errs['course_id'] = 'Course id already exists'
+        user_name = str(bundle.data.get('user_name'))
+        session_key = str(bundle.data.get('session_key'))
+        if valid_session_key(cur, user_name, session_key):
+            # ensure course id is unique
+            query_name = str(bundle.data.get('course_id'))
+            cur.execute('SELECT * from backend_course where course_id=\'' + query_name + '\';')
+            if cur.fetchone() is not None:
+                errs['dup_course_id'] = 'Course id already exists'
+
+            # empty fields
+            for key, value in bundle.data.items():
+                if value == '':
+                    errs[key] = str(key) + ' empty, please complete'
+        else:
+            errs["invalid_user_or_session"] = "Invalid username or session key"
 
         cur.close()
         conn.close()
