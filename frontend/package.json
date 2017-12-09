@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "file-loader": "^1.1.5",
+    "react-icons": "^2.2.7",
     "styled-components": "^2.2.3",
     "url-loader": "^0.6.2"
   },

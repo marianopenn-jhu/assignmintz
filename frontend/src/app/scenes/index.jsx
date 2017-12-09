@@ -31,8 +31,7 @@ const HeaderOne = styled.span`
 `;
 
 const HeaderTwo = styled.span`
-  font-style: italic;
-  font-family: Consolas;
+  font-family: Helvetica;
   color:rgba(167,224,165,1);
 `;
 
@@ -95,9 +94,7 @@ class App extends React.Component {
       // Student view
       case 1:
         current = (
-          <div>
-            <div>Unimplemented</div>
-          </div>
+          <StudentView/>
         );
         break;
       // Teacher view
