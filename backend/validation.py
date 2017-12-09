@@ -3,7 +3,6 @@ from tastypie.validation import Validation
 import psycopg2
 import hashlib
 
-
 class LoginValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
@@ -12,7 +11,7 @@ class LoginValidation(Validation):
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
         cur = conn.cursor()
 
-        # ensure username is unique
+        # ensure username password combo is valid
         query_name = str(bundle.data.get('user_name'))
         query_pass = str(bundle.data.get('passwd'))
         cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
