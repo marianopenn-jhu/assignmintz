@@ -5,7 +5,8 @@ from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
-from backend.validation import UserValidation, CourseValidation, AssignmentValidation, SubtaskValidation, LoginValidation
+from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
+    SubtaskValidation, LoginValidation
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -13,12 +14,13 @@ import hashlib
 
 class LogInResource(ModelResource):
     session_key = uuid.uuid4().hex
+
     class Meta:
         queryset = LogIn.objects.all()
         resource_name = 'login'
         authorization = Authorization()
         validation = LoginValidation()
-        allowed_methods = ['post']
+        allowed_methods = ['post', 'delete']
         always_return_data = True
         include_resource_uri = False
 
@@ -32,6 +34,7 @@ class LogInResource(ModelResource):
         bundle.data.pop('passwd', None)
         bundle.data['session_key'] = self.session_key
         return bundle
+
 
 class UserResource(ModelResource):
     class Meta:
@@ -52,10 +55,12 @@ class UserResource(ModelResource):
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
 
+
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
     students = fields.ManyToManyField(UserResource, 'students')
     #student = fields.ForeignKey(UserResource, 'student')
+
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
