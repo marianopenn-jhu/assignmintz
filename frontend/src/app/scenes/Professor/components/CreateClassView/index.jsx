@@ -29,7 +29,7 @@ const XOut = styled.span`
 `;
 
 const Form = styled.form`
-  width:80%;
+  width:100%;
 `;
 
 const Header = styled.h1`
@@ -37,9 +37,23 @@ const Header = styled.h1`
   font-size:24px;
 `;
 
+const ItemLabel = styled.label
+`
+  padding:0;
+  margin:0;
+  width:100%;
+`;
+
+const TextLabel = styled.div
+`
+  width:50%;
+  display:inline-block;
+`;
+
 const TextInput = styled.input
 `
-
+  width:50%;
+  display:inline-block;
 `;
 
 class CreateClassView extends React.Component {
@@ -66,10 +80,14 @@ class CreateClassView extends React.Component {
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Create a Class</Header>
           <Form onSubmit={this.handleSubmit}>
-            <label>
-              Course Title:
+            <ItemLabel>
+              <TextLabel>Course Title:</TextLabel>
               <TextInput type="text" value={this.state.value} onChange={this.handleChange} />
-            </label>
+            </ItemLabel>
+            <ItemLabel>
+              <TextLabel>Course Title:</TextLabel>
+              <TextInput type="text" value={this.state.value} onChange={this.handleChange} />
+            </ItemLabel>
 
             <input type="submit" value="Submit" />
           </Form>
