@@ -22,6 +22,7 @@ class ProfessorView extends React.Component {
     super(props);
 
     this.addClass = this.addClass.bind(this);
+    this.returnToCalendar = this.returnToCalendar.bind(this);
     this.state = {
       courses:[],
       assignments:[],
@@ -58,6 +59,11 @@ class ProfessorView extends React.Component {
     this.setState({viewState:1});
   }
 
+  returnToCalendar() {
+    this.setState({viewState:0});
+    this.forceUpdate();
+  }
+
   render() {
     const state = this.state;
 
@@ -70,7 +76,7 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <CreateClassView data={this.props.user_name}/>
+          <CreateClassView data={this.props.user_name} onClose={this.returnToCalendar}/>
         );
         break;
       default:

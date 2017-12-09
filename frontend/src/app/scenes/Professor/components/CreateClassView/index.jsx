@@ -63,7 +63,7 @@ class CreateClassView extends React.Component {
   render() {
     return (
         <Container>
-          <XOut><FaClose/></XOut>
+          <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Create a Class</Header>
           <Form onSubmit={this.handleSubmit}>
             <label>
