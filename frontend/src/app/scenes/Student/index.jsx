@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from '../Layout/index.jsx';
-import Header from '../Layout/Header.jsx';
-
+import Sidebar from '../Layout/Sidebar/index.jsx';
+//import Header from '../Layout/Header.jsx';
 
 const Wrapper= styled.div`
     display: flex;
@@ -27,8 +26,6 @@ const ViewPanel = styled.div `
 class StudentView extends React.Component {
   constructor(props) {
     super(props);
-
-
   }
 
   render() {
@@ -40,7 +37,6 @@ class StudentView extends React.Component {
 
               <ViewPanel>
                 <div>
-                  <Header/>
 
                 </div>
               </ViewPanel>

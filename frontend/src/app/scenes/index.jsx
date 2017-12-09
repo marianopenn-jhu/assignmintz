@@ -31,8 +31,7 @@ const HeaderOne = styled.span`
 `;
 
 const HeaderTwo = styled.span`
-  font-style: italic;
-  font-family: Consolas;
+  font-family: Helvetica;
   color:rgba(167,224,165,1);
 `;
 
@@ -54,6 +53,14 @@ class App extends React.Component {
       current_user:"",
       session_key:null
     };
+  }
+
+  componentWillMount() {
+    this.setState({
+      'user_state': 2,
+      'current_user': 'ronnie7',
+      'session_key': "TODO: Replace this!"
+    })
   }
 
   onLogin(answer, user_name, role) {
@@ -95,9 +102,7 @@ class App extends React.Component {
       // Student view
       case 1:
         current = (
-          <div>
-            <div>Unimplemented</div>
-          </div>
+          <StudentView/>
         );
         break;
       // Teacher view

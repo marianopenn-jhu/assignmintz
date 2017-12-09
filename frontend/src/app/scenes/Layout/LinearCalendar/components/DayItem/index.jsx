@@ -2,18 +2,50 @@ import React from 'react';
 import styled from 'styled-components';
 import AssignmentsContainer from './components/AssignmentsContainer/index.jsx';
 
+const Container = styled.div`
+  width:100%;
+  background:white;
+`;
+
 const Day = styled.li`
-  background-color:	#808080;
-  color: black;
+  overflow: hidden;
+  background-color:	white;
+  color: #A9A9A9;
+  width:100%;
 
   font-family:Avenir;
   font-size:16px;
+  padding-top:5px;
+  padding-bottom:5px;
   list-style:none;
-  padding:15px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 
-  &:hover {
-    background-color:#A9A9A9;
+  /*&:hover {
+    background-color:lightgray;
     cursor: pointer;
+  }*/
+
+  &:before,
+  &:after {
+   background-color: #A9A9A9;
+   content: "";
+   display: inline-block;
+   height: 1px;
+   position: relative;
+   vertical-align: middle;
+   width: 50%;
+  }
+
+  &:before {
+   right: 0.5em;
+   margin-left: -50%;
+  }
+
+  &:after {
+   left: 0.5em;
+   margin-right: -50%;
   }
 
   -webkit-touch-callout: none; /* iOS Safari */
@@ -36,16 +68,16 @@ class DayItem extends React.Component {
   }
 
   onClick() {
-    const {hidden} = this.state;
-    this.setState({['hidden']: !hidden});
+    //const {hidden} = this.state;
+    //this.setState({['hidden']: !hidden});
   }
 
   render() {
     return(
-      <div>
+      <Container>
         <Day onClick={this.onClick}>{this.props.day}</Day>
         <AssignmentsContainer hidden={this.state.hidden} assignments={this.props.assignments}/>
-      </div>
+      </Container>
     );
   }
 }

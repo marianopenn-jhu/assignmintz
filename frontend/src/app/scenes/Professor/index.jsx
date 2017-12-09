@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import LinearCalendar from './components/LinearCalendar/index.jsx';
+import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
+import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
 
 const Container = styled.div`
-  position: absolute;
-  top: 15%;
-  left: 5%;
-  width:90%;
+  display:inline-block
+  vertical-align:top;
+  width:100%;
 `;
 
 /*
@@ -55,6 +55,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
+        <Sidebar data={state.courses} user_data={this.props.user_name}/>
         <LinearCalendar data={state.assignments}/>
       </Container>
     );
