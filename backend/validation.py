@@ -5,7 +5,8 @@ import hashlib
 
 
 def valid_session_key(cur, session_key, user_name):
-    cur.execute('SELECT * FROM backend_login WHERE user_name=\'' + user_name + '\' AND session_key=\'' + session_key + ';')
+    cur.execute('SELECT * FROM backend_login WHERE user_name=\'' + user_name
+                + '\' AND session_key=\'' + session_key + '\';')
     if cur.fetchone is None:
         return False
     return True
@@ -27,9 +28,35 @@ class LoginValidation(Validation):
         if fetched is None:
             errs['login'] = 'Invalid username/password combination'
         else:
+            print(fetched[0])
             password, salt = fetched[0].split(':')
             if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
                 errs['passwd'] = 'Invalid password.'
+
+        cur.close()
+        conn.close()
+        return errs
+
+
+class LogOutValidation(Validation):
+    def is_valid(self, bundle, request=None):
+        errs = {}
+
+        # connect to database
+        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        cur = conn.cursor()
+
+        # check valid session key
+        query_name = str(bundle.data.get('user_name'))
+        query_key = str(bundle.data.get('session_key'))
+
+        if valid_session_key(cur, query_key, query_name):
+            # delete entry
+            cur = conn.cursor()
+            cur.execute("DELETE FROM backend_login WHERE user_name = %s;", (query_name,))
+            conn.commit()
+        else:
+            errs['invalid_user_and_key'] = 'Invalid username or sessionkey'
 
         cur.close()
         conn.close()

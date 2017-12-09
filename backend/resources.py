@@ -1,12 +1,12 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn
+from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn, LogOut
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
-    SubtaskValidation, LoginValidation
+    SubtaskValidation, LoginValidation, LogOutValidation
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -20,7 +20,7 @@ class LogInResource(ModelResource):
         resource_name = 'login'
         authorization = Authorization()
         validation = LoginValidation()
-        allowed_methods = ['post', 'delete']
+        allowed_methods = ['post']
         always_return_data = True
         include_resource_uri = False
 
@@ -34,6 +34,15 @@ class LogInResource(ModelResource):
         bundle.data.pop('passwd', None)
         bundle.data['session_key'] = self.session_key
         return bundle
+
+
+class LogOutResource(ModelResource):
+    class Meta:
+        queryset = LogOut.objects.all()
+        resource_name = 'logout'
+        authorization = Authorization()
+        validation = LogOutValidation()
+        allowed_methods = ['post']
 
 
 class UserResource(ModelResource):

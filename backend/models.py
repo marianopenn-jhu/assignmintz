@@ -12,6 +12,13 @@ class LogIn(models.Model):
         return self.user_name
 
 
+class LogOut(models.Model):
+    user_name = models.CharField(max_length=36, default='', primary_key=True)
+
+    def __unicode__(self):
+        return self.user_name
+
+
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
     name = models.CharField(max_length=40, default='')
