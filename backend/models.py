@@ -32,9 +32,10 @@ class User(models.Model):
 
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
-    professor = models.ForeignKey(User, related_name='professor', null=True, on_delete=models.CASCADE)
-    student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
-    course_title = models.CharField(max_length=36, default='')
+    professor = models.ForeignKey(User, related_name='professor', null=False, default='', on_delete=models.CASCADE)
+    #student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
+    students = models.ManyToManyField(User, related_name='student')
+    course_title = models.CharField(max_length=36, default='', null=False)
     visible = models.BooleanField(default=True)
     description = models.TextField()
 
@@ -56,7 +57,7 @@ class Assignment(models.Model):
     priority = models.IntegerField(default=0)
     percent_complete = models.FloatField(default=0.0)
     visible = models.BooleanField(default=True)
-    description = models.TextField
+    description = models.TextField(default='')
 
     def __unicode__(self):
         return self.assignment_name

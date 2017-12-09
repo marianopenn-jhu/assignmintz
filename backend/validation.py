@@ -113,12 +113,7 @@ class CourseValidation(Validation):
         query_name = str(bundle.data.get('course_id'))
         cur.execute('SELECT * from backend_course where course_id=\'' + query_name + '\';')
         if cur.fetchone() is not None:
-            errs['dup_course_id'] = 'Course id already exists'
-
-        # empty fields
-        for key, value in bundle.data.items():
-            if value == '':
-                errs[key] = str(key) + ' empty, please complete'
+            errs['course_id'] = 'Course id already exists'
 
         cur.close()
         conn.close()
