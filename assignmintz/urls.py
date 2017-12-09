@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 # from . import views
-from backend.resources import LogInResource, UserResource, AssignmentResource, SubTaskResource, CourseResource
+from backend.resources import LogInResource, UserResource, AssignmentResource, SubTaskResource, CourseResource, AddStudentToCourseResource
 from tastypie.api import Api
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -17,6 +17,7 @@ v1_api.register(AssignmentResource())
 v1_api.register(SubTaskResource())
 v1_api.register(CourseResource())
 v1_api.register(LogInResource())
+v1_api.register(AddStudentToCourseResource())
 
 
 urlpatterns = [

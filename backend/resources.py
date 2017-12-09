@@ -33,8 +33,8 @@ class UserResource(ModelResource):
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
-    # students = fields.ManyToManyField(UserResource, 'students')
-    student = fields.ForeignKey(UserResource, 'student')
+    students = fields.ManyToManyField(UserResource, 'students')
+    #student = fields.ForeignKey(UserResource, 'student')
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
@@ -45,14 +45,45 @@ class CourseResource(ModelResource):
         filtering = {
             'course_id': ALL,
             'professor':ALL,
-            'student': ALL,
+            'students': ALL,
             'course_title': ALL
         }
 
-    def dehydrate(self, bundle):
-        bundle.data["professor"] = bundle.obj.professor.user_name
-        bundle.data["student"] = bundle.obj.student.user_name
-        return bundle
+class AddStudentToCourseResource(ModelResource):
+    professor = fields.ForeignKey(UserResource, 'professor')
+    students = fields.ManyToManyField(UserResource, 'students')
+
+    def save_m2m(self, bundle):
+        for field, obj in self.fields.items():
+            if not getattr(obj, 'is_m2m', False):
+                continue
+
+            if not obj.attribute:
+                continue
+
+            if obj.readonly:
+                continue
+
+            manager = getattr(bundle.obj, obj.attribute)
+            related_objects = []
+
+            for related_bundle in bundle.data[field]:
+                student = User.objects.get(user_name=related_bundle.obj.user_name)
+                related_objects.append(student)
+            manager.add(*related_objects)
+
+    class Meta:
+        queryset = Course.objects.all()
+        resource_name = 'student/course'
+        authorization = Authorization()
+        allowed_methods = ['post', 'delete']
+        excludes = []
+        filtering = {
+            'course_id': ALL,
+            'professor':ALL,
+            'students': ALL
+        }
+
 
 
 class AssignmentResource(ModelResource):
