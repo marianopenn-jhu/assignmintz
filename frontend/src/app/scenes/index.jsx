@@ -21,18 +21,41 @@ const TitleContainer = styled.div`
   letter-spacing: 0px;
 `;
 
+// color: rgb(177, 217, 231);
+// font-family: Avenir;
+// font-style: regular;
+// font-weight: lighter;
+// font-size: 100px;
+// text-align: center;
+
 const HeaderOne = styled.span`
-  color: rgb(177, 217, 231);
-  font-family: Avenir;
-  font-style: regular;
-  font-weight: lighter;
-  font-size: 100px;
-  text-align: center;
+    line-height: 123px;
+    background-color: rgba(0,0,0,0);
+    width: inherit;
+    letter-spacing: 0px;
+    color: rgb(177, 217, 231);
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: 100px;
+    text-align: center;
+
 `;
 
+// font-family: Helvetica;
+// color:rgba(167,224,165,1);
+
 const HeaderTwo = styled.span`
-  font-family: Helvetica;
+  background-color: rgba(0,0,0,0);
+  width: inherit;
+  font-size: 100px;
+  line-height: 123px;
+  letter-spacing: 0px;
   color:rgba(167,224,165,1);
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: lighter;
+  text-align: center;
 `;
 
 const LoginContainer = styled.div`
@@ -57,6 +80,8 @@ class App extends React.Component {
 
   onLogin(answer, user_name, role) {
     if (role == "student") {
+      console.log("SCENES INDEX");
+      console.log(user_name);
         this.setState({
           'user_state': 1,
           'current_user': user_name,
@@ -93,9 +118,16 @@ class App extends React.Component {
         break;
       // Student view
       case 1:
-        current = (
-          <StudentView/>
-        );
+        if (this.state.session_key != null)
+        {
+          current = (
+            <StudentView user_name={this.state.current_user}/>
+          );
+        }
+        else {
+            current = (<div></div>);
+            alert("Null session key!");
+        }
         break;
       // Teacher view
       case 2:
