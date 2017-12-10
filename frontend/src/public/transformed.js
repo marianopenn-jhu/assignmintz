@@ -26654,6 +26654,7 @@ var ProfessorView = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ProfessorView.__proto__ || Object.getPrototypeOf(ProfessorView)).call(this, props));
 
     _this.addClass = _this.addClass.bind(_this);
+    _this.returnToCalendar = _this.returnToCalendar.bind(_this);
     _this.state = {
       courses: [],
       assignments: [],
@@ -26691,6 +26692,12 @@ var ProfessorView = function (_React$Component) {
       this.setState({ viewState: 1 });
     }
   }, {
+    key: 'returnToCalendar',
+    value: function returnToCalendar() {
+      this.setState({ viewState: 0 });
+      this.forceUpdate();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var state = this.state;
@@ -26701,7 +26708,7 @@ var ProfessorView = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { data: state.assignments });
           break;
         case 1:
-          view = _react2.default.createElement(_index4.default, { data: this.props.user_name });
+          view = _react2.default.createElement(_index4.default, { data: this.props.user_name, onClose: this.returnToCalendar });
           break;
         default:
           this.setState({ viewState: 0 });
@@ -27286,9 +27293,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 80%;\n  position: absolute;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n  text-align:center;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 80%;\n  position: absolute;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n  text-align:center;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  width:80%;\n'], ['\n  width:80%;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  width:100%;\n'], ['\n  width:100%;\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:24px;\n'], ['\n  font-family:Avenir;\n  font-size:24px;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
+    _templateObject5 = _taggedTemplateLiteral(['\n  padding:0;\n  margin:0;\n  width:100%;\n'], ['\n  padding:0;\n  margin:0;\n  width:100%;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  width:50%;\n  display:inline-block;\n'], ['\n  width:50%;\n  display:inline-block;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -27320,7 +27328,11 @@ var Form = _styledComponents2.default.form(_templateObject3);
 
 var Header = _styledComponents2.default.h1(_templateObject4);
 
-var TextInput = _styledComponents2.default.input(_templateObject5);
+var ItemLabel = _styledComponents2.default.label(_templateObject5);
+
+var TextLabel = _styledComponents2.default.div(_templateObject6);
+
+var TextInput = _styledComponents2.default.input(_templateObject6);
 
 var CreateClassView = function (_React$Component) {
   _inherits(CreateClassView, _React$Component);
@@ -27356,7 +27368,7 @@ var CreateClassView = function (_React$Component) {
         null,
         _react2.default.createElement(
           XOut,
-          null,
+          { onClick: this.props.onClose },
           _react2.default.createElement(_close2.default, null)
         ),
         _react2.default.createElement(
@@ -27368,9 +27380,23 @@ var CreateClassView = function (_React$Component) {
           Form,
           { onSubmit: this.handleSubmit },
           _react2.default.createElement(
-            'label',
+            ItemLabel,
             null,
-            'Course Title:',
+            _react2.default.createElement(
+              TextLabel,
+              null,
+              'Course Title:'
+            ),
+            _react2.default.createElement(TextInput, { type: 'text', value: this.state.value, onChange: this.handleChange })
+          ),
+          _react2.default.createElement(
+            ItemLabel,
+            null,
+            _react2.default.createElement(
+              TextLabel,
+              null,
+              'Course Title:'
+            ),
             _react2.default.createElement(TextInput, { type: 'text', value: this.state.value, onChange: this.handleChange })
           ),
           _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
