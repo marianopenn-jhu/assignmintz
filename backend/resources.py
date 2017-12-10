@@ -7,6 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation
+from backend.authorization import UserAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -47,7 +48,7 @@ class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
-            authorization = Authorization()
+            authorization = UserAuthorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
