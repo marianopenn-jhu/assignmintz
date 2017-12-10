@@ -11,6 +11,7 @@ import uuid
 import hashlib
 # from django.contrib.auth.models import User
 
+
 class LogInResource(ModelResource):
 
     class Meta:
@@ -129,11 +130,11 @@ class AssignmentResource(ModelResource):
         excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
         filters = {
-            'assignment_id':ALL,
-            'assignment_name':ALL,
-            'assignment_type':ALL,
-            'course':ALL,
-            'due_date':ALL
+            'assignment_id': ALL,
+            'assignment_name': ALL,
+            'assignment_type': ALL,
+            'course': ALL,
+            'due_date': ALL
         }
 
     def dehydrate(self, bundle):
