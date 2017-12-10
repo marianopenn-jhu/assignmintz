@@ -14,11 +14,15 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'role': 'student'
         }
         self.professor_user = {
-            'user_name': 'dumbledore',
-            'name': 'Albus',
-            'email': 'albusdumbledore@jhu.edu',
-            'passwd': 'chocolate_frogs',
-            'role': 'professor'
+            "user_name": "dumbledore",
+            "name": "Albus",
+            "email": "albusdumbledore@jhu.edu",
+            "passwd": "chocolate_frogs",
+            "role": "professor"
+        }
+        self.login_prof = {
+            "passwd": "chocolate_frogs",
+            "user_name": "dumbledore"
         }
         self.oose_course = {
             "course_id": "601.421",
@@ -55,6 +59,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.course_url = '/backend/v1/course/'
         self.assignment_url = '/backend/v1/professor/assignment/'
         self.subtask_url = '/backend/v1/subtask/'
+        self.login_url = '/backend/v1/login/'
 
     # PUT method is not allowed for User resource
     def test_bad_method(self):
@@ -66,12 +71,14 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.assertHttpCreated(resp1)
         resp2 = self.api_client.post(self.user_url, format='json', data=self.professor_user)
         self.assertHttpCreated(resp2)
-        resp3 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
-        self.assertHttpCreated(resp3)
-        resp4 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1)
-        self.assertHttpCreated(resp4)
-        resp5 = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
-        self.assertHttpCreated(resp5)
+        resp_log = self.api_client.post(self.login_url, format='json', data=self.login_prof)
+        self.assertHttpCreated(resp_log)
+        # resp3 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
+        # self.assertHttpCreated(resp3)
+        # resp4 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1)
+        # self.assertHttpCreated(resp4)
+        # resp5 = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
+        # self.assertHttpCreated(resp5)
         print('Valid post test passed')
 
     def test_invalid_email(self):

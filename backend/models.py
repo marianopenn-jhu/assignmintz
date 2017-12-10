@@ -67,7 +67,7 @@ class SubTask(models.Model):
     subtask_id = models.CharField(max_length=36, primary_key=True)
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
-    description = models.TextField()
+    description = models.TextField(default='')
     assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
 
 

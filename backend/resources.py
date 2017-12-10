@@ -84,6 +84,7 @@ class CourseResource(ModelResource):
             'course_title': ALL
         }
 
+
 class AddStudentToCourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
     students = fields.ManyToManyField(UserResource, 'students')
@@ -118,7 +119,6 @@ class AddStudentToCourseResource(ModelResource):
             'professor':ALL,
             'students': ALL
         }
-
 
 
 class AssignmentResource(ModelResource):
