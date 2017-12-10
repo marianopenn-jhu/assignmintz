@@ -11,6 +11,7 @@ const Element = styled.li`
   padding-bottom:20px;
   padding-top:20px;
   display:inline-block;
+  margin-bottom: 7px;
 
   font-family:Avenir;
   font-size:20px;

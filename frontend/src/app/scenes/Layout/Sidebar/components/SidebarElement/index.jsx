@@ -13,11 +13,13 @@ const Element = styled.li`
   padding-top:10px;
   font-family:Avenir;
   font-size:15px;
+  // margin-bottom: 5px;
 
   &:hover {
     background: #80cc9b;
     color: #170912;
     cursor:pointer;
+    // box-shadow: 0px 4px 2px #212121, 0px -4px 2px #212121;
   }
 
   -webkit-touch-callout: none; /* iOS Safari */
