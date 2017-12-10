@@ -12,7 +12,6 @@ import hashlib
 # from django.contrib.auth.models import User
 
 class LogInResource(ModelResource):
-    session_key = uuid.uuid4().hex
 
     class Meta:
         queryset = LogIn.objects.all()
@@ -24,14 +23,13 @@ class LogInResource(ModelResource):
         include_resource_uri = False
 
     def hydrate(self, bundle):
-        print(self.session_key)
-        bundle.data['session_key'] = self.session_key
+        bundle.data['session_key'] = uuid.uuid4().hex
         return bundle
 
     def dehydrate(self, bundle):
         print(self.session_key)
         bundle.data.pop('passwd', None)
-        bundle.data['session_key'] = self.session_key
+        #bundle.data['session_key'] = self.session_key
         return bundle
 
 
