@@ -2,32 +2,27 @@
 from tastypie.validation import Validation
 import psycopg2
 import hashlib
+from backend.models import User, LogIn, SubTask, Assignment, Course
+from django.core.exceptions import ObjectDoesNotExist
 
 
-def valid_session_key(cur, session_key, user_name):
-    cur.execute('SELECT * FROM backend_login WHERE user_name=\'' + user_name
-                + '\' AND session_key=\'' + session_key + '\';')
-    if cur.fetchone() is None:
+def valid_session_key(session_key, user_name):
+    queryset = LogIn.objects.all()
+    try:
+        queryset.get(session_key=session_key, user_name=user_name)
+        return True
+    except ObjectDoesNotExist:
         return False
-    return True
 
 
 class LoginValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        print(conn)
-        cur = conn.cursor()
-
         # ensure username password combo is valid
         query_name = str(bundle.data.get('user_name'))
         query_pass = str(bundle.data.get('passwd'))
+<<<<<<< HEAD
         print(query_name + " : " + query_pass)
         cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
         fetched = cur.fetchone()
@@ -35,11 +30,17 @@ class LoginValidation(Validation):
             errs['login'] = 'Invalid username/password combination'
         else:
             password, salt = fetched.split(':')
+=======
+        queryset = User.objects.all()
+        try:
+            user = queryset.get(user_name=query_name)
+            password, salt = user.passwd.split(':')
+>>>>>>> 3dd56b1366c42c8f8d2d42668e972bd8b7ea0e23
             if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
                 errs['passwd'] = 'Invalid password.'
+        except ObjectDoesNotExist:
+            errs['login'] = 'Invalid username/password combination'
 
-        cur.close()
-        conn.close()
         return errs
 
 
@@ -47,28 +48,16 @@ class LogOutValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        cur = conn.cursor()
-
         # check valid session key
         query_name = str(bundle.data.get('user_name'))
         query_key = str(bundle.data.get('session_key'))
 
-        if valid_session_key(cur, query_key, query_name):
+        if valid_session_key(query_key, query_name):
             # delete entry
-            cur = conn.cursor()
-            cur.execute("DELETE FROM backend_login WHERE user_name = %s;", (query_name,))
-            conn.commit()
+            LogIn.objects.all().get(session_key=query_key, user_name=query_name).delete()
         else:
             errs['invalid_user_and_key'] = 'Invalid username or session key'
 
-        cur.close()
-        conn.close()
         return errs
 
 
@@ -76,19 +65,13 @@ class UserValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        cur = conn.cursor()
-
         # ensure username is unique
         query_name = str(bundle.data.get('user_name'))
-        cur.execute('SELECT * from backend_user where user_name=\'' + query_name + '\';')
-        if cur.fetchone() is not None:
+        try:
+            User.objects.all().get(user_name=query_name)
             errs['dup_user_name'] = 'User name already exists'
+        except ObjectDoesNotExist:
+            pass
 
         # ensure role is student or professor
         role = str(bundle.data.get('role')).upper()
@@ -100,17 +83,17 @@ class UserValidation(Validation):
         if '@jhu.edu' not in email:
             errs['invalid email'] = 'Must use @jhu.edu email'
 
-        cur.execute('SELECT * from backend_user where email=\'' + email + '\';')
-        if cur.fetchone() is not None:
+        try:
+            User.objects.all().get(email=email)
             errs['dup_email'] = 'User with this email already exists'
+        except ObjectDoesNotExist:
+            pass
 
         # empty fields
         for key, value in bundle.data.items():
             if value == '':
                 errs[key] = str(key) + ' empty, please complete'
 
-        cur.close()
-        conn.close()
         return errs
 
 
@@ -118,22 +101,16 @@ class CourseValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        cur = conn.cursor()
-
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, session_key, user_name):
+        if valid_session_key(session_key, user_name):
             # ensure course id is unique
             query_name = str(bundle.data.get('course_id'))
-            cur.execute('SELECT * from backend_course where course_id=\'' + query_name + '\';')
-            if cur.fetchone() is not None:
+            try:
+                Course.objects.all().get(course_id=query_name)
                 errs['dup_course_id'] = 'Course id already exists'
+            except ObjectDoesNotExist:
+                pass
 
             # empty fields
             for key, value in bundle.data.items():
@@ -142,8 +119,6 @@ class CourseValidation(Validation):
         else:
             errs["invalid_user_or_session"] = "Invalid username or session key"
 
-        cur.close()
-        conn.close()
         return errs
 
 
@@ -151,22 +126,16 @@ class AssignmentValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        cur = conn.cursor()
-
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, session_key, user_name):
+        if valid_session_key(session_key, user_name):
             # ensure assignment id is unique
             query_name = str(bundle.data.get('assignment_id'))
-            cur.execute('SELECT * from backend_assignment where assignment_id=\'' + query_name + '\';')
-            if cur.fetchone() is not None:
+            try:
+                Assignment.objects.all().get(assignment_id=query_name)
                 errs['dup_assignment_id'] = 'Assignment already exists'
+            except ObjectDoesNotExist:
+                pass
 
             # empty fields
             for key, value in bundle.data.items():
@@ -175,8 +144,6 @@ class AssignmentValidation(Validation):
         else:
             errs['invalid_user_and_key'] = 'Invalid username or session key'
 
-        cur.close()
-        conn.close()
         return errs
 
 
@@ -184,22 +151,16 @@ class SubtaskValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        # connect to database
-        conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
-        try:
-            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
-        except Exception:
-            print()
-        cur = conn.cursor()
-
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, session_key, user_name):
+        if valid_session_key(session_key, user_name):
             # ensure subtask id is unique
             query_name = str(bundle.data.get('subtask_id'))
-            cur.execute('SELECT * from backend_subtask where subtask_id=\'' + query_name + '\';')
-            if cur.fetchone() is not None:
+            try:
+                SubTask.objects.all().get(subtask_id=query_name)
                 errs['dup_subtask_id'] = 'Subtask already exists'
+            except ObjectDoesNotExist:
+                pass
 
             # empty fields
             for key, value in bundle.data.items():
@@ -208,6 +169,4 @@ class SubtaskValidation(Validation):
         else:
             errs['invalid_user_and_key'] = 'Invalid username or session key'
 
-        cur.close()
-        conn.close()
         return errs

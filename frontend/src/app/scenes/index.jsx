@@ -34,7 +34,7 @@ const HeaderOne = styled.span`
     width: inherit;
     letter-spacing: 0px;
     color: rgb(177, 217, 231);
-    font-family: Roboto;
+    font-family: Helvetica;
     font-style: italic;
     font-weight: lighter;
     font-size: 100px;
@@ -52,7 +52,7 @@ const HeaderTwo = styled.span`
   line-height: 123px;
   letter-spacing: 0px;
   color:rgba(167,224,165,1);
-  font-family: Roboto;
+  font-family: Helvetica;
   font-style: italic;
   font-weight: lighter;
   text-align: center;

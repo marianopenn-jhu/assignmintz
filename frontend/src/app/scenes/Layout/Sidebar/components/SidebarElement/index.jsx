@@ -6,8 +6,10 @@ import FaEllipsis from 'react-icons/lib/fa/ellipsis-v';
 const Element = styled.li`
   width:100%;
   list-style:none;
-  background:#BEE6CC;
-  color:#4f1e3e;
+  //mint green #BEE6CC
+  background: #686868;
+  color: #BEE6CC;
+  //dark grey #4f1e3e;
   padding: 0;
   padding-bottom:10px;
   padding-top:10px;
@@ -15,9 +17,12 @@ const Element = styled.li`
   font-size:15px;
 
   &:hover {
-    background: #80cc9b;
-    color: #170912;
+    // blah green #80cc9b;
+    // color: #170912;
     cursor:pointer;
+    background: #484848;
+    color: rgb(177, 217, 231);
+    //greyy #686868;
   }
 
   -webkit-touch-callout: none; /* iOS Safari */
@@ -47,6 +52,10 @@ const DropdownElement = styled.a`
   &:hover {
     background-color: #f1f1f1;
   }
+`;
+
+const ElipseSpan = styled.span`
+  font-size:20px;
 `;
 
 var styles = {
@@ -92,7 +101,7 @@ class SidebarElement extends React.Component {
 
       return (
           <Element>
-            {course_info.course_title} ({course_info.course_id}) <FaEllipsis/>
+            {course_info.course_title} ({course_info.course_id}) <ElipseSpan><FaEllipsis/></ElipseSpan>
 
             <Dropdown style={this.state.hidden ? styles.hidden : styles.none}>
               <DropdownElement href="#">Edit</DropdownElement>
