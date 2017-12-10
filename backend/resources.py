@@ -7,7 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation
-from backend.authorization import UserAuthorization
+from backend.authorization import UserAuthorization, GeneralAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -71,7 +71,7 @@ class CourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
@@ -109,7 +109,7 @@ class AddStudentToCourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['post', 'delete']
         excludes = []
         filtering = {
@@ -125,7 +125,7 @@ class AssignmentResource(ModelResource):
     class Meta:
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation();
         excludes = ['actual_difficulty', 'actual_time', \
@@ -149,7 +149,7 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
@@ -168,7 +168,7 @@ class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
                 'professor_id':ALL,
