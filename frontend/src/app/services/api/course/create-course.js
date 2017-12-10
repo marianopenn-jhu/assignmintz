@@ -6,11 +6,11 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/class/";
+const URL = PREFIX + "/backend/v1/course/";
 
-export {addClass};
+export {createCourse};
 
-function addClass(user_name, class_id)
+function createCourse(course_id, course_title, description, professor)
 {
   return (fetch(URL, {
     method: 'POST',
@@ -18,17 +18,17 @@ function addClass(user_name, class_id)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, class_id})
+    body: JSON.stringify({course_id, course_title, description, professor})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in addClass()");
+      throw new Error(response.status + ": " + response.statusText + " in createCourse()");
     } else {
       return response.json();
     }
   })).then((json) => {
-    return {status: true, result: json};
+    return {status: true, body: json};
   }).catch((error) => {
-    return {status: false, result: error};
+    return {status: false, body: error};
   });
 }
