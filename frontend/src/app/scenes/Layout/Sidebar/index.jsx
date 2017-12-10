@@ -23,6 +23,8 @@ const SidebarPanel = styled.div`
 
 const SidebarTitleContainer = styled.div`
   width:90%;
+  left: 5%;
+  right: 5%;
   text-align:center;
 `;
 
