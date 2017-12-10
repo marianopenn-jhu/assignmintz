@@ -1,5 +1,12 @@
 const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/student/subtask/";
+var PREFIX = "";
+if (process.env.host='dev') {
+  PREFIX = "http://localhost:8000";
+} else if (process.env.host=='deploy') {
+  PREFIX = "mighty-mountain-99483.herokuapp.com";
+}
+
+const URL = PREFIX + "/backend/v1/student/subtask/";
 
 export {addSubtask};
 

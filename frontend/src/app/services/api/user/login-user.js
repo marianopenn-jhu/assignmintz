@@ -1,5 +1,12 @@
 const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/login/";
+var PREFIX = "";
+if (process.env.host='dev') {
+  PREFIX = "http://localhost:8000";
+} else if (process.env.host=='deploy') {
+  PREFIX = "mighty-mountain-99483.herokuapp.com";
+}
+
+const URL = PREFIX + "/backend/v1/login/";
 
 export {loginUser};
 
@@ -7,6 +14,7 @@ export {loginUser};
 // TODO: Make the json return
 function loginUser(user_name, passwd_hash)
 {
+  console.log(URL);
   return fetch(URL, {
     method: 'POST',
     headers: {
