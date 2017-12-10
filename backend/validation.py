@@ -31,12 +31,10 @@ class LoginValidation(Validation):
         print(query_name + " : " + query_pass)
         cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
         fetched = cur.fetchone()
-        print(fetched)
         if fetched is None:
             errs['login'] = 'Invalid username/password combination'
         else:
-            print(fetched[0])
-            password, salt = fetched[0].split(':')
+            password, salt = fetched.split(':')
             if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
                 errs['passwd'] = 'Invalid password.'
 
