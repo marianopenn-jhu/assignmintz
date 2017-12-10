@@ -27560,7 +27560,7 @@ var CreateClassView = function (_React$Component) {
           description = _state.description;
 
 
-      (0, _createCourse.createCourse)(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/").then(function (response) {
+      (0, _createCourse.createCourse)(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/", []).then(function (response) {
         if (response.status) {
           {
             _this2.props.onClose;

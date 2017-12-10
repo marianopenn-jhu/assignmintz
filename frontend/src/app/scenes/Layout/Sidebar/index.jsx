@@ -95,7 +95,6 @@ class Sidebar extends React.Component {
             </SidebarPanel>
           </SidebarContainer>
         );
-
     }
 }
 

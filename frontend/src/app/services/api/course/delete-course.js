@@ -6,19 +6,18 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/class/";
+const URL = PREFIX + "/backend/v1/course/";
 
 export {deleteClass};
 
-function deleteClass(user_name, class_id)
+function deleteClass(course_id)
 {
-  return fetch(URL, {
+  return fetch(URL + "?course_id=" + course_id, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({user_name, class_id})
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
