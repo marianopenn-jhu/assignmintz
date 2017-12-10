@@ -6,14 +6,24 @@ from django.db import models
 
 class LogIn(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
-    passwd = models.CharField(max_length=36, default='')
+    session_key = models.CharField(max_length=36, default='')
+
+    def __unicode__(self):
+        return self.user_name
+
+
+class LogOut(models.Model):
+    user_name = models.CharField(max_length=36, default='', primary_key=True)
+
+    def __unicode__(self):
+        return self.user_name
 
 
 class User(models.Model):
     user_name = models.CharField(max_length=36, default='', primary_key=True)
     name = models.CharField(max_length=40, default='')
     email = models.EmailField(max_length=256, default='')
-    passwd = models.CharField(max_length=36, default='')
+    passwd = models.CharField(max_length=256, default='')
     role = models.CharField(max_length=10, default='')
 
     def __unicode__(self):
@@ -39,7 +49,6 @@ class Assignment(models.Model):
     assignment_type = models.CharField(max_length=5, default='')
     course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
     due_date = models.DateField(auto_now=True)
-    due_time = models.TimeField(auto_now=True)
     expected_difficulty = models.IntegerField(default=0)
     actual_difficulty = models.IntegerField(default=0)
     expected_time = models.FloatField(default=0.0)
