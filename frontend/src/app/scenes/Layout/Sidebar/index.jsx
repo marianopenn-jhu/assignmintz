@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 
+const SidebarContainer = styled.div`
+    height: auto;
+    overflow: hidden;
+`;
+
 const SidebarPanel = styled.div`
     background-color: #303030;
     height: 100%;
-    width: 20%;
     min-width: 250px;
     position: absolute;
-    float: right;
     left: 0;
     top: 0;
     -moz-border-radius-bottomright: 3px;
@@ -73,6 +76,7 @@ class Sidebar extends React.Component {
         };
 
         return (
+          <SidebarContainer>
             <SidebarPanel>
               <SidebarTitleContainer>
                 <SidebarTitle>Assign
@@ -85,6 +89,7 @@ class Sidebar extends React.Component {
                 {classes}
               </SidebarElementContainer>
             </SidebarPanel>
+          </SidebarContainer>
         );
 
     }
