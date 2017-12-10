@@ -11,7 +11,6 @@ import uuid
 import hashlib
 # from django.contrib.auth.models import User
 
-
 class LogInResource(ModelResource):
     session_key = uuid.uuid4().hex
 
@@ -68,7 +67,6 @@ class UserResource(ModelResource):
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
     students = fields.ManyToManyField(UserResource, 'students')
-    #student = fields.ForeignKey(UserResource, 'student')
 
     class Meta:
         queryset = Course.objects.all()
