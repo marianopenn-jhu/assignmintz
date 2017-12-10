@@ -3625,7 +3625,7 @@ var PREFIX = "";
 if (process.env.host = 'dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host == 'deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 var URL = PREFIX + "/backend/v1/course/";
@@ -3672,7 +3672,7 @@ var PREFIX = "";
 if (process.env.host = 'dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host == 'deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 var URL = PREFIX + "/backend/v1/professor/assignment/";
@@ -26194,7 +26194,7 @@ var PREFIX = "";
 if (process.env.host = 'dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host == 'deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 var URL = PREFIX + "/backend/v1/user/";
@@ -26238,7 +26238,7 @@ var PREFIX = "";
 if (process.env.host = 'dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host == 'deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 var URL = PREFIX + "/backend/v1/login/";
@@ -27687,7 +27687,7 @@ var PREFIX = "";
 if (process.env.host = 'dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host == 'deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 var URL = PREFIX + "/backend/v1/course/";
