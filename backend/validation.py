@@ -22,20 +22,10 @@ class LoginValidation(Validation):
         # ensure username password combo is valid
         query_name = str(bundle.data.get('user_name'))
         query_pass = str(bundle.data.get('passwd'))
-<<<<<<< HEAD
-        print(query_name + " : " + query_pass)
-        cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
-        fetched = cur.fetchone()
-        if fetched is None:
-            errs['login'] = 'Invalid username/password combination'
-        else:
-            password, salt = fetched.split(':')
-=======
         queryset = User.objects.all()
         try:
             user = queryset.get(user_name=query_name)
             password, salt = user.passwd.split(':')
->>>>>>> 3dd56b1366c42c8f8d2d42668e972bd8b7ea0e23
             if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
                 errs['passwd'] = 'Invalid password.'
         except ObjectDoesNotExist:
