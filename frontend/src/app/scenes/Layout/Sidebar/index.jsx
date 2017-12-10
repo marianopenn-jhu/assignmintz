@@ -9,11 +9,6 @@ const SidebarContainer = styled.div`
     overflow: hidden;
 `;
 
-const SidebarContainer = styled.div`
-    height: auto;
-    overflow: hidden;
-`;
-
 const SidebarPanel = styled.div`
     background-color: #303030;
     height: 100%;
