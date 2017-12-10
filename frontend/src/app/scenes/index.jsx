@@ -80,18 +80,16 @@ class App extends React.Component {
 
   onLogin(answer, user_name, role) {
     if (role == "student") {
-      console.log("SCENES INDEX");
-      console.log(user_name);
         this.setState({
           'user_state': 1,
           'current_user': user_name,
-          'session_key': "TODO: Replace this!"
+          'session_key': answer.session_key
         })
     }  else if (role == "professor") {
       this.setState({
         'user_state': 2,
         'current_user': user_name,
-        'session_key': "TODO: Replace this!"
+        'session_key': answer.session_key
       })
     }
   }
@@ -121,7 +119,7 @@ class App extends React.Component {
         if (this.state.session_key != null)
         {
           current = (
-            <StudentView user_name={this.state.current_user}/>
+            <StudentView user_name={this.state.current_user} session_key={this.state.session_key}/>
           );
         }
         else {
@@ -134,7 +132,7 @@ class App extends React.Component {
         if (this.state.session_key != null)
         {
           current = (
-            <ProfessorView user_name={this.state.current_user}/>
+            <ProfessorView user_name={this.state.current_user} session_key={this.state.session_key}/>
           );
         }
         else {
