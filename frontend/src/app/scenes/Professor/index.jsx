@@ -30,7 +30,6 @@ class ProfessorView extends React.Component {
     };
 
     if (this.props.user_name) {
-
       // Retrieve courses
       getCourses("professor=" + this.props.user_name).then((response) => {
           if (response.status == true) {
@@ -76,7 +75,7 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <CreateClassView data={this.props.user_name} onClose={this.returnToCalendar}/>
+          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
         );
         break;
       default:
