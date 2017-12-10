@@ -55,7 +55,7 @@ class UserResource(ModelResource):
             filtering = {
                 'user_name': ALL,
                 'name': ALL,
-                'role':ALL
+                'role': ALL
             }
 
     def hydrate(self, bundle):
@@ -77,7 +77,7 @@ class CourseResource(ModelResource):
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL,
             'course_title': ALL
         }
