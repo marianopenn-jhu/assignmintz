@@ -5,9 +5,9 @@ import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
 
 const ApplicationContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   background-image: linear-gradient(-87deg, #212121 08%, #303030 100%);
 `;
 

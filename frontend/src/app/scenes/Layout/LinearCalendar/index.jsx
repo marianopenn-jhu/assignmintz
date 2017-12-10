@@ -3,15 +3,21 @@ import styled from 'styled-components';
 import DayItem from './components/DayItem/index.jsx';
 import TopBar from './components/TopBar/index.jsx';
 
+const Wrapper = styled.div`
+  position: relative;
+  float: right;
+  left: 250px;
+  width: inherit;
+`;
+
 const TopBarContainer = styled.div
 `
+  overflow-x: hidden;
+  min-height: 50px;
   height:7%;
-  width:80%;
+  width: 100%;
+  left: inherit;
   position:fixed;
-  right:0;
-  top:0;
-  margin: 0;
-  padding: 0;
   padding-top:10px;
   background:white;
 `;
@@ -58,14 +64,14 @@ class LinearCalendar extends React.Component {
     }
 
     return(
-      <div>
+      <Wrapper>
         <TopBarContainer>
           <TopBar/>
         </TopBarContainer>
         <ScrollableList>
           {current}
         </ScrollableList>
-      </div>
+      </Wrapper>
     );
   }
 }

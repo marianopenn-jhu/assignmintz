@@ -7,6 +7,7 @@ const Container = styled.div`
   padding: 10px 20px 10px 20px;
   color:#A9A9A9;
   text-align:center;
+  float: left;
 `;
 
 const InputWrapper = styled.input`

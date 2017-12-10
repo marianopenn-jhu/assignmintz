@@ -16,15 +16,14 @@ display: flex;
 `;
 
 const FullPage = styled.div`
-height: auto;
-overflow: hidden;
+    height: auto;
+    overflow: hidden;
 `;
 
 const ViewPanel = styled.div `
 background-color: #FAFAFA;
 font-family: 'Trebuchet MS';
-left: 250px;
-right: inherit;
+overflow-x: hidden;
 position: absolute;
 width: auto;
 overflow: hidden;
@@ -70,7 +69,9 @@ render() {
   return (
     <Container>
       <Sidebar data={state.courses} user_data={this.props.user_name}/>
-      <LinearCalendar data={state.assignments}/>
+      <ViewPanel>
+        <LinearCalendar data={state.assignments}/>
+      </ViewPanel>
     </Container>
     // <Wrapper>
     // <FullPage>
