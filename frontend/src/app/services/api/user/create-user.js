@@ -12,7 +12,7 @@ export {createUser};
 
 function createUser(user_name, name, email, passwd, role)
 {
-  return (fetch(DEPLOYMENT_URL, {
+  return (fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

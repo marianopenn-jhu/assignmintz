@@ -8,7 +8,7 @@ var config = {
    entry: APP_DIR + '/index.js',
 
    output: {
-      path: STATIC_DIR,
+      path: BUILD_DIR,
       filename: 'transformed.js',
    },
 

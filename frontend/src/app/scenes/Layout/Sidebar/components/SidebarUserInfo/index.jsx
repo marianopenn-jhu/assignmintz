@@ -11,16 +11,16 @@ const Element = styled.li`
   padding-bottom:20px;
   padding-top:20px;
   display:inline-block;
+  margin-bottom: 7px;
 
   font-family:Avenir;
   font-size:20px;
 
   &:hover {
-    background: #80cc9b;
+    background: #484848;
     color:white;
     cursor:pointer;
   }
-
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */

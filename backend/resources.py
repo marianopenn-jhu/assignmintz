@@ -13,7 +13,6 @@ import hashlib
 
 
 class LogInResource(ModelResource):
-    session_key = uuid.uuid4().hex
 
     class Meta:
         queryset = LogIn.objects.all()
@@ -25,14 +24,13 @@ class LogInResource(ModelResource):
         include_resource_uri = False
 
     def hydrate(self, bundle):
-        print(self.session_key)
-        bundle.data['session_key'] = self.session_key
+        bundle.data['session_key'] = uuid.uuid4().hex
         return bundle
 
     def dehydrate(self, bundle):
         print(self.session_key)
         bundle.data.pop('passwd', None)
-        bundle.data['session_key'] = self.session_key
+        #bundle.data['session_key'] = self.session_key
         return bundle
 
 
@@ -129,7 +127,7 @@ class AssignmentResource(ModelResource):
         authorization = Authorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation();
-        excludes = ['assignment_id', 'due_date', 'actual_difficulty', 'actual_time', \
+        excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
         filters = {
             'assignment_id': ALL,

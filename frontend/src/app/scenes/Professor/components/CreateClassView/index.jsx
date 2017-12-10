@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
+import {createCourse} from '../../../../services/api/course/create-course.js'
 
 const Container = styled.div`
   overflow:hidden;
@@ -14,7 +15,6 @@ const Container = styled.div`
   padding: 0;
   padding-top:10px;
   background:white;
-  text-align:center;
 `;
 
 const XOut = styled.span`
@@ -34,26 +34,41 @@ const Form = styled.form`
 
 const Header = styled.h1`
   font-family:Avenir;
-  font-size:24px;
+  font-size:30px;
+  padding-left:50px;
 `;
 
-const ItemLabel = styled.label
+const ItemLabel = styled.div
 `
-  padding:0;
-  margin:0;
-  width:100%;
+  display:block;
+  width:85%;
+  padding-top:20px;
+  padding-bottom:20px;
+  text-align:center;
 `;
 
 const TextLabel = styled.div
 `
-  width:50%;
   display:inline-block;
+  font-family:Avenir;
+  font-size:16px;
+  width:25%;
+  text-align:right;
+  padding-right:20px;
 `;
 
 const TextInput = styled.input
 `
-  width:50%;
   display:inline-block;
+  width:70%;
+`;
+
+const BigTextInput = styled.textarea
+`
+  display:inline-block;
+  width:70%;
+  height:150px;
+  resize: none;
 `;
 
 class CreateClassView extends React.Component {
@@ -63,15 +78,28 @@ class CreateClassView extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      course_id:'',
+      course_title:'',
+      description:''
+    }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+    const {course_id, course_title, description} = this.state;
+    createCourse(course_id, course_title, description, this.props.data).then((response) => {
+      if (response.status) {
+
+      }
+      else {
+        alert(response.body);
+      }
+    });
   }
 
   render() {
@@ -82,14 +110,19 @@ class CreateClassView extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <ItemLabel>
               <TextLabel>Course Title:</TextLabel>
-              <TextInput type="text" value={this.state.value} onChange={this.handleChange} />
+              <TextInput name="course_title" type="text" onChange={this.handleChange} />
             </ItemLabel>
             <ItemLabel>
-              <TextLabel>Course Title:</TextLabel>
-              <TextInput type="text" value={this.state.value} onChange={this.handleChange} />
+              <TextLabel>Course Number:</TextLabel>
+              <TextInput name="course_id" type="text" onChange={this.handleChange} />
             </ItemLabel>
-
-            <input type="submit" value="Submit" />
+            <ItemLabel>
+              <TextLabel>Description:</TextLabel>
+              <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
+            </ItemLabel>
+            <ItemLabel>
+              <input type="submit" value="Create Course"/>
+            </ItemLabel>
           </Form>
         </Container>
     )

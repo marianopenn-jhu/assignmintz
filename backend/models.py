@@ -44,11 +44,11 @@ class Course(models.Model):
 
 
 class Assignment(models.Model):
-    assignment_id = models.AutoField(primary_key=True)
+    assignment_id = models.IntegerField(primary_key=True, default=0)
     assignment_name = models.CharField(max_length=36, default='')
     assignment_type = models.CharField(max_length=5, default='')
     course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
-    due_date = models.DateField(auto_now=True)
+    due_date = models.DateTimeField(blank=True, null=True)
     expected_difficulty = models.IntegerField(default=0)
     actual_difficulty = models.IntegerField(default=0)
     expected_time = models.FloatField(default=0.0)
