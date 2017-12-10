@@ -9,7 +9,8 @@
   "scripts": {
     "build": "webpack --env.host=dev",
     "start": "webpack-dev-server --content-base src/public --env.host=dev",
-    "static": "webpack --output-path ../backend/static/backend --env.host=deploy"
+    "static": "webpack --output-path ../backend/static/backend --env.host=dev",
+    "deploy": "webpack --output-path ../backend/static/backend --env.host=deploy"
   },
   "author": "",
   "license": "ISC",
