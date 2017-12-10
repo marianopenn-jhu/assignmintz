@@ -15,9 +15,11 @@ const Element = styled.li`
   font-size:15px;
 
   &:hover {
-    background: #80cc9b;
-    color: #170912;
+    // background: #80cc9b;
+    // color: #170912;
     cursor:pointer;
+    color: #BEE6CC;    
+    background-color: #686868;
   }
 
   -webkit-touch-callout: none; /* iOS Safari */

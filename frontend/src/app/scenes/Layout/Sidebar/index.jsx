@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 
+const SidebarContainer = styled.div`
+    height: auto;
+    overflow: hidden;
+`;
+
 const SidebarPanel = styled.div`
     background-color: #303030;
     height: 100%;
-    width: 20%;
     min-width: 250px;
     position: absolute;
-    float: right;
     left: 0;
     top: 0;
     -moz-border-radius-bottomright: 3px;
@@ -40,12 +43,13 @@ const SidebarTitle = styled.span`
     line-height: 123px;
     letter-spacing: 0px;
     color: rgb(177, 217, 231);
-    font-family: Roboto;
+    font-family: Helvetica;
     font-style: italic;
     font-weight: lighter;
     text-align: center;
 `;
 const SidebarTitleMintz = styled.span`
+    font-family: Helvetica;
     color:rgba(167,224,165,1);
 `;
 
@@ -75,6 +79,7 @@ class Sidebar extends React.Component {
         };
 
         return (
+          <SidebarContainer>
             <SidebarPanel>
               <SidebarTitleContainer>
                 <SidebarTitle>Assign
@@ -82,11 +87,11 @@ class Sidebar extends React.Component {
                 </SidebarTitle>
               </SidebarTitleContainer>
               <SidebarElementContainer>
-                "element"
                 <SidebarUserInfo data={this.props.user_data}/>
                 {classes}
               </SidebarElementContainer>
             </SidebarPanel>
+          </SidebarContainer>
         );
 
     }
