@@ -127,7 +127,7 @@ class AssignmentResource(ModelResource):
         resource_name = 'professor/assignment'
         authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete']
-        validation = AssignmentValidation();
+        validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
         filters = {
@@ -154,9 +154,9 @@ class SubTaskResource(ModelResource):
             validation = SubtaskValidation()
             excludes = ['description']
             filters = {
-                'subtask_id':ALL,
-                'subtask_name':ALL,
-                'assignment':ALL
+                'subtask_id': ALL,
+                'subtask_name': ALL,
+                'assignment': ALL
             }
 
     def dehydrate(self, bundle):
@@ -171,6 +171,6 @@ class OfficeHoursResource(ModelResource):
             authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
-                'professor_id':ALL,
-                'ta_name':ALL
+                'professor_id': ALL,
+                'ta_name': ALL
             }

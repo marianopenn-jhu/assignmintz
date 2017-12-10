@@ -46,17 +46,16 @@ class UserAuthorization(Authorization):
         raise Unauthorized("Sorry, no deletes.")
 
 
-class CourseAuthorization(Authorization):
+class GeneralAuthorization(Authorization):
     def read_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
             session_key = bundle.request.GET["session_key"]
-            user_name = bundle.request.GET["user_name"]
-            course = bundle.request.GET["course"]
-            LogIn.objects.all().get(user_name=user_name, session_key=session_key[:-1])
+            user = bundle.request.GET["user"]
+            LogIn.objects.all().get(user_name=user, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
-        return object_list.filter(user_name=user_name)
+        return object_list
 
     def read_detail(self, object_list, bundle):
         # Is the requested object owned by the user?
