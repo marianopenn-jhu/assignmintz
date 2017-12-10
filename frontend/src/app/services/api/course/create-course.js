@@ -10,7 +10,7 @@ const URL = PREFIX + "/backend/v1/course/";
 
 export {createCourse};
 
-function createCourse(course_id, course_title, description, professor)
+function createCourse(session_key, user_name, course_id, course_title, description, professor, students)
 {
   return (fetch(URL, {
     method: 'POST',
@@ -18,7 +18,7 @@ function createCourse(course_id, course_title, description, professor)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({course_id, course_title, description, professor})
+    body: JSON.stringify({session_key, user_name, course_id, course_title, description, professor, students})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {

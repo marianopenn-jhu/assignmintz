@@ -76,10 +76,200 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = __webpack_require__(25);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2327,197 +2517,7 @@ var styled = _styled(StyledComponent, constructWithOptions);
 
 /* harmony default export */ __webpack_exports__["default"] = (styled);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
 /* 3 */
@@ -2619,7 +2619,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 5 */
@@ -2808,7 +2808,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 8 */
@@ -2877,7 +2877,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 9 */
@@ -2944,7 +2944,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 10 */
@@ -3037,7 +3037,7 @@ if (process.env.NODE_ENV !== 'production') {
   module.exports = __webpack_require__(37)();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 13 */
@@ -3083,7 +3083,7 @@ if (process.env.NODE_ENV === 'production') {
   module.exports = __webpack_require__(29);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 14 */
@@ -3164,7 +3164,7 @@ var EventListener = {
 };
 
 module.exports = EventListener;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 15 */
@@ -3372,7 +3372,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -3464,17 +3464,18 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n    background-color: #303030;\n    height: 100%;\n    width: 20%;\n    min-width: 250px;\n    position: absolute;\n    float: right;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n'], ['\n    background-color: #303030;\n    height: 100%;\n    width: 20%;\n    min-width: 250px;\n    position: absolute;\n    float: right;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n'], ['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Roboto;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n'], ['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Roboto;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    color:rgba(167,224,165,1);\n'], ['\n    color:rgba(167,224,165,1);\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n'], ['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n    height: auto;\n    overflow: hidden;\n'], ['\n    height: auto;\n    overflow: hidden;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n    background-color: #303030;\n    height: 100%;\n    min-width: 250px;\n    position: absolute;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n'], ['\n    background-color: #303030;\n    height: 100%;\n    min-width: 250px;\n    position: absolute;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n'], ['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n'], ['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n'], ['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n'], ['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n']);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -3500,9 +3501,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var SidebarPanel = _styledComponents2.default.div(_templateObject);
+var SidebarContainer = _styledComponents2.default.div(_templateObject);
 
-var SidebarTitleContainer = _styledComponents2.default.div(_templateObject2);
+var SidebarPanel = _styledComponents2.default.div(_templateObject2);
+
+var SidebarTitleContainer = _styledComponents2.default.div(_templateObject3);
 
 // const SidebarTitle = styled.h1`
 //   color: black;
@@ -3512,10 +3515,10 @@ var SidebarTitleContainer = _styledComponents2.default.div(_templateObject2);
 //   font-size: 34px;
 //   text-align: center;
 // `;
-var SidebarTitle = _styledComponents2.default.span(_templateObject3);
-var SidebarTitleMintz = _styledComponents2.default.span(_templateObject4);
+var SidebarTitle = _styledComponents2.default.span(_templateObject4);
+var SidebarTitleMintz = _styledComponents2.default.span(_templateObject5);
 
-var SidebarElementContainer = _styledComponents2.default.ul(_templateObject5);
+var SidebarElementContainer = _styledComponents2.default.ul(_templateObject6);
 
 var Sidebar = function (_React$Component) {
     _inherits(Sidebar, _React$Component);
@@ -3542,29 +3545,32 @@ var Sidebar = function (_React$Component) {
             };
 
             return _react2.default.createElement(
-                SidebarPanel,
+                SidebarContainer,
                 null,
                 _react2.default.createElement(
-                    SidebarTitleContainer,
+                    SidebarPanel,
                     null,
                     _react2.default.createElement(
-                        SidebarTitle,
+                        SidebarTitleContainer,
                         null,
-                        'Assign',
                         _react2.default.createElement(
-                            SidebarTitleMintz,
+                            SidebarTitle,
                             null,
-                            'Mintz'
+                            'Assign',
+                            _react2.default.createElement(
+                                SidebarTitleMintz,
+                                null,
+                                'Mintz'
+                            )
                         )
+                    ),
+                    _react2.default.createElement(
+                        SidebarElementContainer,
+                        null,
+                        _react2.default.createElement(_index4.default, { data: this.props.user_data }),
+                        _react2.default.createElement(_index6.default, { triggerEvent: this.props.addClass }),
+                        classes
                     )
-                ),
-                _react2.default.createElement(
-                    SidebarElementContainer,
-                    null,
-                    '"element"',
-                    _react2.default.createElement(_index4.default, { data: this.props.user_data }),
-                    _react2.default.createElement(_index6.default, { triggerEvent: this.props.addClass }),
-                    classes
                 )
             );
         }
@@ -3649,7 +3655,7 @@ function getCourses(filters) {
     return { status: false, body: error };
   });
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 22 */
@@ -3693,7 +3699,7 @@ function getAssignment(filter) {
     return { status: false, body: error };
   });
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 23 */
@@ -5454,7 +5460,7 @@ module.exports = ReactEntry;
 })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 26 */
@@ -23002,7 +23008,7 @@ module.exports = ReactDOMFiberEntry;
 })();
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 30 */
@@ -23771,7 +23777,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 37 */
@@ -23853,15 +23859,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-image: linear-gradient(-87deg, #212121 08%, #303030 100%);\n'], ['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-image: linear-gradient(-87deg, #212121 08%, #303030 100%);\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n'], ['\n  position: absolute;\n  top: 15%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n\n  letter-spacing: 0px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n    line-height: 123px;\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Roboto;\n    font-style: italic;\n    font-weight: lighter;\n    font-size: 100px;\n    text-align: center;\n\n'], ['\n    line-height: 123px;\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Roboto;\n    font-style: italic;\n    font-weight: lighter;\n    font-size: 100px;\n    text-align: center;\n\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  background-color: rgba(0,0,0,0);\n  width: inherit;\n  font-size: 100px;\n  line-height: 123px;\n  letter-spacing: 0px;\n  color:rgba(167,224,165,1);\n  font-family: Roboto;\n  font-style: italic;\n  font-weight: lighter;\n  text-align: center;\n'], ['\n  background-color: rgba(0,0,0,0);\n  width: inherit;\n  font-size: 100px;\n  line-height: 123px;\n  letter-spacing: 0px;\n  color:rgba(167,224,165,1);\n  font-family: Roboto;\n  font-style: italic;\n  font-weight: lighter;\n  text-align: center;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n    line-height: 123px;\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    font-size: 100px;\n    text-align: center;\n\n'], ['\n    line-height: 123px;\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    font-size: 100px;\n    text-align: center;\n\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  background-color: rgba(0,0,0,0);\n  width: inherit;\n  font-size: 100px;\n  line-height: 123px;\n  letter-spacing: 0px;\n  color:rgba(167,224,165,1);\n  font-family: Helvetica;\n  font-style: italic;\n  font-weight: lighter;\n  text-align: center;\n'], ['\n  background-color: rgba(0,0,0,0);\n  width: inherit;\n  font-size: 100px;\n  line-height: 123px;\n  letter-spacing: 0px;\n  color:rgba(167,224,165,1);\n  font-family: Helvetica;\n  font-style: italic;\n  font-weight: lighter;\n  text-align: center;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n'], ['\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n']);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -23925,15 +23931,6 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.setState({
-        'user_state': 2,
-        'current_user': "ronnie7",
-        'session_key': 'NOT NULL'
-      });
-    }
-  }, {
     key: 'onLogin',
     value: function onLogin(answer, user_name, role) {
       if (role == "student") {
@@ -25779,7 +25776,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -25943,7 +25940,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26119,7 +26116,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26226,7 +26223,7 @@ function createUser(user_name, name, email, passwd, role) {
     return { status: false, body: error };
   });
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 48 */
@@ -26270,7 +26267,7 @@ function loginUser(user_name, passwd) {
     return { status: false, body: error };
   });
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 49 */
@@ -26300,7 +26297,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26424,7 +26421,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26505,7 +26502,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26587,7 +26584,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26669,7 +26666,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26787,7 +26784,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -26868,7 +26865,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    background: #80cc9b;\n    color: #170912;\n    cursor:pointer;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    background: #80cc9b;\n    color: #170912;\n    cursor:pointer;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: none;\n  position: absolute;\n  background-color: #f9f9f9;\n  min-width: 160px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n'], ['\n  display: none;\n  position: absolute;\n  background-color: #f9f9f9;\n  min-width: 160px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  color: black;\n  padding: 12px 16px;\n  text-decoration: none;\n  display: block;\n\n  &:hover {\n    background-color: #f1f1f1;\n  }\n'], ['\n  color: black;\n  padding: 12px 16px;\n  text-decoration: none;\n  display: block;\n\n  &:hover {\n    background-color: #f1f1f1;\n  }\n']),
     _templateObject4 = _taggedTemplateLiteral(['\n  font-size:20px;\n'], ['\n  font-size:20px;\n']);
@@ -26881,7 +26878,7 @@ var _reactDom = __webpack_require__(13);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -27046,14 +27043,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#170912;\n  padding: 0;\n  padding-bottom:20px;\n  padding-top:20px;\n  display:inline-block;\n\n  font-family:Avenir;\n  font-size:20px;\n\n  &:hover {\n    background: #80cc9b;\n    color:white;\n    cursor:pointer;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#170912;\n  padding: 0;\n  padding-bottom:20px;\n  padding-top:20px;\n  display:inline-block;\n\n  font-family:Avenir;\n  font-size:20px;\n\n  &:hover {\n    background: #80cc9b;\n    color:white;\n    cursor:pointer;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#170912;\n  padding: 0;\n  padding-bottom:20px;\n  padding-top:20px;\n  display:inline-block;\n  margin-bottom: 7px;\n\n  font-family:Avenir;\n  font-size:20px;\n\n  &:hover {\n    background: #484848;\n    color:white;\n    cursor:pointer;\n  }\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  background:#BEE6CC;\n  color:#170912;\n  padding: 0;\n  padding-bottom:20px;\n  padding-top:20px;\n  display:inline-block;\n  margin-bottom: 7px;\n\n  font-family:Avenir;\n  font-size:20px;\n\n  &:hover {\n    background: #484848;\n    color:white;\n    cursor:pointer;\n  }\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  padding-left:10px;\n'], ['\n  padding-left:10px;\n']);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -27171,7 +27168,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -27342,7 +27339,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -27490,7 +27487,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styledComponents = __webpack_require__(1);
+var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
@@ -27498,7 +27495,11 @@ var _close = __webpack_require__(65);
 
 var _close2 = _interopRequireDefault(_close);
 
+var _createCourse = __webpack_require__(66);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27507,8 +27508,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-//import {createCourse} from '../../../../services/api/'
 
 var Container = _styledComponents2.default.div(_templateObject);
 
@@ -27538,19 +27537,33 @@ var CreateClassView = function (_React$Component) {
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+
+    _this.state = {
+      course_id: '',
+      course_title: '',
+      description: ''
+    };
     return _this;
   }
 
   _createClass(CreateClassView, [{
     key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState({ value: event.target.value });
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
-      event.preventDefault();
+      var _state = this.state,
+          course_id = _state.course_id,
+          course_title = _state.course_title,
+          description = _state.description;
+
+      (0, _createCourse.createCourse)(course_id, course_title, description, "/backend/v1/user/" + this.props.data + "/").then(function (response) {
+        if (response.status) {} else {
+          alert(response.body);
+        }
+      });
     }
   }, {
     key: 'render',
@@ -27579,7 +27592,7 @@ var CreateClassView = function (_React$Component) {
               null,
               'Course Title:'
             ),
-            _react2.default.createElement(TextInput, { type: 'text', onChange: this.handleChange })
+            _react2.default.createElement(TextInput, { name: 'course_title', type: 'text', onChange: this.handleChange })
           ),
           _react2.default.createElement(
             ItemLabel,
@@ -27589,7 +27602,7 @@ var CreateClassView = function (_React$Component) {
               null,
               'Course Number:'
             ),
-            _react2.default.createElement(TextInput, { type: 'text', onChange: this.handleChange })
+            _react2.default.createElement(TextInput, { name: 'course_id', type: 'text', onChange: this.handleChange })
           ),
           _react2.default.createElement(
             ItemLabel,
@@ -27599,7 +27612,12 @@ var CreateClassView = function (_React$Component) {
               null,
               'Description:'
             ),
-            _react2.default.createElement(BigTextInput, { onChange: this.handleChange })
+            _react2.default.createElement(BigTextInput, { name: 'description', onChange: this.handleChange })
+          ),
+          _react2.default.createElement(
+            ItemLabel,
+            null,
+            _react2.default.createElement('input', { type: 'submit', value: 'Create Course' })
           )
         )
       );
@@ -27648,6 +27666,51 @@ var FaClose = function FaClose(props) {
 
 exports.default = FaClose;
 module.exports = exports['default'];
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var PREFIX = "";
+if (process.env.host = 'dev') {
+  PREFIX = "http://localhost:8000";
+} else if (process.env.host == 'deploy') {
+  PREFIX = "mighty-mountain-99483.herokuapp.com";
+}
+
+var URL = PREFIX + "/backend/v1/course/";
+
+exports.createCourse = createCourse;
+
+
+function createCourse(course_id, course_title, description, professor) {
+  return fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ course_id: course_id, course_title: course_title, description: description, professor: professor })
+  }).then(function (response) {
+    if (response.status >= ERROR_STATUS) {
+      throw new Error(response.status + ": " + response.statusText + " in createCourse()");
+    } else {
+      return response.json();
+    }
+  }).then(function (json) {
+    return { status: true, body: json };
+  }).catch(function (error) {
+    return { status: false, body: error };
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 /******/ ]);
