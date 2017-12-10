@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
-//import {createCourse} from '../../../../services/api/'
+import {createCourse} from '../../../../services/api/course/create-course.js'
 
 const Container = styled.div`
   overflow:hidden;
@@ -78,15 +78,28 @@ class CreateClassView extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      course_id:'',
+      course_title:'',
+      description:''
+    }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+    const {course_id, course_title, description} = this.state;
+    createCourse(course_id, course_title, description, this.props.data).then((response) => {
+      if (response.status) {
+
+      }
+      else {
+        alert(response.body);
+      }
+    });
   }
 
   render() {
@@ -97,15 +110,18 @@ class CreateClassView extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <ItemLabel>
               <TextLabel>Course Title:</TextLabel>
-              <TextInput type="text" onChange={this.handleChange} />
+              <TextInput name="course_title" type="text" onChange={this.handleChange} />
             </ItemLabel>
             <ItemLabel>
               <TextLabel>Course Number:</TextLabel>
-              <TextInput type="text" onChange={this.handleChange} />
+              <TextInput name="course_id" type="text" onChange={this.handleChange} />
             </ItemLabel>
             <ItemLabel>
               <TextLabel>Description:</TextLabel>
-              <BigTextInput onChange={this.handleChange}></BigTextInput>
+              <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
+            </ItemLabel>
+            <ItemLabel>
+              <input type="submit" value="Create Course"/>
             </ItemLabel>
           </Form>
         </Container>
