@@ -7,7 +7,7 @@ import hashlib
 def valid_session_key(cur, session_key, user_name):
     cur.execute('SELECT * FROM backend_login WHERE user_name=\'' + user_name
                 + '\' AND session_key=\'' + session_key + '\';')
-    if cur.fetchone is None:
+    if cur.fetchone() is None:
         return False
     return True
 
@@ -111,7 +111,7 @@ class CourseValidation(Validation):
 
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, user_name, session_key):
+        if valid_session_key(cur, session_key, user_name):
             # ensure course id is unique
             query_name = str(bundle.data.get('course_id'))
             cur.execute('SELECT * from backend_course where course_id=\'' + query_name + '\';')
@@ -140,7 +140,7 @@ class AssignmentValidation(Validation):
 
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, user_name, session_key):
+        if valid_session_key(cur, session_key, user_name):
             # ensure assignment id is unique
             query_name = str(bundle.data.get('assignment_id'))
             cur.execute('SELECT * from backend_assignment where assignment_id=\'' + query_name + '\';')
@@ -169,7 +169,7 @@ class SubtaskValidation(Validation):
 
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(cur, user_name, session_key):
+        if valid_session_key(cur, session_key, user_name):
             # ensure subtask id is unique
             query_name = str(bundle.data.get('subtask_id'))
             cur.execute('SELECT * from backend_subtask where subtask_id=\'' + query_name + '\';')

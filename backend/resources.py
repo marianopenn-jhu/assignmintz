@@ -67,6 +67,7 @@ class UserResource(ModelResource):
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
     students = fields.ManyToManyField(UserResource, 'students')
+
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
@@ -80,6 +81,7 @@ class CourseResource(ModelResource):
             'students': ALL,
             'course_title': ALL
         }
+
 
 class AddStudentToCourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -115,7 +117,6 @@ class AddStudentToCourseResource(ModelResource):
             'professor':ALL,
             'students': ALL
         }
-
 
 
 class AssignmentResource(ModelResource):
