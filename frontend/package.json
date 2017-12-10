@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "config": {
+    "localhost": "dev"
+  },
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --content-base src/public"
+    "build": "webpack --env.host=dev",
+    "start": "webpack-dev-server --content-base src/public --env.host=dev",
+    "static": "webpack --output-path ../backend/static/backend --env.host=deploy"
   },
   "author": "",
   "license": "ISC",

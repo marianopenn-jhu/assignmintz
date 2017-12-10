@@ -93,6 +93,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'assignmintz',
         'USER': 'postgres',
+        'TEST':  {
+            'NAME': 'test_assignmintz',
+        },
     }
 }
 

@@ -1,50 +1,92 @@
 import React from 'react';
 import styled from 'styled-components';
+import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
-//import Header from '../Layout/Header.jsx';
+import {getCourses} from '../../services/api/course/get-course.js';
+import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+//student can use gets from professor api
+const Container = styled.div`
+  display:inline-block
+  vertical-align:top;
+  width:100%;
+`;
 
 const Wrapper= styled.div`
-    display: flex;
+display: flex;
 `;
 
 const FullPage = styled.div`
-    height: auto;
-    overflow: hidden;
+height: auto;
+overflow: hidden;
 `;
 
 const ViewPanel = styled.div `
-    background-color: #FAFAFA;
-    font-family: 'Trebuchet MS';
-    left: 250px;
-    right: inherit;
-    position: absolute;
-    width: auto;
-    overflow: hidden;
-    height:100vh;
+background-color: #FAFAFA;
+font-family: 'Trebuchet MS';
+left: 250px;
+right: inherit;
+position: absolute;
+width: auto;
+overflow: hidden;
+height:100vh;
 `;
 
 class StudentView extends React.Component {
   constructor(props) {
     super(props);
-  }
 
-  render() {
-    return (
-        <Wrapper>
-          <FullPage>
-            <div id="fullPage">
-              <Sidebar/>
+    this.state = {
+      courses:[],
+      assignments:[]
+    };
 
-              <ViewPanel>
-                <div>
-
-                </div>
-              </ViewPanel>
-            </div>
-          </FullPage>
-        </Wrapper>
+    if (this.props.user_name) {
+      // Retrieve courses
+      getCourses("student=" + this.props.user_name).then((response) => {
+        if (response.status == true) {
+          var obj = response.body;
+          this.setState({courses: obj.objects});
+        } else {
+          console.log("Failed to retrieve courses!");
+        }
+      }
     );
+
+      // Retrieve assignments
+      getAssignment("student=" + this.props.user_name).then((response) => {
+        if (response.status == true) {
+          var obj = response.body;
+          this.setState({assignments: obj.objects});
+        } else {
+          console.log("Failed to retrieve assignments");
+        }
+      }
+    )
   }
+}
+
+render() {
+  const state = this.state;
+  return (
+    <Container>
+      <Sidebar data={state.courses} user_data={this.props.user_name}/>
+      <LinearCalendar data={state.assignments}/>
+    </Container>
+    // <Wrapper>
+    // <FullPage>
+    // <div id="fullPage">
+    // <Sidebar/>
+    //
+    // <ViewPanel>
+    // <div>
+    //
+    // </div>
+    // </ViewPanel>
+    // </div>
+    // </FullPage>
+    // </Wrapper>
+  );
+}
 }
 
 export default StudentView;

@@ -1,6 +1,13 @@
 const ERROR_STATUS = 400;
-const URL = "http://localhost:8000/backend/v1/user/";
-const DEPLOYMENT_URL = "mighty-mountain-99483.herokuapp.com/backend/v1/user/"
+
+var PREFIX = "";
+if (process.env.host='dev') {
+  PREFIX = "http://localhost:8000";
+} else if (process.env.host=='deploy') {
+  PREFIX = "mighty-mountain-99483.herokuapp.com";
+}
+
+const URL = PREFIX + "/backend/v1/user/";
 export {createUser};
 
 function createUser(user_name, name, email, passwd, role)
