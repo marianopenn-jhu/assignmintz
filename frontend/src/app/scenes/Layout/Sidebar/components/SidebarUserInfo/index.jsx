@@ -17,7 +17,7 @@ const Element = styled.li`
   font-size:20px;
 
   &:hover {
-    background: #80cc9b;
+    background: #484848;
     color:white;
     cursor:pointer;
   }

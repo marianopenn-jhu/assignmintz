@@ -6,20 +6,23 @@ import FaEllipsis from 'react-icons/lib/fa/ellipsis-v';
 const Element = styled.li`
   width:100%;
   list-style:none;
-  background:#BEE6CC;
-  color:#4f1e3e;
+  //mint green #BEE6CC
+  background: #686868;
+  color: #BEE6CC;
+  //dark grey #4f1e3e;
   padding: 0;
   padding-bottom:10px;
   padding-top:10px;
   font-family:Avenir;
   font-size:15px;
-  // margin-bottom: 5px;
 
   &:hover {
-    background: #80cc9b;
-    color: #170912;
+    // blah green #80cc9b;
+    // color: #170912;
     cursor:pointer;
-    // box-shadow: 0px 4px 2px #212121, 0px -4px 2px #212121;
+    background: #484848;
+    color: rgb(177, 217, 231);
+    //greyy #686868;
   }
 
   -webkit-touch-callout: none; /* iOS Safari */
