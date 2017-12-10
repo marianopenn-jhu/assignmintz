@@ -23934,18 +23934,16 @@ var App = function (_React$Component) {
     key: 'onLogin',
     value: function onLogin(answer, user_name, role) {
       if (role == "student") {
-        console.log("SCENES INDEX");
-        console.log(user_name);
         this.setState({
           'user_state': 1,
           'current_user': user_name,
-          'session_key': "TODO: Replace this!"
+          'session_key': answer.session_key
         });
       } else if (role == "professor") {
         this.setState({
           'user_state': 2,
           'current_user': user_name,
-          'session_key': "TODO: Replace this!"
+          'session_key': answer.session_key
         });
       }
     }
@@ -23985,7 +23983,7 @@ var App = function (_React$Component) {
         // Student view
         case 1:
           if (this.state.session_key != null) {
-            current = _react2.default.createElement(_index4.default, { user_name: this.state.current_user });
+            current = _react2.default.createElement(_index4.default, { user_name: this.state.current_user, session_key: this.state.session_key });
           } else {
             current = _react2.default.createElement('div', null);
             alert("Null session key!");
@@ -23994,7 +23992,7 @@ var App = function (_React$Component) {
         // Teacher view
         case 2:
           if (this.state.session_key != null) {
-            current = _react2.default.createElement(_index6.default, { user_name: this.state.current_user });
+            current = _react2.default.createElement(_index6.default, { user_name: this.state.current_user, session_key: this.state.session_key });
           } else {
             current = _react2.default.createElement('div', null);
             alert("Null session key!");
@@ -26249,7 +26247,6 @@ exports.loginUser = loginUser;
 
 
 function loginUser(user_name, passwd) {
-  console.log(URL);
   return fetch(URL, {
     method: 'POST',
     headers: {
@@ -26261,8 +26258,10 @@ function loginUser(user_name, passwd) {
     if (response.status >= ERROR_STATUS) {
       throw new Error(response.status + ": " + response.statusText + " in loginUser()");
     } else {
-      return { status: true, body: response };
+      return response.json();
     }
+  }).then(function (json) {
+    return { status: true, body: json };
   }).catch(function (error) {
     return { status: false, body: error };
   });
@@ -27395,7 +27394,6 @@ var ProfessorView = function (_React$Component) {
     };
 
     if (_this.props.user_name) {
-
       // Retrieve courses
       (0, _getCourse.getCourses)("professor=" + _this.props.user_name).then(function (response) {
         if (response.status == true) {
@@ -27441,7 +27439,7 @@ var ProfessorView = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { data: state.assignments });
           break;
         case 1:
-          view = _react2.default.createElement(_index4.default, { data: this.props.user_name, onClose: this.returnToCalendar });
+          view = _react2.default.createElement(_index4.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar });
           break;
         default:
           this.setState({ viewState: 0 });
@@ -27554,13 +27552,20 @@ var CreateClassView = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
+      var _this2 = this;
+
       var _state = this.state,
           course_id = _state.course_id,
           course_title = _state.course_title,
           description = _state.description;
 
-      (0, _createCourse.createCourse)(course_id, course_title, description, "/backend/v1/user/" + this.props.data + "/").then(function (response) {
-        if (response.status) {} else {
+
+      (0, _createCourse.createCourse)(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/").then(function (response) {
+        if (response.status) {
+          {
+            _this2.props.onClose;
+          };
+        } else {
           alert(response.body);
         }
       });
@@ -27690,17 +27695,17 @@ var URL = PREFIX + "/backend/v1/course/";
 exports.createCourse = createCourse;
 
 
-function createCourse(course_id, course_title, description, professor) {
+function createCourse(session_key, user_name, course_id, course_title, description, professor, students) {
   return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ course_id: course_id, course_title: course_title, description: description, professor: professor })
+    body: JSON.stringify({ session_key: session_key, user_name: user_name, course_id: course_id, course_title: course_title, description: description, professor: professor, students: students })
   }).then(function (response) {
     if (response.status >= ERROR_STATUS) {
-      throw new Error(response.status + ": " + response.statusText + " in createCourse()");
+      throw new Error(response.status + ": " + response.statusText + " in createUser()");
     } else {
       return response.json();
     }

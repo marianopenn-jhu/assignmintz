@@ -92,12 +92,13 @@ class CreateClassView extends React.Component {
 
   handleSubmit(event) {
     const {course_id, course_title, description} = this.state;
-    createCourse(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/").then((response) => {
-      if (response.status) {
 
+    createCourse(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/", []).then((response) => {
+      if (response.status) {
+        {this.props.onClose};
       }
       else {
-        //alert(response.body);
+        alert(response.body);
       }
     });
   }

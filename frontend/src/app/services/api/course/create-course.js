@@ -22,7 +22,7 @@ function createCourse(session_key, user_name, course_id, course_title, descripti
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in createCourse()");
+      throw new Error(response.status + ": " + response.statusText + " in createUser()")
     } else {
       return response.json();
     }
