@@ -19,7 +19,6 @@ v1_api.register(CourseResource())
 v1_api.register(LogInResource())
 v1_api.register(LogOutResource())
 v1_api.register(AddStudentToCourseResource())
-v1_api.register(LogOutResource())
 
 
 urlpatterns = [

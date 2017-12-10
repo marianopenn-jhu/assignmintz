@@ -18,13 +18,20 @@ class LoginValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
+        print(conn)
         cur = conn.cursor()
 
         # ensure username password combo is valid
         query_name = str(bundle.data.get('user_name'))
         query_pass = str(bundle.data.get('passwd'))
+        print(query_name + " : " + query_pass)
         cur.execute('SELECT passwd FROM backend_user WHERE user_name=\'' + query_name + '\';')
         fetched = cur.fetchone()
+        print(fetched)
         if fetched is None:
             errs['login'] = 'Invalid username/password combination'
         else:
@@ -44,6 +51,10 @@ class LogOutValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
         cur = conn.cursor()
 
         # check valid session key
@@ -69,6 +80,10 @@ class UserValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
         cur = conn.cursor()
 
         # ensure username is unique
@@ -107,6 +122,10 @@ class CourseValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
         cur = conn.cursor()
 
         user_name = str(bundle.data.get('user_name'))
@@ -136,6 +155,10 @@ class AssignmentValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
         cur = conn.cursor()
 
         user_name = str(bundle.data.get('user_name'))
@@ -165,6 +188,10 @@ class SubtaskValidation(Validation):
 
         # connect to database
         conn = psycopg2.connect(dbname='assignmintz', user='postgres', host='localhost')
+        try:
+            conn = psycopg2.connect(dbname='test_assignmintz', user='postgres', host='localhost')
+        except Exception:
+            print()
         cur = conn.cursor()
 
         user_name = str(bundle.data.get('user_name'))
