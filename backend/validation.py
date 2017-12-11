@@ -1,6 +1,5 @@
 # backend/validation.py
 from tastypie.validation import Validation
-import psycopg2
 import hashlib
 from backend.models import User, LogIn, SubTask, Assignment, Course
 from django.core.exceptions import ObjectDoesNotExist
