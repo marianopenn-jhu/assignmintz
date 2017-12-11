@@ -27148,16 +27148,13 @@ var SidebarElement = function (_React$Component) {
         _react2.default.createElement(
           Dropdown,
           { style: this.state.hidden ? styles.hidden : styles.none },
-          _react2.default.createElement(
-            DropdownElement,
-            { href: '#' },
-            'Edit'
-          ),
-          _react2.default.createElement(
-            DropdownElement,
-            { href: '#' },
-            'Delete'
-          )
+          this.props.dropdown_elements.map(function (e, index) {
+            return _react2.default.createElement(
+              DropdownElement,
+              { onClick: e.onClick, key: index },
+              e.name
+            );
+          })
         )
       );
     }
