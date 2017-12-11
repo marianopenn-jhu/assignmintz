@@ -2,22 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
 
-
-const Container = styled.div`
-    height: auto;
-    overflow: hidden;
-`;
-
 const Panel = styled.div`
   overflow:hidden;
   overflow-y:auto;
   height: 100%;
   width: 80%;
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   margin: 0;
   padding: 0;
+  padding-top:10px;
+  background:white;
+`;
+
+const TopBarContainer = styled.div
+`
+  overflow-x: hidden;
+  min-height: 50px;
+  height:7%;
+  width: 100%;
+  left: inherit;
+  position:relative;
   padding-top:10px;
   background:white;
 `;
@@ -49,11 +55,14 @@ class FindClassView extends React.Component {
 
   render() {
     return (
-      <Container>
         <Panel>
-            ayyo
+        <TopBarContainer>
+          hello
+        </TopBarContainer>
+            <div>
+
+            </div>
         </Panel>
-        </Container>
     )
   }
 }

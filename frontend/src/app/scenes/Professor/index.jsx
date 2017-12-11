@@ -8,7 +8,7 @@ import {getAssignment} from '../../services/api/professor/assignment/get-assignm
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
-  display:inline-block
+  display:inline-block;
   vertical-align:top;
   width:100%;
 `;
@@ -81,9 +81,7 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <Wrapper>
-            <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          </Wrapper>
+          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
         );
         break;
       default:
