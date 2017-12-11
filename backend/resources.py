@@ -7,6 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation
+from backend.authorization import UserAuthorization, GeneralAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -47,14 +48,14 @@ class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
-            authorization = Authorization()
+            authorization = UserAuthorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
             filtering = {
                 'user_name': ALL,
                 'name': ALL,
-                'role':ALL
+                'role': ALL
             }
 
     def hydrate(self, bundle):
@@ -70,13 +71,13 @@ class CourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL,
             'course_title': ALL
         }
@@ -108,7 +109,7 @@ class AddStudentToCourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['post', 'delete']
         excludes = []
         filtering = {
@@ -124,9 +125,9 @@ class AssignmentResource(ModelResource):
     class Meta:
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete']
-        validation = AssignmentValidation();
+        validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
         filters = {
@@ -148,14 +149,14 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
             filters = {
-                'subtask_id':ALL,
-                'subtask_name':ALL,
-                'assignment':ALL
+                'subtask_id': ALL,
+                'subtask_name': ALL,
+                'assignment': ALL
             }
 
     def dehydrate(self, bundle):
@@ -167,9 +168,9 @@ class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
-                'professor_id':ALL,
-                'ta_name':ALL
+                'professor_id': ALL,
+                'ta_name': ALL
             }
