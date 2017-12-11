@@ -9,7 +9,7 @@ if (process.env.host='dev') {
 
 const URL = PREFIX + "/backend/v1/user/logout/";
 
-function logoutUser(user_id, sesson_id)
+function logoutUser(user_name, session_key)
 {
   return fetch(URL, {
     method: 'POST',
@@ -23,7 +23,7 @@ function logoutUser(user_id, sesson_id)
     {
       throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
     } else {
-      return {status: true, result: response};
+      return {status: true, result: "Empty"};
     }
   }).catch((error) => {
     return {status: false, result: error};

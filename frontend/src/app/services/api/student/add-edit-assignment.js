@@ -29,5 +29,4 @@ function addEditAssignment(student_id, priority, difficulty, assignment_id)
   }).catch((error) => {
     return {status: false, result: error};
   });
-
 }

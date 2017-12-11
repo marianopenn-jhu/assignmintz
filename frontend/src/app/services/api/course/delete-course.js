@@ -23,7 +23,7 @@ function deleteClass(course_id)
     {
       throw new Error(response.status + ": " + response.statusText + " in deleteClass()");
     } else {
-      return {status: true, result: response};
+      return {status: true, result: "Empty"};
     }
   }).catch((error) => {
     return {status: false, result: error};

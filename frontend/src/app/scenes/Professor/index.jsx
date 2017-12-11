@@ -4,7 +4,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import CreateClassView from './components/CreateClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
