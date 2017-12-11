@@ -6,8 +6,8 @@ import TopBar from './components/TopBar/index.jsx';
 const Wrapper = styled.div`
   position: relative;
   float: right;
-  left: 250px;
-  width: inherit;
+  left: 25vw;
+  width: 75vw;
 `;
 
 const TopBarContainer = styled.div

@@ -12,7 +12,7 @@ const SidebarContainer = styled.div`
 const SidebarPanel = styled.div`
     background-color: #303030;
     height: 100%;
-    min-width: 250px;
+    min-width: 25vw;
     position: absolute;
     left: 0;
     top: 0;

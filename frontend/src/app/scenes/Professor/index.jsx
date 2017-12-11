@@ -12,6 +12,12 @@ const Container = styled.div`
   vertical-align:top;
   width:100%;
 `;
+const Wrapper = styled.div`
+  position: relative;
+  float: right;
+  left: 25vw;
+  width: 75vw;
+`;
 
 /*
   The professor will have props with:
@@ -75,7 +81,9 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          <Wrapper>
+            <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          </Wrapper>
         );
         break;
       default:

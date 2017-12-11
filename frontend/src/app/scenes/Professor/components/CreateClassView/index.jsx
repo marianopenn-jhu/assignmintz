@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
-import {createCourse} from '../../../../services/api/course/create-course.js'
+import {createCourse} from '../../../../services/api/course/create-course.js';
 
 const Container = styled.div`
   overflow:hidden;

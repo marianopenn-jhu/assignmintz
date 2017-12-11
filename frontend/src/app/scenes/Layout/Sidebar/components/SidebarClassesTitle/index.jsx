@@ -3,20 +3,6 @@ import styled from 'styled-components';
 import FaPlusCircle from 'react-icons/lib/fa/plus-square-o';
 
 const Container = styled.li`
-  // width:100%;
-  // list-style:none;
-  // padding:10px 30px 10px 30px;
-  // margin:0;
-  // font-family:'Avenir Next';
-  // font-size:16px;
-  //
-  // background: #686868;
-  // color: #BEE6CC;
-  //
-  // &:hover {
-  //   background: #484848;
-  // }
-
   width:100%;
   list-style:none;
   background: #686868;
