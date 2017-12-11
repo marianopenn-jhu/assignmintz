@@ -100,33 +100,3 @@ class Sidebar extends React.Component {
 }
 
 export default Sidebar;
-
-
-/*var sidebarTitle = (
-    <div style="width: inherit; font-size: 40px;" id="p-1-box-13" data-component-type="text"
-         className="box pos type-text liveUpdate-textColor changeProperty-textColor changeProperty-textAlign changeProperty-lineHeight changeProperty-textSpacingv2-text">
-        <div className="text-contents  liveUpdate-backgroundColor changeProperty-backgroundColor"
-             style="background-color: rgba(0,0,0,0);">
-            <span data-editableproperty="text">Assign<span
-                style="color:rgba(167,224,165,1);">Mintz</span></span>
-        </div>
-    </div>
-);
-
-var settingsLogo = (
-    <span style="width: inherit">
-        <SettingsLogo>
-            <button type="button" className="btn btn-xs">
-                <span className="glyphicon glyphicon-cog"></span>
-            </button>
-        </SettingsLogo>
-    </span>
-
-);
-var sidebarHeader = (
-    <div class="sidebar-header">
-        <h3 style="color: white"> Welcome <span id="username"> </span> </h3>
-        <div id="app">app</div>
-        <div id="root">root</div>
-    </div>
-);*/

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
+import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
@@ -66,26 +67,28 @@ class StudentView extends React.Component {
 
 render() {
   const state = this.state;
+
+      let view = null;
+      switch (state.viewState) {
+        case 0:
+          view = (
+            <LinearCalendar data={state.assignments}/>
+          );
+          break;
+        case 1:
+          view = (
+            <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          );
+          break;
+        default:
+          this.setState({viewState:0});
+      }
+
   return (
     <Container>
       <Sidebar data={state.courses} user_data={this.props.user_name}/>
-      <ViewPanel>
-        <LinearCalendar data={state.assignments}/>
-      </ViewPanel>
+      {view}
     </Container>
-    // <Wrapper>
-    // <FullPage>
-    // <div id="fullPage">
-    // <Sidebar/>
-    //
-    // <ViewPanel>
-    // <div>
-    //
-    // </div>
-    // </ViewPanel>
-    // </div>
-    // </FullPage>
-    // </Wrapper>
   );
 }
 }
