@@ -4,7 +4,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import CreateClassView from './components/CreateClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
@@ -70,7 +70,7 @@ class ProfessorView extends React.Component {
     switch (state.viewState) {
       case 0:
         view = (
-          <LinearCalendar data={state.assignments}/>
+          <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         );
         break;
       case 1:
@@ -84,7 +84,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.addClass}/>
+        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} addClass={this.addClass}/>
         {view}
       </Container>
     );

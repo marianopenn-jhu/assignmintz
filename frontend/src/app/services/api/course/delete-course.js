@@ -6,28 +6,26 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/professor/assignment/";
+const URL = PREFIX + "/backend/v1/course/";
 
-export {getAssignment};
+export {deleteClass};
 
-function getAssignment(filter)
+function deleteClass(course_id)
 {
-  return (fetch(URL + "?" + filter, {
-    method: 'GET',
+  return fetch(URL + "?course_id=" + course_id, {
+    method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in deleteClass()");
     } else {
-      return response.json();
+      return {status: true, result: "Empty"};
     }
-  })).then((json) => {
-    return {status: true, body: json};
   }).catch((error) => {
-    return {status: false, body: error};
+    return {status: false, result: error};
   });
 }
