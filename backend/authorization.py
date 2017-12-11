@@ -26,21 +26,25 @@ class UserAuthorization(Authorization):
         return bundle.obj.user == bundle.request.user
 
     def create_list(self, object_list, bundle):
+        print("no")
         # Assuming they're auto-assigned to ``user``.
-        return True
+        return object_list
 
     def create_detail(self, object_list, bundle):
+        print("yes")
         return True
 
     def update_list(self, object_list, bundle):
-        return True
+        print("hi")
+        return object_list
 
     def update_detail(self, object_list, bundle):
+        print("hello")
         return True
 
     def delete_list(self, object_list, bundle):
         # Sorry user, no deletes for you!
-        raise Unauthorized("Sorry, no deletes.")
+        raise Unauthorized("Sorry, no deletes for you.")
 
     def delete_detail(self, object_list, bundle):
         raise Unauthorized("Sorry, no deletes.")
@@ -55,7 +59,7 @@ class GeneralAuthorization(Authorization):
             LogIn.objects.all().get(user_name=user, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
-        return object_list
+        return object_list.filter(user_name=user)
 
     def read_detail(self, object_list, bundle):
         # Is the requested object owned by the user?
@@ -69,20 +73,20 @@ class GeneralAuthorization(Authorization):
 
     def create_list(self, object_list, bundle):
         # Assuming they're auto-assigned to ``user``.
-        return True
+        return object_list
 
     def create_detail(self, object_list, bundle):
         return True
 
     def update_list(self, object_list, bundle):
-        return True
+        return object_list
 
     def update_detail(self, object_list, bundle):
+        print("update_detail Harry")
         return True
 
     def delete_list(self, object_list, bundle):
-        # Sorry user, no deletes for you!
-        raise Unauthorized("Sorry, no deletes.")
+        raise Unauthorized("Sorry no deletes for you")
 
     def delete_detail(self, object_list, bundle):
-        raise Unauthorized("Sorry, no deletes.")
+        raise Unauthorized("Sorry no deletes for you")

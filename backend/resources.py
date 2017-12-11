@@ -48,7 +48,7 @@ class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
-            authorization = UserAuthorization()
+            authorization = Authorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
