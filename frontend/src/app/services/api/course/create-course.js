@@ -3,14 +3,14 @@ var PREFIX = "";
 if (process.env.host='dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host=='deploy') {
-  PREFIX = "mighty-mountain-99483.herokuapp.com";
+  PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
 const URL = PREFIX + "/backend/v1/course/";
 
 export {createCourse};
 
-function createCourse(course_id, course_title, description, professor)
+function createCourse(session_key, user_name, course_id, course_title, description, professor, students)
 {
   return (fetch(URL, {
     method: 'POST',
@@ -18,11 +18,11 @@ function createCourse(course_id, course_title, description, professor)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({course_id, course_title, description, professor})
+    body: JSON.stringify({session_key, user_name, course_id, course_title, description, professor, students})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in createCourse()");
+      throw new Error(response.status + ": " + response.statusText + " in createUser()")
     } else {
       return response.json();
     }
