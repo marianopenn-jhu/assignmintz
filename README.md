@@ -1,4 +1,19 @@
-------Installation------
+------Accessing the Application---------
+The application is hosted at
+https://mysterious-depths-20159.herokuapp.com/home/.
+You must access it through Google Chrome, as we are resolving an issue with
+font display on other popular browsers.
+Limitations:
+    -If you are signing in as a professor and try to create a course,
+     you will get a browser error that says "Type Error: Failed to Fetch".
+     The course has been created, but we are having trouble locating the source
+     of this bug.
+     After clicking OK, you will be redirected to the home page, where you will
+     be prompted to sign in once again. Once you sign in, you will see that the
+     course has indeed been added to the sidebar.
+
+
+------Installation for Development------
 
 The application is simply installed by running 'source install.sh' on the script
 found in the install-scripts directory. In order to run this script, you must have Python 3,
@@ -16,16 +31,26 @@ To build and run for local development:
 To run tests locally:  
     source run_tests.sh
 
+
+If you have a previously installed version of Assignmintz adn intend to run the
+application locally, a few steps are required to get the database models lined
+up to the current version of development.
+
+(1) open psql on the command line
+(2) type in 'drop database assignmintz'
+(3) exit psql
+(4) run 'createdb -h localhost -p 5432 -U postgres assignmintz'
+(5) run update_migrations.sh
+
 To build the frontend:  
 (1) Install npm onto your machine  
 (2) Navigate to assignmintz/frontend  
-(3) Type 'npm run build' in your terminal  
+(3) Type 'npm run static' in your terminal for local development and 
+    'npm run deploy' for a deployment version 
 
 The app should now be ready to go!
 Navigate to 'localhost:8000/home/' to begin using the app.
-Alternatively, you can check out the deployed app at:
-'https://mighty-mountain-99483.herokuapp.com/home/'
-NOTE: On the Heroku deployed app. User creation is currently failing.
+
 Our deploy process is as follows:
     -Make changes to current branch
     -commit changes

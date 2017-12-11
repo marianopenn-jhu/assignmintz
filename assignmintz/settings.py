@@ -76,9 +76,9 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'staticfiles'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'staticfiles'),
+# )
 
 WSGI_APPLICATION = 'assignmintz.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
