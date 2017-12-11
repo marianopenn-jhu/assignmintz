@@ -6,25 +6,24 @@ if (process.env.host=='dev') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/class/";
+const URL = PREFIX + "/backend/v1/course/";
 
 export {deleteClass};
 
-function deleteClass(user_name, class_id)
+function deleteClass(course_id)
 {
-  return fetch(URL, {
+  return fetch(URL + "?course_id=" + course_id, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({user_name, class_id})
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in deleteClass()");
     } else {
-      return {status: true, result: response};
+      return {status: true, result: "Empty"};
     }
   }).catch((error) => {
     return {status: false, result: error};

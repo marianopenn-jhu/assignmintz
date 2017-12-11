@@ -10,18 +10,21 @@ const URL = PREFIX + "/backend/v1/professor/assignment/";
 
 export {getAssignment};
 
-function getAssignment(filter)
+/*
+  Return the assignments given the particular filters
+*/
+function getAssignment(filters)
 {
-  return (fetch(URL + "?" + filter, {
+  return (fetch(URL + "?" + filters, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
     } else {
       return response.json();
     }

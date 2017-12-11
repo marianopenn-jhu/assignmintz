@@ -74,7 +74,7 @@ class Sidebar extends React.Component {
         if (this.props.data != null) {
           classes = this.props.data.map((e, i) => {
             return (
-              <SidebarElement key={i} course={e}/>
+              <SidebarElement key={i} course={e} dropdown_elements={this.props.dropdown_elements}/>
             )
           });
         };
@@ -95,7 +95,6 @@ class Sidebar extends React.Component {
             </SidebarPanel>
           </SidebarContainer>
         );
-
     }
 }
 
