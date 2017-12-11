@@ -34,7 +34,7 @@ const Header = styled.h1`
   padding-left:50px;
 `;
 
-const Form = styled.div`
+const FormContainer = styled.div`
   width:100%;
 `;
 
@@ -69,6 +69,11 @@ const BigTextInput = styled.textarea
   width:70%;
   height:150px;
   resize: none;
+`;
+
+const CreateButton = styled.button
+`
+
 `;
 
 class CreateClassView extends React.Component {
@@ -116,7 +121,7 @@ class CreateClassView extends React.Component {
         <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Create a Class</Header>
-          <Form>
+          <FormContainer>
             <ItemLabel>
               <TextLabel>Course Title:</TextLabel>
               <TextInput name="course_title" type="text" onChange={this.handleChange} />
@@ -130,9 +135,9 @@ class CreateClassView extends React.Component {
               <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
             </ItemLabel>
             <ItemLabel onClick={this.handleSubmit}>
-              Create Course
+              <CreateButton type="button">Create Course</CreateButton>
             </ItemLabel>
-          </Form>
+          </FormContainer>
         </Container>
     )
   }
