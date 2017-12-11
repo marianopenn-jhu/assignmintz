@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import FaSearchIcon from 'react-icons/lib/fa/search'
 import FilterItem from './components/FilterItem/index.jsx';
+import FaCogs from 'react-icons/lib/fa/cogs';
+import {logoutUser} from '../../../../../services/api/user/logout-user.js';
 
 const Container = styled.div`
   padding: 10px 20px 10px 20px;
@@ -30,10 +32,30 @@ const SearchIconSpan = styled.span`
   }
 `;
 
+const LogOutSpan = styled.span`
+  padding-left:10px;
+  display:inline-block;
+  font-size:24px;
+
+  &:hover {
+    cursor:pointer;
+    color:#545454;
+  }
+`;
 
 class TopBar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.onWheelClick = this.onWheelClick.bind(this);
+  }
+
+  onWheelClick() {
+    logoutUser(this.props.user_data, this.props.session_key);
+    if (this.props.onLogout != null)
+    {
+      this.props.onLogout();
+    }
   }
 
   render() {
@@ -46,6 +68,9 @@ class TopBar extends React.Component {
         <SearchIconSpan>
           <FaSearchIcon/>
         </SearchIconSpan>
+        <LogOutSpan onClick={this.onWheelClick}>
+          <FaCogs/>
+        </LogOutSpan>
       </Container>
     );
   }

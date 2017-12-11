@@ -7,7 +7,9 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/user/logout/";
+const URL = PREFIX + "/backend/v1/logout/";
+
+export{logoutUser};
 
 function logoutUser(user_name, session_key)
 {
@@ -17,7 +19,7 @@ function logoutUser(user_name, session_key)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, passwd_hash})
+    body: JSON.stringify({user_name, session_key})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {

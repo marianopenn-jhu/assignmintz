@@ -69,8 +69,8 @@ render() {
   const state = this.state;
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name}/>
-      <LinearCalendar data={state.assignments}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key}/>
+      <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
     </Container>
     // <Wrapper>
     // <FullPage>

@@ -60,7 +60,7 @@ class LinearCalendar extends React.Component {
     return(
       <div>
         <TopBarContainer>
-          <TopBar/>
+          <TopBar user_data={this.props.user_data} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         </TopBarContainer>
         <ScrollableList>
           {current}

@@ -2626,6 +2626,74 @@ module.exports = invariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(12);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var IconBase = function IconBase(_ref, _ref2) {
+  var children = _ref.children;
+  var color = _ref.color;
+  var size = _ref.size;
+  var style = _ref.style;
+  var width = _ref.width;
+  var height = _ref.height;
+
+  var props = _objectWithoutProperties(_ref, ['children', 'color', 'size', 'style', 'width', 'height']);
+
+  var _ref2$reactIconBase = _ref2.reactIconBase;
+  var reactIconBase = _ref2$reactIconBase === undefined ? {} : _ref2$reactIconBase;
+
+  var computedSize = size || reactIconBase.size || '1em';
+  return _react2.default.createElement('svg', _extends({
+    children: children,
+    fill: 'currentColor',
+    preserveAspectRatio: 'xMidYMid meet',
+    height: height || computedSize,
+    width: width || computedSize
+  }, reactIconBase, props, {
+    style: _extends({
+      verticalAlign: 'middle',
+      color: color || reactIconBase.color
+    }, reactIconBase.style || {}, style)
+  }));
+};
+
+IconBase.propTypes = {
+  color: _propTypes2.default.string,
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  width: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  height: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  style: _propTypes2.default.object
+};
+
+IconBase.contextTypes = {
+  reactIconBase: _propTypes2.default.shape(IconBase.propTypes)
+};
+
+exports.default = IconBase;
+module.exports = exports['default'];
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /*
 object-assign
 (c) Sindre Sorhus
@@ -2717,74 +2785,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(12);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var IconBase = function IconBase(_ref, _ref2) {
-  var children = _ref.children;
-  var color = _ref.color;
-  var size = _ref.size;
-  var style = _ref.style;
-  var width = _ref.width;
-  var height = _ref.height;
-
-  var props = _objectWithoutProperties(_ref, ['children', 'color', 'size', 'style', 'width', 'height']);
-
-  var _ref2$reactIconBase = _ref2.reactIconBase;
-  var reactIconBase = _ref2$reactIconBase === undefined ? {} : _ref2$reactIconBase;
-
-  var computedSize = size || reactIconBase.size || '1em';
-  return _react2.default.createElement('svg', _extends({
-    children: children,
-    fill: 'currentColor',
-    preserveAspectRatio: 'xMidYMid meet',
-    height: height || computedSize,
-    width: width || computedSize
-  }, reactIconBase, props, {
-    style: _extends({
-      verticalAlign: 'middle',
-      color: color || reactIconBase.color
-    }, reactIconBase.style || {}, style)
-  }));
-};
-
-IconBase.propTypes = {
-  color: _propTypes2.default.string,
-  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-  width: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-  height: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
-  style: _propTypes2.default.object
-};
-
-IconBase.contextTypes = {
-  reactIconBase: _propTypes2.default.shape(IconBase.propTypes)
-};
-
-exports.default = IconBase;
-module.exports = exports['default'];
 
 /***/ }),
 /* 7 */
@@ -3675,13 +3675,16 @@ if (process.env.host = 'dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-var URL = PREFIX + "/backend/v1/professor/assignment/";
+var URL = PREFIX + "/backend/v1/assignment/";
 
 exports.getAssignment = getAssignment;
 
+/*
+  Return the assignments given the particular filters
+*/
 
-function getAssignment(filter) {
-  return fetch(URL + "?" + filter, {
+function getAssignment(filters) {
+  return fetch(URL + "?" + filters, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -3689,7 +3692,7 @@ function getAssignment(filter) {
     }
   }).then(function (response) {
     if (response.status >= ERROR_STATUS) {
-      throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
     } else {
       return response.json();
     }
@@ -3740,7 +3743,7 @@ _reactDom2.default.render(_react2.default.createElement(_index2.default, null), 
  This source code is licensed under the MIT license found in the
  LICENSE file in the root directory of this source tree.
 */
-var f=__webpack_require__(5),p=__webpack_require__(7);__webpack_require__(4);var r=__webpack_require__(3);
+var f=__webpack_require__(6),p=__webpack_require__(7);__webpack_require__(4);var r=__webpack_require__(3);
 function t(a){for(var b=arguments.length-1,d="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,e=0;e<b;e++)d+="\x26args[]\x3d"+encodeURIComponent(arguments[e+1]);b=Error(d+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var u={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function v(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}v.prototype.isReactComponent={};v.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?t("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};v.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function w(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}function x(){}x.prototype=v.prototype;var y=w.prototype=new x;y.constructor=w;f(y,v.prototype);y.isPureReactComponent=!0;function z(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}var A=z.prototype=new x;A.constructor=z;f(A,v.prototype);A.unstable_isAsyncReactComponent=!0;A.render=function(){return this.props.children};
@@ -3777,7 +3780,7 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var objectAssign$1 = __webpack_require__(5);
+var objectAssign$1 = __webpack_require__(6);
 var require$$0 = __webpack_require__(8);
 var emptyObject = __webpack_require__(7);
 var invariant = __webpack_require__(4);
@@ -5477,7 +5480,7 @@ module.exports = ReactEntry;
  LICENSE file in the root directory of this source tree.
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(0);__webpack_require__(4);var l=__webpack_require__(11),n=__webpack_require__(5),ba=__webpack_require__(14),ca=__webpack_require__(3),da=__webpack_require__(7),ea=__webpack_require__(15),fa=__webpack_require__(16),ha=__webpack_require__(17),ia=__webpack_require__(18);
+var aa=__webpack_require__(0);__webpack_require__(4);var l=__webpack_require__(11),n=__webpack_require__(6),ba=__webpack_require__(14),ca=__webpack_require__(3),da=__webpack_require__(7),ea=__webpack_require__(15),fa=__webpack_require__(16),ha=__webpack_require__(17),ia=__webpack_require__(18);
 function w(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:w("227");
 function ja(a){switch(a){case "svg":return"http://www.w3.org/2000/svg";case "math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}
 var ka={Namespaces:{html:"http://www.w3.org/1999/xhtml",mathml:"http://www.w3.org/1998/Math/MathML",svg:"http://www.w3.org/2000/svg"},getIntrinsicNamespace:ja,getChildNamespace:function(a,b){return null==a||"http://www.w3.org/1999/xhtml"===a?ja(b):"http://www.w3.org/2000/svg"===a&&"foreignObject"===b?"http://www.w3.org/1999/xhtml":a}},la=null,oa={};
@@ -5805,7 +5808,7 @@ if (process.env.NODE_ENV !== "production") {
 var react = __webpack_require__(0);
 var invariant = __webpack_require__(4);
 var ExecutionEnvironment = __webpack_require__(11);
-var _assign = __webpack_require__(5);
+var _assign = __webpack_require__(6);
 var EventListener = __webpack_require__(14);
 var require$$0 = __webpack_require__(8);
 var hyphenateStyleName = __webpack_require__(30);
@@ -23246,7 +23249,7 @@ module.exports = performance || {};
 var emptyFunction = __webpack_require__(3);
 var invariant = __webpack_require__(4);
 var warning = __webpack_require__(8);
-var assign = __webpack_require__(5);
+var assign = __webpack_require__(6);
 
 var ReactPropTypesSecret = __webpack_require__(10);
 var checkPropTypes = __webpack_require__(9);
@@ -25768,7 +25771,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n'], ['\n  position: absolute;\n  width: 300px;\n  left:50%;\n  top:50%;\n  margin-left: -160px;\n  margin-top: -160px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n'], ['\n  margin-top: 30px;\n  height: 123px;\n  opacity: 1;\n  -webkit-filter: none;\n  filter: none;\n  font-weight: 100;\n\n  font-size: 40px;\n  letter-spacing: 0px;\n  color: rgb(177, 217, 231);\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n'], ['\n  display: inline-block;\n  border-radius: 4px;\n  background-color: #424242;\n  width: 300px;\n  margin: 15px;\n\n  &:hover, &:focus, &:active {\n    color: #BEE6CC;\n    box-shadow: 0px 0px 2px 2px #212121;\n    background-color: #686868;\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n'], ['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n'], ['\n  color: #999;\n  font-size: 20px;\n  font-family: Avenir;\n  width:100%;\n  text-align: center;\n\n  & > a {\n    color:#69FF7A;\n  }\n  & > a:hover {\n    color:#3f9949;\n    cursor:pointer;\n  }\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  font-size:50px;\n  color:#3f9949;\n\n  &:hover {\n    color:#69FF7A;\n    cursor:pointer;\n  }\n'], ['\n  font-size:50px;\n  color:#3f9949;\n\n  &:hover {\n    color:#69FF7A;\n    cursor:pointer;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -25782,9 +25786,9 @@ var _index = __webpack_require__(45);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _backarrow = __webpack_require__(49);
+var _arrowCircleOLeft = __webpack_require__(49);
 
-var _backarrow2 = _interopRequireDefault(_backarrow);
+var _arrowCircleOLeft2 = _interopRequireDefault(_arrowCircleOLeft);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25806,6 +25810,8 @@ var AccountButton = _styledComponents2.default.button(_templateObject3);
 
 var UserCreatedMessage = _styledComponents2.default.p(_templateObject4);
 
+var BackArrowContainer = _styledComponents2.default.span(_templateObject5);
+
 var AccountChooser = function (_React$Component) {
   _inherits(AccountChooser, _React$Component);
 
@@ -25825,6 +25831,7 @@ var AccountChooser = function (_React$Component) {
     _this.onSignUpSuccess = _this.onSignUpSuccess.bind(_this);
     _this.onSignInSuccess = _this.onSignInSuccess.bind(_this);
     _this.resetState = _this.resetState.bind(_this);
+    _this.backClick = _this.backClick.bind(_this);
     return _this;
   }
 
@@ -25856,6 +25863,12 @@ var AccountChooser = function (_React$Component) {
       this.setState(_defineProperty({}, 'email', '<NOT FOUND>'));
     }
   }, {
+    key: 'backClick',
+    value: function backClick() {
+      this.setState(_defineProperty({}, 'currentState', 'accountChooser'));
+      this.setState(_defineProperty({}, 'selectedRole', e.target.name));
+    }
+  }, {
     key: 'render',
     value: function render() {
       var current = null;
@@ -25878,7 +25891,16 @@ var AccountChooser = function (_React$Component) {
           );
           break;
         case 'loginScreen':
-          current = _react2.default.createElement(_index2.default, { role: this.state.selectedRole, onSignUp: this.onSignUpSuccess, onSignIn: this.onSignInSuccess });
+          current = _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              BackArrowContainer,
+              { onClick: this.backClick },
+              _react2.default.createElement(_arrowCircleOLeft2.default, null)
+            ),
+            _react2.default.createElement(_index2.default, { role: this.state.selectedRole, onSignUp: this.onSignUpSuccess, onSignIn: this.onSignInSuccess })
+          );
           break;
         case 'createdUser':
           current = _react2.default.createElement(
@@ -26213,10 +26235,8 @@ function createUser(user_name, name, email, passwd, role) {
     if (response.status >= ERROR_STATUS) {
       throw new Error(response.status + ": " + response.statusText + " in createUser()");
     } else {
-      return response.json();
+      return { status: true, body: "Empty" };
     }
-  }).then(function (json) {
-    return { status: true, body: json };
   }).catch(function (error) {
     return { status: false, body: error };
   });
@@ -26272,7 +26292,39 @@ function loginUser(user_name, passwd) {
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "src/app/scenes/Login/assets/backarrow-b89fbf5d.png";
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactIconBase = __webpack_require__(5);
+
+var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FaArrowCircleOLeft = function FaArrowCircleOLeft(props) {
+    return _react2.default.createElement(
+        _reactIconBase2.default,
+        _extends({ viewBox: '0 0 40 40' }, props),
+        _react2.default.createElement(
+            'g',
+            null,
+            _react2.default.createElement('path', { d: 'm28.7 17.9v4.2q0 0.3-0.2 0.5t-0.5 0.3h-7.9v4.2q0 0.4-0.2 0.6t-0.5 0.2q-0.2 0-0.5-0.3l-7.1-7.1q-0.2-0.2-0.2-0.5t0.2-0.5l7.1-7.2q0.2-0.2 0.5-0.2 0.3 0 0.5 0.3t0.2 0.5v4.2h7.9q0.3 0 0.5 0.3t0.2 0.5z m3.6 2.1q0-3.3-1.6-6.1t-4.5-4.4-6.1-1.6-6.1 1.6-4.4 4.4-1.6 6.1 1.6 6.1 4.4 4.4 6.1 1.6 6.1-1.6 4.5-4.4 1.6-6.1z m5 0q0 4.7-2.3 8.6t-6.3 6.2-8.6 2.3-8.6-2.3-6.2-6.2-2.3-8.6 2.3-8.6 6.2-6.2 8.6-2.3 8.6 2.3 6.3 6.2 2.3 8.6z' })
+        )
+    );
+};
+
+exports.default = FaArrowCircleOLeft;
+module.exports = exports['default'];
 
 /***/ }),
 /* 50 */
@@ -26346,7 +26398,7 @@ var StudentView = function (_React$Component) {
 
     if (_this.props.user_name) {
       // Retrieve courses
-      (0, _getCourse.getCourses)("student=" + _this.props.user_name).then(function (response) {
+      (0, _getCourse.getCourses)("students=" + _this.props.user_name).then(function (response) {
         if (response.status == true) {
           var obj = response.body;
           _this.setState({ courses: obj.objects });
@@ -26356,7 +26408,7 @@ var StudentView = function (_React$Component) {
       });
 
       // Retrieve assignments
-      (0, _getAssignment.getAssignment)("student=" + _this.props.user_name).then(function (response) {
+      (0, _getAssignment.getAssignment)("students=" + _this.props.user_name).then(function (response) {
         if (response.status == true) {
           var obj = response.body;
           _this.setState({ assignments: obj.objects });
@@ -26743,7 +26795,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactIconBase = __webpack_require__(6);
+var _reactIconBase = __webpack_require__(5);
 
 var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -27008,7 +27060,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactIconBase = __webpack_require__(6);
+var _reactIconBase = __webpack_require__(5);
 
 var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -27122,7 +27174,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactIconBase = __webpack_require__(6);
+var _reactIconBase = __webpack_require__(5);
 
 var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -27298,7 +27350,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactIconBase = __webpack_require__(6);
+var _reactIconBase = __webpack_require__(5);
 
 var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -27560,13 +27612,11 @@ var CreateClassView = function (_React$Component) {
           description = _state.description;
 
 
-      (0, _createCourse.createCourse)(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/", []).then(function (response) {
-        if (response.status) {
-          {
-            _this2.props.onClose;
-          };
+      (0, _createCourse.createCourse)(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/", []).then(function (answer) {
+        if (answer.status == false) {
+          alert(answer.body);
         } else {
-          alert(response.body);
+          _this2.props.onClose();
         }
       });
     }
@@ -27651,7 +27701,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactIconBase = __webpack_require__(6);
+var _reactIconBase = __webpack_require__(5);
 
 var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
 
@@ -27707,10 +27757,8 @@ function createCourse(session_key, user_name, course_id, course_title, descripti
     if (response.status >= ERROR_STATUS) {
       throw new Error(response.status + ": " + response.statusText + " in createUser()");
     } else {
-      return response.json();
+      return { status: true, body: "Empty" };
     }
-  }).then(function (json) {
-    return { status: true, body: json };
   }).catch(function (error) {
     return { status: false, body: error };
   });
