@@ -3435,7 +3435,7 @@ var LinearCalendar = function (_React$Component) {
         _react2.default.createElement(
           TopBarContainer,
           null,
-          _react2.default.createElement(_index4.default, null)
+          _react2.default.createElement(_index4.default, { user_data: this.props.user_data, session_key: this.props.session_key, onLogout: this.props.onLogout })
         ),
         _react2.default.createElement(
           ScrollableList,
@@ -3479,15 +3479,15 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(57);
+var _index = __webpack_require__(59);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(59);
+var _index3 = __webpack_require__(61);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(61);
+var _index5 = __webpack_require__(63);
 
 var _index6 = _interopRequireDefault(_index5);
 
@@ -23882,7 +23882,7 @@ var _index3 = __webpack_require__(50);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(63);
+var _index5 = __webpack_require__(65);
 
 var _index6 = _interopRequireDefault(_index5);
 
@@ -23925,6 +23925,7 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.onLogin = _this.onLogin.bind(_this);
+    _this.onLogout = _this.onLogout.bind(_this);
     _this.state = {
       user_state: 0, // 0 = Login, 1 = Student, 2 = Professor
       current_user: "",
@@ -23949,6 +23950,16 @@ var App = function (_React$Component) {
           'session_key': answer.session_key
         });
       }
+    }
+  }, {
+    key: 'onLogout',
+    value: function onLogout() {
+      this.setState({
+        'user_state': 0,
+        'current_user': '',
+        'session_key': ''
+      });
+      this.forceUpdate();
     }
   }, {
     key: 'render',
@@ -23986,7 +23997,7 @@ var App = function (_React$Component) {
         // Student view
         case 1:
           if (this.state.session_key != null) {
-            current = _react2.default.createElement(_index4.default, { user_name: this.state.current_user, session_key: this.state.session_key });
+            current = _react2.default.createElement(_index4.default, { user_name: this.state.current_user, session_key: this.state.session_key, onLogout: this.onLogout });
           } else {
             current = _react2.default.createElement('div', null);
             alert("Null session key!");
@@ -23995,7 +24006,7 @@ var App = function (_React$Component) {
         // Teacher view
         case 2:
           if (this.state.session_key != null) {
-            current = _react2.default.createElement(_index6.default, { user_name: this.state.current_user, session_key: this.state.session_key });
+            current = _react2.default.createElement(_index6.default, { user_name: this.state.current_user, session_key: this.state.session_key, onLogout: this.onLogout });
           } else {
             current = _react2.default.createElement('div', null);
             alert("Null session key!");
@@ -26427,8 +26438,8 @@ var StudentView = function (_React$Component) {
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index4.default, { data: state.courses, user_data: this.props.user_name }),
-        _react2.default.createElement(_index2.default, { data: state.assignments })
+        _react2.default.createElement(_index4.default, { data: state.courses, user_data: this.props.user_name, session_key: this.props.session_key }),
+        _react2.default.createElement(_index2.default, { data: state.assignments, user_data: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout })
       )
       // <Wrapper>
       // <FullPage>
@@ -26711,7 +26722,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  padding: 10px 20px 10px 20px;\n  color:#A9A9A9;\n  text-align:center;\n'], ['\n  padding: 10px 20px 10px 20px;\n  color:#A9A9A9;\n  text-align:center;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: inline-block;\n  border-radius:5px;\n  -moz-border-radius:5px;\n  -webkit-border-radius:5px;\n  border:1px solid #cccccc;\n\n  &:focus {\n    outline:none;\n  }\n'], ['\n  display: inline-block;\n  border-radius:5px;\n  -moz-border-radius:5px;\n  -webkit-border-radius:5px;\n  border:1px solid #cccccc;\n\n  &:focus {\n    outline:none;\n  }\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  padding-left:10px;\n  display:inline-block;\n\n  &:hover {\n    cursor:pointer;\n  }\n'], ['\n  padding-left:10px;\n  display:inline-block;\n\n  &:hover {\n    cursor:pointer;\n  }\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  padding-left:10px;\n  display:inline-block;\n\n  &:hover {\n    cursor:pointer;\n  }\n'], ['\n  padding-left:10px;\n  display:inline-block;\n\n  &:hover {\n    cursor:pointer;\n  }\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  padding-left:10px;\n  display:inline-block;\n  font-size:24px;\n\n  &:hover {\n    cursor:pointer;\n    color:#545454;\n  }\n'], ['\n  padding-left:10px;\n  display:inline-block;\n  font-size:24px;\n\n  &:hover {\n    cursor:pointer;\n    color:#545454;\n  }\n']);
 
 var _react = __webpack_require__(0);
 
@@ -26729,6 +26741,12 @@ var _index = __webpack_require__(56);
 
 var _index2 = _interopRequireDefault(_index);
 
+var _cogs = __webpack_require__(57);
+
+var _cogs2 = _interopRequireDefault(_cogs);
+
+var _logoutUser = __webpack_require__(58);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26745,16 +26763,29 @@ var InputWrapper = _styledComponents2.default.input(_templateObject2);
 
 var SearchIconSpan = _styledComponents2.default.span(_templateObject3);
 
+var LogOutSpan = _styledComponents2.default.span(_templateObject4);
+
 var TopBar = function (_React$Component) {
   _inherits(TopBar, _React$Component);
 
   function TopBar(props) {
     _classCallCheck(this, TopBar);
 
-    return _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).call(this, props));
+
+    _this.onWheelClick = _this.onWheelClick.bind(_this);
+    return _this;
   }
 
   _createClass(TopBar, [{
+    key: 'onWheelClick',
+    value: function onWheelClick() {
+      (0, _logoutUser.logoutUser)(this.props.user_data, this.props.session_key);
+      if (this.props.onLogout != null) {
+        this.props.onLogout();
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -26768,6 +26799,11 @@ var TopBar = function (_React$Component) {
           SearchIconSpan,
           null,
           _react2.default.createElement(_search2.default, null)
+        ),
+        _react2.default.createElement(
+          LogOutSpan,
+          { onClick: this.onWheelClick },
+          _react2.default.createElement(_cogs2.default, null)
         )
       );
     }
@@ -26911,6 +26947,88 @@ exports.default = FilterItem;
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactIconBase = __webpack_require__(5);
+
+var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FaCogs = function FaCogs(props) {
+    return _react2.default.createElement(
+        _reactIconBase2.default,
+        _extends({ viewBox: '0 0 40 40' }, props),
+        _react2.default.createElement(
+            'g',
+            null,
+            _react2.default.createElement('path', { d: 'm18.6 20q0-2.2-1.6-3.8t-3.7-1.5-3.8 1.5-1.5 3.8 1.5 3.8 3.8 1.5 3.7-1.5 1.6-3.8z m16 10.6q0-1-0.8-1.8t-1.9-0.8-1.9 0.8-0.8 1.8q0 1.1 0.8 1.9t1.9 0.8 1.9-0.8 0.8-1.9z m0-21.2q0-1.1-0.8-1.9t-1.9-0.8-1.9 0.8-0.8 1.9q0 1.1 0.8 1.8t1.9 0.8 1.9-0.8 0.8-1.8z m-8 8.7v3.9q0 0.2-0.2 0.4t-0.3 0.2l-3.2 0.5q-0.2 0.7-0.7 1.6 0.7 0.9 1.9 2.3 0.1 0.2 0.1 0.5 0 0.2-0.1 0.3-0.5 0.7-1.7 1.9t-1.7 1.2q-0.2 0-0.4-0.1l-2.4-1.9q-0.7 0.4-1.6 0.7-0.2 2.2-0.5 3.2-0.1 0.5-0.6 0.5h-3.8q-0.3 0-0.5-0.2t-0.2-0.3l-0.4-3.2q-0.7-0.2-1.6-0.7l-2.4 1.9q-0.2 0.1-0.5 0.1-0.2 0-0.4-0.1-3-2.8-3-3.3 0-0.2 0.2-0.4 0.2-0.3 0.8-1.1t1-1.3q-0.5-0.9-0.7-1.7l-3.2-0.5q-0.2 0-0.4-0.2t-0.1-0.4v-3.9q0-0.2 0.1-0.4t0.4-0.2l3.2-0.5q0.2-0.7 0.7-1.6-0.7-0.9-1.9-2.3-0.2-0.3-0.2-0.5 0-0.2 0.2-0.4 0.4-0.6 1.7-1.8t1.6-1.2q0.3 0 0.5 0.1l2.4 1.9q0.7-0.4 1.6-0.7 0.2-2.2 0.4-3.2 0.2-0.5 0.7-0.5h3.8q0.2 0 0.4 0.2t0.2 0.3l0.5 3.2q0.7 0.2 1.6 0.7l2.4-1.9q0.2-0.1 0.4-0.1 0.3 0 0.5 0.1 3 2.8 3 3.3 0 0.2-0.2 0.4-0.2 0.4-0.8 1.2t-1 1.2q0.5 1 0.7 1.7l3.2 0.5q0.2 0 0.3 0.2t0.2 0.4z m13.3 11.1v2.9q0 0.3-3.1 0.6-0.3 0.6-0.6 1.1 1 2.4 1 2.9 0 0.1-0.1 0.1-2.5 1.5-2.5 1.5-0.2 0-1-1t-1.1-1.4q-0.4 0-0.6 0t-0.6 0q-0.3 0.4-1.1 1.4t-1 1q0 0-2.5-1.5-0.1 0-0.1-0.1 0-0.5 1-2.9-0.3-0.5-0.6-1.1-3.1-0.3-3.1-0.6v-2.9q0-0.4 3.1-0.7 0.3-0.6 0.6-1-1-2.4-1-2.9 0-0.1 0.1-0.2 0 0 0.7-0.4t1.2-0.7 0.6-0.3q0.2 0 1 1t1.1 1.4q0.4-0.1 0.6-0.1t0.6 0.1q1.1-1.5 1.9-2.4l0.2 0q0 0 2.5 1.4 0.1 0.1 0.1 0.2 0 0.5-1.1 2.9 0.4 0.4 0.7 1 3.1 0.3 3.1 0.7z m0-21.3v2.9q0 0.4-3.1 0.7-0.3 0.5-0.6 1 1 2.4 1 2.9 0 0.1-0.1 0.2-2.5 1.4-2.5 1.4-0.2 0-1-0.9t-1.1-1.5q-0.4 0.1-0.6 0.1t-0.6-0.1q-0.3 0.5-1.1 1.5t-1 0.9q0 0-2.5-1.4-0.1-0.1-0.1-0.2 0-0.5 1-2.9-0.3-0.5-0.6-1-3.1-0.3-3.1-0.7v-2.9q0-0.3 3.1-0.6 0.3-0.6 0.6-1.1-1-2.4-1-2.9 0-0.1 0.1-0.1 0-0.1 0.7-0.4t1.2-0.7 0.6-0.4q0.2 0 1 1t1.1 1.4q0.4 0 0.6 0t0.6 0q1.1-1.5 1.9-2.3l0.2-0.1q0 0 2.5 1.5 0.1 0 0.1 0.1 0 0.5-1.1 2.9 0.4 0.5 0.7 1.1 3.1 0.3 3.1 0.6z' })
+        )
+    );
+};
+
+exports.default = FaCogs;
+module.exports = exports['default'];
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var ERROR_STATUS = 400;
+var PREFIX = "";
+if (process.env.host = 'dev') {
+  PREFIX = "http://localhost:8000";
+} else if (process.env.host == 'deploy') {
+  PREFIX = "mighty-mountain-99483.herokuapp.com";
+}
+
+var URL = PREFIX + "/backend/v1/logout/";
+
+exports.logoutUser = logoutUser;
+
+
+function logoutUser(user_name, session_key) {
+  return fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user_name: user_name, session_key: session_key })
+  }).then(function (response) {
+    if (response.status >= ERROR_STATUS) {
+      throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
+    } else {
+      return { status: true, result: "Empty" };
+    }
+  }).catch(function (error) {
+    return { status: false, result: error };
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -26933,7 +27051,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _ellipsisV = __webpack_require__(58);
+var _ellipsisV = __webpack_require__(60);
 
 var _ellipsisV2 = _interopRequireDefault(_ellipsisV);
 
@@ -27044,7 +27162,7 @@ var SidebarElement = function (_React$Component) {
 exports.default = SidebarElement;
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27082,7 +27200,7 @@ exports.default = FaEllipsisV;
 module.exports = exports['default'];
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27105,7 +27223,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _caretDown = __webpack_require__(60);
+var _caretDown = __webpack_require__(62);
 
 var _caretDown2 = _interopRequireDefault(_caretDown);
 
@@ -27158,7 +27276,7 @@ var SidebarUserInfo = function (_React$Component) {
 exports.default = SidebarUserInfo;
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27196,7 +27314,7 @@ exports.default = FaCaretDown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27223,7 +27341,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _plusSquareO = __webpack_require__(62);
+var _plusSquareO = __webpack_require__(64);
 
 var _plusSquareO2 = _interopRequireDefault(_plusSquareO);
 
@@ -27334,7 +27452,7 @@ var SidebarClassesTitle = function (_React$Component) {
 exports.default = SidebarClassesTitle;
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27372,7 +27490,7 @@ exports.default = FaPlusSquareO;
 module.exports = exports['default'];
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27398,7 +27516,7 @@ var _index = __webpack_require__(19);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(64);
+var _index3 = __webpack_require__(66);
 
 var _index4 = _interopRequireDefault(_index3);
 
@@ -27488,7 +27606,7 @@ var ProfessorView = function (_React$Component) {
       var view = null;
       switch (state.viewState) {
         case 0:
-          view = _react2.default.createElement(_index2.default, { data: state.assignments });
+          view = _react2.default.createElement(_index2.default, { data: state.assignments, user_data: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout });
           break;
         case 1:
           view = _react2.default.createElement(_index4.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar });
@@ -27500,7 +27618,7 @@ var ProfessorView = function (_React$Component) {
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index6.default, { data: state.courses, user_data: this.props.user_name, addClass: this.addClass }),
+        _react2.default.createElement(_index6.default, { data: state.courses, user_data: this.props.user_name, session_key: this.props.session_key, addClass: this.addClass }),
         view
       );
     }
@@ -27512,7 +27630,7 @@ var ProfessorView = function (_React$Component) {
 exports.default = ProfessorView;
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27541,11 +27659,11 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _close = __webpack_require__(65);
+var _close = __webpack_require__(67);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _createCourse = __webpack_require__(66);
+var _createCourse = __webpack_require__(68);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27685,7 +27803,7 @@ var CreateClassView = function (_React$Component) {
 exports.default = CreateClassView;
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27723,7 +27841,7 @@ exports.default = FaClose;
 module.exports = exports['default'];
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

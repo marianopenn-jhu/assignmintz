@@ -6,7 +6,7 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/assignment/";
+const URL = PREFIX + "/backend/v1/professor/assignment/";
 
 export {getAssignment};
 
