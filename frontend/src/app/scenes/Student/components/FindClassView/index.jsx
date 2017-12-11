@@ -4,16 +4,9 @@ import FaClose from 'react-icons/lib/fa/close';
 
 const Panel = styled.div`
   overflow:hidden;
-  overflow-y:auto;
+  position:relative;
   height: 100%;
-  width: 80%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  padding-top:10px;
-  background:white;
+  width: 100%;
 `;
 
 const TopBarContainer = styled.div
@@ -23,9 +16,8 @@ const TopBarContainer = styled.div
   height:7%;
   width: 100%;
   left: inherit;
-  position:relative;
   padding-top:10px;
-  background:white;
+  background:grey;
 `;
 
 
