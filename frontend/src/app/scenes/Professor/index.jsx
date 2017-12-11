@@ -113,6 +113,31 @@ class ProfessorView extends React.Component {
 
   returnToCalendar() {
     this.setState({viewState:0});
+
+    if (this.props.user_name) {
+      // Retrieve courses
+      getCourses("professor=" + this.props.user_name).then((response) => {
+          if (response.status == true) {
+            var obj = response.body;
+            this.setState({courses: obj.objects});
+          } else {
+            console.log("Failed to retrieve courses!");
+          }
+        }
+      );
+
+      // Retrieve assignments
+      getAssignment("professor=" + this.props.user_name).then((response) => {
+          if (response.status == true) {
+            var obj = response.body;
+            this.setState({assignments: obj.objects});
+          } else {
+            console.log("Failed to retrieve assignments");
+          }
+        }
+      )
+    }
+
     this.forceUpdate();
   }
 
