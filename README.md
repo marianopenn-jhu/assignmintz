@@ -1,6 +1,6 @@
-![alt text][logo]
+![alt-text][logo]
 
-[logo]: https://github.com/jhu-oose/2017-group-11/assignmintz/assets/assignmintz.png "Logo"
+[logo]: https://github.com/jhu-oose/2017-group-11/blob/master/frontend/assets/assignmintz.png "Logo"
 
 ## Accessing the Application
 
