@@ -13,8 +13,8 @@ const Wrapper = styled.div`
 const TopBarContainer = styled.div
 `
   overflow-x: hidden;
-  min-height: 50px;
-  height:7%;
+  min-height: 70px;
+  height: 10%;
   width: 100%;
   left: inherit;
   position:fixed;
