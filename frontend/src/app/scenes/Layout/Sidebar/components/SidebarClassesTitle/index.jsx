@@ -99,13 +99,13 @@ class SidebarClassesTitle extends React.Component {
         }
 
         return (
-          <Container>
+          <Container onClick={this.onClick}>
             <LeftContainer>
               <Title>Classes</Title>
             </LeftContainer>
-            <RightContainer>
+            <RightContainer >
               {/*tooltip*/}
-              <PlusSpan onClick={this.onClick} onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover}><FaPlusCircle/></PlusSpan>
+              <PlusSpan onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover}><FaPlusCircle/></PlusSpan>
             </RightContainer>
           </Container>
         );
