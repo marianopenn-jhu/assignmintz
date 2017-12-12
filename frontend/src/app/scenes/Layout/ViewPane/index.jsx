@@ -9,6 +9,7 @@ position: relative;
 float: left;
 left: 25vw;
 width: 75vw;
+height: 100vh;
 `;
 
 class ViewPane extends React.Component {

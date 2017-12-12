@@ -4,12 +4,17 @@ import FaClose from 'react-icons/lib/fa/close';
 import FindClassElement from '../FindClassElement/index.jsx'
 import {getCourses} from '../../../../services/api/course/get-course.js';
 
+const PanelContainer = styled.div `
+  margin: 30px;
+`;
+
 const Panel = styled.div`
   overflow:hidden;
   position:relative;
   height: 100%;
   width: 100%;
 `;
+
 
 const TopBarContainer = styled.div
 `
@@ -24,11 +29,9 @@ const TopBarContainer = styled.div
 
 const ResultElementContainer = styled.div
 `
-  overflow-x: hidden;
+  overflow-x: auto;
   min-height: 70px;
-  height: 10%;
   width: 100%;
-  left: inherit;
   padding-top:10px;
   background:grey;
 `;
@@ -77,9 +80,7 @@ const Header2 = styled.h1`
 const ItemLabel = styled.div
 `
   display:block;
-  width:85%;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding: 20px 50px;
   text-align:center;
 `;
 
@@ -163,7 +164,7 @@ class FindClassView extends React.Component {
 
 
     return (
-      <div>
+      <PanelContainer>
         <Panel>
           <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
@@ -186,7 +187,8 @@ class FindClassView extends React.Component {
             </ItemLabel>
           </Container>
         </Panel>
-      </div>
+      </PanelContainer>
+
     )
   }
 }
