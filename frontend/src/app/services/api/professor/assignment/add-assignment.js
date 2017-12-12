@@ -6,23 +6,23 @@ if (process.env.host=='dev') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/student/assignment/";
+const URL = PREFIX + "/backend/v1/professor/assignment/";
 
-export {addEditAssignment};
+export {addAssignment};
 
-function addEditAssignment(student_id, priority, difficulty, assignment_id)
+function addAssignment(professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate)
 {
-  return fetch(URL + assignment_id + "/", {
+  return fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({student_id, priority, difficulty})
+    body: JSON.stringify({professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in addEditAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in addAssignment()");
     } else {
       return {status: true, result: response};
     }

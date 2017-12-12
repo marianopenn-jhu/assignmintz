@@ -6,31 +6,27 @@ if (process.env.host=='dev') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/course/";
+const URL = PREFIX + "/backend/v1/user/email/";
 
-export {getCourses};
+export {getUserEmail};
 
-/*
-  Return the courses given the particular filters
-*/
-function getCourses(filters)
+function getUserEmail(user_name)
 {
-  return (fetch(URL + "?" + filters, {
+  return fetch(URL, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+    },
+    body: JSON.stringify({user_name})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
+      throw new Error(response.status + ": " + response.statusText + " in getUserEmail()");
     } else {
-      return response.json();
+      return {status: true, result: response};
     }
-  })).then((json) => {
-    return {status: true, body: json};
   }).catch((error) => {
-    return {status: false, body: error};
+    return {status: false, result: error};
   });
 }

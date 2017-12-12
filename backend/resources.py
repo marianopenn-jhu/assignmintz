@@ -7,6 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation
+from backend.authorization import UserAuthorization, GeneralAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -54,7 +55,7 @@ class UserResource(ModelResource):
             filtering = {
                 'user_name': ALL,
                 'name': ALL,
-                'role':ALL
+                'role': ALL
             }
 
     def hydrate(self, bundle):
@@ -76,7 +77,7 @@ class CourseResource(ModelResource):
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL,
             'course_title': ALL
         }
@@ -126,7 +127,7 @@ class AssignmentResource(ModelResource):
         resource_name = 'professor/assignment'
         authorization = Authorization()
         allowed_methods = ['get', 'post', 'delete']
-        validation = AssignmentValidation();
+        validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
         filters = {
@@ -153,9 +154,9 @@ class SubTaskResource(ModelResource):
             validation = SubtaskValidation()
             excludes = ['description']
             filters = {
-                'subtask_id':ALL,
-                'subtask_name':ALL,
-                'assignment':ALL
+                'subtask_id': ALL,
+                'subtask_name': ALL,
+                'assignment': ALL
             }
 
     def dehydrate(self, bundle):
@@ -170,6 +171,6 @@ class OfficeHoursResource(ModelResource):
             authorization = Authorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
-                'professor_id':ALL,
-                'ta_name':ALL
+                'professor_id': ALL,
+                'ta_name': ALL
             }
