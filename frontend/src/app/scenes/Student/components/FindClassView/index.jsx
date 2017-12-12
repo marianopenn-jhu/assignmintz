@@ -171,7 +171,7 @@ class FindClassView extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <ItemLabel>
               <TextLabel>Course Number:</TextLabel>
-              <TextInput name={this.state.course_id} type="text" onChange={this.handleChange} />
+              <TextInput name={this.state.course_id} type="text" onChange={this.handleChange} disabled={true}/>
             </ItemLabel>
           </Form>
           </Container>
