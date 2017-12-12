@@ -5,7 +5,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx'
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //student can use gets from professor api
 const Container = styled.div`
 display:inline-block
@@ -27,7 +27,7 @@ class StudentView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("student=" + this.props.user_name).then((response) => {
+      getCourses("students=" + this.props.user_name).then((response) => {
         if (response.status == true) {
           var obj = response.body;
           this.setState({courses: obj.objects});

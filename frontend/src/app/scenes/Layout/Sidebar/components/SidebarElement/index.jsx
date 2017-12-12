@@ -51,6 +51,8 @@ const DropdownElement = styled.a`
 
   &:hover {
     background-color: #f1f1f1;
+    color:gray;
+    text-decoration:none;
   }
 `;
 
@@ -99,13 +101,24 @@ class SidebarElement extends React.Component {
     render() {
       const course_info = this.props.course;
 
+      var elements = [];
+      var dropdown_elements = (<div></div>);
+      if (this.props.dropdown_elements) {
+        elements = this.props.dropdown_elements;
+
+        dropdown_elements = (
+          elements.map(function(e, index){
+            return <DropdownElement onClick={() => e.onClick(course_info.course_title, course_info.course_id)} key={ index }>{e.name}</DropdownElement>;
+          })
+        );
+      }
+
       return (
           <Element>
             {course_info.course_title} ({course_info.course_id}) <ElipseSpan><FaEllipsis/></ElipseSpan>
 
             <Dropdown style={this.state.hidden ? styles.hidden : styles.none}>
-              <DropdownElement href="#">Edit</DropdownElement>
-              <DropdownElement href="#">Delete</DropdownElement>
+              {dropdown_elements}
             </Dropdown>
           </Element>
       );

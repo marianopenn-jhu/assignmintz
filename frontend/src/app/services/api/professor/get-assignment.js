@@ -8,26 +8,29 @@ if (process.env.host='dev') {
 
 const URL = PREFIX + "/backend/v1/professor/assignment/";
 
-export {updateAssignment};
+export {getAssignment};
 
-function updateAssignment(professor_id, updated_date, assignment_id)
+/*
+  Return the assignments given the particular filters
+*/
+function getAssignment(filters)
 {
-  return fetch(URL + assignment_id + "/", {
-    method: 'POST',
+  return (fetch(URL + "?" + filters, {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({professor_id, updated_date})
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
     } else {
-      return {status: true, result: response};
+      return response.json();
     }
+  })).then((json) => {
+    return {status: true, body: json};
   }).catch((error) => {
-    return {status: false, result: error};
+    return {status: false, body: error};
   });
-
 }

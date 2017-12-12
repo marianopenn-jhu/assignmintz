@@ -7,9 +7,11 @@ if (process.env.host='dev') {
   PREFIX = "mighty-mountain-99483.herokuapp.com";
 }
 
-const URL = PREFIX + "/backend/v1/user/logout/";
+const URL = PREFIX + "/backend/v1/logout/";
 
-function logoutUser(user_id, sesson_id)
+export{logoutUser};
+
+function logoutUser(user_name, session_key)
 {
   return fetch(URL, {
     method: 'POST',
@@ -17,13 +19,13 @@ function logoutUser(user_id, sesson_id)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, passwd_hash})
+    body: JSON.stringify({user_name, session_key})
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
       throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
     } else {
-      return {status: true, result: response};
+      return {status: true, result: "Empty"};
     }
   }).catch((error) => {
     return {status: false, result: error};

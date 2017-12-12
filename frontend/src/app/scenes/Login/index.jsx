@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LoginForm from './components/Form/index.jsx';
-import BackArrow from './assets/backarrow.png';
+import FaBackArrow from 'react-icons/lib/fa/arrow-circle-o-left';
 
 const LoginWrapper = styled.div`
   position: absolute;
@@ -58,6 +58,16 @@ const UserCreatedMessage = styled.p`
   }
 `;
 
+const BackArrowContainer = styled.span`
+  font-size:50px;
+  color:#3f9949;
+
+  &:hover {
+    color:#69FF7A;
+    cursor:pointer;
+  }
+`;
+
 class AccountChooser extends React.Component {
   constructor(props) {
     super(props);
@@ -73,6 +83,7 @@ class AccountChooser extends React.Component {
     this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
     this.onSignInSuccess = this.onSignInSuccess.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.backClick = this.backClick.bind(this);
   }
 
   onClick(e) {
@@ -98,6 +109,11 @@ class AccountChooser extends React.Component {
     this.setState({['email']: '<NOT FOUND>'});
   }
 
+  backClick() {
+    this.setState({['currentState']: 'accountChooser'});
+    this.setState({['selectedRole']: e.target.name});
+  }
+
   render () {
     let current = null;
 
@@ -112,7 +128,10 @@ class AccountChooser extends React.Component {
         break;
       case 'loginScreen':
         current = (
-          <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
+          <div>
+            <BackArrowContainer onClick={this.backClick}><FaBackArrow/></BackArrowContainer>
+            <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
+          </div>
         );
         break;
       case 'createdUser':

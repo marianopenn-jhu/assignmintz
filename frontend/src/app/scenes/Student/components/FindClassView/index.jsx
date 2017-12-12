@@ -97,9 +97,7 @@ class FindClassView extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      course_id:'',
-      course_title:'',
-      description:''
+      course_id:''
     }
   }
 
@@ -108,8 +106,16 @@ class FindClassView extends React.Component {
   }
 
   handleSubmit(event) {
-    const {course_id, course_title, description} = this.state;
+    const {course_id} = this.state;
 
+    getCourses(course_id).then((response) => {
+      if (response.status) {
+        {this.props.onClose};
+      }
+      else {
+        alert(response.body);
+      }
+    });
   }
 
   render() {
