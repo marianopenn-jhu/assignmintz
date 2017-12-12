@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
+import FindClassElement from '../FindClassElement/index.jsx'
+import {getCourses} from '../../../../services/api/course/get-course.js';
 
 const Panel = styled.div`
   overflow:hidden;
@@ -12,8 +14,19 @@ const Panel = styled.div`
 const TopBarContainer = styled.div
 `
   overflow-x: hidden;
-  min-height: 50px;
-  height:7%;
+  min-height: 70px;
+  height: 10%;
+  width: 100%;
+  left: inherit;
+  padding-top:10px;
+  background:grey;
+`;
+
+const ResultElementContainer = styled.div
+`
+  overflow-x: hidden;
+  min-height: 70px;
+  height: 10%;
   width: 100%;
   left: inherit;
   padding-top:10px;
@@ -24,8 +37,7 @@ const Container = styled.div`
   overflow:hidden;
   overflow-y:auto;
   height: 100%;
-  width: 80%;
-  position: absolute;
+  width: 100%;
   right: 0;
   top: 0;
   margin: 0;
@@ -33,6 +45,7 @@ const Container = styled.div`
   padding-top:10px;
   background:white;
 `;
+
 
 const XOut = styled.span`
   font-size:40px;
@@ -52,6 +65,12 @@ const Form = styled.form`
 const Header = styled.h1`
   font-family:Avenir;
   font-size:30px;
+  padding-left:50px;
+`;
+
+const Header2 = styled.h1`
+  font-family:Avenir;
+  font-size:  25px;
   padding-left:50px;
 `;
 
@@ -97,45 +116,77 @@ class FindClassView extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      course_id:''
+      course_id:'',
+      courses:''
     }
   }
 
   handleChange(e) {
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({course_id: e.target.value});
   }
 
   handleSubmit(event) {
-    const {course_id} = this.state;
+    const {course_id} = this.state.course_id;
 
-    getCourses(course_id).then((response) => {
-      if (response.status) {
-        {this.props.onClose};
-      }
-      else {
-        alert(response.body);
+    // getCourses(course_id).then((response) => {
+    //   if (response.status) {
+    //     {this.props.onClose};
+    //   }
+    //   else {
+    //     alert(response.body);
+    //   }
+    // });
+  }
+
+  if(course_id){
+    getCourses(this.state.course_id).then((response) => {
+      if(response.status == true){
+        var obj = response.body;
+        this.setState({courses: obj.objects});
+      } else {
+        console.log("Failed to retrieve courses!");
       }
     });
   }
 
   render() {
+    let classes = (
+      <div>N/A</div>
+    );
+    if (this.state.course_id != null) {
+      classes = this.props.data.map((e, i) => {
+        return (
+          <FindClassElement key={i} course={e}/>
+        )
+      });
+    };
+
+
     return (
+      <div>
         <Panel>
           <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
-          <Header>Create a Class</Header>
+          <Header>Add a Class</Header>
           <Form onSubmit={this.handleSubmit}>
             <ItemLabel>
-              <TextLabel>Course Title:</TextLabel>
-              <TextInput name="course_title" type="text" onChange={this.handleChange} />
-            </ItemLabel>
-            <ItemLabel>
               <TextLabel>Course Number:</TextLabel>
-              <TextInput name="course_id" type="text" onChange={this.handleChange} />
+              <TextInput name={this.state.course_id} type="text" onChange={this.handleChange} />
             </ItemLabel>
           </Form>
           </Container>
         </Panel>
+        <Panel>
+          <Container>
+            <Header2>Results</Header2>
+            <ItemLabel>
+            <ResultElementContainer>
+              {classes}
+            </ResultElementContainer>
+            </ItemLabel>
+          </Container>
+        </Panel>
+      </div>
     )
   }
 }
