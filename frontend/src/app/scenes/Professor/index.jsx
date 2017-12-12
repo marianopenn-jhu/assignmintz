@@ -159,7 +159,8 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role}/>
         );
         break;
       case 2:

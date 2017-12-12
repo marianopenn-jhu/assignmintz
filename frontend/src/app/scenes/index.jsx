@@ -75,7 +75,8 @@ class App extends React.Component {
     this.state = {
       user_state:0, // 0 = Login, 1 = Student, 2 = Professor
       current_user:"",
-      session_key:null
+      session_key:null,
+      role:""
     };
   }
 
@@ -84,13 +85,15 @@ class App extends React.Component {
         this.setState({
           'user_state': 1,
           'current_user': user_name,
-          'session_key': answer.session_key
+          'session_key': answer.session_key,
+          'role': role
         })
     }  else if (role == "professor") {
       this.setState({
         'user_state': 2,
         'current_user': user_name,
-        'session_key': answer.session_key
+        'session_key': answer.session_key,
+        'role': role
       })
     }
   }
@@ -99,7 +102,8 @@ class App extends React.Component {
     this.setState({
       'user_state': 0,
       'current_user': '',
-      'session_key': ''
+      'session_key': '',
+      'role': ''
     });
     this.forceUpdate();
   }
@@ -129,7 +133,7 @@ class App extends React.Component {
         if (this.state.session_key != null)
         {
           current = (
-            <StudentView user_name={this.state.current_user} session_key={this.state.session_key} onLogout={this.onLogout}/>
+            <StudentView user_name={this.state.current_user} session_key={this.state.session_key} onLogout={this.onLogout} role={this.state.role}/>
           );
         }
         else {
@@ -142,7 +146,7 @@ class App extends React.Component {
         if (this.state.session_key != null)
         {
           current = (
-            <ProfessorView user_name={this.state.current_user} session_key={this.state.session_key} onLogout={this.onLogout}/>
+            <ProfessorView user_name={this.state.current_user} session_key={this.state.session_key} onLogout={this.onLogout} role={this.state.role}/>
           );
         }
         else {
