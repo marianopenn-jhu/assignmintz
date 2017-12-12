@@ -10,7 +10,7 @@ This is the backend specification for the Assignmintz application.
             "user_name": "ronnie1",
             "name": "testname",
             "email": "testemail@test.com",
-            "passwd_hash": "passhash",
+            "passwd": "passhash",
             "role": "student"
         }
 
@@ -18,14 +18,8 @@ This is the backend specification for the Assignmintz application.
 
 + Response 400 (application/json)
 
-        { 
+        {
             "Bad request format or missing parameters."
-        }
-
-+ Response 409 (application/json)
-    
-        { 
-            "User already exists." 
         }
 
 ### Login a User [POST] /api/v1/user/login
@@ -34,25 +28,26 @@ This is the backend specification for the Assignmintz application.
 
         {
             "user_name": "ronnie1",
-            "passwd_hash": "passhash"
+            "passwd": "passhash"
         }
 
-+ Response 200 (application/json)
-    
-        { 
-            "session_id": session_id 
++ Response 201 (application/json)
+
+        {
+            "session_id": session_id,
+            "user_name": user_name
         }
 
 + Response 404 (application/json)
-    
-        { 
-            "User does not exist." 
+
+        {
+            "User does not exist."
         }
 
 + Response 400 (application/json)
 
-        { 
-            "Bad request format, check JSON" 
+        {
+            "Bad request format, check JSON"
         }
 
 ### Logout a User [POST] /api/v1/user/logout
@@ -64,81 +59,63 @@ This is the backend specification for the Assignmintz application.
             "session_id":session_id
         }
 
-+ Response 200 (application/json)
-    
-        { 
-            "session_id": session_id
-        }
++ Response 201 (application/json)
 
 + Response 404 (application/json)
-        { 
-            "User does not exist or session is expired." 
+        {
+            "User does not exist or session is expired."
         }
 
 + Response 400 (application/json)
-        { 
-            "Bad request format, check JSON." 
+    {
+        "logout": {
+            "invalid_user_and_key": "Invalid username or session key"
         }
+    }
 
-### Get user email [GET] /api/v1/user/email
+
+### Add a course [POST] /api/v1/course/
 
 + Request (application/json)
 
-        { "user_name": "ronnie" }
+    {   
+        "session_key": "231c5279b2804736aa32255462449c2a",
+        "user_name": "dumbledore",
+        "course_id": "601.461",
+        "course_title": "Stuff 101",
+        "visible": "True",
+        "description": "Stuff is cool.",
+        "professor": "/backend/v1/user/dumbledore/",
+        "students": []
+    }
 
-+ Response 200 (application/json)
-
-        { "email": "testemail@test.com" }
++ Response 201 (application/json)
 
 + Response 400 (application/json)
+        "course": {
+                "dup_course_id": "Course id already exists"
+        }
 
-+ Response 404 (application/json)
-
-        { "Could not find email for given user name" }
-
-
-### Add a class [POST] /api/v1/class/
-
-+ Request (application/json)
+        "course": {
+            "invalid_user_or_session": "Invalid username or session key"
+        }
 
         {
-            "user_name":"ronnie",
-            "class_id": "xxx-xxx-xxx"
+            "error": "The 'professor' field has no data and doesn't allow a default or null value."
         }
-
-+ Response 200 (application/json)
-
-        { "Class class_id added for user user_name" }
-
-+ Response 400 (application/json)
-
-        { "Invalid request Parameters, make sure the class ID is correct" }
-
-+ Response 404 (application/json)
-
-        { "Could not find a user with the given user name" }
-
-
-### Remove a class [DELETE] /api/v1/class/
-
-+ Request (application/json)
 
         {
-            "user_name":"ronnie",
-            "class_id": "xxx-xxx-xxx"
+            "error": "The 'students' field has no data and doesn't allow a null value."
         }
 
-+ Response 200 (application/json)
 
-        { "Class class_id removed for user user_name" }
+### Remove a class [DELETE] /api/v1/class/course_id/
 
-+ Response 400 (application/json)
-
-        { "Invalid request Parameters, make sure the class ID is correct" }
++ Response 204 (application/json)
 
 + Response 404 (application/json)
 
-        { "Could not find a user with the given user name" }
+        { "Could not find a course with the given course ID" }
 
 
 ## Add Assignment [POST] /api/v1/professor/assignment
@@ -146,18 +123,24 @@ This is the backend specification for the Assignmintz application.
 + Request (application/json)
 
         {
-            "professor_id": prof_id,
-            "assignment_name": "hw1",
-            "type": "assignmentType",
-            "description":"desc",
-            "expectedDifficulty": difficultyScore,
-            "expectedTime": expTime,
-            "dueDate": "dateTime"
+            "assignment_id": "2",
+            "session_key": "67743fdae6c44735a12aa9fdc8f22c66",
+            "user_name": "prof_name"
+            "assignment_name": "Assignment 1",
+            "assignment_type": "hw",
+            "course":  "/backend/v1/course/601.452/",
+            "due_date": "2013-01-29T12:34:56.000000Z",
+            "expected_difficulty": "3",
+            "actual_difficulty": "4",
+            "expected_time": "3.4",
+            "actual_time": "5.4",
+            "priority": "5",
+            "percent_complete": "33.3",
+            "visible": "True",
+            "description": "Typing"
         }
 
-+ Response 200 (application/json)
-
-        { "assignment_id": id }
++ Response 201 (application/json)
 
 + Response 404 (application/json)
 
@@ -165,33 +148,29 @@ This is the backend specification for the Assignmintz application.
 
 + Response 400 (application/json)
 
-        { "Missing or incorrect request parameters." }
-
-## Remove Assignment [DELETE] /api/v1/professor/assignment/
-
-+ Request (application/json)
-
         {
-            "professor_id": prof_id,
-            "assignment_id":assignment_id
+            "professor/assignment":
+            {
+                "invalid_user_and_key": "Invalid username or session key"
+            }
         }
 
-+ Response 200 (application/json)
+        {
+            "error": "Datetime provided to 'due_date' field doesn't appear to be a valid datetime string: '2013-01-29T12:34:56000000Z'"
+        }
+
+
+## Remove Assignment [DELETE] /api/v1/professor/assignment/assignment_id/
+
++ Response 204 (application/json)
 
         { "Assignment deleted." }
 
-+ Response 404 (application/json)
-
-        { "Could not find a professor with the given ID." }
-
-+ Response 404 (application/json)
-
-        { "Could not find an assignment with the given ID." }
-
 + Response 400 (application/json)
 
-        { "Missing or incorrect request parameters." }
+        Errors will be the usual bas requests documented previously.
 
+## Below not yet implemented.
 
 ## Update Assignment Due Date / Exam Time [POST] /api/v1/professor/assignment/{assignment_id}/
 
