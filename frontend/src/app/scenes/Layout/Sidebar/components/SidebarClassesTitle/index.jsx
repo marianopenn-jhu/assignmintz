@@ -5,11 +5,20 @@ import FaPlusCircle from 'react-icons/lib/fa/plus-square-o';
 const Container = styled.li`
   width:100%;
   list-style:none;
-  color:#5d2349;
-  padding:0px 30px 0px 30px;
-  margin:0;
-  font-family:'Avenir Next';
-  font-size:16px;
+  background: #686868;
+  color: #BEE6CC;
+  padding: 0;
+  padding-bottom:10px;
+  padding-top:10px;
+  font-family:Avenir;
+  font-size:15px;
+
+  &:hover {
+    cursor: pointer;
+    background: #484848;
+    color: rgb(177, 217, 231);
+  }
+
 
   -webkit-touch-callout: none; /* iOS Safari */
    -webkit-user-select: none; /* Safari */
@@ -22,17 +31,14 @@ const Container = styled.li`
 
 const LeftContainer = styled.div`
   width:50%;
+  left: 25%;
   display:inline-block;
-  text-align:left;
+  text-align:center;
   font-size:18px;
-
-  &:hover {
-    color:black;
-  }
 `;
 
 const RightContainer = styled.div`
-  width:50%;
+  width:25%;
   display:inline-block;
   text-align:right;
 `;
@@ -41,14 +47,9 @@ const Title = styled.span`
 `;
 
 const PlusSpan = styled.span`
-  padding: 10px 10px 10px 10px;
+  padding: 10px 0px 10px 10px;
   margin:0;
   font-size:20px;
-
-  &:hover {
-    color:black;
-    cursor:pointer;
-  }
 `;
 
 const Tooltip = styled.div`
@@ -98,13 +99,13 @@ class SidebarClassesTitle extends React.Component {
         }
 
         return (
-          <Container>
+          <Container onClick={this.onClick}>
             <LeftContainer>
               <Title>Classes</Title>
             </LeftContainer>
-            <RightContainer>
+            <RightContainer >
               {/*tooltip*/}
-              <PlusSpan onClick={this.onClick} onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover}><FaPlusCircle/></PlusSpan>
+              <PlusSpan onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover}><FaPlusCircle/></PlusSpan>
             </RightContainer>
           </Container>
         );
