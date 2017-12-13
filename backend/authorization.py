@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class UserAuthorization(Authorization):
     def read_list(self, object_list, bundle):
+        print('in User read list')
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
             session_key = bundle.request.GET["key"]
@@ -16,14 +17,7 @@ class UserAuthorization(Authorization):
         return object_list.filter(user_name=user)
 
     def read_detail(self, object_list, bundle):
-        # Is the requested object owned by the user?
-        try:
-            session_key = bundle.request.GET["key"]
-            user_name = bundle.request.GET["user"]
-            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-        except (KeyError, ObjectDoesNotExist):
-            raise Unauthorized("Need valid session key and username")
-        return bundle.obj.user_name == bundle.request.user_name
+        return True
 
     def create_list(self, object_list, bundle):
         # Assuming they're auto-assigned to ``user``.
@@ -49,22 +43,21 @@ class UserAuthorization(Authorization):
 class GeneralAuthorization(Authorization):
     def read_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
+        print('in GA read list')
         try:
             session_key = bundle.request.GET["key"]
             user = bundle.request.GET["user"]
             LogIn.objects.all().get(user_name=user, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
-        return object_list.filter(user_name=user)
+        if 'Course'==str(bundle.obj).split(' ')[0]:
+            return object_list.filter(professor=user)
+        elif 'SubTask'==str(bundle.obj).split(' ')[0]:
+            return object_list
+        else:
+            return object_list.filter(user_name=user)
 
     def read_detail(self, object_list, bundle):
-        # Is the requested object owned by the user?
-        try:
-            session_key = bundle.request.GET["key"]
-            user_name = bundle.request.GET["user"]
-            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-        except (KeyError, ObjectDoesNotExist):
-            raise Unauthorized("Need valid session key and username")
         return True
 
     def create_list(self, object_list, bundle):

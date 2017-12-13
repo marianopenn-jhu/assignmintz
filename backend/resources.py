@@ -81,6 +81,9 @@ class CourseResource(ModelResource):
             'students': ALL,
             'course_title': ALL
         }
+    def hydrate(self, bundle):
+        bundle.data['session_key'] = bundle.data['session_key']
+        return bundle
 
 
 class AddStudentToCourseResource(ModelResource):
@@ -154,7 +157,7 @@ class SubTaskResource(ModelResource):
             validation = SubtaskValidation()
             excludes = ['description']
             filters = {
-                'subtask_id': ALL,
+                'subtask': ALL,
                 'subtask_name': ALL,
                 'assignment': ALL
             }
