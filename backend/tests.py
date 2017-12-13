@@ -9,43 +9,86 @@ from django.db.utils import IntegrityError
 class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
+        self.student_user = {
+            'user_name': 'harrypotter',
+            'name': 'harry',
+            'email': 'harrypotter@jhu.edu',
+            'passwd': '1234',
+            'role': 'student'
+        }
+        self.professor_user = {
+            "user_name": "dumbledore",
+            "name": "Albus",
+            "email": "albusdumbledore@jhu.edu",
+            "passwd": "chocolate_frogs",
+            "role": "professor"
+        }
+        self.login_prof = {
+            "passwd": "chocolate_frogs",
+            "user_name": "dumbledore"
+        }
+        self.logout_prof = {
+            "user_name": "mcgonagall",
+            "session_key": "12344321"
+        }
+        self.oose_course = {
+            "course_id": "601.421",
+            "course_title": "OOSE",
+            "visible": "True",
+            "description": "A series of project iterations.",
+            "professor": "/backend/v1/user/dumbledore/",
+            "students": ["/backend/v1/user/harrypotter/"]
+        }
+        self.oose_assignment_1 = {
+            "assignment_id": "3",
+            "assignment_name": "Iteration 3",
+            "assignment_type": "hw",
+            "course": "/backend/v1/course/601.421/",
+            "due_date": "11/17/17",
+            "due_time": "11:59 PM",
+            "expected_difficulty": "3",
+            "actual_difficulty": "4",
+            "expected_time": "3.4",
+            "actual_time": "5.4",
+            "priority": "5",
+            "percent_complete": "85.3",
+            "visible": "True",
+            "description": "Complete the iteration before time runs out"
+        }
+        self.oose_subtask_1 = {
+            "subtask_id": "testing",
+            "subtask_name": "Implement Testing",
+            "visible": "True",
+            "description": "Implement extensive testing",
+            "assignment": "/backend/v1/professor/assignment/1/"
+        }
+        self.user_url = '/backend/v1/user/'
+        self.course_url = '/backend/v1/course/'
+        self.assignment_url = '/backend/v1/professor/assignment/'
+        self.subtask_url = '/backend/v1/subtask/'
+        self.login_url = '/backend/v1/login/'
 
     # PUT method is not allowed for User resource
     def test_bad_method(self):
-        self.user_url = '/backend/v1/user/'
-        self.student_user = {
-            'user_name': 'user_name',
-            'name': 'name',
-            'email': 'email@jhu.edu',
-            'role': 'professor',
-            'passwd': 'passwd'
-        }
         self.assertHttpMethodNotAllowed(self.api_client.put(self.user_url, format='json', data=self.student_user))
         print('Method not allowed test passed')
 
     def test_valid_user_post(self):
-        user = User.objects.create(user_name='mmcgonagall', name='minerva', email='mmcg@jhu.edu',
-                                   passwd='chocolate_frogs', role='professor')
-        user.save()
-        print(user.user_name)
-        self.assertEqual(user.user_name, 'mmcgonagall')
-        self.assertEqual(user.name, 'minerva')
-        self.assertEqual(user.email, 'mmcg@jhu.edu')
-        self.assertEqual(user.passwd, 'chocolate_frogs')
-        self.assertEqual(user.role, 'professor')
+        resp1 = self.api_client.post(self.user_url, format='json', data=self.student_user)
+        self.assertHttpCreated(resp1)
+
         print('Valid post test passed')
 
     def test_valid_login_post(self):
-        login = LogIn.objects.create(user_name='mcgonagall', session_key='1234432156788765')
-        login.save()
-        self.assertEqual(login.user_name, 'mcgonagall')
-        self.assertEqual(login.session_key, '1234432156788765')
+        resp1 = self.api_client.post(self.login_url, format='json', data=self.login_prof)
+        self.assertHttpCreated(resp1)
         print('Valid post test passed')
 
     def test_valid_logout_post(self):
-        logout = LogOut.objects.create(user_name='mcgonagall')
-        logout.save()
-        self.assertEqual(logout.user_name, 'mcgonagall')
+        login = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
+        login.save()
+        resp1 = self.api_client.post(self.logout_url, format='json', data=self.logout_prof)
+        self.assertHttpCreated(resp1)
         print('Valid post test passed')
 
     def test_valid_course_post(self):
