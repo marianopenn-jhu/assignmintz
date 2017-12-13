@@ -25,6 +25,7 @@ class User(models.Model):
     email = models.EmailField(max_length=256, default='')
     passwd = models.CharField(max_length=256, default='')
     role = models.CharField(max_length=10, default='')
+    session_key = models.CharField(max_length=36, default='')
 
     def __unicode__(self):
         return self.user_name
@@ -38,6 +39,7 @@ class Course(models.Model):
     course_title = models.CharField(max_length=36, default='', null=False)
     visible = models.BooleanField(default=True)
     description = models.TextField()
+    session_key = models.CharField(max_length=36, default='')
 
     def __unicode__(self):
         return self.course_title
@@ -57,6 +59,7 @@ class Assignment(models.Model):
     percent_complete = models.FloatField(default=0.0)
     visible = models.BooleanField(default=True)
     description = models.TextField(default='')
+    session_key = models.CharField(max_length=36, default='')
 
     def __unicode__(self):
         return self.assignment_name
@@ -68,14 +71,17 @@ class SubTask(models.Model):
     visible = models.BooleanField(default=True)
     description = models.TextField(default='')
     assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
+    session_key = models.CharField(max_length=36, default='')
 
 
 class OfficeHours(models.Model):
     professor_id = models.CharField(max_length=36, primary_key=True)
     ta_name = models.CharField(max_length=36)
     office_hours = models.ForeignKey('OfficeHours')
+    session_key = models.CharField(max_length=36, default='')
 
 
 class OfficeHour(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False)
     time = models.TimeField(auto_now=False, auto_now_add=False)
+    session_key = models.CharField(max_length=36, default='')

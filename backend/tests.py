@@ -1,199 +1,114 @@
 from django.test import TestCase
 from tastypie.test import ResourceTestCaseMixin
+from backend.models import User, LogIn, LogOut, Course, Assignment, SubTask
+import unittest
+from django.db.utils import IntegrityError
 
 
 # Create your tests here.
 class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
-        self.student_user = {
-            'user_name': 'harrypotter',
-            'name': 'harry',
-            'email': 'harrypotter@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-        self.professor_user = {
-            "user_name": "dumbledore",
-            "name": "Albus",
-            "email": "albusdumbledore@jhu.edu",
-            "passwd": "chocolate_frogs",
-            "role": "professor"
-        }
-        self.login_prof = {
-            "passwd": "chocolate_frogs",
-            "user_name": "dumbledore"
-        }
-        self.oose_course = {
-            "course_id": "601.421",
-            "course_title": "OOSE",
-            "visible": "True",
-            "description": "A series of project iterations.",
-            "professor": "/backend/v1/user/dumbledore/",
-            "students": ["/backend/v1/user/harrypotter/"]
-        }
-        self.oose_assignment_1 = {
-            "assignment_id": "3",
-            "assignment_name": "Iteration 3",
-            "assignment_type": "hw",
-            "course":  "/backend/v1/course/601.421/",
-            "due_date": "11/17/17",
-            "due_time": "11:59 PM",
-            "expected_difficulty": "3",
-            "actual_difficulty": "4",
-            "expected_time": "3.4",
-            "actual_time": "5.4",
-            "priority": "5",
-            "percent_complete": "85.3",
-            "visible": "True",
-            "description": "Complete the iteration before time runs out"
-        }
-        self.oose_subtask_1 = {
-            "subtask_id": "testing",
-            "subtask_name": "Implement Testing",
-            "visible": "True",
-            "description": "Implement extensive testing",
-            "assignment": "/backend/v1/professor/assignment/1/"
-        }
-        self.user_url = '/backend/v1/user/'
-        self.course_url = '/backend/v1/course/'
-        self.assignment_url = '/backend/v1/professor/assignment/'
-        self.subtask_url = '/backend/v1/subtask/'
-        self.login_url = '/backend/v1/login/'
 
     # PUT method is not allowed for User resource
     def test_bad_method(self):
+        self.user_url = '/backend/v1/user/'
+        self.student_user = {
+            'user_name': 'user_name',
+            'name': 'name',
+            'email': 'email@jhu.edu',
+            'role': 'professor',
+            'passwd': 'passwd'
+        }
         self.assertHttpMethodNotAllowed(self.api_client.put(self.user_url, format='json', data=self.student_user))
         print('Method not allowed test passed')
 
-    def test_valid_post(self):
-        resp1 = self.api_client.post(self.user_url, format='json', data=self.student_user)
-        self.assertHttpCreated(resp1)
-        resp2 = self.api_client.post(self.user_url, format='json', data=self.professor_user)
-        self.assertHttpCreated(resp2)
-        # resp_log = self.api_client.post(self.login_url, format='json', data=self.login_prof)
-        # self.assertHttpCreated(resp_log)
-        # resp3 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
-        # self.assertHttpCreated(resp3)
-        # resp4 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1)
-        # self.assertHttpCreated(resp4)
-        # resp5 = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
-        # self.assertHttpCreated(resp5)
+    def test_valid_user_post(self):
+        user = User.objects.create(user_name='mmcgonagall', name='minerva', email='mmcg@jhu.edu',
+                                   passwd='chocolate_frogs', role='professor')
+        user.save()
+        print(user.user_name)
+        self.assertEqual(user.user_name, 'mmcgonagall')
+        self.assertEqual(user.name, 'minerva')
+        self.assertEqual(user.email, 'mmcg@jhu.edu')
+        self.assertEqual(user.passwd, 'chocolate_frogs')
+        self.assertEqual(user.role, 'professor')
         print('Valid post test passed')
 
+    def test_valid_login_post(self):
+        login = LogIn.objects.create(user_name='mcgonagall', session_key='1234432156788765')
+        login.save()
+        self.assertEqual(login.user_name, 'mcgonagall')
+        self.assertEqual(login.session_key, '1234432156788765')
+        print('Valid post test passed')
+
+    def test_valid_logout_post(self):
+        logout = LogOut.objects.create(user_name='mcgonagall')
+        logout.save()
+        self.assertEqual(logout.user_name, 'mcgonagall')
+        print('Valid post test passed')
+
+    def test_valid_course_post(self):
+        student = User.objects.create(user_name='rweasely', name='Ron', email='rweasely@jhu.edu', passwd='pottermore',
+                                      role='student')
+        student.save()
+        professor = User.objects.create(user_name='rhagrid', name='Rubeus', email='rhagrid@jhu.edu', passwd='fang',
+                                        role='professor')
+        professor.save()
+        course = Course.objects.create(course_id='601.421', course_title='Defense Against the Dark Arts',
+                              description='Protect yourself against dark forces', students=[student],
+                              professor=professor)
+        course.save()
+        self.assertEqual(course.course_id, '601.421')
+
     def test_invalid_email(self):
-        # not @jhu.edu
-        self.invalid_user_post_data = {
-            'user_name': 'harrypotter',
-            'name': 'harry',
-            'email': 'harrypotter@gmail.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        # JHED instead of email
-        self.invalid_user_post_data_2 = {
-            'user_name': 'harrypotter1',
-            'name': 'harry',
-            'email': 'harrypotter1',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        # duplicate email
-        self.invalid_user_post_data_3 = {
-            'user_name': 'harrypotter1',
-            'name': 'harry',
-            'email': 'harrypotter@jhu.edu',
-            'passwd': '1234',
-            'role': 'student'
-        }
-
-        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
-        self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpBadRequest(resp2)
-        resp3 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpBadRequest(resp3)
+        # not jhu email
+        # user = User.objects.create(user_name='mc', email='mcg@gmail.com', passwd='fdfd', name='mfdfd', role='professor')
+        # user.save()
+        # dup email
+        user = User.objects.create(user_name='mc', email='mcg@jhu.com', passwd='fdfd', name='mfdfd', role='professor')
+        user.save()
+        user2 = User.objects.create(user_name='mcg', email='mcg@jhu.com', passwd='fdfd', name='mfdfd', role='professor')
+        print(user2.validation)
+        # empty email
         print('Invalid email test passed')
 
     def test_invalid_role(self):
         # role is teacher
-        self.invalid_user_post_data = {
-            'user_name': 'harrypotter',
-            'name': 'harry',
-            'email': 'test@gmail.edu',
-            'passwd': '1234',
-            'role': 'teacher'
-        }
-
+        with self.assertRaises(IntegrityError):
+            User.objects.create(user_name='mc', email='mcmc@jhu.com', passwd='fdfd', name='mfdfd', role='teacher')
         # role is students
-        self.invalid_user_post_data_2 = {
-            'user_name': 'harrypotter1',
-            'name': 'harry',
-            'email': 'test1@jhu.edu',
-            'passwd': '1234',
-            'role': 'students'
-        }
-
-        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
-        self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpBadRequest(resp2)
+        with self.assertRaises(IntegrityError):
+            User.objects.create(user_name='mc', email='mcmc@jhu.com', passwd='fdfd', name='mfdfd', role='students')
+        # capitalization doesn't matter
+        user = User.objects.create(user_name='mc', email='mcmc@jhu.com', passwd='fdfd', name='mfdfd', role='pROFessor')
+        self.assertEqual(user, user)
         print('Invalid role tests passed')
 
     def test_empty_field(self):
         # forgot name
-        self.invalid_user_post_data = {
-            'user_name': 'harrypotter',
-            'name': '',
-            'email': 'harrypotter@jhu.edu',
-            'passwd': '1234',
-            'role': 'teacher'
-        }
-
+        with self.assertRaises(IntegrityError):
+            User.objects.create(user_name='mcgo', email='mcgo@jhu.com', passwd='fdfd', role='professor')
         # forgot user_name and passwd
-        self.invalid_user_post_data_2 = {
-            'user_name': '',
-            'name': 'harry',
-            'email': 'harrypotter1@jhu.edu',
-            'passwd': '',
-            'role': 'student'
-        }
-
-        resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
-        self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
-        self.assertHttpBadRequest(resp2)
+        with self.assertRaises(IntegrityError):
+            User.objects.create(name='name', email='mcgo@jhu.com', role='professor')
         print('Empty field test passed')
 
     def test_invalid_course_user_combo(self):
-        # professor does not exist
-        self.oose_invalid_prof_course = {
-            "course_id": "601.421",
-            "course_title": "OOSE",
-            "visible": "True",
-            "description": "A series of project iterations.",
-            "professor": "/backend/v1/user/harrypotter/",
-            "student": "/backend/v1/user/dumbledor/"
-        }
+        student = User.objects.create(user_name='hpotter', name='Harry', email='hpotter@jhu.edu', passwd='pottermore',
+                                      role='student')
+        student.save()
+        professor = User.objects.create(user_name='rlupin', name='Remus', email='rlupin@jhu.edu', passwd='howl@themoon',
+                                        role='professor')
+        professor.save()
+        self.assertEqual(student.user_name, 'hpotter')
+        # with self.assertRaises(IntegrityError):
+            # Course.objects.create(course_id='601.421', course_title='Defense Against the Dark Arts',
+            #                      description='Protect yourself against dark forces', students=['/backend/v1/user/hpot'],
+            #                      professor=professor)
 
-        # student does not exist
-        self.oose_invalid_student_course = {
-            "course_id": "601.421",
-            "course_title": "OOSE",
-            "visible": "True",
-            "description": "A series of project iterations.",
-            "professor": "/backend/v1/user/harrypotte/",
-            "student": "/backend/v1/user/dumbledore/"
-        }
-
-        resp1 = self.api_client.post(self.course_url, format='json', data=self.oose_invalid_prof_course)
-        self.assertHttpBadRequest(resp1)
-        resp2 = self.api_client.post(self.course_url, format='json', data=self.oose_invalid_student_course)
-        self.assertHttpBadRequest(resp2)
         print('Invalid course student combo passed')
-
+'''
     def test_empty_course_field(self):
         # empty title and professor
         self.oose_empty_prof_and_title_course = {
@@ -349,4 +264,4 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
 
     def test_dup_subtask(self):
         resp = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
-        self.assertHttpBadRequest(resp)
+        self.assertHttpBadRequest(resp) '''
