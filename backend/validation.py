@@ -4,7 +4,6 @@ import hashlib
 from backend.models import User, LogIn, SubTask, Assignment, Course
 from django.core.exceptions import ObjectDoesNotExist
 
-
 def valid_session_key(session_key, user_name):
     queryset = LogIn.objects.all()
     try:
@@ -53,7 +52,6 @@ class LogOutValidation(Validation):
 class UserValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
-
         # ensure username is unique
         query_name = str(bundle.data.get('user_name'))
         try:
@@ -90,7 +88,7 @@ class CourseValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        user_name = str(bundle.data.get('user_name'))
+        user_name = str(bundle.data.get('professor').split('/')[4])
         session_key = str(bundle.data.get('session_key'))
         if valid_session_key(session_key, user_name):
             # ensure course id is unique

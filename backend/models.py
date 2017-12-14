@@ -33,7 +33,6 @@ class User(models.Model):
 class Course(models.Model):
     course_id = models.CharField(max_length=36, primary_key=True)
     professor = models.ForeignKey(User, related_name='professor', null=False, default='', on_delete=models.CASCADE)
-    #student = models.ForeignKey(User, related_name='student', null=True, on_delete=models.CASCADE)
     students = models.ManyToManyField(User, related_name='student')
     course_title = models.CharField(max_length=36, default='', null=False)
     visible = models.BooleanField(default=True)
