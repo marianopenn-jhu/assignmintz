@@ -81,9 +81,6 @@ class CourseResource(ModelResource):
             'students': ALL,
             'course_title': ALL
         }
-    def hydrate(self, bundle):
-        bundle.data['session_key'] = bundle.data['session_key']
-        return bundle
 
 
 class AddStudentToCourseResource(ModelResource):

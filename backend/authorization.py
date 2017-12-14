@@ -50,12 +50,7 @@ class GeneralAuthorization(Authorization):
             LogIn.objects.all().get(user_name=user, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
-        if 'Course'==str(bundle.obj).split(' ')[0]:
-            return object_list.filter(professor=user)
-        elif 'SubTask'==str(bundle.obj).split(' ')[0]:
-            return object_list
-        else:
-            return object_list.filter(user_name=user)
+        return object_list
 
     def read_detail(self, object_list, bundle):
         return True
