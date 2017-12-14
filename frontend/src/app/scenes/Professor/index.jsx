@@ -5,14 +5,23 @@ import CreateClassView from './components/CreateClassView/index.jsx';
 import DeleteClassView from './components/DeleteClassView/index.jsx';
 import AssignmentEditor from './components/AssignmentEditor/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
+import ViewPane from '../Layout/ViewPane/index.jsx'
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
-  display:inline-block
+  display:inline-block;
   vertical-align:top;
   width:100%;
+`;
+// position: relative;
+// float: right;
+// left: 25vw;
+// width: 75vw;
+const Wrapper = styled.div`
+  height:auto;
+  
 `;
 
 /*
@@ -153,7 +162,8 @@ class ProfessorView extends React.Component {
         break;
       case 1:
         view = (
-          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role}/>
         );
         break;
       case 2:
