@@ -29,7 +29,6 @@ class LogInResource(ModelResource):
         return bundle
 
     def dehydrate(self, bundle):
-        print(self.session_key)
         bundle.data.pop('passwd', None)
         #bundle.data['session_key'] = self.session_key
         return bundle
@@ -48,7 +47,7 @@ class UserResource(ModelResource):
     class Meta:
             queryset = User.objects.all()
             resource_name = 'user'
-            authorization = Authorization()
+            authorization = UserAuthorization()
             authentication = Authentication()
             allowed_methods = ['get', 'post']
             validation = UserValidation()
@@ -71,7 +70,7 @@ class CourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
@@ -109,7 +108,7 @@ class AddStudentToCourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['post', 'delete']
         excludes = []
         filtering = {
@@ -125,7 +124,7 @@ class AssignmentResource(ModelResource):
     class Meta:
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
-        authorization = Authorization()
+        authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
@@ -149,12 +148,12 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
             filters = {
-                'subtask_id': ALL,
+                'subtask': ALL,
                 'subtask_name': ALL,
                 'assignment': ALL
             }
@@ -168,7 +167,7 @@ class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
-            authorization = Authorization()
+            authorization = GeneralAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
                 'professor_id': ALL,
