@@ -38,7 +38,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "visible": "True",
             "description": "A series of project iterations.",
             "professor": "/backend/v1/user/rhagrid/",
-            "students": ["/backend/v1/user/harrypotter/"]
+            "students": ["/backend/v1/user/rweasely/"]
         }
         self.oose_assignment_1 = {
             "assignment_id": "3",
@@ -68,7 +68,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.assignment_url = '/backend/v1/professor/assignment/'
         self.subtask_url = '/backend/v1/subtask/'
         self.login_url = '/backend/v1/login/'
-        self.logout_url = '/backend/v1/logout'
+        self.logout_url = '/backend/v1/logout/'
 
     # PUT method is not allowed for User resource
     def test_bad_method(self):
@@ -88,14 +88,14 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         professor.save()
         resp1 = self.api_client.post(self.login_url, format='json', data=self.login_prof)
         self.assertHttpCreated(resp1)
-        print('Valid post test passed')
+        print('Valid login post test passed')
 
     def test_valid_logout_post(self):
         login = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
         login.save()
         resp1 = self.api_client.post(self.logout_url, format='json', data=self.logout_prof)
         self.assertHttpCreated(resp1)
-        print('Valid post test passed')
+        print('Valid logout post test passed')
 
     def test_valid_course_post(self):
         student = User.objects.create(user_name='rweasely', name='Ron', email='rweasely@jhu.edu', passwd='pottermore',
