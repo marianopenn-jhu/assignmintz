@@ -87,6 +87,11 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.user_potter = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu',
                                                passwd='1234', role='student')
         self.user_potter.save()
+        self.user_granger = User.objects.create(user_name='hgranger', name='hermione', email='hgranger@jhu.edu',
+                                                passwd='1234', role='student')
+        self.user_granger.save()
+        self.login_granger = LogIn.objects.create(user_name='hgranger', session_key='5432112345')
+        self.login_granger.save()
         self.login_mcgonagall = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
         self.login_mcgonagall.save()
         self.assignment_1 = Assignment.objects.create(assignment_id="1", assignment_name="Assignment 1",
@@ -121,6 +126,30 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def test_valid_course_post(self):
         resp1 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
         self.assertHttpCreated(resp1)
+
+    def test_valid_get(self):
+        resp1 = self.api_client.get('/backend/v1/user/?user=rhagrid&key=12344321', format='json')
+        self.assertValidJSONResponse(resp1)
+        resp2 = self.api_client.get('/backend/v1/course/?user=rhagrid&key=12344321', format='json')
+        self.assertValidJSONResponse(resp2)
+        resp3 = self.api_client.get('/backend/v1/professor/assignment/?user=rhagrid&key=12344321', format='json')
+        self.assertValidJSONResponse(resp3)
+        resp4 = self.api_client.get('/backend/v1/subtask/?user=rhagrid&key=12344321', format='json')
+        self.assertValidJSONResponse(resp4)
+
+    def test_invalid_get(self):
+        # invalid session_key
+        resp1 = self.api_client.get('/backend/v1/user/?user=rhagrid&key=1234421', format='json')
+        self.assertHttpUnauthorized(resp1)
+        # invalid user
+        resp2 = self.api_client.get('/backend/v1/course/?user=rhagri&key=12344321', format='json')
+        self.assertHttpUnauthorized(resp2)
+        # invalid session_key and user
+        resp3 = self.api_client.get('/backend/v1/professor/assignment/?user=rhadid&key=344343', format='json')
+        self.assertHttpUnauthorized(resp3)
+        # mismatched user and session_key
+        resp4 = self.api_client.get('/backend/v1/subtask/?user=hgranger&key=12344321', format='json')
+        self.assertHttpUnauthorized(resp4)
 
     def test_invalid_email(self):
         # not @jhu.edu
