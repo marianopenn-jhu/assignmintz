@@ -66,14 +66,19 @@ render() {
   switch (state.viewState) {
     case 0:
     view = (
-      <LinearCalendar data={state.assignments}/>
+      <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
     );
     break;
     case 1:
     view = (
       // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-      <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role}/>
+      <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
     );
+    break;
+    case 2:
+      view = (
+        <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
+      );
     break;
     default:
     this.setState({viewState:0});
@@ -81,7 +86,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass}/>
         {view}
     </Container>
   );

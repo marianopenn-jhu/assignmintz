@@ -27,12 +27,20 @@ class ViewPane extends React.Component {
 
       let view = null;
       if (this.props.role == "student") {
-        view = (
-          <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
-        )
+        if (this.props.case == 1) {
+          view = (
+            <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
+          )
+        } else if (this.props.case == 2) {
+          view = (
+            // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
+            <StudentClassView/>
+          )
+        }
+
       } else if (this.props.role == "professor") {
         view = (
-          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+          <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
         )
       }
         return (

@@ -21,7 +21,7 @@ const Container = styled.div`
 // width: 75vw;
 const Wrapper = styled.div`
   height:auto;
-  
+
 `;
 
 /*
@@ -163,10 +163,14 @@ class ProfessorView extends React.Component {
       case 1:
         view = (
           // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
         );
         break;
       case 2:
+        view = (
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
+        );
+        break;
       case 3:
         view = (
           <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
