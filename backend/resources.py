@@ -29,7 +29,6 @@ class LogInResource(ModelResource):
         return bundle
 
     def dehydrate(self, bundle):
-        print(self.session_key)
         bundle.data.pop('passwd', None)
         #bundle.data['session_key'] = self.session_key
         return bundle

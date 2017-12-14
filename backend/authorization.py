@@ -6,7 +6,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class UserAuthorization(Authorization):
     def read_list(self, object_list, bundle):
-        print('in User read list')
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
             session_key = bundle.request.GET["key"]
@@ -43,7 +42,6 @@ class UserAuthorization(Authorization):
 class GeneralAuthorization(Authorization):
     def read_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
-        print('in GA read list')
         try:
             session_key = bundle.request.GET["key"]
             user = bundle.request.GET["user"]

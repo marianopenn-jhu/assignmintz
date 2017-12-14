@@ -1,8 +1,6 @@
 from django.test import TestCase
 from tastypie.test import ResourceTestCaseMixin
-from backend.models import User, LogIn, LogOut, Course, Assignment, SubTask
-import unittest
-from django.db.utils import IntegrityError
+from backend.models import User, LogIn, Course, Assignment, SubTask
 
 
 # Create your tests here.
@@ -10,16 +8,16 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
         self.student_user = {
-            'user_name': 'harrypotter',
-            'name': 'harry',
-            'email': 'harrypotter@jhu.edu',
+            'user_name': 'gweasely',
+            'name': 'ginny',
+            'email': 'gweasely@jhu.edu',
             'passwd': '1234',
             'role': 'student'
         }
         self.professor_user = {
-            "user_name": "dumbledore",
-            "name": "Albus",
-            "email": "albusdumbledore@jhu.edu",
+            "user_name": "sprout",
+            "name": "mrs",
+            "email": "mrs_sprout@jhu.edu",
             "passwd": "chocolate_frogs",
             "role": "professor"
         }
@@ -33,7 +31,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
         self.oose_course = {
             "session_key": "12344321",
-            "course_id": "601.421",
+            "course_id": "601.500",
             "course_title": "OOSE",
             "visible": "True",
             "description": "A series of project iterations.",
@@ -45,8 +43,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "assignment_name": "Iteration 3",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
-            "due_date": "11/17/17",
-            "due_time": "11:59 PM",
+            "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
             "actual_difficulty": "4",
             "expected_time": "3.4",
@@ -57,6 +54,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "description": "Complete the iteration before time runs out"
         }
         self.oose_subtask_1 = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
             "subtask_id": "testing",
             "subtask_name": "Implement Testing",
             "visible": "True",
@@ -69,6 +68,34 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.subtask_url = '/backend/v1/subtask/'
         self.login_url = '/backend/v1/login/'
         self.logout_url = '/backend/v1/logout/'
+        self.student_weasely = User.objects.create(user_name='rweasely', name='Ron', email='rweasely@jhu.edu',
+                                                   passwd='pottermore', role='student')
+        self.student_weasely.save()
+        self.professor_hagrid = User.objects.create(user_name='rhagrid', name='Rubeus', email='rhagrid@jhu.edu',
+                                                    passwd='fang', role='professor')
+        self.professor_hagrid.save()
+        self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
+                                                 description="Cool class", professor=self.professor_hagrid, students=[])
+        self.course_oose.save()
+        self.login_hagrid = LogIn.objects.create(user_name='rhagrid', session_key='12344321')
+        self.login_hagrid.save()
+        self.professor_dumbledore = User.objects.create(user_name='dumbledore', name='albus', email='adumb@jhu.edu',
+                                                        passwd='3daaeb1364f420ac47850dd70451c9c9d39d3f9c1b27352411cce'
+                                                               'ab5e3992479:f15fcd16101845aaac8ea40188841410',
+                                                        role='professor')
+        self.professor_dumbledore.save()
+        self.user_potter = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu',
+                                               passwd='1234', role='student')
+        self.user_potter.save()
+        self.login_mcgonagall = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
+        self.login_mcgonagall.save()
+        self.assignment_1 = Assignment.objects.create(assignment_id="1", assignment_name="Assignment 1",
+                                                      assignment_type="hw", course=self.course_oose,
+                                                      due_date="2013-01-29T12:34:56.00Z", expected_difficulty="4",
+                                                      actual_difficulty="3", expected_time="3.4", actual_time="5.4",
+                                                      priority="5", percent_complete="85.3", visible="True",
+                                                      description="Assignment 1")
+        self.assignment_1.save()
 
     # PUT method is not allowed for User resource
     def test_bad_method(self):
@@ -82,30 +109,16 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         print('Valid post test passed')
 
     def test_valid_login_post(self):
-        professor = User.objects.create(user_name='dumbledore', name='albus', email='adumb@jhu.edu',
-                                        passwd='3daaeb1364f420ac47850dd70451c9c9d39d3f9c1b27352411cceab5e3992479:f15fcd'
-                                               '16101845aaac8ea40188841410', role='professor')
-        professor.save()
         resp1 = self.api_client.post(self.login_url, format='json', data=self.login_prof)
         self.assertHttpCreated(resp1)
         print('Valid login post test passed')
 
     def test_valid_logout_post(self):
-        login = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
-        login.save()
         resp1 = self.api_client.post(self.logout_url, format='json', data=self.logout_prof)
         self.assertHttpCreated(resp1)
         print('Valid logout post test passed')
 
     def test_valid_course_post(self):
-        student = User.objects.create(user_name='rweasely', name='Ron', email='rweasely@jhu.edu', passwd='pottermore',
-                                      role='student')
-        student.save()
-        professor = User.objects.create(user_name='rhagrid', name='Rubeus', email='rhagrid@jhu.edu', passwd='fang',
-                                        role='professor')
-        professor.save()
-        login = LogIn.objects.create(user_name='rhagrid', session_key='12344321')
-        login.save()
         resp1 = self.api_client.post(self.course_url, format='json', data=self.oose_course)
         self.assertHttpCreated(resp1)
 
@@ -136,9 +149,6 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             'passwd': '1234',
             'role': 'student'
         }
-        user = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu', passwd='1234',
-                                   role='student')
-        user.save()
         resp1 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data)
         self.assertHttpBadRequest(resp1)
         resp2 = self.api_client.post(self.user_url, format='json', data=self.invalid_user_post_data_2)
@@ -224,7 +234,6 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.assertHttpBadRequest(resp2)
         print('Invalid course student combo passed')
 
-'''
     def test_empty_course_field(self):
         # empty title and professor
         self.oose_empty_prof_and_title_course = {
@@ -253,28 +262,30 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         print('Empty course fields passed')
 
     def test_dup_course(self):
-        # empty id and description
+        # duplicate course
         self.oose_dup_course = {
+            "session_key": "12344321",
             "course_id": "601.421",
             "course_title": "OOSE",
             "visible": "True",
             "description": "Cool class",
-            "professor": "/backend/v1/user/harrypotter/",
-            "student": "/backend/v1/user/dumbledore/"
+            "professor": "/backend/v1/user/rhagrid/",
+            "student": "/backend/v1/user/harrypotter/"
         }
-
         resp1 = self.api_client.post(self.course_url, format='json', data=self.oose_dup_course)
         self.assertHttpBadRequest(resp1)
         print('Dup course passed')
 
     def test_invalid_assignment_course_combo(self):
+        # course not in database
         self.invalid_oose_assignment_1 = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
             "assignment_id": "1",
             "assignment_name": "Iteration 1",
             "assignment_type": "hw",
             "course": "/backend/v1/course/801.400/",
-            "due_date": "11/17/17",
-            "due_time": "11:59 PM",
+            "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
             "actual_difficulty": "4",
             "expected_time": "3.4",
@@ -289,12 +300,13 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
 
     def test_empty_assignment_fields(self):
         self.oose_assignment_1_empty_fields = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
             "assignment_id": "1",
             "assignment_name": "",
             "assignment_type": "",
             "course": "/backend/v1/course/601.421/",
-            "due_date": "",
-            "due_time": "11:59 PM",
+            "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
             "actual_difficulty": "",
             "expected_time": "3.4",
@@ -305,12 +317,13 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "description": "Complete the iteration before time runs out"
         }
         self.oose_assignment_1_empty_fields_2 = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
             "assignment_id": "",
             "assignment_name": "Iteration 1",
             "assignment_type": "hw",
             "course": "",
-            "due_date": "11/17/17",
-            "due_time": "",
+            "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "",
             "actual_difficulty": "4",
             "expected_time": "",
@@ -327,12 +340,13 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
 
     def test_dup_assignment(self):
         self.oose_assignment_1_dup = {
-            "assignment_id": "1",
+            "session_key": "12344321",
+            "user_name": "rhagrid",
+            "assignment_id": "2",
             "assignment_name": "Iteration 1",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
-            "due_date": "11/17/17",
-            "due_time": "11:59 PM",
+            "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
             "actual_difficulty": "4",
             "expected_time": "3.4",
@@ -342,35 +356,48 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "visible": "True",
             "description": "Complete the iteration before time runs out"
         }
+        assignment = Assignment.objects.create(assignment_id="2", assignment_name="Iteration 1", assignment_type="hw",
+                                               course=self.course_oose, due_date="2013-01-29T12:34:56.00Z",
+                                               expected_difficulty="3", actual_difficulty="4", expected_time="3.4",
+                                               actual_time="5.4", priority="5", percent_complete="85.3", visible="True",
+                                               description="Complete the iteration before time runs out")
+        assignment.save()
         resp1 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1_dup)
         self.assertHttpBadRequest(resp1)
         print('Dup assignment passed')
 
     def test_invalid_subtask_assignment_combo(self):
+        # assignment does not exist
         self.invalid_oose_subtask_1 = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
             "subtask_id": "testing",
             "subtask_name": "Implement Testing",
             "visible": "True",
             "description": "Implement extensive testing",
-            "assignment": "/backend/v1/professor/assignment/1/"
+            "assignment": "/backend/v1/professor/assignment/43/"
         }
         resp1 = self.api_client.post(self.subtask_url, format='json', data=self.invalid_oose_subtask_1)
         self.assertHttpBadRequest(resp1)
 
     def test_empty_subtask_fields(self):
         self.empty_oose_subtask_1 = {
-            "subtask_id": "",
+            "session_key": "12344321",
+            "user_name": "rhagrid",
+            "subtask_id": "testing",
+            "subtask_name": "",
+            "visible": "True",
+            "description": "",
+            "assignment": "/backend/v1/professor/assignment/1/"
+        }
+        self.empty_oose_subtask_2 = {
+            "session_key": "12344321",
+            "user_name": "rhagrid",
+            "subtask_id": "testing",
             "subtask_name": "Implement Testing",
             "visible": "",
             "description": "Implement extensive testing",
             "assignment": ""
-        }
-        self.empty_oose_subtask_2 = {
-            "subtask_id": "123",
-            "subtask_name": "",
-            "visible": "False",
-            "description": "",
-            "assignment": "/backend/v1/professor/assignment/1/"
         }
         resp1 = self.api_client.post(self.subtask_url, format='json', data=self.empty_oose_subtask_1)
         self.assertHttpBadRequest(resp1)
@@ -379,5 +406,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         print("Empty subtask passed")
 
     def test_dup_subtask(self):
+        subtask = SubTask.objects.create(subtask_id="testing", subtask_name="Implement Testing", visible="True",
+                                         description="Implement extensive testing", assignment=self.assignment_1)
+        subtask.save()
         resp = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
-        self.assertHttpBadRequest(resp) '''
+        self.assertHttpBadRequest(resp)
