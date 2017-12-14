@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FindClassView from '../../Student/components/FindClassView/index.jsx';
+import CreateClassView from '../../Professor/components/CreateClassView/index.jsx';
 //**  MIDDLE MAN FOR RHS PANEL  **//
 //ensures panel dimensions correct//
 

@@ -5,6 +5,7 @@ import CreateClassView from './components/CreateClassView/index.jsx';
 import DeleteClassView from './components/DeleteClassView/index.jsx';
 import AssignmentEditor from './components/AssignmentEditor/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
+import ViewPane from '../Layout/ViewPane/index.jsx'
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //import {addClass} from '../../services/api/professor/course/add-class.js';
@@ -14,11 +15,13 @@ const Container = styled.div`
   vertical-align:top;
   width:100%;
 `;
+// position: relative;
+// float: right;
+// left: 25vw;
+// width: 75vw;
 const Wrapper = styled.div`
-  position: relative;
-  float: right;
-  left: 25vw;
-  width: 75vw;
+  height:auto;
+  
 `;
 
 /*

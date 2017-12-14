@@ -4,7 +4,6 @@ import FaClose from 'react-icons/lib/fa/close';
 import {createCourse} from '../../../../services/api/course/create-course.js';
 
 const Wrapper = styled.div`
-  position: relative;
   float: right;
   left: 25vw;
   width: 75vw;
