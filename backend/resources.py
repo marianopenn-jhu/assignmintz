@@ -1,7 +1,7 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn, LogOut
+from backend.models import User, Assignment, StudentAssignment, SubTask, Course, OfficeHours, LogIn, LogOut
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
@@ -140,6 +140,24 @@ class AssignmentResource(ModelResource):
     def dehydrate(self, bundle):
         bundle.data["course"] = bundle.obj.course.course_id
         return bundle
+
+class StudentAssignmentResource(ModelResource):
+    student = fields.ForeignKey(UserResource, 'student')
+    assignment = fields.ToOneField(AssignmentResource, 'assignment')
+
+    class Meta:
+        queryset = StudentAssignment.objects.all()
+        resource_name = 'student/assignment'
+        # authorization = GeneralAuthorization()
+        authorization = Authorization()
+        allowed_methods = ['get', 'post', 'delete']
+        # validation = AssignmentValidation()
+        excludes = ['priority']
+        filtering = {
+            'student': ALL
+        }
+
+    #TODO write dehydrate method to call algorithm
 
 
 class SubTaskResource(ModelResource):
