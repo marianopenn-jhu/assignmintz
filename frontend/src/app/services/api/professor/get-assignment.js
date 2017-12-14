@@ -1,6 +1,6 @@
 const ERROR_STATUS = 400;
 var PREFIX = "";
-if (process.env.host='dev') {
+if (process.env.host=='dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host=='deploy') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
@@ -10,18 +10,21 @@ const URL = PREFIX + "/backend/v1/professor/assignment/";
 
 export {getAssignment};
 
-function getAssignment(filter)
+/*
+  Return the assignments given the particular filters
+*/
+function getAssignment(filters)
 {
-  return (fetch(URL + "?" + filter, {
+  return (fetch(URL + "?" + filters, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
-    },
+    }
   }) .then((response) => {
     if(response.status >= ERROR_STATUS)
     {
-      throw new Error(response.status + ": " + response.statusText + " in updateAssignment()");
+      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
     } else {
       return response.json();
     }

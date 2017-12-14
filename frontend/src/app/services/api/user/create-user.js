@@ -1,7 +1,7 @@
 const ERROR_STATUS = 400;
 
 var PREFIX = "";
-if (process.env.host='dev') {
+if (process.env.host=='dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host=='deploy') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
@@ -24,11 +24,9 @@ function createUser(user_name, name, email, passwd, role)
     {
       throw new Error(response.status + ": " + response.statusText + " in createUser()")
     } else {
-      return response.json();
+      return {status: true, body: "Empty"};
     }
-  })).then((json) => {
-    return {status: true, body: json};
-  }).catch((error) => {
+  })).catch((error) => {
     return {status: false, body: error};
   });
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/professor/assignment/get-assignment.js';
+import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //student can use gets from professor api
 const Container = styled.div`
   display:inline-block
@@ -16,15 +16,14 @@ display: flex;
 `;
 
 const FullPage = styled.div`
-height: auto;
-overflow: hidden;
+    height: auto;
+    overflow: hidden;
 `;
 
 const ViewPanel = styled.div `
 background-color: #FAFAFA;
 font-family: 'Trebuchet MS';
-left: 250px;
-right: inherit;
+overflow-x: hidden;
 position: absolute;
 width: auto;
 overflow: hidden;
@@ -42,7 +41,7 @@ class StudentView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("student=" + this.props.user_name).then((response) => {
+      getCourses("students=" + this.props.user_name).then((response) => {
         if (response.status == true) {
           var obj = response.body;
           this.setState({courses: obj.objects});
@@ -53,7 +52,7 @@ class StudentView extends React.Component {
     );
 
       // Retrieve assignments
-      getAssignment("student=" + this.props.user_name).then((response) => {
+      getAssignment("students=" + this.props.user_name).then((response) => {
         if (response.status == true) {
           var obj = response.body;
           this.setState({assignments: obj.objects});
@@ -69,8 +68,10 @@ render() {
   const state = this.state;
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name}/>
-      <LinearCalendar data={state.assignments}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key}/>
+      <ViewPanel>
+        <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+      </ViewPanel>
     </Container>
     // <Wrapper>
     // <FullPage>

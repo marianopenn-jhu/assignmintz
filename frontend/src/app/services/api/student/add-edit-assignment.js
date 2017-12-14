@@ -1,6 +1,6 @@
 const ERROR_STATUS = 400;
 var PREFIX = "";
-if (process.env.host='dev') {
+if (process.env.host=='dev') {
   PREFIX = "http://localhost:8000";
 } else if (process.env.host=='deploy') {
   PREFIX = "mysterious-depths-20159.herokuapp.com";
@@ -29,5 +29,4 @@ function addEditAssignment(student_id, priority, difficulty, assignment_id)
   }).catch((error) => {
     return {status: false, result: error};
   });
-
 }

@@ -28,14 +28,14 @@ const XOut = styled.span`
   }
 `;
 
-const Form = styled.form`
-  width:100%;
-`;
-
 const Header = styled.h1`
   font-family:Avenir;
   font-size:30px;
   padding-left:50px;
+`;
+
+const FormContainer = styled.div`
+  width:100%;
 `;
 
 const ItemLabel = styled.div
@@ -71,6 +71,11 @@ const BigTextInput = styled.textarea
   resize: none;
 `;
 
+const CreateButton = styled.button
+`
+
+`;
+
 class CreateClassView extends React.Component {
   constructor(props) {
     super(props);
@@ -93,12 +98,20 @@ class CreateClassView extends React.Component {
   handleSubmit(event) {
     const {course_id, course_title, description} = this.state;
 
-    createCourse(this.props.session_key, this.props.user_name, course_id, course_title, description, "/backend/v1/user/" + this.props.user_name + "/", []).then((response) => {
-      if (response.status) {
-        {this.props.onClose};
-      }
-      else {
-        alert(response.body);
+    createCourse(
+      this.props.session_key,
+      this.props.user_name,
+      course_id,
+      course_title,
+      description,
+      "/backend/v1/user/" + this.props.user_name + "/",
+      []
+    ).then((answer) =>
+    {
+      if (answer.status == false) {
+        alert(answer.body);
+      } else {
+        this.props.onClose();
       }
     });
   }
@@ -108,7 +121,7 @@ class CreateClassView extends React.Component {
         <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Create a Class</Header>
-          <Form onSubmit={this.handleSubmit}>
+          <FormContainer>
             <ItemLabel>
               <TextLabel>Course Title:</TextLabel>
               <TextInput name="course_title" type="text" onChange={this.handleChange} />
@@ -121,10 +134,10 @@ class CreateClassView extends React.Component {
               <TextLabel>Description:</TextLabel>
               <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
             </ItemLabel>
-            <ItemLabel>
-              <input type="submit" value="Create Course"/>
+            <ItemLabel onClick={this.handleSubmit}>
+              <CreateButton type="button">Create Course</CreateButton>
             </ItemLabel>
-          </Form>
+          </FormContainer>
         </Container>
     )
   }
