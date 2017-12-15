@@ -26,6 +26,8 @@ class LoginValidation(Validation):
             password, salt = user.passwd.split(':')
             if password != hashlib.sha256(salt.encode() + query_pass.encode()).hexdigest():
                 errs['passwd'] = 'Invalid password.'
+            if bundle.data.get('role') != user.role:
+                errs['role'] = user.role + ' must log in as a ' + user.role
         except ObjectDoesNotExist:
             errs['login'] = 'Invalid username/password combination'
 

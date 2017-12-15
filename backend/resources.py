@@ -30,7 +30,7 @@ class LogInResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data.pop('passwd', None)
-        #bundle.data['session_key'] = self.session_key
+        bundle.data.pop('role', None)
         return bundle
 
 
