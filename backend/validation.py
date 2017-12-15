@@ -124,7 +124,7 @@ class AssignmentValidation(Validation):
 
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name) and isProfessor(user_name):
+        if valid_session_key(session_key, user_name) and self.isProfessor(user_name):
             # ensure assignment id is unique
             query_name = str(bundle.data.get('assignment_id'))
             try:
