@@ -87,12 +87,16 @@ class UserValidation(Validation):
 
 
 class CourseValidation(Validation):
+    def isProfessor(self, user_name):
+        user = User.objects.all().get(user_name=user_name)
+        return user.role == 'professor'
+
     def is_valid(self, bundle, request=None):
         errs = {}
 
         user_name = str(bundle.data.get('professor').split('/')[4])
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name):
+        if valid_session_key(session_key, user_name) and self.isProfessor(user_name):
             # ensure course id is unique
             query_name = str(bundle.data.get('course_id'))
             try:
@@ -106,18 +110,21 @@ class CourseValidation(Validation):
                 if value == '':
                     errs[key] = str(key) + ' empty, please complete'
         else:
-            errs["invalid_user_or_session"] = "Invalid username or session key"
+            errs["invalid_user_or_session"] = "Invalid username or session key. User must be a professor to perform this action."
 
         return errs
 
 
 class AssignmentValidation(Validation):
+    def isProfessor(self, user_name):
+        user = User.objects.all().get(user_name=user_name)
+        return user.role == 'professor'
     def is_valid(self, bundle, request=None):
         errs = {}
 
         user_name = str(bundle.data.get('user_name'))
         session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name):
+        if valid_session_key(session_key, user_name) and isProfessor(user_name):
             # ensure assignment id is unique
             query_name = str(bundle.data.get('assignment_id'))
             try:
@@ -131,7 +138,7 @@ class AssignmentValidation(Validation):
                 if value == '':
                     errs[key] = str(key) + ' empty, please complete'
         else:
-            errs['invalid_user_and_key'] = 'Invalid username or session key'
+            errs['invalid_user_and_key'] = 'Invalid username or session key. User must be a professor.'
 
         return errs
 

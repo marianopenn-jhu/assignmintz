@@ -55,6 +55,7 @@ class GeneralAuthorization(Authorization):
 
     def create_list(self, object_list, bundle):
         # Assuming they're auto-assigned to ``user``.
+
         return object_list
 
     def create_detail(self, object_list, bundle):
@@ -73,7 +74,6 @@ class GeneralAuthorization(Authorization):
         raise Unauthorized("Sorry no deletes for you")
 
 class StudentAssignmentAuthorization(Authorization):
-    print('auth got called')
     def read_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
