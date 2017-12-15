@@ -1,7 +1,7 @@
 # backend/validation.py
 from tastypie.validation import Validation
 import hashlib
-from backend.models import User, LogIn, SubTask, Assignment, Course
+from backend.models import User, LogIn, SubTask, Assignment, Course, StudentAssignment
 from django.core.exceptions import ObjectDoesNotExist
 
 def valid_session_key(session_key, user_name):
@@ -135,6 +135,18 @@ class AssignmentValidation(Validation):
 
         return errs
 
+class AssignmentUpdateValidation(Validation):
+    def is_valid(self, bundle, request=None):
+        errs = {}
+        user_name = str(bundle.data.get('student').split('/')[4])
+        session_key = str(bundle.data.get('session_key'))
+        if not valid_session_key(session_key, user_name):
+            errs['invalid_user_and_key'] = 'Invalid username or session key'
+        assignment_id = str(bundle.data.get('assignment').split('/')[5])
+        # obj = StudentAssignment.objects.all().get(student_id=user_name, assignment_id=assignment_id)
+        # if not obj:
+        #     errs['']
+        return errs
 
 class SubtaskValidation(Validation):
     def is_valid(self, bundle, request=None):

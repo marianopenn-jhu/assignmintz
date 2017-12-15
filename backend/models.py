@@ -55,7 +55,7 @@ class Assignment(models.Model):
         return self.assignment_name
 
 class StudentAssignment(models.Model):
-    id = models.AutoField(primary_key=True)
+    student_assignment_id = models.AutoField(primary_key=True)
     student = models.ForeignKey('User', related_name='pupil',on_delete=models.CASCADE)
     assignment = models.ForeignKey('Assignment', null=True, on_delete=models.CASCADE, related_name='professor_assignment')
     actual_difficulty = models.IntegerField(default=0)
@@ -64,7 +64,7 @@ class StudentAssignment(models.Model):
     done = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.assignment_name
+        return self.student_assignment_id
 
 class SubTask(models.Model):
     subtask_id = models.CharField(max_length=36, primary_key=True)

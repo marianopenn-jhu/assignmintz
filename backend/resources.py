@@ -6,8 +6,8 @@ from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
-    SubtaskValidation, LoginValidation, LogOutValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization
+    SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
+from backend.authorization import UserAuthorization, GeneralAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -45,17 +45,17 @@ class LogOutResource(ModelResource):
 
 class UserResource(ModelResource):
     class Meta:
-            queryset = User.objects.all()
-            resource_name = 'user'
-            authorization = UserAuthorization()
-            authentication = Authentication()
-            allowed_methods = ['get', 'post']
-            validation = UserValidation()
-            filtering = {
-                'user_name': ALL,
-                'name': ALL,
-                'role': ALL
-            }
+        queryset = User.objects.all()
+        resource_name = 'user'
+        authorization = UserAuthorization()
+        authentication = Authentication()
+        allowed_methods = ['get', 'post']
+        validation = UserValidation()
+        filtering = {
+            'user_name': ALL,
+            'name': ALL,
+            'role': ALL
+        }
 
     def hydrate(self, bundle):
         salt = uuid.uuid4().hex
@@ -148,16 +148,27 @@ class StudentAssignmentResource(ModelResource):
     class Meta:
         queryset = StudentAssignment.objects.all()
         resource_name = 'student/assignment'
-        # authorization = GeneralAuthorization()
-        authorization = Authorization()
-        allowed_methods = ['get', 'post', 'delete']
-        # validation = AssignmentValidation()
-        excludes = ['priority']
+        authorization = StudentAssignmentAuthorization()
+        allowed_methods = ['get', 'post', 'delete', 'put']
+        validation = AssignmentUpdateValidation()
+        always_return_data = True
+        include_resource_uri = False
+        excludes = []
         filtering = {
             'student': ALL
         }
 
     #TODO write dehydrate method to call algorithm
+    def dehydrate(self, bundle):
+        bundle.data.pop('actual_difficulty', None)
+        bundle.data.pop('actual_time', None)
+        bundle.data.pop('assignment_id', None)
+        bundle.data.pop('done', None)
+        bundle.data.pop('priority', None)
+        bundle.data.pop('session_key', None)
+        bundle.data.pop('student', None)
+        bundle.data.pop('pk', None)
+        return bundle
 
 
 class SubTaskResource(ModelResource):
