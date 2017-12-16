@@ -121,6 +121,7 @@ class ProfessorView extends React.Component {
   }
 
   returnToCalendar() {
+    console.log("got here ");
     this.setState({viewState:0});
 
     if (this.props.user_name) {
@@ -163,22 +164,25 @@ class ProfessorView extends React.Component {
       case 1:
         view = (
           // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseCreate={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
         );
         break;
       case 2:
+      //what case is this...?
         view = (
           <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
         );
         break;
       case 3:
         view = (
-          <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
+          // <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
+          <ViewPane session_key={this.props.session_key} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
         )
         break;
       case 4:
         view = (
-          <AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course}/>
+          //<AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseEditor={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={4}/>
         );
         break;
       default:
