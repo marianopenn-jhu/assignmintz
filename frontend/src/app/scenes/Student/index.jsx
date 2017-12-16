@@ -71,10 +71,10 @@ render() {
     break;
     case 1:
     view = (
-        // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-        <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
-      );
-      break;
+      // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+      <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
+    );
+    break;
     case 2:
       view = (
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
@@ -87,7 +87,7 @@ render() {
   return (
     <Container>
       <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass}/>
-      {view}
+        {view}
     </Container>
   );
 }

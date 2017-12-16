@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
-import {createCourse} from '../../../../services/api/course/create-course.js';
 
 const Wrapper = styled.div`
 overflow:hidden;
@@ -73,15 +72,17 @@ const BigTextInput = styled.textarea
   resize: none;
 `;
 
-const CreateButton = styled.button
+const EditButton = styled.button
 `
 
 `;
 
-class CreateClassView extends React.Component {
+class EditClassView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
+
+    // this.didSwitchTitle = true;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,6 +93,16 @@ class CreateClassView extends React.Component {
       description:''
     }
   }
+  //
+  // titleDidUpdate() {
+  //   if (this.didSwitchTitle) {
+  //     this.didSwitchTitle = false;
+  //     this.refs.givenTitle.value = this.state.course_title;
+  //   }
+  // }
+  // givenTitleChange(){
+  //   this.setState ({givenTitle: event.target.value});
+  // }
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -100,7 +111,7 @@ class CreateClassView extends React.Component {
   handleSubmit(event) {
     const {course_id, course_title, description} = this.state;
 
-    createCourse(
+    editCourse(
       this.props.session_key,
       this.props.user_name,
       course_id,
@@ -123,11 +134,17 @@ class CreateClassView extends React.Component {
       <Wrapper>
         <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
-          <Header>Create a Class</Header>
+          <Header>Edit Class</Header>
           <FormContainer>
             <ItemLabel>
               <TextLabel>Course Title:</TextLabel>
-              <TextInput name="course_title" type="text" onChange={this.handleChange} />
+              <TextInput
+                name="course_title"
+                type="text"
+                ref = "givenTitle"
+                onBlur = {this.givenTitleChange}
+                onChange={this.handleChange}
+              />
             </ItemLabel>
             <ItemLabel>
               <TextLabel>Course Number:</TextLabel>
@@ -138,7 +155,7 @@ class CreateClassView extends React.Component {
               <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
             </ItemLabel>
             <ItemLabel onClick={this.handleSubmit}>
-              <CreateButton type="button">Create Course</CreateButton>
+              <EditButton type="button">Edit Course</EditButton>
             </ItemLabel>
           </FormContainer>
         </Container>
@@ -147,4 +164,4 @@ class CreateClassView extends React.Component {
   }
 }
 
-export default CreateClassView;
+export default EditClassView;

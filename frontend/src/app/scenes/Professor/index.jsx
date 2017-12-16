@@ -15,11 +15,13 @@ const Container = styled.div`
   vertical-align:top;
   width:100%;
 `;
+// position: relative;
+// float: right;
+// left: 25vw;
+// width: 75vw;
 const Wrapper = styled.div`
-  position: relative;
-  float: right;
-  left: 25vw;
-  width: 75vw;
+  height:auto;
+
 `;
 
 /*

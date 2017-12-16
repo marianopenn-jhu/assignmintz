@@ -36,38 +36,19 @@ const ElipseSpan = styled.span`
 class FindClassElement extends React.Component {
     constructor(props) {
         super(props);
-
-        this.handleClick = this.handleClick.bind(this);
         this.state = {
-
+          course : this.props.course,
+          course_id : this.props.course.course_id
         }
     }
 
-    componentWillMount() {
-      document.addEventListener('click', this.handleClick, false);
-    }
-
-    componentWillUnmount() {
-      document.removeEventListener('click', this.handleClick, false);
-    }
-
-    handleClick(e) {
-      if(!ReactDOM.findDOMNode(this).contains(e.target)) {
-        this.setState();
-      }
-      else {
-        const {hidden} = this.state;
-        this.setState();
-      }
-    }
-
     render() {
-      const course_id = this.props.course;
+      const id = this.state.course_id;
       // var FindClassElements = [];
 
       return (
           <FindClassElementDiv>
-            {course_info.course_title} ({course_info.course_id})
+            {id}
           </FindClassElementDiv>
       );
     }
