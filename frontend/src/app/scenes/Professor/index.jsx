@@ -15,13 +15,11 @@ const Container = styled.div`
   vertical-align:top;
   width:100%;
 `;
-// position: relative;
-// float: right;
-// left: 25vw;
-// width: 75vw;
 const Wrapper = styled.div`
-  height:auto;
-
+  position: relative;
+  float: right;
+  left: 25vw;
+  width: 75vw;
 `;
 
 /*
@@ -33,6 +31,7 @@ class ProfessorView extends React.Component {
     super(props);
 
     this.addClassView = this.addClassView.bind(this);
+    this.showClasses = this.showClasses.bind(this);
     this.editClassView = this.editClassView.bind(this);
     this.deleteClassView = this.deleteClassView.bind(this);
     this.editAssignmentsView = this.editAssignmentsView.bind(this);
@@ -99,6 +98,11 @@ class ProfessorView extends React.Component {
 
   addClassView() {
     this.setState({viewState:1});
+    this.forceUpdate();
+  }
+
+  showClasses() {
+    this.setState({viewState:0});
     this.forceUpdate();
   }
 
@@ -191,7 +195,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
+        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
         {view}
       </Container>
     );
