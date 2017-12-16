@@ -1,13 +1,13 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn, LogOut
+from backend.models import User, Assignment, StudentAssignment, SubTask, Course, OfficeHours, LogIn, LogOut
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
-    SubtaskValidation, LoginValidation, LogOutValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization
+    SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
+from backend.authorization import UserAuthorization, GeneralAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -30,7 +30,7 @@ class LogInResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data.pop('passwd', None)
-        #bundle.data['session_key'] = self.session_key
+        bundle.data.pop('role', None)
         return bundle
 
 
@@ -45,17 +45,17 @@ class LogOutResource(ModelResource):
 
 class UserResource(ModelResource):
     class Meta:
-            queryset = User.objects.all()
-            resource_name = 'user'
-            authorization = UserAuthorization()
-            authentication = Authentication()
-            allowed_methods = ['get', 'post']
-            validation = UserValidation()
-            filtering = {
-                'user_name': ALL,
-                'name': ALL,
-                'role': ALL
-            }
+        queryset = User.objects.all()
+        resource_name = 'user'
+        authorization = UserAuthorization()
+        authentication = Authentication()
+        allowed_methods = ['get', 'post']
+        validation = UserValidation()
+        filtering = {
+            'user_name': ALL,
+            'name': ALL,
+            'role': ALL
+        }
 
     def hydrate(self, bundle):
         salt = uuid.uuid4().hex
@@ -139,6 +139,35 @@ class AssignmentResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data["course"] = bundle.obj.course.course_id
+        return bundle
+
+class StudentAssignmentResource(ModelResource):
+    student = fields.ForeignKey(UserResource, 'student')
+    assignment = fields.ToOneField(AssignmentResource, 'assignment')
+
+    class Meta:
+        queryset = StudentAssignment.objects.all()
+        resource_name = 'student/assignment'
+        authorization = StudentAssignmentAuthorization()
+        allowed_methods = ['get', 'post', 'delete', 'put']
+        validation = AssignmentUpdateValidation()
+        always_return_data = True
+        include_resource_uri = False
+        excludes = []
+        filtering = {
+            'student': ALL
+        }
+
+    #TODO write dehydrate method to call algorithm
+    def dehydrate(self, bundle):
+        bundle.data.pop('actual_difficulty', None)
+        bundle.data.pop('actual_time', None)
+        bundle.data.pop('assignment_id', None)
+        bundle.data.pop('done', None)
+        bundle.data.pop('priority', None)
+        bundle.data.pop('session_key', None)
+        bundle.data.pop('student', None)
+        bundle.data.pop('pk', None)
         return bundle
 
 

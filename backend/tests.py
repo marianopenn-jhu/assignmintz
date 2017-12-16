@@ -7,6 +7,16 @@ from backend.models import User, LogIn, Course, Assignment, SubTask
 class UserResourceTest(ResourceTestCaseMixin, TestCase):
     def setUp(self):
         super(UserResourceTest, self).setUp()
+
+        #Define Assignmintz URLs
+        self.user_url = '/backend/v1/user/'
+        self.course_url = '/backend/v1/course/'
+        self.assignment_url = '/backend/v1/professor/assignment/'
+        self.subtask_url = '/backend/v1/subtask/'
+        self.login_url = '/backend/v1/login/'
+        self.logout_url = '/backend/v1/logout/'
+
+        #Define JSON models
         self.student_user = {
             'user_name': 'gweasely',
             'name': 'ginny',
@@ -23,11 +33,21 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
         self.login_prof = {
             "passwd": "chocolate_frogs",
-            "user_name": "dumbledore"
+            "user_name": "dumbledore",
+            "role": "professor"
+        }
+        self.login_stud = {
+            "passwd": "1234",
+            "user_name": "gweasely",
+            "role": "student"
         }
         self.logout_prof = {
             "user_name": "mcgonagall",
             "session_key": "12344321"
+        }
+        self.logout_prof = {
+            "user_name": "gweasely",
+            "session_key": "12344322"
         }
         self.oose_course = {
             "session_key": "12344321",
@@ -45,13 +65,16 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
-            "actual_difficulty": "4",
             "expected_time": "3.4",
-            "actual_time": "5.4",
-            "priority": "5",
-            "percent_complete": "85.3",
-            "visible": "True",
             "description": "Complete the iteration before time runs out"
+        }
+        self.oose_student_assignment_1 = {
+            "student": "/backend/v1/user/gweasely/",
+            "assignment": "/backend/v1/professor/assignment/3/",
+            "actual_difficulty": "5",
+            "actual_time": "4",
+            "priority": "4",
+            "done": "False"
         }
         self.oose_subtask_1 = {
             "session_key": "12344321",
@@ -62,44 +85,50 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "description": "Implement extensive testing",
             "assignment": "/backend/v1/professor/assignment/1/"
         }
-        self.user_url = '/backend/v1/user/'
-        self.course_url = '/backend/v1/course/'
-        self.assignment_url = '/backend/v1/professor/assignment/'
-        self.subtask_url = '/backend/v1/subtask/'
-        self.login_url = '/backend/v1/login/'
-        self.logout_url = '/backend/v1/logout/'
+
+        #Save JSON models in the DB
+        #This step is necessary because the test REST calls are only simulations
+        #-------------------------------USERS--------------------------------
         self.student_weasely = User.objects.create(user_name='rweasely', name='Ron', email='rweasely@jhu.edu',
                                                    passwd='pottermore', role='student')
-        self.student_weasely.save()
         self.professor_hagrid = User.objects.create(user_name='rhagrid', name='Rubeus', email='rhagrid@jhu.edu',
                                                     passwd='fang', role='professor')
-        self.professor_hagrid.save()
-        self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
-                                                 description="Cool class", professor=self.professor_hagrid, students=[])
-        self.course_oose.save()
-        self.login_hagrid = LogIn.objects.create(user_name='rhagrid', session_key='12344321')
-        self.login_hagrid.save()
+        self.user_potter = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu',
+                                               passwd='1234', role='student')
+        self.user_granger = User.objects.create(user_name='hgranger', name='hermione', email='hgranger@jhu.edu',
+                                                passwd='1234', role='student')
         self.professor_dumbledore = User.objects.create(user_name='dumbledore', name='albus', email='adumb@jhu.edu',
                                                         passwd='3daaeb1364f420ac47850dd70451c9c9d39d3f9c1b27352411cce'
                                                                'ab5e3992479:f15fcd16101845aaac8ea40188841410',
                                                         role='professor')
-        self.professor_dumbledore.save()
-        self.user_potter = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu',
-                                               passwd='1234', role='student')
-        self.user_potter.save()
-        self.user_granger = User.objects.create(user_name='hgranger', name='hermione', email='hgranger@jhu.edu',
-                                                passwd='1234', role='student')
-        self.user_granger.save()
+        #-------------------------------LOGINS--------------------------------
+        self.login_hagrid = LogIn.objects.create(user_name='rhagrid', session_key='12344321')
+        self.login_weasely = LogIn.objects.create(user_name='gweasely', session_key='12344322')
         self.login_granger = LogIn.objects.create(user_name='hgranger', session_key='5432112345')
-        self.login_granger.save()
         self.login_mcgonagall = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
-        self.login_mcgonagall.save()
+
+        #-------------------------------COURSE--------------------------------
+        self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
+                                                 description="Cool class", professor=self.professor_hagrid, students=[])
+        #-------------------------------ASSIGNMENT--------------------------------
         self.assignment_1 = Assignment.objects.create(assignment_id="1", assignment_name="Assignment 1",
                                                       assignment_type="hw", course=self.course_oose,
                                                       due_date="2013-01-29T12:34:56.00Z", expected_difficulty="4",
-                                                      actual_difficulty="3", expected_time="3.4", actual_time="5.4",
-                                                      priority="5", percent_complete="85.3", visible="True",
-                                                      description="Assignment 1")
+                                                      expected_time="3.4", description="Assignment 1")
+
+        # Logged in: Hagrid (Professor), McGonagall (Professor), Gweasely (Student)
+        # Logged out: Dumbledore (Professor), Potter (Student), Granger (Student)
+        # Total number of users: 6 TODO test that number of users is correct
+        self.professor_hagrid.save()
+        self.student_weasely.save()
+        self.professor_dumbledore.save()
+        self.user_potter.save()
+        self.user_granger.save()
+        self.login_weasely.save()
+        self.login_granger.save()
+        self.login_mcgonagall.save()
+        self.login_hagrid.save()
+        self.course_oose.save()
         self.assignment_1.save()
 
     # PUT method is not allowed for User resource
@@ -316,12 +345,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course": "/backend/v1/course/801.400/",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
-            "actual_difficulty": "4",
             "expected_time": "3.4",
-            "actual_time": "5.4",
-            "priority": "5",
-            "percent_complete": "85.3",
-            "visible": "True",
             "description": "Complete the iteration before time runs out"
         }
         resp1 = self.api_client.post(self.assignment_url, format='json', data=self.invalid_oose_assignment_1)
@@ -337,12 +361,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
-            "actual_difficulty": "",
             "expected_time": "3.4",
-            "actual_time": "5.4",
-            "priority": "",
-            "percent_complete": "85.3",
-            "visible": "",
             "description": "Complete the iteration before time runs out"
         }
         self.oose_assignment_1_empty_fields_2 = {
@@ -354,12 +373,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course": "",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "",
-            "actual_difficulty": "4",
             "expected_time": "",
-            "actual_time": "",
-            "priority": "5",
-            "percent_complete": "",
-            "visible": "True",
             "description": ""
         }
         resp1 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1_empty_fields)
@@ -377,18 +391,12 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "3",
-            "actual_difficulty": "4",
             "expected_time": "3.4",
-            "actual_time": "5.4",
-            "priority": "5",
-            "percent_complete": "85.3",
-            "visible": "True",
             "description": "Complete the iteration before time runs out"
         }
         assignment = Assignment.objects.create(assignment_id="2", assignment_name="Iteration 1", assignment_type="hw",
                                                course=self.course_oose, due_date="2013-01-29T12:34:56.00Z",
-                                               expected_difficulty="3", actual_difficulty="4", expected_time="3.4",
-                                               actual_time="5.4", priority="5", percent_complete="85.3", visible="True",
+                                               expected_difficulty="3", expected_time="3.4",
                                                description="Complete the iteration before time runs out")
         assignment.save()
         resp1 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1_dup)
