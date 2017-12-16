@@ -110,11 +110,11 @@ class AddStudentToCourseResource(ModelResource):
         queryset = Course.objects.all()
         resource_name = 'student/course'
         authorization = StudentCourseAuthorization()
-        allowed_methods = ['post', 'delete']
+        allowed_methods = ['put']
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL
         }
 
