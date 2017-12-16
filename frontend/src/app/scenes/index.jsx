@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Cookies from "universal-cookie";
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
+
+const cookie = new Cookies();
 
 const ApplicationContainer = styled.div`
   position: fixed;
@@ -80,6 +83,15 @@ class App extends React.Component {
     };
   }
 
+  componentWillMount() {
+    var user = cookie.get("assignmintz_user_name");
+    var session_key = cookie.get("assignmintz_session_key");
+    var role = cookie.get("assignmintz_role");
+    var answer = new Object();
+    answer.session_key = session_key;
+    this.onLogin(answer, user, role);
+  }
+
   onLogin(answer, user_name, role) {
     if (role == "student") {
         this.setState({
@@ -96,6 +108,10 @@ class App extends React.Component {
         'role': role
       })
     }
+
+    cookie.set("assignmintz_user_name", user_name);
+    cookie.set("assignmintz_session_key", answer.session_key);
+    cookie.set("assignmintz_role", role);
   }
 
   onLogout() {
@@ -105,6 +121,9 @@ class App extends React.Component {
       'session_key': '',
       'role': ''
     });
+    cookie.set("assignmintz_user_name", "");
+    cookie.set("assignmintz_session_key", "");
+    cookie.set("assignmintz_role", "");
     this.forceUpdate();
   }
 
