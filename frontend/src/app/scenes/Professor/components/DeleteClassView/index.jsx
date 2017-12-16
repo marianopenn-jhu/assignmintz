@@ -4,17 +4,14 @@ import FaClose from 'react-icons/lib/fa/close';
 import {deleteCourse} from '../../../../services/api/course/delete-course.js'
 
 const Container = styled.div`
-  overflow:hidden;
-  overflow-y:auto;
-  height: 100%;
-  width: 80%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  padding-top:10px;
-  background:white;
+overflow:hidden;
+overflow-y:auto;
+right: 0;
+top: 0;
+margin: 30px;
+padding: 0;
+padding-top:10px;
+background:white;
 `;
 
 const XOut = styled.span`
@@ -37,6 +34,18 @@ const Header = styled.h1`
 const Button = styled.div`
   text-align:center;
 `;
+const ItemLabel = styled.div
+`
+  display:block;
+  width:85%;
+  padding-top:20px;
+  padding-bottom:20px;
+  text-align:center;
+`;
+const DeleteButton = styled.button
+`
+
+`;
 
 class DeleteClassView extends React.Component {
   constructor(props) {
@@ -55,6 +64,9 @@ class DeleteClassView extends React.Component {
         <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Delete {this.props.course.course_name}?</Header>
+          <ItemLabel onClick={this.handleSubmit}>
+            <DeleteButton type="button">Delete Course</DeleteButton>
+          </ItemLabel>
         </Container>
     )
   }
