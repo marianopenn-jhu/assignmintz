@@ -99,23 +99,30 @@ class AddStudentToCourseResource(ModelResource):
 
             manager = getattr(bundle.obj, obj.attribute)
             related_objects = []
+            course_id = bundle.request.path.split('/')[5]
 
             for related_bundle in bundle.data[field]:
                 student = User.objects.get(user_name=related_bundle.obj.user_name)
                 related_objects.append(student)
+                assignments = (Assignment.objects.filter(course_id=course_id))
+                course = (Course.objects.all().get(course_id=course_id))
+                for assignment in assignments:
+                    StudentAssignment.objects.create(student_assignment_id=assignment.assignment_id+'_'+student.user_name, student=student, assignment=Assignment.objects.all().get(assignment_id=assignment.assignment_id))
             manager.add(*related_objects)
 
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
         authorization = GeneralAuthorization()
-        allowed_methods = ['post', 'delete']
+        validation = CourseValidation()
+        allowed_methods = ['post', 'delete', 'put']
         excludes = []
         filtering = {
             'course_id': ALL,
             'professor':ALL,
             'students': ALL
         }
+
 
 
 class AssignmentResource(ModelResource):
@@ -129,6 +136,7 @@ class AssignmentResource(ModelResource):
         validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
                     'priority', 'percent_complete', 'visible', 'description']
+        always_return_data = True
         filters = {
             'assignment_id': ALL,
             'assignment_name': ALL,
@@ -137,8 +145,28 @@ class AssignmentResource(ModelResource):
             'due_date': ALL
         }
 
+    def hydrate(self, bundle):
+        try:
+            bundle.data['assignment_id'] = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
+        except IndexError:
+            pass
+        return bundle
     def dehydrate(self, bundle):
+        course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
+        students = course.students.all()
+        for stud in students:
+            StudentAssignment.objects.create(student_assignment_id=bundle.obj.assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=bundle.obj.assignment_id))
         bundle.data["course"] = bundle.obj.course.course_id
+        bundle.data['assignment_id'] = bundle.obj.assignment_id
+        bundle.data.pop('expected_difficulty', None)
+        bundle.data.pop('expected_time', None)
+        bundle.data.pop('due_date', None)
+        bundle.data.pop('user_name', None)
+        bundle.data.pop('session_key', None)
+        bundle.data.pop('description', None)
+        bundle.data.pop('assignment_name', None)
+        bundle.data.pop('assignment_type', None)
+        bundle.data.pop('course', None)
         return bundle
 
 class StudentAssignmentResource(ModelResource):
@@ -157,7 +185,10 @@ class StudentAssignmentResource(ModelResource):
         filtering = {
             'student': ALL
         }
-
+    def hydrate(self, bundle):
+        assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
+        bundle.data['student_assignment_id'] = str(assignment.course.course_id) + '_' + str(assignment.assignment_id) + '_'+bundle.data['student'].split('_')[4]
+        return bundle
     #TODO write dehydrate method to call algorithm
     def dehydrate(self, bundle):
         bundle.data.pop('actual_difficulty', None)

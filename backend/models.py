@@ -42,7 +42,7 @@ class Course(models.Model):
         return self.course_title
 
 class Assignment(models.Model):
-    assignment_id = models.IntegerField(primary_key=True, default=0)
+    assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     assignment_name = models.CharField(max_length=36, default='')
     assignment_type = models.CharField(max_length=5, default='')
     course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
@@ -55,7 +55,7 @@ class Assignment(models.Model):
         return self.assignment_name
 
 class StudentAssignment(models.Model):
-    student_assignment_id = models.AutoField(primary_key=True)
+    student_assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     student = models.ForeignKey('User', related_name='pupil',on_delete=models.CASCADE)
     assignment = models.ForeignKey('Assignment', null=True, on_delete=models.CASCADE, related_name='professor_assignment')
     actual_difficulty = models.IntegerField(default=0)

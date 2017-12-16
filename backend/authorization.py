@@ -93,6 +93,7 @@ class StudentAssignmentAuthorization(Authorization):
 
     def create_list(self, object_list, bundle):
         try:
+            print('in create list student assignment')
             StudentAssignment.objects.all().get(student=bundle.data.get('student').split('/')[4], assignment=bundle.data.get('assignment').split('/')[5])
         except (KeyError, ObjectDoesNotExist):
             return True
@@ -100,6 +101,7 @@ class StudentAssignmentAuthorization(Authorization):
 
     def create_detail(self, object_list, bundle):
         try:
+            print('in create detail student assignment')
             StudentAssignment.objects.all().get(student=bundle.data.get('student').split('/')[4], assignment=bundle.data.get('assignment').split('/')[5])
         except (KeyError, ObjectDoesNotExist):
             return True
@@ -110,10 +112,11 @@ class StudentAssignmentAuthorization(Authorization):
 
     def update_detail(self, object_list, bundle):
         try:
+            print('in update detail student assignment')
             StudentAssignment.objects.all().get(student_id=bundle.data.get('student').split('/')[4], assignment_id=bundle.data.get('assignment').split('/')[5])
         except (KeyError, ObjectDoesNotExist):
-            return False
-        return True
+            return True
+        return False
 
     def delete_list(self, object_list, bundle):
         raise Unauthorized("Sorry no deletes for you")

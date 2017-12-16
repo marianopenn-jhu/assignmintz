@@ -111,7 +111,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
                                                  description="Cool class", professor=self.professor_hagrid, students=[])
         #-------------------------------ASSIGNMENT--------------------------------
-        self.assignment_1 = Assignment.objects.create(assignment_id="1", assignment_name="Assignment 1",
+        self.assignment_1 = Assignment.objects.create(assignment_id="601.421_Assignment 1", assignment_name="Assignment 1",
                                                       assignment_type="hw", course=self.course_oose,
                                                       due_date="2013-01-29T12:34:56.00Z", expected_difficulty="4",
                                                       expected_time="3.4", description="Assignment 1")
