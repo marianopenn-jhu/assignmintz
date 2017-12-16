@@ -3,18 +3,17 @@ import styled from 'styled-components';
 import DayItem from './components/DayItem/index.jsx';
 import TopBar from './components/TopBar/index.jsx';
 
-const Wrapper = styled.div`
-  position: relative;
-  float: right;
-  left: 25vw;
-  width: 75vw;
+const ViewPane = styled.div`
+position: relative;
+float: left;
+left: 25vw;
+width: 75vw;
+height: 100vh;
 `;
 
-const TopBarContainer = styled.div
-`
+const TopBarContainer = styled.div`
   overflow-x: hidden;
-  min-height: 70px;
-  height: 10%;
+  height: 10vh;
   width: 100%;
   left: inherit;
   position:fixed;
@@ -23,15 +22,9 @@ const TopBarContainer = styled.div
 `;
 
 const ScrollableList=styled.ul`
+  margin-top: 10vh;
   overflow:hidden;
   overflow-y:auto;
-  height: 93%;
-  width: 80%;
-  position: absolute;
-  right: 0;
-  top: 7%;
-  margin: 0;
-  padding: 0;
   padding-top:10px;
   background:white;
 `;
@@ -102,14 +95,14 @@ class LinearCalendar extends React.Component {
     ));
 
     return(
-      <Wrapper>
+      <ViewPane>
         <TopBarContainer>
           <TopBar user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         </TopBarContainer>
         <ScrollableList>
           {current}
         </ScrollableList>
-      </Wrapper>
+      </ViewPane>
     );
   }
 }
