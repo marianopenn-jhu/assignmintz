@@ -15,7 +15,7 @@ background:white;
 `;
 
 const Container = styled.div`
-margin: 30px;
+  margin: 30px;
 `;
 
 const XOut = styled.span`

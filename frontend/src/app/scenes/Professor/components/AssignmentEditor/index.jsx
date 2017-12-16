@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
+import FaCalendar from 'react-icons/lib/fa/calendar';
+import DateTime from 'react-datetime';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
 import {addAssignment} from '../../../../services/api/professor/add-assignment.js'
+
 //position: absolute;
 const Container = styled.div`
   overflow:hidden;
@@ -58,22 +61,31 @@ const TextLabel = styled.div
 `;
 
 const TextInput = styled.input
-`
-  display:inline-block;
-  width:70%;
+`  width:70%;
 `;
 
 const BigTextInput = styled.textarea
 `
   display:inline-block;
   width:70%;
-  height:150px;
+  height:100px;
   resize: none;
 `;
 
 const CreateButton = styled.button
 `
+  float:right;
+`;
 
+const CalendarContainer = styled.span`
+  display:inline-block;
+  font-size:30px;
+  text-align:right;
+`
+
+const DateContainer = styled.span`
+  display:inline-block;
+  width:70%;
 `;
 
 class AssignmentEditor extends React.Component {
@@ -81,20 +93,23 @@ class AssignmentEditor extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCalendarChange = this.handleCalendarChange.bind(this);
 
     this.state = {
       assignment_id:"",
       assignment_name:"",
-      due_date_year:"",
-      due_date_month:"",
-      due_date_day:"",
-      due_date_time:"",
-      description:""
+      description:"",
+      date:""
     }
   }
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
+  }
+
+  handleCalendarChange(value) {
+    this.setState({['date']: value});
+    console.log(value);
   }
 
   handleSubmit(event) {
@@ -118,6 +133,8 @@ class AssignmentEditor extends React.Component {
     {
       if (response.status == false) {
           console.log(response.body);
+      } else {
+        this.onClose();
       }
     })
   }
@@ -142,23 +159,18 @@ class AssignmentEditor extends React.Component {
             <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
           </ItemLabel>
           <ItemLabel>
-            <TextLabel>Due Year:</TextLabel>
-            <BigTextInput name="due_date_year" onChange={this.handleChange}></BigTextInput>
+            <TextLabel>
+              <FaCalendar/>
+            </TextLabel>
+            <DateContainer>
+              <DateTime
+                inputProps={{ placeholder: "Select a Due Date/Time"}}
+                onChange={(value) => this.handleCalendarChange(value)}
+              />
+            </DateContainer>
           </ItemLabel>
           <ItemLabel>
-            <TextLabel>Due Month:</TextLabel>
-            <BigTextInput name="due_date_month" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Day:</TextLabel>
-            <BigTextInput name="due_date_day" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Time:</TextLabel>
-            <BigTextInput name="due_date_time" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel onClick={this.handleSubmit}>
-            <CreateButton type="button">Create Course</CreateButton>
+            <CreateButton onClick={this.handleSubmit}>Create Assignment</CreateButton>
           </ItemLabel>
         </FormContainer>
       </Container>
