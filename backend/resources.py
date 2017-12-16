@@ -7,7 +7,8 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization, StudentAssignmentAuthorization
+from backend.authorization import UserAuthorization, GeneralAuthorization, AssignmentAuthorization, \
+    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -70,7 +71,7 @@ class CourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
-        authorization = GeneralAuthorization()
+        authorization = CourseAuthorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
@@ -113,13 +114,12 @@ class AddStudentToCourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
-        authorization = GeneralAuthorization()
-        validation = CourseValidation()
-        allowed_methods = ['post', 'delete', 'put']
+        authorization = StudentCourseAuthorization()
+        allowed_methods = ['put']
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL
         }
 
@@ -131,7 +131,7 @@ class AssignmentResource(ModelResource):
     class Meta:
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
-        authorization = GeneralAuthorization()
+        authorization = AssignmentAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
         excludes = ['actual_difficulty', 'actual_time', \
@@ -168,6 +168,7 @@ class AssignmentResource(ModelResource):
         bundle.data.pop('assignment_type', None)
         bundle.data.pop('course', None)
         return bundle
+
 
 class StudentAssignmentResource(ModelResource):
     student = fields.ForeignKey(UserResource, 'student')
@@ -208,7 +209,7 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = GeneralAuthorization()
+            authorization = StudentAssignmentAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
@@ -227,7 +228,7 @@ class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
-            authorization = GeneralAuthorization()
+            authorization = CourseAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filters = {
                 'professor_id': ALL,

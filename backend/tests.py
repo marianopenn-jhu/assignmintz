@@ -51,6 +51,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
         self.oose_course = {
             "session_key": "12344321",
+            "user_name": "rhagrid",
             "course_id": "601.500",
             "course_title": "OOSE",
             "visible": "True",
@@ -163,7 +164,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.assertValidJSONResponse(resp2)
         resp3 = self.api_client.get('/backend/v1/professor/assignment/?user=rhagrid&key=12344321', format='json')
         self.assertValidJSONResponse(resp3)
-        resp4 = self.api_client.get('/backend/v1/subtask/?user=rhagrid&key=12344321', format='json')
+        resp4 = self.api_client.get('/backend/v1/subtask/?user=hgranger&key=5432112345', format='json')
         self.assertValidJSONResponse(resp4)
 
     def test_invalid_get(self):

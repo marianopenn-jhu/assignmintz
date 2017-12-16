@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
-import {createCourse} from '../../../../services/api/course/create-course.js'
+import {createCourse} from '../../../../services/api/course/create-course.js';
+
+const Wrapper = styled.div`
+  position: relative;
+  float: right;
+  left: 25vw;
+  width: 75vw;
+`;
 
 const Container = styled.div`
-  overflow:hidden;
-  overflow-y:auto;
-  height: 100%;
-  width: 80%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  padding-top:10px;
-  background:white;
+margin: 30px;
 `;
 
 const XOut = styled.span`
@@ -118,6 +115,7 @@ class CreateClassView extends React.Component {
 
   render() {
     return (
+      <Wrapper>
         <Container>
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Create a Class</Header>
@@ -139,6 +137,7 @@ class CreateClassView extends React.Component {
             </ItemLabel>
           </FormContainer>
         </Container>
+        </Wrapper>
     )
   }
 }

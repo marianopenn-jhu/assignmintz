@@ -3,21 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "config": {
-    "localhost": "dev"
-  },
   "scripts": {
-    "build": "webpack --env.host=dev",
-    "start": "webpack-dev-server --content-base src/public --env.host=dev",
-    "static": "webpack --output-path ../backend/static/backend --env.host=dev",
-    "deploy": "webpack --output-path ../backend/static/backend --env.host=deploy"
+    "build:dev": "NODE_ENV=develop webpack",
+    "start": "NODE_ENV=develop webpack-dev-server --content-base src/public",
+    "build:static": "NODE_ENV=develop webpack --output-path ../backend/static/backend",
+    "build:prod": "NODE_ENV=production webpack --output-path ../backend/static/backend"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "file-loader": "^1.1.5",
+    "file-loader": "^1.1.6",
     "react-icons": "^2.2.7",
-    "styled-components": "^2.2.3",
+    "styled-components": "^2.3.0",
     "url-loader": "^0.6.2"
   },
   "devDependencies": {
@@ -25,14 +22,16 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
+    "dedupe-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.30.1",
     "jquery": "^3.2.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0",
     "webpack-bundle-tracker": "^0.2.0",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.7"
   }
 }

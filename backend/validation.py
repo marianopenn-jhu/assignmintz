@@ -4,6 +4,7 @@ import hashlib
 from backend.models import User, LogIn, SubTask, Assignment, Course, StudentAssignment
 from django.core.exceptions import ObjectDoesNotExist
 
+
 def valid_session_key(session_key, user_name):
     queryset = LogIn.objects.all()
     try:
@@ -87,94 +88,71 @@ class UserValidation(Validation):
 
 
 class CourseValidation(Validation):
-    def isProfessor(self, user_name):
-        user = User.objects.all().get(user_name=user_name)
-        return user.role == 'professor'
 
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        user_name = str(bundle.data.get('professor').split('/')[4])
-        session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name) and self.isProfessor(user_name):
-            # ensure course id is unique
-            query_name = str(bundle.data.get('course_id'))
-            try:
-                Course.objects.all().get(course_id=query_name)
-                errs['dup_course_id'] = 'Course id already exists'
-            except ObjectDoesNotExist:
-                pass
+        # ensure course id is unique
+        query_name = str(bundle.data.get('course_id'))
+        try:
+            Course.objects.all().get(course_id=query_name)
+            errs['dup_course_id'] = 'Course id already exists'
+        except ObjectDoesNotExist:
+            pass
 
-            # empty fields
-            for key, value in bundle.data.items():
-                if value == '':
-                    errs[key] = str(key) + ' empty, please complete'
-        else:
-            errs["invalid_user_or_session"] = "Invalid username or session key. User must be a professor to perform this action."
-
+        # empty fields
+        for key, value in bundle.data.items():
+            if value == '':
+                errs[key] = str(key) + ' empty, please complete'
         return errs
 
 
 class AssignmentValidation(Validation):
-    def isProfessor(self, user_name):
-        user = User.objects.all().get(user_name=user_name)
-        return user.role == 'professor'
+
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        user_name = str(bundle.data.get('user_name'))
-        session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name) and self.isProfessor(user_name):
-            # ensure assignment id is unique
-            query_name = str(bundle.data.get('assignment_id'))
-            try:
-                Assignment.objects.all().get(assignment_id=query_name)
-                errs['dup_assignment_id'] = 'Assignment already exists'
-            except ObjectDoesNotExist:
-                pass
+        # ensure assignment id is unique
+        query_name = str(bundle.data.get('assignment_id'))
+        try:
+            Assignment.objects.all().get(assignment_id=query_name)
+            errs['dup_assignment_id'] = 'Assignment already exists'
+        except ObjectDoesNotExist:
+            pass
 
-            # empty fields
-            for key, value in bundle.data.items():
-                if value == '':
-                    errs[key] = str(key) + ' empty, please complete'
-        else:
-            errs['invalid_user_and_key'] = 'Invalid username or session key. User must be a professor.'
+        # empty fields
+        for key, value in bundle.data.items():
+            if value == '':
+                errs[key] = str(key) + ' empty, please complete'
 
         return errs
+
 
 class AssignmentUpdateValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
-        user_name = str(bundle.data.get('student').split('/')[4])
-        session_key = str(bundle.data.get('session_key'))
-        if not valid_session_key(session_key, user_name):
-            errs['invalid_user_and_key'] = 'Invalid username or session key'
         assignment_id = str(bundle.data.get('assignment').split('/')[5])
         # obj = StudentAssignment.objects.all().get(student_id=user_name, assignment_id=assignment_id)
         # if not obj:
         #     errs['']
         return errs
 
+
 class SubtaskValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
 
-        user_name = str(bundle.data.get('user_name'))
-        session_key = str(bundle.data.get('session_key'))
-        if valid_session_key(session_key, user_name):
-            # ensure subtask id is unique
-            query_name = str(bundle.data.get('subtask_id'))
-            try:
-                SubTask.objects.all().get(subtask_id=query_name)
-                errs['dup_subtask_id'] = 'Subtask already exists'
-            except ObjectDoesNotExist:
-                pass
+        # ensure subtask id is unique
+        query_name = str(bundle.data.get('subtask_id'))
+        try:
+            SubTask.objects.all().get(subtask_id=query_name)
+            errs['dup_subtask_id'] = 'Subtask already exists'
+        except ObjectDoesNotExist:
+            pass
 
-            # empty fields
-            for key, value in bundle.data.items():
-                if value == '':
-                    errs[key] = str(key) + ' empty, please complete'
-        else:
-            errs['invalid_user_and_key'] = 'Invalid username or session key'
+        # empty fields
+        for key, value in bundle.data.items():
+            if value == '':
+                errs[key] = str(key) + ' empty, please complete'
 
         return errs

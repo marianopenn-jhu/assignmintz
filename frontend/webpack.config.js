@@ -4,6 +4,23 @@ var BUILD_DIR = path.resolve(__dirname, 'src/public');
 var STATIC_DIR = path.resolve('../backend/static/backend/')
 var APP_DIR = path.resolve(__dirname, 'src/app');
 
+var apiHost;
+
+var setupApi = function() {
+  switch (process.env.NODE_ENV) {
+    case 'production':
+      apiHost = '"mysterious-depths-20159.herokuapp.com"';
+      break;
+    case 'qa':
+    case 'develop':
+    default:
+      apiHost = '"http://localhost:8000"';
+      break;
+  }
+};
+
+setupApi();
+
 var config = {
    entry: APP_DIR + '/index.js',
 
@@ -49,7 +66,12 @@ var config = {
              ]
          }
       ]
-   }
+   },
+   plugins : [
+     new webpack.DefinePlugin({
+       __API__:apiHost
+     })
+   ]
 }
 
 module.exports = config;
