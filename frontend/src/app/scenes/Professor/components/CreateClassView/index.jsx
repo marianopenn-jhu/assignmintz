@@ -11,17 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  overflow:hidden;
-  overflow-y:auto;
-  height: 100%;
-  width: 80%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  padding-top:10px;
-  background:white;
+margin: 30px;
 `;
 
 const XOut = styled.span`
