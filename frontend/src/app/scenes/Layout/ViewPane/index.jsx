@@ -18,15 +18,9 @@ height: 100vh;
 class ViewPane extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-          courses:[],
-          role:""
-        };
-  }
+    }
 
     render() {
-
       let view = null;
       if (this.props.role == "student") {
         if (this.props.case == 1) {
@@ -47,7 +41,7 @@ class ViewPane extends React.Component {
           )
         } else if (this.props.case == 3) {
           view = (
-            <DeleteClassView session_key={this.props.session_key} onClose={this.props.onCloseDelete} course={this.props.course}/>
+            <DeleteClassView user_name={this.props.user_name} session_key={this.props.session_key} onClose={this.props.onCloseDelete} course={this.props.course}/>
           )
         }else if (this.props.case == 4) {
           view = (

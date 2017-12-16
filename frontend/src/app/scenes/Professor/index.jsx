@@ -126,7 +126,7 @@ class ProfessorView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("professor=" + this.props.user_name).then((response) => {
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({courses: obj.objects});
@@ -137,7 +137,7 @@ class ProfessorView extends React.Component {
       );
 
       // Retrieve assignments
-      getAssignment("professor=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+      getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({assignments: obj.objects});
@@ -158,7 +158,7 @@ class ProfessorView extends React.Component {
     switch (state.viewState) {
       case 0:
         view = (
-          <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+          <LinearCalendar data={state.assignments} user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         );
         break;
       case 1:
@@ -176,7 +176,7 @@ class ProfessorView extends React.Component {
       case 3:
         view = (
           // <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          <ViewPane session_key={this.props.session_key} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
         )
         break;
       case 4:

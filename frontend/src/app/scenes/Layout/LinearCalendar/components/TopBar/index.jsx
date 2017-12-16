@@ -52,7 +52,7 @@ class TopBar extends React.Component {
   }
 
   onWheelClick() {
-    logoutUser(this.props.user_data, this.props.session_key);
+    logoutUser(this.props.user_name, this.props.session_key);
     if (this.props.onLogout != null)
     {
       this.props.onLogout();

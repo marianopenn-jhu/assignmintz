@@ -1,11 +1,12 @@
 const ERROR_STATUS = 400;
 const URL = __API__ + "/backend/v1/course/";
 
-export {deleteClass};
+export {deleteCourse};
 
-function deleteClass(course_id)
+function deleteCourse(filter)
 {
-  return fetch(URL + "?course_id=" + course_id, {
+  console.log(URL + filter);
+  return fetch(URL + filter, {
     method: 'DELETE',
     headers: {
       'Accept': 'application/json',
