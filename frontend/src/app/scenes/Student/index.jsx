@@ -27,7 +27,7 @@ class StudentView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("students=" + this.props.user_name).then((response) => {
+      getCourses("user=" + this.props.user_name).then((response) => {
         if (response.status == true) {
           var obj = response.body;
           this.setState({courses: obj.objects});
@@ -38,7 +38,7 @@ class StudentView extends React.Component {
     );
 
     // Retrieve assignments
-    getAssignment("student=" + this.props.user_name).then((response) => {
+    getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
       if (response.status == true) {
         var obj = response.body;
         this.setState({assignments: obj.objects});
@@ -86,7 +86,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} session_key={this.porps.session_key}/>
         {view}
     </Container>
   );
