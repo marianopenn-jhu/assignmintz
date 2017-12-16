@@ -46,7 +46,7 @@ class ProfessorView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("professor=" + this.props.user_name).then((response) => {
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({courses: obj.objects});
@@ -57,7 +57,7 @@ class ProfessorView extends React.Component {
       );
 
       // Retrieve assignments
-      getAssignment("professor=" + this.props.user_name).then((response) => {
+      getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({assignments: obj.objects});
@@ -141,7 +141,7 @@ class ProfessorView extends React.Component {
       );
 
       // Retrieve assignments
-      getAssignment("professor=" + this.props.user_name).then((response) => {
+      getAssignment("professor=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({assignments: obj.objects});
