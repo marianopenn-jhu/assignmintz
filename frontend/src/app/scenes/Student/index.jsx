@@ -19,6 +19,7 @@ class StudentView extends React.Component {
 
     this.returnToCalendar = this.returnToCalendar.bind(this);
     this.findClass = this.findClass.bind(this);
+    this.openClass = this.openClass.bind(this);
     this.state = {
       courses:[],
       assignments:[],
@@ -58,24 +59,27 @@ returnToCalendar() {
 findClass() {
   this.setState({viewState:1});
 }
+openClass(){
+  this.setState({viewState:3});
+}
 
 render() {
   const state = this.state;
 
   let view = null;
   switch (state.viewState) {
-    case 0:
+    case 0: //Full Calendar
     view = (
       <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
     );
     break;
     case 1:
-    view = (
+    view = (  //Find Class to add to class list/schedule
       // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
       <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
     );
     break;
-    case 2:
+      case 2: // View single class
       view = (
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
       );

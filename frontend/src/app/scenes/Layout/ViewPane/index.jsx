@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FindClassView from '../../Student/components/FindClassView/index.jsx';
+import StudentClassView from '../../Student/components/StudentClassView/index.jsx';
 import CreateClassView from '../../Professor/components/CreateClassView/index.jsx';
 import DeleteClassView from '../../Professor/components/DeleteClassView/index.jsx';
 import AssignmentEditor from '../../Professor/components/AssignmentEditor/index.jsx';
@@ -27,9 +28,8 @@ class ViewPane extends React.Component {
           view = (
             <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
           )
-        } else if (this.props.case == 2) {
+        } else if (this.props.case == 2) { // View single class
           view = (
-            // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
             <StudentClassView/>
           )
         }

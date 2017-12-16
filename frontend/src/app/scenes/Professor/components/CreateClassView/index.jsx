@@ -4,15 +4,10 @@ import FaClose from 'react-icons/lib/fa/close';
 import {createCourse} from '../../../../services/api/course/create-course.js';
 
 const Wrapper = styled.div`
-overflow:hidden;
-overflow-y:auto;
-height: 100%;
-right: 0;
-top: 0;
-margin: 0;
-padding: 0;
-padding-top:10px;
-background:white;
+  position: relative;
+  float: right;
+  left: 25vw;
+  width: 75vw;
 `;
 
 const Container = styled.div`
