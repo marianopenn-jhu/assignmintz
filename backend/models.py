@@ -43,30 +43,38 @@ class Course(models.Model):
 
 
 class Assignment(models.Model):
-    assignment_id = models.IntegerField(primary_key=True, default=0)
+    assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     assignment_name = models.CharField(max_length=36, default='')
     assignment_type = models.CharField(max_length=5, default='')
     course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
     due_date = models.DateTimeField(blank=True, null=True)
     expected_difficulty = models.IntegerField(default=0)
-    actual_difficulty = models.IntegerField(default=0)
     expected_time = models.FloatField(default=0.0)
-    actual_time = models.FloatField(default=0.0)
-    priority = models.IntegerField(default=0)
-    percent_complete = models.FloatField(default=0.0)
-    visible = models.BooleanField(default=True)
     description = models.TextField(default='')
 
     def __unicode__(self):
         return self.assignment_name
 
 
+class StudentAssignment(models.Model):
+    student_assignment_id = models.CharField(primary_key=True, default='', max_length=256)
+    student = models.ForeignKey('User', related_name='pupil', on_delete=models.CASCADE)
+    assignment = models.ForeignKey('Assignment', null=True, on_delete=models.CASCADE, related_name='professor_assignment')
+    actual_difficulty = models.IntegerField(default=0)
+    actual_time = models.FloatField(default=0.0)
+    priority = models.IntegerField(default=0)
+    done = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.student_assignment_id
+
+
 class SubTask(models.Model):
-    subtask_id = models.CharField(max_length=36, primary_key=True)
+    subtask_id = models.CharField(max_length=60, primary_key=True)
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
     description = models.TextField(default='')
-    assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
+    student_assignment = models.ForeignKey('StudentAssignment', null=True, on_delete=models.CASCADE)
 
 
 class OfficeHours(models.Model):

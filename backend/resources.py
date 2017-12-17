@@ -1,13 +1,14 @@
 # backend/resources.py
 
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from backend.models import User, Assignment, SubTask, Course, OfficeHours, LogIn, LogOut
+from backend.models import User, Assignment, StudentAssignment, SubTask, Course, OfficeHours, LogIn, LogOut
 from tastypie.authorization import Authorization
 from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
-    SubtaskValidation, LoginValidation, LogOutValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization
+    SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
+from backend.authorization import UserAuthorization, AssignmentAuthorization, \
+    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
 # from django.contrib.auth.models import User
@@ -30,7 +31,7 @@ class LogInResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data.pop('passwd', None)
-        #bundle.data['session_key'] = self.session_key
+        bundle.data.pop('role', None)
         return bundle
 
 
@@ -45,17 +46,17 @@ class LogOutResource(ModelResource):
 
 class UserResource(ModelResource):
     class Meta:
-            queryset = User.objects.all()
-            resource_name = 'user'
-            authorization = UserAuthorization()
-            authentication = Authentication()
-            allowed_methods = ['get', 'post']
-            validation = UserValidation()
-            filtering = {
-                'user_name': ALL,
-                'name': ALL,
-                'role': ALL
-            }
+        queryset = User.objects.all()
+        resource_name = 'user'
+        authorization = UserAuthorization()
+        authentication = Authentication()
+        allowed_methods = ['get', 'post']
+        validation = UserValidation()
+        filtering = {
+            'user_name': ALL,
+            'name': ALL,
+            'role': ALL
+        }
 
     def hydrate(self, bundle):
         salt = uuid.uuid4().hex
@@ -70,7 +71,7 @@ class CourseResource(ModelResource):
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'course'
-        authorization = GeneralAuthorization()
+        authorization = CourseAuthorization()
         allowed_methods = ['get', 'post', 'delete', 'put']
         validation = CourseValidation()
         excludes = []
@@ -99,21 +100,26 @@ class AddStudentToCourseResource(ModelResource):
 
             manager = getattr(bundle.obj, obj.attribute)
             related_objects = []
+            course_id = bundle.request.path.split('/')[5]
 
             for related_bundle in bundle.data[field]:
                 student = User.objects.get(user_name=related_bundle.obj.user_name)
                 related_objects.append(student)
+                assignments = (Assignment.objects.filter(course_id=course_id))
+                course = (Course.objects.all().get(course_id=course_id))
+                for assignment in assignments:
+                    StudentAssignment.objects.create(student_assignment_id=assignment.assignment_id+'_'+student.user_name, student=student, assignment=Assignment.objects.all().get(assignment_id=assignment.assignment_id))
             manager.add(*related_objects)
 
     class Meta:
         queryset = Course.objects.all()
         resource_name = 'student/course'
-        authorization = GeneralAuthorization()
-        allowed_methods = ['post', 'delete']
+        authorization = StudentCourseAuthorization()
+        allowed_methods = ['put']
         excludes = []
         filtering = {
             'course_id': ALL,
-            'professor':ALL,
+            'professor': ALL,
             'students': ALL
         }
 
@@ -124,7 +130,7 @@ class AssignmentResource(ModelResource):
     class Meta:
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
-        authorization = GeneralAuthorization()
+        authorization = AssignmentAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
         excludes = []
@@ -136,26 +142,89 @@ class AssignmentResource(ModelResource):
             'due_date': ALL
         }
 
+    def hydrate(self, bundle):
+        try:
+            bundle.data['assignment_id'] = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
+        except IndexError:
+            pass
+        return bundle
+
     def dehydrate(self, bundle):
+        course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
+        students = course.students.all()
+        for stud in students:
+            StudentAssignment.objects.create(student_assignment_id=bundle.obj.assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=bundle.obj.assignment_id))
         bundle.data["course"] = bundle.obj.course.course_id
+        bundle.data['assignment_id'] = bundle.obj.assignment_id
+        bundle.data.pop('expected_difficulty', None)
+        bundle.data.pop('expected_time', None)
+        bundle.data.pop('due_date', None)
+        bundle.data.pop('user_name', None)
+        bundle.data.pop('session_key', None)
+        bundle.data.pop('description', None)
+        bundle.data.pop('assignment_name', None)
+        bundle.data.pop('assignment_type', None)
+        bundle.data.pop('course', None)
+        return bundle
+
+
+class StudentAssignmentResource(ModelResource):
+    student = fields.ForeignKey(UserResource, 'student')
+    assignment = fields.ToOneField(AssignmentResource, 'assignment')
+
+    class Meta:
+        queryset = StudentAssignment.objects.all()
+        resource_name = 'student/assignment'
+        authorization = StudentAssignmentAuthorization()
+        allowed_methods = ['get', 'post', 'delete', 'put']
+        validation = AssignmentUpdateValidation()
+        always_return_data = True
+        include_resource_uri = False
+        excludes = []
+        filtering = {
+            'student': ALL
+        }
+
+    def hydrate(self, bundle):
+        assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
+        bundle.data['student_assignment_id'] = str(assignment.course.course_id) + '_' + str(assignment.assignment_id) + '_'+bundle.data['student'].split('_')[4]
+        return bundle
+
+    #TODO write dehydrate method to call algorithm
+    def dehydrate(self, bundle):
+        bundle.data.pop('actual_difficulty', None)
+        bundle.data.pop('actual_time', None)
+        bundle.data.pop('assignment_id', None)
+        bundle.data.pop('done', None)
+        bundle.data.pop('priority', None)
+        bundle.data.pop('session_key', None)
+        bundle.data.pop('student', None)
+        bundle.data.pop('pk', None)
         return bundle
 
 
 class SubTaskResource(ModelResource):
-    assignment = fields.ForeignKey(AssignmentResource, 'assignment')
+    student_assignment = fields.ForeignKey(StudentAssignmentResource, 'student_assignment')
 
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = GeneralAuthorization()
+            authorization = StudentAssignmentAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
             filtering = {
                 'subtask': ALL,
                 'subtask_name': ALL,
-                'assignment': ALL
+                'student_assignment': ALL
             }
+
+    def hydrate(self, bundle):
+        try:
+            bundle.data['subtask_id'] = bundle.data['student_assignment'].split('/')[5] + '_' + bundle.data['subtask_name']
+        except IndexError:
+            pass
+        return bundle
 
     def dehydrate(self, bundle):
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
@@ -166,7 +235,7 @@ class OfficeHoursResource(ModelResource):
     class Meta:
             queryset = OfficeHours.objects.all()
             resource_name = 'officehours'
-            authorization = GeneralAuthorization()
+            authorization = CourseAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             filtering = {
                 'professor_id': ALL,
