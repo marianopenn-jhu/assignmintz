@@ -124,7 +124,6 @@ class AddStudentToCourseResource(ModelResource):
         }
 
 
-
 class AssignmentResource(ModelResource):
     course = fields.ForeignKey(CourseResource, 'course')
 
@@ -151,6 +150,7 @@ class AssignmentResource(ModelResource):
         except IndexError:
             pass
         return bundle
+
     def dehydrate(self, bundle):
         course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
         students = course.students.all()
@@ -186,10 +186,12 @@ class StudentAssignmentResource(ModelResource):
         filtering = {
             'student': ALL
         }
+
     def hydrate(self, bundle):
         assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
         bundle.data['student_assignment_id'] = str(assignment.course.course_id) + '_' + str(assignment.assignment_id) + '_'+bundle.data['student'].split('_')[4]
         return bundle
+
     #TODO write dehydrate method to call algorithm
     def dehydrate(self, bundle):
         bundle.data.pop('actual_difficulty', None)
@@ -204,7 +206,7 @@ class StudentAssignmentResource(ModelResource):
 
 
 class SubTaskResource(ModelResource):
-    assignment = fields.ForeignKey(AssignmentResource, 'assignment')
+    assignment = fields.ForeignKey(StudentAssignmentResource, 'student_assignment')
 
     class Meta:
             queryset = SubTask.objects.all()
@@ -216,8 +218,15 @@ class SubTaskResource(ModelResource):
             filters = {
                 'subtask': ALL,
                 'subtask_name': ALL,
-                'assignment': ALL
+                'assignment_id': ALL
             }
+
+    def hydrate(self, bundle):
+        try:
+            bundle.data['subtask_id'] = bundle.data['assignment_id'].split('/')[5] + '_' + bundle.data['subtask_name']
+        except IndexError:
+            pass
+        return bundle
 
     def dehydrate(self, bundle):
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
