@@ -90,6 +90,8 @@ class LinearCalendar extends React.Component {
         }
     }
 
+    console.log(assignmentDict);
+
     var current = (<DayItem day="Your schedule is free!"/>);
     var current = Object.keys(assignmentDict).map((key, index) => (
        <DayItem key={index} day={key} assignments={assignmentDict[key]}/>

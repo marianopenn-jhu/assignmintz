@@ -6,18 +6,12 @@ export {addAssignment};
 function addAssignment(
   session_key,
   user_name,
-  assignment_id,
   assignment_name,
   assignment_type,
   course,
   due_date,
   expected_difficulty,
-  actual_difficulty,
   expected_time,
-  actual_time,
-  priority,
-  percent_complete,
-  visible,
   description)
 {
   var status = 200;
@@ -30,18 +24,12 @@ function addAssignment(
     body: JSON.stringify({
       session_key,
       user_name,
-      assignment_id,
       assignment_name,
       assignment_type,
       course,
       due_date,
       expected_difficulty,
-      actual_difficulty,
       expected_time,
-      actual_time,
-      priority,
-      percent_complete,
-      visible,
       description
     })
   })).then((response) => {

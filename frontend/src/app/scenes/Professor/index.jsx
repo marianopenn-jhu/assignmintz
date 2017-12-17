@@ -125,7 +125,6 @@ class ProfessorView extends React.Component {
   }
 
   returnToCalendar() {
-    console.log("got here ");
     this.setState({viewState:0});
 
     if (this.props.user_name) {

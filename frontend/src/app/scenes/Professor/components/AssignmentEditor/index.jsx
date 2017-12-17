@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
 import FaPencil from 'react-icons/lib/fa/pencil';
 import AssignmentElement from './components/AssignmentElement/index.jsx';
+import AddAssignmentElement from './components/AddAssignmentElement/index.jsx';
 import AssignmentFieldEditor from './components/AssignmentFieldEditor/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
 
@@ -45,7 +46,6 @@ const PencilSpan = styled.span`
 const AssignmentsContainer = styled.div`
   width:85%;
   height:100%;
-  padding:50px;
 `;
 
 const AssignmentList = styled.ul`
@@ -111,6 +111,7 @@ class AssignmentEditor extends React.Component {
           <AssignmentsContainer>
             <AssignmentList>
               {assignmentListHtml}
+              <AddAssignmentElement onClick={() => this.onEditClick(null)}/>
             </AssignmentList>
           </AssignmentsContainer>
         )
