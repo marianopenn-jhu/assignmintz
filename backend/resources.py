@@ -127,8 +127,7 @@ class AssignmentResource(ModelResource):
         authorization = GeneralAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
-        excludes = ['actual_difficulty', 'actual_time', \
-                    'priority', 'percent_complete', 'visible', 'description']
+        excludes = []
         filtering = {
             'assignment_id': ALL,
             'assignment_name': ALL,
