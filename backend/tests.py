@@ -60,8 +60,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "students": ["/backend/v1/user/rweasely/"]
         }
         self.oose_assignment_1 = {
-            "assignment_id": "3",
-            "assignment_name": "Iteration 3",
+            "assignment_name": "Iteration2",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
@@ -112,7 +111,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
                                                  description="Cool class", professor=self.professor_hagrid, students=[])
         #-------------------------------ASSIGNMENT--------------------------------
-        self.assignment_1 = Assignment.objects.create(assignment_id="601.421_Assignment 1", assignment_name="Assignment 1",
+        self.assignment_1 = Assignment.objects.create(assignment_id="601.421_Assignment3", assignment_name="Assignment3",
                                                       assignment_type="hw", course=self.course_oose,
                                                       due_date="2013-01-29T12:34:56.00Z", expected_difficulty="4",
                                                       expected_time="3.4", description="Assignment 1")
@@ -386,8 +385,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_assignment_1_dup = {
             "session_key": "12344321",
             "user_name": "rhagrid",
-            "assignment_id": "2",
-            "assignment_name": "Iteration 1",
+            "assignment_name": "Iteration3",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
@@ -395,7 +393,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "expected_time": "3.4",
             "description": "Complete the iteration before time runs out"
         }
-        assignment = Assignment.objects.create(assignment_id="2", assignment_name="Iteration 1", assignment_type="hw",
+        assignment = Assignment.objects.create(assignment_id="601.421_Iteration3", assignment_name="Iteration 1", assignment_type="hw",
                                                course=self.course_oose, due_date="2013-01-29T12:34:56.00Z",
                                                expected_difficulty="3", expected_time="3.4",
                                                description="Complete the iteration before time runs out")

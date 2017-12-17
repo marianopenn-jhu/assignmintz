@@ -41,6 +41,7 @@ class Course(models.Model):
     def __unicode__(self):
         return self.course_title
 
+
 class Assignment(models.Model):
     assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     assignment_name = models.CharField(max_length=36, default='')

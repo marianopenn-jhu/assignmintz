@@ -7,7 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization, AssignmentAuthorization, \
+from backend.authorization import UserAuthorization, AssignmentAuthorization, \
     CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
