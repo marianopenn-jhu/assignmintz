@@ -118,7 +118,7 @@ class AssignmentEditor extends React.Component {
         break;
       case 1:
         current = (
-          <AssignmentFieldEditor assignment={this.state.selectedAssignment}/>
+          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment}/>
         );
         break;
       case 2:

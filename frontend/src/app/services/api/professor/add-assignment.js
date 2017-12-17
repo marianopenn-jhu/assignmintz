@@ -34,7 +34,11 @@ function addAssignment(
     })
   })).then((response) => {
     status = response.status;
-    return response.json()
+    if (status >= ERROR_STATUS) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
   }).then((json) => {
     if(status >= ERROR_STATUS) {
       return {status: false, body: json};
