@@ -39,53 +39,6 @@ class UserAuthorization(Authorization):
         raise Unauthorized("Sorry, no deletes.")
 
 
-class GeneralAuthorization(Authorization):
-    def read_list(self, object_list, bundle):
-        # This assumes a ``QuerySet`` from ``ModelResource``.
-        try:
-            session_key = bundle.request.GET["key"]
-            user = bundle.request.GET["user"]
-            LogIn.objects.all().get(user_name=user, session_key=session_key)
-        except (KeyError, ObjectDoesNotExist):
-            raise Unauthorized("Need valid session key and username")
-        return object_list
-
-    def read_detail(self, object_list, bundle):
-        return True
-
-    def create_list(self, object_list, bundle):
-        # Assuming they're auto-assigned to ``user``.
-
-        return object_list
-
-    def create_detail(self, object_list, bundle):
-        try:
-            session_key = bundle.request.GET["key"]
-            user = bundle.request.GET["user"]
-            LogIn.objects.all().get(user_name=user, session_key=session_key)
-        except (KeyError, ObjectDoesNotExist):
-            raise Unauthorized("Need valid session key and username")
-        return True
-
-    def update_list(self, object_list, bundle):
-        try:
-            session_key = bundle.request.GET["key"]
-            user = bundle.request.GET["user"]
-            LogIn.objects.all().get(user_name=user, session_key=session_key)
-        except (KeyError, ObjectDoesNotExist):
-            raise Unauthorized("Need valid session key and username")
-        return object_list
-
-    def update_detail(self, object_list, bundle):
-        return True
-
-    def delete_list(self, object_list, bundle):
-        raise Unauthorized("Sorry no deletes for you")
-
-    def delete_detail(self, object_list, bundle):
-        raise Unauthorized("Sorry no deletes for you")
-
-
 class StudentAssignmentAuthorization(Authorization):
 
     def read_list(self, object_list, bundle):
@@ -297,9 +250,6 @@ class StudentCourseAuthorization(Authorization):
         try:
             user_name = bundle.data.get('user_name')
             session_key = bundle.data.get('session_key')
-            user = User.objects.all().get(user_name=user_name)
-            if user.role.lower() == 'student':
-                raise Unauthorized("Must be professor")
             LogIn.objects.all().get(user_name=user_name, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
@@ -310,9 +260,6 @@ class StudentCourseAuthorization(Authorization):
         try:
             user_name = bundle.data.get('user_name')
             session_key = bundle.data.get('session_key')
-            user = User.objects.all().get(user_name=user_name)
-            if user.role.lower() == 'student':
-                raise Unauthorized("Must be professor")
             LogIn.objects.all().get(user_name=user_name, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")

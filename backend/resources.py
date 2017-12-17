@@ -7,7 +7,7 @@ from tastypie.authentication import Authentication
 from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
-from backend.authorization import UserAuthorization, GeneralAuthorization, AssignmentAuthorization, \
+from backend.authorization import UserAuthorization, AssignmentAuthorization, \
     CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
@@ -125,7 +125,6 @@ class AddStudentToCourseResource(ModelResource):
         }
 
 
-
 class AssignmentResource(ModelResource):
     course = fields.ForeignKey(CourseResource, 'course')
 
@@ -136,8 +135,7 @@ class AssignmentResource(ModelResource):
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
         excludes = []
-        always_return_data = True
-        filters = {
+        filtering = {
             'assignment_id': ALL,
             'assignment_name': ALL,
             'assignment_type': ALL,
@@ -151,6 +149,7 @@ class AssignmentResource(ModelResource):
         except IndexError:
             pass
         return bundle
+
     def dehydrate(self, bundle):
         #Create instance of assignment for all students in this course
         course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
@@ -216,12 +215,14 @@ class StudentAssignmentResource(ModelResource):
         filtering = {
             'student': ALL
         }
+
     def hydrate(self, bundle):
         print('in student hydrate')
         assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
         bundle.data['student_assignment_id'] = str(assignment.assignment_id) + '_'+bundle.data['student'].split('/')[4]
         return bundle
 
+    #TODO write dehydrate method to call algorithm
     def dehydrate(self, bundle):
         bundle.data.pop('actual_difficulty', None)
         bundle.data.pop('actual_time', None)
@@ -235,7 +236,7 @@ class StudentAssignmentResource(ModelResource):
 
 
 class SubTaskResource(ModelResource):
-    assignment = fields.ForeignKey(AssignmentResource, 'assignment')
+    student_assignment = fields.ForeignKey(StudentAssignmentResource, 'student_assignment')
 
     class Meta:
             queryset = SubTask.objects.all()
@@ -244,11 +245,18 @@ class SubTaskResource(ModelResource):
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = []
-            filters = {
+            filtering = {
                 'subtask': ALL,
                 'subtask_name': ALL,
-                'assignment': ALL
+                'student_assignment': ALL
             }
+
+    def hydrate(self, bundle):
+        try:
+            bundle.data['subtask_id'] = bundle.data['student_assignment'].split('/')[5] + '_' + bundle.data['subtask_name']
+        except IndexError:
+            pass
+        return bundle
 
     def dehydrate(self, bundle):
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
@@ -261,7 +269,7 @@ class OfficeHoursResource(ModelResource):
             resource_name = 'officehours'
             authorization = CourseAuthorization()
             allowed_methods = ['get', 'post', 'delete']
-            filters = {
+            filtering = {
                 'professor_id': ALL,
                 'ta_name': ALL
             }

@@ -42,6 +42,7 @@ class Course(models.Model):
     def __unicode__(self):
         return self.course_title
 
+
 class Assignment(models.Model):
     assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     assignment_name = models.CharField(max_length=36, default='')
@@ -55,9 +56,10 @@ class Assignment(models.Model):
     def __unicode__(self):
         return self.assignment_name
 
+
 class StudentAssignment(models.Model):
     student_assignment_id = models.CharField(primary_key=True, default='', max_length=256)
-    student = models.ForeignKey('User', related_name='pupil',on_delete=models.CASCADE)
+    student = models.ForeignKey('User', related_name='pupil', on_delete=models.CASCADE)
     assignment = models.ForeignKey('Assignment', null=True, on_delete=models.CASCADE, related_name='professor_assignment')
     actual_difficulty = models.IntegerField(default=0)
     actual_time = models.FloatField(default=0.0)
@@ -67,12 +69,13 @@ class StudentAssignment(models.Model):
     def __unicode__(self):
         return self.student_assignment_id
 
+
 class SubTask(models.Model):
-    subtask_id = models.CharField(max_length=36, primary_key=True)
+    subtask_id = models.CharField(max_length=60, primary_key=True)
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
     description = models.TextField(default='')
-    assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
+    student_assignment = models.ForeignKey('StudentAssignment', null=True, on_delete=models.CASCADE)
 
 
 class OfficeHours(models.Model):

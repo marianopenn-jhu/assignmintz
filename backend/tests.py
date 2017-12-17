@@ -1,6 +1,6 @@
 from django.test import TestCase
 from tastypie.test import ResourceTestCaseMixin
-from backend.models import User, LogIn, Course, Assignment, SubTask
+from backend.models import User, LogIn, Course, Assignment, SubTask, StudentAssignment
 
 
 # Create your tests here.
@@ -60,8 +60,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "students": ["/backend/v1/user/rweasely/"]
         }
         self.oose_assignment_1 = {
-            "assignment_id": "3",
-            "assignment_name": "Iteration 3",
+            "assignment_name": "Iteration2",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
@@ -79,12 +78,11 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
         self.oose_subtask_1 = {
             "session_key": "12344321",
-            "user_name": "rhagrid",
-            "subtask_id": "testing",
-            "subtask_name": "Implement Testing",
+            "user_name": "potter",
+            "subtask_name": "ImplementTesting",
             "visible": "True",
             "description": "Implement extensive testing",
-            "assignment": "/backend/v1/professor/assignment/1/"
+            "student_assignment": "/backend/v1/student/assignment/601.421_Assignment3_potter/"
         }
 
         #Save JSON models in the DB
@@ -94,7 +92,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
                                                    passwd='pottermore', role='student')
         self.professor_hagrid = User.objects.create(user_name='rhagrid', name='Rubeus', email='rhagrid@jhu.edu',
                                                     passwd='fang', role='professor')
-        self.user_potter = User.objects.create(user_name='username', name='name', email='harrypotter@jhu.edu',
+        self.user_potter = User.objects.create(user_name='potter', name='harry', email='harrypotter@jhu.edu',
                                                passwd='1234', role='student')
         self.user_granger = User.objects.create(user_name='hgranger', name='hermione', email='hgranger@jhu.edu',
                                                 passwd='1234', role='student')
@@ -106,16 +104,22 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.login_hagrid = LogIn.objects.create(user_name='rhagrid', session_key='12344321')
         self.login_weasely = LogIn.objects.create(user_name='gweasely', session_key='12344322')
         self.login_granger = LogIn.objects.create(user_name='hgranger', session_key='5432112345')
+        self.login_potter = LogIn.objects.create(user_name='potter', session_key='12344321')
         self.login_mcgonagall = LogIn.objects.create(user_name='mcgonagall', session_key='12344321')
 
         #-------------------------------COURSE--------------------------------
         self.course_oose = Course.objects.create(course_id="601.421", course_title="OOSE", visible="True",
                                                  description="Cool class", professor=self.professor_hagrid, students=[])
         #-------------------------------ASSIGNMENT--------------------------------
-        self.assignment_1 = Assignment.objects.create(assignment_id="601.421_Assignment 1", assignment_name="Assignment 1",
+        self.assignment_1 = Assignment.objects.create(assignment_id="601.421_Assignment3", assignment_name="Assignment3",
                                                       assignment_type="hw", course=self.course_oose,
                                                       due_date="2013-01-29T12:34:56.00Z", expected_difficulty="4",
                                                       expected_time="3.4", description="Assignment 1")
+        self.student_assignment_1 = StudentAssignment.objects.create(student_assignment_id="601.421_Assignment3_potter",
+                                                                     student=self.user_potter,
+                                                                     assignment=self.assignment_1,
+                                                                     actual_difficulty="3", actual_time="3.4",
+                                                                     priority="5", done="False")
 
         # Logged in: Hagrid (Professor), McGonagall (Professor), Gweasely (Student)
         # Logged out: Dumbledore (Professor), Potter (Student), Granger (Student)
@@ -386,8 +390,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_assignment_1_dup = {
             "session_key": "12344321",
             "user_name": "rhagrid",
-            "assignment_id": "2",
-            "assignment_name": "Iteration 1",
+            "assignment_name": "Iteration3",
             "assignment_type": "hw",
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
@@ -395,7 +398,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "expected_time": "3.4",
             "description": "Complete the iteration before time runs out"
         }
-        assignment = Assignment.objects.create(assignment_id="2", assignment_name="Iteration 1", assignment_type="hw",
+        assignment = Assignment.objects.create(assignment_id="601.421_Iteration3", assignment_name="Iteration 1", assignment_type="hw",
                                                course=self.course_oose, due_date="2013-01-29T12:34:56.00Z",
                                                expected_difficulty="3", expected_time="3.4",
                                                description="Complete the iteration before time runs out")
@@ -409,11 +412,10 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.invalid_oose_subtask_1 = {
             "session_key": "12344321",
             "user_name": "rhagrid",
-            "subtask_id": "testing",
-            "subtask_name": "Implement Testing",
+            "subtask_name": "ImplementTesting",
             "visible": "True",
             "description": "Implement extensive testing",
-            "assignment": "/backend/v1/professor/assignment/43/"
+            "student_assignment": "/backend/v1/student/assignment/01/"
         }
         resp1 = self.api_client.post(self.subtask_url, format='json', data=self.invalid_oose_subtask_1)
         self.assertHttpBadRequest(resp1)
@@ -426,7 +428,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "subtask_name": "",
             "visible": "True",
             "description": "",
-            "assignment": "/backend/v1/professor/assignment/1/"
+            "student_assignment": "/backend/v1/student/assignment/601.400_Iteration1_potter/"
         }
         self.empty_oose_subtask_2 = {
             "session_key": "12344321",
@@ -435,7 +437,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "subtask_name": "Implement Testing",
             "visible": "",
             "description": "Implement extensive testing",
-            "assignment": ""
+            "student_assignment": ""
         }
         resp1 = self.api_client.post(self.subtask_url, format='json', data=self.empty_oose_subtask_1)
         self.assertHttpBadRequest(resp1)
@@ -444,8 +446,10 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         print("Empty subtask passed")
 
     def test_dup_subtask(self):
-        subtask = SubTask.objects.create(subtask_id="testing", subtask_name="Implement Testing", visible="True",
-                                         description="Implement extensive testing", assignment=self.assignment_1)
+        subtask = SubTask.objects.create(subtask_id="601.421_Assignment3_potter_ImplementTesting",
+                                         subtask_name="ImplementTesting", visible="True",
+                                         description="Implement extensive testing",
+                                         student_assignment=self.student_assignment_1)
         subtask.save()
         resp = self.api_client.post(self.subtask_url, format='json', data=self.oose_subtask_1)
         self.assertHttpBadRequest(resp)
