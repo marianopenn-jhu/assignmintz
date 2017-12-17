@@ -250,9 +250,6 @@ class StudentCourseAuthorization(Authorization):
         try:
             user_name = bundle.data.get('user_name')
             session_key = bundle.data.get('session_key')
-            user = User.objects.all().get(user_name=user_name)
-            if user.role.lower() == 'student':
-                raise Unauthorized("Must be professor")
             LogIn.objects.all().get(user_name=user_name, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
@@ -263,9 +260,6 @@ class StudentCourseAuthorization(Authorization):
         try:
             user_name = bundle.data.get('user_name')
             session_key = bundle.data.get('session_key')
-            user = User.objects.all().get(user_name=user_name)
-            if user.role.lower() == 'student':
-                raise Unauthorized("Must be professor")
             LogIn.objects.all().get(user_name=user_name, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
