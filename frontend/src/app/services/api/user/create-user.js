@@ -4,6 +4,7 @@ export {createUser};
 
 function createUser(user_name, name, email, passwd, role)
 {
+  var status = 200;
   return (fetch(URL, {
     method: 'POST',
     headers: {
@@ -11,14 +12,18 @@ function createUser(user_name, name, email, passwd, role)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({user_name, name, email, passwd, role})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in createUser()")
+  })).then((response) => {
+    status = response.status;
+    if (status >= ERROR_STATUS) {
+        return response.json()
     } else {
-      return {status: true, body: "Empty"};
+      return "Empty";
     }
-  })).catch((error) => {
-    return {status: false, body: error};
-  });
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
+    } else {
+      return {status: true, body: json};
+    }
+  })
 }

@@ -46,7 +46,7 @@ class AssignmentElement extends React.Component {
       <Container>
         <HeaderContainer>
           <TextContainer>Hippopotami are a purplish gray (grey) and Ospreys are not greay</TextContainer>
-          <IconContainer><IconSpan><FaEdit/></IconSpan><IconSpan><FaMinus/></IconSpan></IconContainer>
+          <IconContainer><IconSpan onClick={() => this.props.onEditClick(this.props.assignment)}><FaEdit/></IconSpan><IconSpan onClick={() => this.props.onDeleteClick(this.props.assignment)}><FaMinus/></IconSpan></IconContainer>
         </HeaderContainer>
         <DescriptionContainer>
           One time my cousin and I were at the park. 'Twas a lovely park if not for the variety of Hippopotami in the vicintiy, then for the various owls and other reptiles. Of course an owl is most certainly not a reptile, but, nonetheless, my point remains.

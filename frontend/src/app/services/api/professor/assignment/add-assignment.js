@@ -5,21 +5,22 @@ export {addAssignment};
 
 function addAssignment(professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate)
 {
-  return fetch(URL, {
+  var status = 200;
+  return (fetch(URL, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({professor_id, assignment_name, type, description, expectedDifficulty, expectedTime, dueDate})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in addAssignment()");
+  })).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return {status: true, result: response};
+      return {status: true, body: json};
     }
-  }).catch((error) => {
-    return {status: false, result: error};
-  });
+  })
 }

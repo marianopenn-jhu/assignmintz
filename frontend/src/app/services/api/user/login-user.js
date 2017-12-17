@@ -6,6 +6,7 @@ export {loginUser};
 
 function loginUser(user_name, passwd)
 {
+  var status = 200;
   return (fetch(URL, {
     method: 'POST',
     headers: {
@@ -13,18 +14,14 @@ function loginUser(user_name, passwd)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({user_name, passwd})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in loginUser() " + URL);
+  })).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return response.json();
+      return {status: true, body: json};
     }
-  })).then((json) =>
-  {
-    return {status: true, body: json};
-  }).catch((error) =>
-  {
-    return {status: false, body: error};
-  });
+  })
 }

@@ -5,6 +5,7 @@ export {deleteAssignment};
 
 function deleteAssignment(professor_id, assignment_id)
 {
+  var status = 200;
   return fetch(URL, {
     method: 'DELETE',
     headers: {
@@ -12,14 +13,14 @@ function deleteAssignment(professor_id, assignment_id)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({professor_id, assignment_id})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in deleteAssignment()");
+  }).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return {status: true, result: response};
+      return {status: true, body: json};
     }
-  }).catch((error) => {
-    return {status: false, result: error};
-  });
+  })
 }

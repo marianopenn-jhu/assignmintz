@@ -20,23 +20,7 @@ function addAssignment(
   visible,
   description)
 {
-  console.log(JSON.stringify({
-    session_key,
-    user_name,
-    assignment_id,
-    assignment_name,
-    assignment_type,
-    course,
-    due_date,
-    expected_difficulty,
-    actual_difficulty,
-    expected_time,
-    actual_time,
-    priority,
-    percent_complete,
-    visible,
-    description
-  }));
+  var status = 200;
   return (fetch(URL, {
     method: 'POST',
     headers: {
@@ -60,15 +44,14 @@ function addAssignment(
       visible,
       description
     })
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in addAssignment()");
+  })).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return {status: true, body: "Empty"};
+      return {status: true, body: json};
     }
-  })).catch((error) =>
-  {
-    return {status: false, body: error};
-  });
+  })
 }
