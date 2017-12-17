@@ -133,10 +133,8 @@ class AssignmentResource(ModelResource):
         authorization = AssignmentAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
-        excludes = ['actual_difficulty', 'actual_time', \
-                    'priority', 'percent_complete', 'visible', 'description']
-        always_return_data = True
-        filters = {
+        excludes = []
+        filtering = {
             'assignment_id': ALL,
             'assignment_name': ALL,
             'assignment_type': ALL,
@@ -215,7 +213,7 @@ class SubTaskResource(ModelResource):
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = ['description']
-            filters = {
+            filtering = {
                 'subtask': ALL,
                 'subtask_name': ALL,
                 'student_assignment': ALL
@@ -239,7 +237,7 @@ class OfficeHoursResource(ModelResource):
             resource_name = 'officehours'
             authorization = CourseAuthorization()
             allowed_methods = ['get', 'post', 'delete']
-            filters = {
+            filtering = {
                 'professor_id': ALL,
                 'ta_name': ALL
             }
