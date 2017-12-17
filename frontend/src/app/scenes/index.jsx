@@ -69,6 +69,13 @@ const LoginContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+const Surround = styled.div`
+clear: both;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -142,7 +149,9 @@ class App extends React.Component {
               </HeaderOne>
             </TitleContainer>
             <LoginContainer>
-              <Login onLogin={this.onLogin}/>
+              <Surround>
+                <Login onLogin={this.onLogin}/>
+              </Surround>
             </LoginContainer>
           </div>
         );
