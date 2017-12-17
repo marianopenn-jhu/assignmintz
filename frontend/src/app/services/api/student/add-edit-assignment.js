@@ -5,6 +5,7 @@ export {addEditAssignment};
 
 function addEditAssignment(student_id, priority, difficulty, assignment_id)
 {
+  var status = 200;
   return fetch(URL + assignment_id + "/", {
     method: 'POST',
     headers: {
@@ -12,14 +13,14 @@ function addEditAssignment(student_id, priority, difficulty, assignment_id)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({student_id, priority, difficulty})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in addEditAssignment()");
+  }).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return {status: true, result: response};
+      return {status: true, body: json};
     }
-  }).catch((error) => {
-    return {status: false, result: error};
-  });
+  })
 }

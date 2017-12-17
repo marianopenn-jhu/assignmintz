@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import LoginForm from './components/Form/index.jsx';
-import FaBackArrow from 'react-icons/lib/fa/arrow-circle-o-left';
 
 const LoginWrapper = styled.div`
   position: absolute;
@@ -10,6 +9,15 @@ const LoginWrapper = styled.div`
   top:50%;
   margin-left: -160px;
   margin-top: -160px;
+
+  clear: both;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  overflow-y: scroll;
+`;
+
+const FormWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
@@ -26,20 +34,6 @@ const ButtonWrapper = styled.div`
   font-family: Avenir;
   width:100%;
   text-align: center;
-`;
-
-const AccountButton = styled.button`
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #424242;
-  width: 300px;
-  margin: 15px;
-
-  &:hover, &:focus, &:active {
-    color: #BEE6CC;
-    box-shadow: 0px 0px 2px 2px #212121;
-    background-color: #686868;
-  }
 `;
 
 const UserCreatedMessage = styled.p`
@@ -73,7 +67,7 @@ class AccountChooser extends React.Component {
     super(props);
 
     this.state = {
-      currentState: 'accountChooser',
+      currentState: 'loginScreen',
       selectedRole: "",
       userName: "<NOT FOUND>",
       email: "<NOT FOUND>"
@@ -83,7 +77,6 @@ class AccountChooser extends React.Component {
     this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
     this.onSignInSuccess = this.onSignInSuccess.bind(this);
     this.resetState = this.resetState.bind(this);
-    this.backClick = this.backClick.bind(this);
   }
 
   onClick(e) {
@@ -103,35 +96,21 @@ class AccountChooser extends React.Component {
   }
 
   resetState() {
-    this.setState({['currentState']: 'accountChooser'});
+    this.setState({['currentState']: 'loginScreen'});
     this.setState({['selectedRole']: ''});
     this.setState({['userName']: '<NOT FOUND>'});
     this.setState({['email']: '<NOT FOUND>'});
-  }
-
-  backClick() {
-    this.setState({['currentState']: 'accountChooser'});
-    this.setState({['selectedRole']: e.target.name});
   }
 
   render () {
     let current = null;
 
     switch (this.state.currentState) {
-      case 'accountChooser':
-        current = (
-          <ButtonWrapper>
-            <AccountButton name="student" onClick={this.onClick}>Student</AccountButton>
-            <AccountButton name="professor" onClick={this.onClick}>Professor</AccountButton>
-          </ButtonWrapper>
-        );
-        break;
       case 'loginScreen':
         current = (
-          <div>
-            <BackArrowContainer onClick={this.backClick}><FaBackArrow/></BackArrowContainer>
+          <FormWrapper>
             <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
-          </div>
+          </FormWrapper>
         );
         break;
       case 'createdUser':

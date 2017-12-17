@@ -8,22 +8,21 @@ export {getAssignment};
 */
 function getAssignment(filters)
 {
+  var status = 200;
   return (fetch(URL + "?" + filters, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in getCourse()");
+  })).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return response.json();
+      return {status: true, body: json};
     }
-  })).then((json) => {
-    return {status: true, body: json};
-  }).catch((error) => {
-    return {status: false, body: error};
-  });
+  })
 }

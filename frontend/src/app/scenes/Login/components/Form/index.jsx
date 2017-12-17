@@ -72,12 +72,33 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+
+const AccountButton = styled.button`
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #424242;
+  width: 120px;
+  margin: 5px;
+  font-family: Avenir;
+  font-size: 14px;
+  color: rgb(177, 217, 231);
+  padding: 4px;
+
+  &:hover, &:focus, &:active {
+    color: #BEE6CC;
+    box-shadow: 0px 0px 1px 1px #c6c6c6;
+    background-color: #686868;
+  }
+`;
+
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sign_in: true,
       user_name: '',
+      role: '',
       first_name: '',
       last_name: '',
       email: '',
@@ -97,8 +118,8 @@ class Form extends React.Component {
   }
 
   onSubmit(event) {
-    const {sign_in, user_name, first_name, last_name, email, password, confirm_password} = this.state;
-    const role = this.props.role;
+    const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
+    //const role = this.props.role;
 
     if (sign_in == true)
     {
@@ -146,10 +167,12 @@ class Form extends React.Component {
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
+          <AccountButton name="role" type="select" value="Student" className={hiddenField} onChange={this.onChange}>Student</AccountButton>
+          <AccountButton name="role" type="select" value="Professor" className={hiddenField} onChange={this.onChange}>Professor</AccountButton>
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
-          <Input name="email" placeholder="JHED@jhu.edu" type="text" className={hiddenField} onChange={this.onChange}/>
+          <Input name="email" placeholder="JHED@jhu.edu" type="email" className={hiddenField} onChange={this.onChange}/>
           <Input name="password" placeholder="Password" type="password" onChange={this.onChange}/>
           <Input name="confirm_password" placeholder="Confirm Password" type="password" className={hiddenField} onChange={this.onChange}/>
           <Error>{this.state['errorMessage']}</Error>

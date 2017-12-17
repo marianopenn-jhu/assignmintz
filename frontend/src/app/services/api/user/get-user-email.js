@@ -5,6 +5,7 @@ export {getUserEmail};
 
 function getUserEmail(user_name)
 {
+  var status = 200;
   return fetch(URL, {
     method: 'GET',
     headers: {
@@ -12,14 +13,14 @@ function getUserEmail(user_name)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({user_name})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in getUserEmail()");
+  }).then((response) => {
+    status = response.status;
+    return response.json()
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
     } else {
-      return {status: true, result: response};
+      return {status: true, body: json};
     }
-  }).catch((error) => {
-    return {status: false, result: error};
-  });
+  })
 }
