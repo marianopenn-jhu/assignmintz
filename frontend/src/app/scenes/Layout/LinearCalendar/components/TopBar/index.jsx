@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import FaSearchIcon from 'react-icons/lib/fa/search'
 import FilterItem from './components/FilterItem/index.jsx';
-import FaCogs from 'react-icons/lib/fa/cogs';
+import FaCogs from 'react-icons/lib/fa/cog';
 import {logoutUser} from '../../../../../services/api/user/logout-user.js';
 
 const Container = styled.div`

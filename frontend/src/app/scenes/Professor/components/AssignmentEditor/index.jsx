@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
 import FaCalendar from 'react-icons/lib/fa/calendar';
+import FaPencil from 'react-icons/lib/fa/pencil';
 import DateTime from 'react-datetime';
+import AssignmentElement from './components/AssignmentElement/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
 import {addAssignment} from '../../../../services/api/professor/add-assignment.js'
 
@@ -37,8 +39,27 @@ const Header = styled.h1`
   padding-left:50px;
 `;
 
+const PencilSpan = styled.span`
+  font-size:40px;
+  padding:10px;
+`;
+
+const AssignmentsContainer = styled.div`
+  width:85%;
+  height:50%;
+  padding:50px;
+`;
+
+const AssignmentList = styled.ul`
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  overflow-y:auto;
+`;
+
 const FormContainer = styled.div`
   width:100%;
+  height:50%;
 `;
 
 const ItemLabel = styled.div
@@ -99,8 +120,19 @@ class AssignmentEditor extends React.Component {
       assignment_id:"",
       assignment_name:"",
       description:"",
-      date:""
-    }
+      date:"",
+      assignmentList:[]
+    };
+
+    // Get the current assignments
+    getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+      if (response.status) {
+        this.setState({['assignmentList'] : response.body});
+      }
+      else {
+        this.setState({['assignmentList'] : ["Failed to fetch assignment list!"]});
+      }
+    });
   }
 
   handleChange(e) {
@@ -140,10 +172,20 @@ class AssignmentEditor extends React.Component {
   }
 
   render() {
+    // Render the view with the current assignments
     return (
       <Container>
         <XOut onClick={this.props.onClose}><FaClose/></XOut>
-        <Header>Edit Assignments for {this.props.course.course_name}</Header>
+        <Header><PencilSpan><FaPencil/></PencilSpan>Edit Assignments for {this.props.course.course_name}</Header>
+
+        <AssignmentsContainer>
+          <AssignmentList>
+            <AssignmentElement/>
+            <AssignmentElement/>
+            <AssignmentElement/>
+            <AssignmentElement/>
+          </AssignmentList>
+        </AssignmentsContainer>
 
         <FormContainer>
           <ItemLabel>
