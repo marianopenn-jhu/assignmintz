@@ -74,7 +74,7 @@ class SubTask(models.Model):
     subtask_name = models.CharField(max_length=36)
     visible = models.BooleanField(default=True)
     description = models.TextField(default='')
-    assignment_id = models.ForeignKey('StudentAssignment', on_delete=models.CASCADE)
+    student_assignment = models.ForeignKey('StudentAssignment', null=True, on_delete=models.CASCADE)
 
 
 class OfficeHours(models.Model):

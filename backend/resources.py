@@ -206,7 +206,7 @@ class StudentAssignmentResource(ModelResource):
 
 
 class SubTaskResource(ModelResource):
-    assignment = fields.ForeignKey(StudentAssignmentResource, 'student_assignment')
+    student_assignment = fields.ForeignKey(StudentAssignmentResource, 'student_assignment')
 
     class Meta:
             queryset = SubTask.objects.all()
@@ -218,12 +218,12 @@ class SubTaskResource(ModelResource):
             filters = {
                 'subtask': ALL,
                 'subtask_name': ALL,
-                'assignment_id': ALL
+                'student_assignment': ALL
             }
 
     def hydrate(self, bundle):
         try:
-            bundle.data['subtask_id'] = bundle.data['assignment_id'].split('/')[5] + '_' + bundle.data['subtask_name']
+            bundle.data['subtask_id'] = bundle.data['student_assignment'].split('/')[5] + '_' + bundle.data['subtask_name']
         except IndexError:
             pass
         return bundle
