@@ -33,13 +33,11 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         }
         self.login_prof = {
             "passwd": "chocolate_frogs",
-            "user_name": "dumbledore",
-            "role": "professor"
+            "user_name": "dumbledore"
         }
         self.login_stud = {
             "passwd": "1234",
-            "user_name": "gweasely",
-            "role": "student"
+            "user_name": "gweasely"
         }
         self.logout_prof = {
             "user_name": "mcgonagall",
