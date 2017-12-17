@@ -120,7 +120,6 @@ class Form extends React.Component {
   onSubmit(event) {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     //const role = this.props.role;
-
     if (sign_in == true)
     {
       loginUser(user_name, password).then((answer) =>
@@ -167,8 +166,8 @@ class Form extends React.Component {
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
-          <AccountButton name="role" type="select" value="Student" className={hiddenField} onChange={this.onChange}>Student</AccountButton>
-          <AccountButton name="role" type="select" value="Professor" className={hiddenField} onChange={this.onChange}>Professor</AccountButton>
+          <AccountButton name="role" type="text" value="Student"  onClick={this.onChange}>Student</AccountButton>
+          <AccountButton name="role" type="text" value="Professor" onClick={this.onChange}>Professor</AccountButton>
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
