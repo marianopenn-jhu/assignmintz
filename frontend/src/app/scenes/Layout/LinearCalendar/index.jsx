@@ -3,18 +3,17 @@ import styled from 'styled-components';
 import DayItem from './components/DayItem/index.jsx';
 import TopBar from './components/TopBar/index.jsx';
 
-const Wrapper = styled.div`
-  position: relative;
-  float: right;
-  left: 25vw;
-  width: 75vw;
+const ViewPane = styled.div`
+position: relative;
+float: left;
+left: 25vw;
+width: 75vw;
+height: 100vh;
 `;
 
-const TopBarContainer = styled.div
-`
+const TopBarContainer = styled.div`
   overflow-x: hidden;
-  min-height: 70px;
-  height: 10%;
+  height: 10vh;
   width: 100%;
   left: inherit;
   position:fixed;
@@ -23,23 +22,22 @@ const TopBarContainer = styled.div
 `;
 
 const ScrollableList=styled.ul`
+  margin-top: 10vh;
   overflow:hidden;
   overflow-y:auto;
-  height: 93%;
-  width: 80%;
-  position: absolute;
-  right: 0;
-  top: 7%;
-  margin: 0;
-  padding: 0;
   padding-top:10px;
   background:white;
+  height:100%;
 `;
 
 var obj = {
   title: "title",
   info:"info"
 }
+
+var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 /*
   A linear calendar, expecting a props list of assignments
@@ -52,26 +50,62 @@ class LinearCalendar extends React.Component {
   }
 
   render() {
-    // TODO: For now, we assume that the due data is December 9th
-    if (this.props.data != null) {
-      var current = this.props.data.map((e, i) => {
-        return (
-          <DayItem key={i} day="December nth, 2017" assignments={[e]}/>
-        )
-      });
-    } else {
-      current = <DayItem day="Your schedule is free!"/>
+    // Create a dictionary with dates corresponding to assignments
+    var assignmentDict = {};
+    var arrayLength = this.props.data.length;
+    for (var i = 0; i < arrayLength; i++) {
+        var e = this.props.data[i];
+
+        var due_date = e.due_date;
+
+        // Find month and year
+        var ss = due_date.split('-');
+        var year = ss[0];
+        var month = ss[1];
+
+        // Find day and time
+        var sss = ss[2].split('T');
+        var day = sss[0];
+        var time = sss[1];
+
+        var bucket = month + "/" + day + "/" + year;
+        if (bucket in assignmentDict) {
+          var items = assignmentDict[bucket];
+
+          // Find if item is already in dictionary
+          var itemIndex = 0;
+          for (; itemIndex < items.length; itemIndex++) {
+              if (items[itemIndex].assignment_id == e.assignment_id) {
+                  break;
+              }
+          }
+
+          // Add it if its not
+          if (itemIndex == items.length) {
+            items.push(e);
+            assignmentDict[bucket] = items;
+          }
+        } else {
+          assignmentDict[bucket] = [e];
+        }
     }
 
+    console.log(assignmentDict);
+
+    var current = (<DayItem day="Your schedule is free!"/>);
+    var current = Object.keys(assignmentDict).map((key, index) => (
+       <DayItem key={index} day={key} assignments={assignmentDict[key]}/>
+    ));
+
     return(
-      <Wrapper>
+      <ViewPane>
         <TopBarContainer>
-          <TopBar user_data={this.props.user_data} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+          <TopBar user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         </TopBarContainer>
         <ScrollableList>
           {current}
         </ScrollableList>
-      </Wrapper>
+      </ViewPane>
     );
   }
 }

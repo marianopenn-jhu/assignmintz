@@ -31,6 +31,7 @@ class ProfessorView extends React.Component {
     super(props);
 
     this.addClassView = this.addClassView.bind(this);
+    this.showClasses = this.showClasses.bind(this);
     this.editClassView = this.editClassView.bind(this);
     this.deleteClassView = this.deleteClassView.bind(this);
     this.editAssignmentsView = this.editAssignmentsView.bind(this);
@@ -45,7 +46,7 @@ class ProfessorView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("professor=" + this.props.user_name).then((response) => {
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({courses: obj.objects});
@@ -56,7 +57,7 @@ class ProfessorView extends React.Component {
       );
 
       // Retrieve assignments
-      getAssignment("professor=" + this.props.user_name).then((response) => {
+      getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({assignments: obj.objects});
@@ -100,6 +101,11 @@ class ProfessorView extends React.Component {
     this.forceUpdate();
   }
 
+  showClasses() {
+    this.setState({viewState:0});
+    this.forceUpdate();
+  }
+
   editClassView(course_title, course_id) {
     this.setState({viewState:2});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
@@ -119,12 +125,11 @@ class ProfessorView extends React.Component {
   }
 
   returnToCalendar() {
-    console.log("got here ");
     this.setState({viewState:0});
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("professor=" + this.props.user_name).then((response) => {
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({courses: obj.objects});
@@ -135,7 +140,7 @@ class ProfessorView extends React.Component {
       );
 
       // Retrieve assignments
-      getAssignment("professor=" + this.props.user_name).then((response) => {
+      getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status == true) {
             var obj = response.body;
             this.setState({assignments: obj.objects});
@@ -156,7 +161,7 @@ class ProfessorView extends React.Component {
     switch (state.viewState) {
       case 0:
         view = (
-          <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+          <LinearCalendar data={state.assignments} user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
         );
         break;
       case 1:
@@ -174,7 +179,7 @@ class ProfessorView extends React.Component {
       case 3:
         view = (
           // <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          <ViewPane session_key={this.props.session_key} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
         )
         break;
       case 4:
@@ -189,7 +194,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
+        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
         {view}
       </Container>
     );
