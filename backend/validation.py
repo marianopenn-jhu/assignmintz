@@ -131,7 +131,7 @@ class AssignmentValidation(Validation):
 class AssignmentUpdateValidation(Validation):
     def is_valid(self, bundle, request=None):
         errs = {}
-        assignment_id = str(bundle.data.get('assignment').split('/')[5])
+        # assignment_id = str(bundle.data.get('assignment').split('/')[5])
         # obj = StudentAssignment.objects.all().get(student_id=user_name, assignment_id=assignment_id)
         # if not obj:
         #     errs['']
