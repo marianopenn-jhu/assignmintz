@@ -25,6 +25,7 @@ class User(models.Model):
     email = models.EmailField(max_length=256, default='')
     passwd = models.CharField(max_length=256, default='')
     role = models.CharField(max_length=10, default='')
+    points = models.IntegerField(default=5)
 
     def __unicode__(self):
         return self.user_name

@@ -11,6 +11,7 @@ from backend.authorization import UserAuthorization, GeneralAuthorization, Assig
     CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
 import uuid
 import hashlib
+from django.core.exceptions import ObjectDoesNotExist
 # from django.contrib.auth.models import User
 
 
@@ -51,6 +52,7 @@ class UserResource(ModelResource):
         authorization = UserAuthorization()
         authentication = Authentication()
         allowed_methods = ['get', 'post']
+        excludes = ['points']
         validation = UserValidation()
         filtering = {
             'user_name': ALL,
@@ -62,7 +64,6 @@ class UserResource(ModelResource):
         salt = uuid.uuid4().hex
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
-
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -134,8 +135,7 @@ class AssignmentResource(ModelResource):
         authorization = AssignmentAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         validation = AssignmentValidation()
-        excludes = ['actual_difficulty', 'actual_time', \
-                    'priority', 'percent_complete', 'visible', 'description']
+        excludes = []
         always_return_data = True
         filters = {
             'assignment_id': ALL,
@@ -152,6 +152,7 @@ class AssignmentResource(ModelResource):
             pass
         return bundle
     def dehydrate(self, bundle):
+        #Create instance of assignment for all students in this course
         course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
         students = course.students.all()
         for stud in students:
@@ -170,6 +171,35 @@ class AssignmentResource(ModelResource):
         return bundle
 
 
+class EditStudentAssignmentResource(ModelResource):
+
+    class Meta:
+        queryset = StudentAssignment.objects.all()
+        resource_name = 'student/update/assignment'
+        authorization = StudentAssignmentAuthorization()
+        allowed_methods = ['put']
+        validation = AssignmentUpdateValidation()
+        always_return_data = True
+        include_resource_uri = False
+        excludes = []
+        filtering = {
+            'student': ALL
+        }
+    def obj_update(self, bundle, request=None, **kwargs):
+        try:
+            curr_student = User.objects.all().get(user_name=bundle.data['user_name'])
+            student_assignment = StudentAssignment.objects.all().get(student_assignment_id=bundle.request.path.split('/')[6], student=curr_student)
+            points = 0.0
+            if bundle.data['done']=='True' and not student_assignment.done:
+                points =points +5.0
+                if bundle.data['actual_difficulty'] is not None and bundle.data['actual_time'] is not None:
+                    points = points+ 10.0
+                User.objects.filter(user_name=curr_student.user_name).update(points=curr_student.points+points)
+            bundle = self.full_hydrate(bundle)
+        except (KeyError, ObjectDoesNotExist):
+            pass
+        return bundle
+
 class StudentAssignmentResource(ModelResource):
     student = fields.ForeignKey(UserResource, 'student')
     assignment = fields.ToOneField(AssignmentResource, 'assignment')
@@ -187,10 +217,11 @@ class StudentAssignmentResource(ModelResource):
             'student': ALL
         }
     def hydrate(self, bundle):
+        print('in student hydrate')
         assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
-        bundle.data['student_assignment_id'] = str(assignment.course.course_id) + '_' + str(assignment.assignment_id) + '_'+bundle.data['student'].split('_')[4]
+        bundle.data['student_assignment_id'] = str(assignment.assignment_id) + '_'+bundle.data['student'].split('/')[4]
         return bundle
-    #TODO write dehydrate method to call algorithm
+
     def dehydrate(self, bundle):
         bundle.data.pop('actual_difficulty', None)
         bundle.data.pop('actual_time', None)
@@ -212,7 +243,7 @@ class SubTaskResource(ModelResource):
             authorization = StudentAssignmentAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
-            excludes = ['description']
+            excludes = []
             filters = {
                 'subtask': ALL,
                 'subtask_name': ALL,
