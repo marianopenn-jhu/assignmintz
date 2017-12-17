@@ -8,7 +8,7 @@ from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
 from backend.authorization import UserAuthorization, AssignmentAuthorization, \
-    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
+    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization, StudentSubTaskAuthorization
 import uuid
 import hashlib
 from django.core.exceptions import ObjectDoesNotExist
@@ -63,6 +63,7 @@ class UserResource(ModelResource):
         salt = uuid.uuid4().hex
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
+
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -204,6 +205,7 @@ class EditStudentAssignmentResource(ModelResource):
             pass
         return bundle
 
+
 class StudentAssignmentResource(ModelResource):
     student = fields.ForeignKey(UserResource, 'student')
     assignment = fields.ToOneField(AssignmentResource, 'assignment')
@@ -212,7 +214,7 @@ class StudentAssignmentResource(ModelResource):
         queryset = StudentAssignment.objects.all()
         resource_name = 'student/assignment'
         authorization = StudentAssignmentAuthorization()
-        allowed_methods = ['get', 'post', 'delete', 'put']
+        allowed_methods = ['get', 'post', 'put']
         validation = AssignmentUpdateValidation()
         always_return_data = True
         include_resource_uri = False
@@ -246,7 +248,7 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = StudentAssignmentAuthorization()
+            authorization = StudentSubTaskAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = []
