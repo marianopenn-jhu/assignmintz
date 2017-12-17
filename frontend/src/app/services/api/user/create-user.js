@@ -21,6 +21,7 @@ function createUser(user_name, name, email, passwd, role)
     }
   }).then((json) => {
     if(status >= ERROR_STATUS) {
+      console.log(json);
       return {status: false, body: json};
     } else {
       return {status: true, body: json};

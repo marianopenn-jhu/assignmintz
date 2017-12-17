@@ -85,12 +85,24 @@ class AssignmentEditor extends React.Component {
     switch (this.state.editingState) {
       case 0:
         // Get the current assignments
+        var assignmentListHtml = (<div></div>);
         var assignmentList = [];
         getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status) {
             assignmentList = response.body;
-          }
-          else {
+
+            assignmentListHtml = assignmentList.map(function(assignment, index){
+              return
+                (
+                  <AssignmentElement
+                    assignment={assignment}
+                    onEditClick={(assignment) => this.onEditClick(assignment)}
+                    onDeleteClick={(assignment) => this.onDeleteClick(assignment)}
+                  />
+                )
+              })
+          }  else {
+            // TODO: Handle failure
             console.log(response);
           }
         });
@@ -98,10 +110,7 @@ class AssignmentEditor extends React.Component {
         current = (
           <AssignmentsContainer>
             <AssignmentList>
-              <AssignmentElement onEditClick={(assignment) => this.onEditClick(assignment)} onDeleteClick={(assignment) => this.onDeleteClick(assignment)} />
-              <AssignmentElement onEditClick={(assignment) => this.onEditClick(assignment)} onDeleteClick={(assignment) => this.onDeleteClick(assignment)}/>
-              <AssignmentElement onEditClick={(assignment) => this.onEditClick(assignment)} onDeleteClick={(assignment) => this.onDeleteClick(assignment)}/>
-              <AssignmentElement onEditClick={(assignment) => this.onEditClick(assignment)} onDeleteClick={(assignment) => this.onDeleteClick(assignment)}/>
+              {assignmentListHtml}
             </AssignmentList>
           </AssignmentsContainer>
         )

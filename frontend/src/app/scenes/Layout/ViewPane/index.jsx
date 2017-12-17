@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import FadeIn from 'react-fade-in';
 import FindClassView from '../../Student/components/FindClassView/index.jsx';
 import StudentClassView from '../../Student/components/StudentClassView/index.jsx';
 import CreateClassView from '../../Professor/components/CreateClassView/index.jsx';
@@ -19,6 +20,15 @@ height: 100vh;
 class ViewPane extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+          // demo props
+          run: false,
+          // fade props
+          in: true,
+          interval: 50,
+          delay: 500
+        };
     }
 
     render() {
@@ -50,9 +60,11 @@ class ViewPane extends React.Component {
         }
       }
         return (
-          <ViewPaneContainer>
-            {view}
-          </ViewPaneContainer>
+          <FadeIn>
+            <ViewPaneContainer>
+              {view}
+            </ViewPaneContainer>
+          </FadeIn>
         );
 
     }
