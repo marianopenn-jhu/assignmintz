@@ -112,8 +112,8 @@ class StudentAssignmentAuthorization(Authorization):
     def delete_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'professor':
                 raise Unauthorized("Must be student")
@@ -126,8 +126,8 @@ class StudentAssignmentAuthorization(Authorization):
     def delete_detail(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'professor':
                 raise Unauthorized("Must be student")
@@ -206,8 +206,8 @@ class StudentAssignmentAuthorization(Authorization):
         def delete_list(self, object_list, bundle):
             # This assumes a ``QuerySet`` from ``ModelResource``.
             try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
+                user_name = bundle.request.GET['user']
+                session_key = bundle.request.GET['key']
                 user = User.objects.all().get(user_name=user_name)
                 if user.role.lower() == 'student':
                     raise Unauthorized("Must be professor")
@@ -220,8 +220,8 @@ class StudentAssignmentAuthorization(Authorization):
         def delete_detail(self, object_list, bundle):
             # This assumes a ``QuerySet`` from ``ModelResource``.
             try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
+                user_name = bundle.request.GET['user']
+                session_key = bundle.request.GET['key']
                 user = User.objects.all().get(user_name=user_name)
                 if user.role.lower() == 'student':
                     raise Unauthorized("Must be professor")
@@ -342,22 +342,21 @@ class CourseAuthorization(Authorization):
     def delete_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'student':
                 raise Unauthorized("Must be professor")
             LogIn.objects.all().get(user_name=user_name, session_key=session_key)
         except (KeyError, ObjectDoesNotExist):
             raise Unauthorized("Need valid session key and username")
-        #TODO filter on professor
         return object_list
 
     def delete_detail(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'student':
                 raise Unauthorized("Must be professor")
@@ -437,8 +436,8 @@ class AssignmentAuthorization(Authorization):
     def delete_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'student':
                 raise Unauthorized("Must be professor")
@@ -451,8 +450,8 @@ class AssignmentAuthorization(Authorization):
     def delete_detail(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
-            user_name = bundle.data.get('user_name')
-            session_key = bundle.data.get('session_key')
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
             user = User.objects.all().get(user_name=user_name)
             if user.role.lower() == 'student':
                 raise Unauthorized("Must be professor")

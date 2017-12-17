@@ -83,6 +83,10 @@ class CourseResource(ModelResource):
             'course_title': ALL
         }
 
+    def hydrate(self, bundle):
+        bundle.data['user_name'] = bundle.data['user_name']
+        bundle.data['session_key'] = bundle.data['session_key']
+        return bundle
 
 class AddStudentToCourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -132,7 +136,7 @@ class AssignmentResource(ModelResource):
         queryset = Assignment.objects.all()
         resource_name = 'professor/assignment'
         authorization = AssignmentAuthorization()
-        allowed_methods = ['get', 'post', 'delete']
+        allowed_methods = ['get', 'post', 'delete', 'put']
         validation = AssignmentValidation()
         excludes = []
         filtering = {
@@ -144,6 +148,8 @@ class AssignmentResource(ModelResource):
         }
 
     def hydrate(self, bundle):
+        if bundle.request.method == 'PUT':
+            return bundle
         try:
             bundle.data['assignment_id'] = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
         except IndexError:

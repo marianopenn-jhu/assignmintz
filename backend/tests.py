@@ -275,6 +275,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_invalid_prof_course = {
             "course_id": "601.421",
             "course_title": "OOSE",
+            "user_name": "rhagrid",
+            "session_key": "12344321",
             "visible": "True",
             "description": "A series of project iterations.",
             "professor": "/backend/v1/user/harrypotter/",
@@ -285,6 +287,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_invalid_student_course = {
             "course_id": "601.421",
             "course_title": "OOSE",
+            "user_name": "rhagrid",
+            "session_key": "12344321",
             "visible": "True",
             "description": "A series of project iterations.",
             "professor": "/backend/v1/user/harrypotte/",
@@ -302,6 +306,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_empty_prof_and_title_course = {
             "course_id": "621.421",
             "course_title": "",
+            "user_name": "rhagrid",
+            "session_key": "12344321",
             "visible": "True",
             "description": "A series of project iterations.",
             "professor": "",
@@ -312,6 +318,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_empty_id_and_desc_course = {
             "course_id": "",
             "course_title": "OOSE",
+            "user_name": "rhagrid",
+            "session_key": "12344321",
             "visible": "True",
             "description": "",
             "professor": "/backend/v1/user/harrypotte/",
@@ -329,6 +337,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.oose_dup_course = {
             "session_key": "12344321",
             "course_id": "601.421",
+            "user_name": "rhagrid",
             "course_title": "OOSE",
             "visible": "True",
             "description": "Cool class",
