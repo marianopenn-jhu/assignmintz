@@ -164,15 +164,6 @@ class AssignmentResource(ModelResource):
             StudentAssignment.objects.create(student_assignment_id=bundle.obj.assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=bundle.obj.assignment_id))
         bundle.data["course"] = bundle.obj.course.course_id
         bundle.data['assignment_id'] = bundle.obj.assignment_id
-        bundle.data.pop('expected_difficulty', None)
-        bundle.data.pop('expected_time', None)
-        bundle.data.pop('due_date', None)
-        bundle.data.pop('user_name', None)
-        bundle.data.pop('session_key', None)
-        bundle.data.pop('description', None)
-        bundle.data.pop('assignment_name', None)
-        bundle.data.pop('assignment_type', None)
-        bundle.data.pop('course', None)
         return bundle
 
 
