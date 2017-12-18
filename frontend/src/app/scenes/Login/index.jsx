@@ -85,6 +85,8 @@ class AccountChooser extends React.Component {
   }
 
   onSignUpSuccess(userName, email) {
+    console.log("changed cookie");
+    console.log(document.cookie);
     this.setState({['currentState']: 'createdUser'});
     this.setState({['userName']: userName});
     this.setState({['email']: email});
@@ -109,7 +111,7 @@ class AccountChooser extends React.Component {
       case 'loginScreen':
         current = (
           <FormWrapper>
-            <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
+            <LoginForm role={''} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
           </FormWrapper>
         );
         break;
