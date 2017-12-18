@@ -7,6 +7,7 @@ const Container = styled.li`
   font-family:Avenir;
   list-style-type: none;
   margin-bottom:10px;
+  padding-top:20px;
 `;
 
 const HeaderContainer = styled.div`

@@ -33,7 +33,7 @@ class ViewPane extends React.Component {
 
     render() {
       let view = null;
-      if (this.props.role == "student") {
+      if (this.props.role == "Student") {
         if (this.props.case == 1) {
           view = (
             <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
@@ -44,7 +44,7 @@ class ViewPane extends React.Component {
           )
         }
 
-      } else if (this.props.role == "professor") {
+      } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {
           view = (
             <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onCloseCreate} data={this.props.data}/>

@@ -5,6 +5,7 @@ import FaPencil from 'react-icons/lib/fa/pencil';
 import AssignmentElement from './components/AssignmentElement/index.jsx';
 import AddAssignmentElement from './components/AddAssignmentElement/index.jsx';
 import AssignmentFieldEditor from './components/AssignmentFieldEditor/index.jsx';
+import DeleteAssignmentView from './components/AddAssignmentElement/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
 
 //position: absolute;
@@ -60,10 +61,12 @@ class AssignmentEditor extends React.Component {
     super(props);
     this.onEditClick = this.onEditClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.onReturnClick = this.onReturnClick.bind(this);
 
     this.state = {
       editingState: 0, // 0 = Assignment Picker, 1 = Editing an Assignment, 2 = Deleting an assignment
-      selectedAssignment:null
+      selectedAssignment:null,
+      assignmentList: []
     };
   }
 
@@ -79,49 +82,55 @@ class AssignmentEditor extends React.Component {
     this.forceUpdate();
   }
 
+  onReturnClick() {
+    this.setState({['editingState'] : 0});
+    this.setState({['selectedAssignment'] : null});
+    this.forceUpdate();
+  }
+
   render() {
     // Render the view with the current assignments
     let current = null;
     switch (this.state.editingState) {
       case 0:
         // Get the current assignments
-        var assignmentListHtml = (<div></div>);
-        var assignmentList = [];
+        var that = this;
         getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status) {
-            assignmentList = response.body;
-
-            assignmentListHtml = assignmentList.map(function(assignment, index){
-              return
-                (
-                  <AssignmentElement
-                    assignment={assignment}
-                    onEditClick={(assignment) => this.onEditClick(assignment)}
-                    onDeleteClick={(assignment) => this.onDeleteClick(assignment)}
-                  />
-                )
-              })
+            that.state.assignmentList = response.body.objects;
+            that.forceUpdate();
           }  else {
             // TODO: Handle failure
-            console.log(response);
           }
         });
+
 
         current = (
           <AssignmentsContainer>
             <AssignmentList>
-              {assignmentListHtml}
+              {this.state.assignmentList.map((item, index) => (
+                <AssignmentElement
+                  key={index}
+                  assignment={item}
+                  onEditClick={(a) => this.onEditClick(a)}
+                  onDeleteClick={(a) => this.onDeleteClick(a)}
+                />
+              ))}
               <AddAssignmentElement onClick={() => this.onEditClick(null)}/>
             </AssignmentList>
           </AssignmentsContainer>
-        )
+        );
+
         break;
       case 1:
         current = (
-          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment}/>
+          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
         );
         break;
       case 2:
+        current = (
+          <DeleteAssignmentView session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
+        );
         break;
       default:
         break;

@@ -70,7 +70,12 @@ class UserResource(ModelResource):
         bundle.data.pop('passwd', None)
         return bundle
 
-
+class TopFiveResource(ModelResource):
+    class Meta:
+        queryset = User.objects.all().order_by('-points')[:5]
+        resource_name = 'leaderboard'
+        authorization = Authorization()
+        allowed_methods = ['get']
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -156,7 +161,6 @@ class AssignmentResource(ModelResource):
         }
 
     def hydrate(self, bundle):
-        print('in hydrate')
         if bundle.request.method == 'PUT':
             return bundle
         try:
@@ -182,7 +186,6 @@ class AssignmentResource(ModelResource):
         return bundle
 
     def dehydrate(self, bundle):
-        print('in dehydrate')
         #Create instance of assignment for all students in this course
         bundle.data["course"] = bundle.obj.course.course_id
         bundle.data['assignment_id'] = bundle.obj.assignment_id
@@ -277,7 +280,6 @@ class SubTaskResource(ModelResource):
         return bundle
 
     def dehydrate(self, bundle):
-        print('in subtask dehydrate')
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
         return bundle
 

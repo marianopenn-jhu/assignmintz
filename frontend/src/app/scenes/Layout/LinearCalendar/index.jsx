@@ -2,19 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import DayItem from './components/DayItem/index.jsx';
 import TopBar from './components/TopBar/index.jsx';
+import Moment from 'moment';
 
 const ViewPane = styled.div`
-position: relative;
-float: left;
-left: 25vw;
-width: 75vw;
-height: 100vh;
+  position: relative;
+  float: left;
+  left: 25vw;
+  width: 75vw;
+  height: 100vh;
+  overflow:hidden;
+  overflow-y:auto;
 `;
 
 const TopBarContainer = styled.div`
   overflow-x: hidden;
   height: 10vh;
-  width: 100%;
+  width: inherit;
   left: inherit;
   position:fixed;
   padding-top:10px;
@@ -23,8 +26,6 @@ const TopBarContainer = styled.div`
 
 const ScrollableList=styled.ul`
   margin-top: 10vh;
-  overflow:hidden;
-  overflow-y:auto;
   padding-top:10px;
   background:white;
   height:100%;
@@ -53,6 +54,14 @@ class LinearCalendar extends React.Component {
     // Create a dictionary with dates corresponding to assignments
     var assignmentDict = {};
     var arrayLength = this.props.data.length;
+
+    // Sort the dictionary by due date
+    this.props.data.sort(function (left, right) {
+      var left_dd = Moment.utc(left.due_date).local();
+      var right_dd = Moment.utc(right.due_date).local();
+      return left_dd.diff(right_dd);
+    });
+
     for (var i = 0; i < arrayLength; i++) {
         var e = this.props.data[i];
 
@@ -89,8 +98,6 @@ class LinearCalendar extends React.Component {
           assignmentDict[bucket] = [e];
         }
     }
-
-    console.log(assignmentDict);
 
     var current = (<DayItem day="Your schedule is free!"/>);
     var current = Object.keys(assignmentDict).map((key, index) => (
