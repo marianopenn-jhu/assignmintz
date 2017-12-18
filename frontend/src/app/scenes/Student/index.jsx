@@ -39,23 +39,21 @@ getInfo() {
           var cs = courseResponse.body.objects;
           this.setState({courses: cs});
           this.forceUpdate();
-          // Retrieve assignments
-          for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
-            var c = cs[courseIndex];
-            getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
-                if (assignmentResponse.status == true) {
-                  var as = assignmentResponse.body.objects;
-                  var currAssignments = this.state.assignments.concat(as);
-                  this.setState({assignments: currAssignments});
-                  this.forceUpdate();
-                } else {
-                  console.log("Failed to retrieve assignments");
-                }
-              }
-            );
-          }
         } else {
           console.log("Failed to retrieve courses!");
+        }
+      }
+    );
+
+    // Retrieve assignments
+    getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
+        if (assignmentResponse.status == true) {
+          var as = assignmentResponse.body.objects;
+          var currAssignments = this.state.assignments.concat(as);
+          this.setState({assignments: currAssignments});
+          this.forceUpdate();
+        } else {
+          console.log("Failed to retrieve assignments");
         }
       }
     );
