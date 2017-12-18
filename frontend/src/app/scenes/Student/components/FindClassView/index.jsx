@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
 import FindClassElement from '../FindClassElement/index.jsx'
 import {getCourses} from '../../../../services/api/course/get-course.js';
+import {addToCourse} from '../../../../services/api/course/add-to-course.js';
 
 const PanelContainer = styled.div `
   margin: 30px;
@@ -33,7 +34,6 @@ const ResultElementContainer = styled.div
   min-height: 70px;
   width: 100%;
   padding-top:10px;
-  background:grey;
 `;
 
 const Container = styled.div`
@@ -108,6 +108,11 @@ const BigTextInput = styled.textarea
   resize: none;
 `;
 
+const CreateButton = styled.button
+`
+
+`;
+
 class FindClassView extends React.Component {
   constructor(props) {
     super(props);
@@ -115,52 +120,64 @@ class FindClassView extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleSelected = this.toggleSelected.bind(this);
 
     this.state = {
-      course_id:'',
-      courses:''
+      number:'',
+      title:'',
+      availableCourses:[],
+      selectedCourses:[]
     }
-  }
 
-  handleChange(e) {
-    this.setState({course_id: e.target.value});
-  }
-
-  handleSubmit(event) {
-    const {course_id} = this.state.course_id;
-
-    // getCourses(course_id).then((response) => {
-    //   if (response.status) {
-    //     {this.props.onClose};
-    //   }
-    //   else {
-    //     alert(response.body);
-    //   }
-    // });
-  }
-
-  if(course_id){
-    getCourses(this.state.course_id).then((response) => {
+    getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
       if(response.status == true){
-        var obj = response.body;
-        this.setState({courses: obj.objects});
+        this.setState({availableCourses: response.body.objects});
       } else {
         console.log("Failed to retrieve courses!");
       }
-    });
+    })
+  }
+
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value});
+    this.forceUpdate();
+  }
+
+  handleSubmit(event) {
+    for (var index = 0; index < this.state.selectedCourses.length; index++) {
+      addToCourse(this.state.selectedCourses[index], this.props.session_key, this.props.user_name, ["/backend/v1/user/" + this.props.user_name + "/"]);
+    }
+    this.props.onClose();
+  }
+
+  toggleSelected(course_id) {
+    var index = this.state.selectedCourses.indexOf(course_id);
+    if (index > -1)
+    {
+      this.state.selectedCourses.splice(index, 1);
+    }
+    else
+    {
+      this.state.selectedCourses.push(course_id);
+    }
   }
 
   render() {
     let classes = (
       <div>N/A</div>
     );
-    if (this.state.course_id != null) {
-      classes = this.props.data.map((e, i) => {
+    if (this.state.availableCourses) {
+      classes = this.state.availableCourses.map((course, index) => {
+        var index = this.state.selectedCourses.indexOf(course.course_id);
+        var selected = false;
+        if (index > -1) {
+          selected = true;
+        }
         return (
-          <FindClassElement key={i} course={e}/>
+          <FindClassElement key={index} course={course} filter_id={this.state.number} filter_title={this.state.title} onClick={(course_id) => this.toggleSelected(course_id)}/>
         )
-      });
-    };
+      })
+    }
 
 
     return (
@@ -172,7 +189,11 @@ class FindClassView extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <ItemLabel>
               <TextLabel>Course Number:</TextLabel>
-              <TextInput name={this.state.course_id} type="text" onChange={this.handleChange} disabled={true}/>
+              <TextInput name="number" type="text" onChange={this.handleChange}/>
+            </ItemLabel>
+            <ItemLabel>
+              <TextLabel>Course Title:</TextLabel>
+              <TextInput name="title" type="text" onChange={this.handleChange}/>
             </ItemLabel>
           </Form>
           </Container>
@@ -184,6 +205,13 @@ class FindClassView extends React.Component {
             <ResultElementContainer>
               {classes}
             </ResultElementContainer>
+            </ItemLabel>
+          </Container>
+        </Panel>
+        <Panel>
+          <Container>
+            <ItemLabel>
+              <CreateButton type="button" onClick={this.handleSubmit}>Sign Up for Selected</CreateButton>
             </ItemLabel>
           </Container>
         </Panel>

@@ -5,7 +5,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx'
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/professor/get-assignment.js';
+import {getAssignment} from '../../services/api/student/get-assignment.js';
 //student can use gets from professor api
 const Container = styled.div`
 display:inline-block
@@ -20,42 +20,50 @@ class StudentView extends React.Component {
     this.returnToCalendar = this.returnToCalendar.bind(this);
     this.findClass = this.findClass.bind(this);
     this.openClass = this.openClass.bind(this);
+    this.getInfo = this.getInfo.bind(this);
     this.state = {
       courses:[],
       assignments:[],
       viewState: 0 // 0 = Calendar, 1 = Find a Class
     };
 
-    if (this.props.user_name) {
-      // Retrieve courses
-      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key + "&students=" + this.props.user_name).then((courseResponse) => {
-          if (courseResponse.status == true) {
-            var cs = courseResponse.body.objects;
-            this.setState({courses: cs});
-            // Retrieve assignments
-            for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
-              var c = cs[courseIndex];
-              getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
-                  if (assignmentResponse.status == true) {
-                    var as = assignmentResponse.body.objects;
-                    var currAssignments = this.state.assignments.concat(as);
-                    this.setState({assignments: currAssignments});
-                  } else {
-                    console.log("Failed to retrieve assignments");
-                  }
+    this.getInfo();
+}
+
+getInfo() {
+  if (this.props.user_name) {
+    // Retrieve courses
+    getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key + "&students=" + this.props.user_name).then((courseResponse) => {
+        if (courseResponse.status == true) {
+          var cs = courseResponse.body.objects;
+          this.setState({courses: cs});
+          this.forceUpdate();
+          // Retrieve assignments
+          for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
+            var c = cs[courseIndex];
+            getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
+                if (assignmentResponse.status == true) {
+                  var as = assignmentResponse.body.objects;
+                  var currAssignments = this.state.assignments.concat(as);
+                  this.setState({assignments: currAssignments});
+                  this.forceUpdate();
+                } else {
+                  console.log("Failed to retrieve assignments");
                 }
-              );
-            }
-          } else {
-            console.log("Failed to retrieve courses!");
+              }
+            );
           }
+        } else {
+          console.log("Failed to retrieve courses!");
         }
-      );
-    }
+      }
+    );
+  }
 }
 
 returnToCalendar() {
   this.setState({viewState:0});
+  this.getInfo();
   this.forceUpdate();
 }
 
