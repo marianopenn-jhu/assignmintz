@@ -9,7 +9,7 @@ var apiHost;
 var setupApi = function() {
   switch (process.env.NODE_ENV) {
     case 'production':
-      apiHost = '"mysterious-depths-20159.herokuapp.com"';
+      apiHost = '"http://theassignmintzapp.herokuapp.com"';
       break;
     case 'qa':
     case 'develop':

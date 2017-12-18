@@ -235,7 +235,8 @@ class StudentAssignmentResource(ModelResource):
         include_resource_uri = False
         excludes = []
         filtering = {
-            'student': ALL
+            'student': ALL,
+            'course': ALL
         }
 
     def hydrate(self, bundle):
