@@ -93,16 +93,12 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    var user =  '';//cookie.get("assignmintz_user_name");
-    var session_key = '';// cookie.get("assignmintz_session_key");
-    var role = '';// = cookie.get("assignmintz_role");
+    var user = cookie.get("assignmintz_user_name");
+    var session_key =  cookie.get("assignmintz_session_key");
+    var role = cookie.get("assignmintz_role");
     var answer = new Object();
 
     answer.session_key = session_key;
-    console.log("top login");
-    console.log(role);
     this.onLogin(answer, user, role);
   }
 
