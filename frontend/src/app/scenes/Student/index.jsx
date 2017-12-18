@@ -49,6 +49,7 @@ getInfo() {
     getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
           var as = assignmentResponse.body.objects;
+          console.log(as);
           var currAssignments = this.state.assignments.concat(as);
           this.setState({assignments: currAssignments});
           this.forceUpdate();

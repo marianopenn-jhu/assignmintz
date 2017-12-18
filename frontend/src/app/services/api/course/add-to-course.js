@@ -1,5 +1,5 @@
 const ERROR_STATUS = 400;
-const URL = __API__ + "/backend/v1/course/";
+const URL = __API__ + "/backend/v1/student/course/";
 
 export {addToCourse};
 
