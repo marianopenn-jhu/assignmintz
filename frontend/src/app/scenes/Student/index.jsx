@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 // import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
-import ViewPane from '../Layout/ViewPane/index.jsx'
+import ViewPane from '../Layout/ViewPane/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
-import Modal from '../Layout/LeaderboardModal/index.jsx';
+
 //student can use gets from professor api
 const Container = styled.div`
 display:inline-block
@@ -68,7 +68,7 @@ openClass(){
   this.setState({viewState:2});
 }
 openLeaderboard(){
-  Modal
+  console.log("hey");
 }
 
 render() {
