@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import dj_database_url
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,29 +88,40 @@ CORS_ALLOW_CREDENTIALS = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-db_from_env = dj_database_url.config()
-
-DATABASES = {
-    'default': {
+if 'test' in sys.argv:
+    DATABASES = {}
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'assignmintz',
         'USER': 'postgres',
         'TEST':  {
             'NAME': 'test_assignmintz',
         },
-    },
-    'heroku': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ddck90ov0amqgs',
-        'USER': 'exdjaouijtwhht',
-        'HOST': 'ec2-107-21-201-57.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'PASSWORD': 'bcb35094aa560aa688f161b9f84701f8bb99eba093c877fcb42b54662c8edb67'
     }
-}
+else:
+    db_from_env = dj_database_url.config()
 
-DATABASES['default'].update(db_from_env)
-DATABASES['heroku'].update(db_from_env)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'assignmintz',
+            'USER': 'postgres',
+            'TEST':  {
+                'NAME': 'test_assignmintz',
+            },
+        },
+        'heroku': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ddck90ov0amqgs',
+            'USER': 'exdjaouijtwhht',
+            'HOST': 'ec2-107-21-201-57.compute-1.amazonaws.com',
+            'PORT': '5432',
+            'PASSWORD': 'bcb35094aa560aa688f161b9f84701f8bb99eba093c877fcb42b54662c8edb67'
+        }
+    }
+
+    DATABASES['default'].update(db_from_env)
+    DATABASES['heroku'].update(db_from_env)
 
 
 # Password validation
