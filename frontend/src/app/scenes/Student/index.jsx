@@ -5,7 +5,8 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
-import {getAssignment} from '../../services/api/student/get-assignment.js';
+import {getAssignment} from '../../services/api/professor/get-assignment.js';
+import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
 //student can use gets from professor api
 const Container = styled.div`
 display:inline-block
@@ -46,13 +47,20 @@ getInfo() {
     );
 
     // Retrieve assignments
-    getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
+    getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
-          var as = assignmentResponse.body.objects;
-          console.log(as);
-          var currAssignments = this.state.assignments.concat(as);
-          this.setState({assignments: currAssignments});
-          this.forceUpdate();
+
+          for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
+            var a = assignmentResponse.body.objects[aIndex];
+
+            var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+            getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
+              var as = actualResponse.body.objects;
+              var currAssignments = this.state.assignments.concat(as);
+              this.setState({assignments: currAssignments});
+              this.forceUpdate();
+            });
+          }
         } else {
           console.log("Failed to retrieve assignments");
         }

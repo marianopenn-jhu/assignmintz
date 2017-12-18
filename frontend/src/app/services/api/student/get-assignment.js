@@ -1,12 +1,12 @@
 const ERROR_STATUS = 400;
 const URL = __API__ + "/backend/v1/student/assignment/";
 
-export {getAssignment};
+export {getStudentAssignment};
 
 /*
   Return the assignments given the particular filters
 */
-function getAssignment(filters)
+function getStudentAssignment(filters)
 {
   var status = 200;
   return (fetch(URL + "?" + filters, {
