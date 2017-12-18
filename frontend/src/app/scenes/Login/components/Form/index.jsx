@@ -4,6 +4,7 @@ import Tab from './components/Tab/index.jsx';
 //import AccountButton from './components/AccountButton/index.jsx';
 import {createUser} from '../../../../services/api/user/create-user.js';
 import {loginUser} from '../../../../services/api/user/login-user.js';
+import {getUser} from '../../../../services/api/user/get-user.js';
 import Cookies from "universal-cookie";
 
 const cookie = document.cookie;
@@ -124,7 +125,10 @@ class Form extends React.Component {
     this.onSelectProfessor = this.onSelectProfessor.bind(this);
     this.signInSelected = this.signInSelected.bind(this);
     this.signUpSelected = this.signUpSelected.bind(this);
+
+
   }
+
 
   onChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -133,6 +137,18 @@ class Form extends React.Component {
   onSubmit(event) {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     //const role = this.props.role;
+    getUser("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+        if (response.status == true) {
+          var obj = response.body;
+          console.log("get user");
+          console.log(obj);
+          //this.setState({courses: obj.objects});
+        } else {
+          console.log("Failed to retrieve courses!");
+        }
+      }
+    );
+
     console.log("role");
     console.log(role);
 

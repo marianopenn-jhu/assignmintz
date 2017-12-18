@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
-import {getUser} from '../../services/api/user/get-user.js';
+import {getUser} from '../services/api/user/get-user.js';
 
 const cookie = new Cookies();
 
@@ -89,6 +89,7 @@ class App extends React.Component {
       session_key:null,
       role:""
     };
+
   }
 
   componentWillMount() {
@@ -98,18 +99,6 @@ class App extends React.Component {
     var session_key = '';// cookie.get("assignmintz_session_key");
     var role = '';// = cookie.get("assignmintz_role");
     var answer = new Object();
-
-    getUser("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
-        if (response.status == true) {
-          var obj = response.body;
-          console.log("get user");
-          console.log(obj);
-          this.setState({courses: obj.objects});
-        } else {
-          console.log("Failed to retrieve courses!");
-        }
-      }
-    );
 
     answer.session_key = session_key;
     console.log("top login");
