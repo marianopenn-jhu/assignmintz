@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tab from './components/Tab/index.jsx';
-//import AccountButton from './components/AccountButton/index.jsx';
 import {createUser} from '../../../../services/api/user/create-user.js';
 import {loginUser} from '../../../../services/api/user/login-user.js';
 import Cookies from "universal-cookie";
