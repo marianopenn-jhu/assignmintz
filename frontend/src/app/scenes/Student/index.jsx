@@ -8,10 +8,11 @@ import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
 //student can use gets from professor api
+
 const Container = styled.div`
-display:inline-block
-vertical-align:top;
-width:100%;
+  display:inline-block
+  vertical-align:top;
+  width:100%;
 `;
 
 class StudentView extends React.Component {
@@ -106,9 +107,10 @@ render() {
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
       );
     break;
-
     default:
-    this.setState({viewState:0});
+      this.setState({viewState:0});
+      this.forceUpdate();
+      break;
   }
 
   return (

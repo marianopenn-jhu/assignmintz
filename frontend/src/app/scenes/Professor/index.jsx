@@ -11,15 +11,9 @@ import {getAssignment} from '../../services/api/professor/get-assignment.js';
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 const Container = styled.div`
-  display:inline-block;
+  display:inline-block
   vertical-align:top;
   width:100%;
-`;
-const Wrapper = styled.div`
-  position: relative;
-  float: right;
-  left: 25vw;
-  width: 75vw;
 `;
 
 /*
@@ -176,6 +170,8 @@ class ProfessorView extends React.Component {
         break;
       default:
         this.setState({viewState:0});
+        this.forceUpdate();
+        break;
     }
 
     return(
