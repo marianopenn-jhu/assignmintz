@@ -94,7 +94,6 @@ class Sidebar extends React.Component {
         };
 
         return (
-          <TransitionGroup>
           <SidebarContainer>
             <SidebarPanel>
               <SidebarTitleContainer>
@@ -109,7 +108,6 @@ class Sidebar extends React.Component {
               </SidebarElementContainer>
             </SidebarPanel>
           </SidebarContainer>
-          </TransitionGroup>
         );
     }
 }
