@@ -103,6 +103,23 @@ const AccountButton = styled.button`
 
 `;
 
+function getCookie(c_name) {
+  var c_start;
+  var c_end;
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -137,31 +154,38 @@ class Form extends React.Component {
   onSubmit(event) {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     //const role = this.props.role;
-    getUser("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+    var session_key = getCookie("session_key");
+    console.log("user");
+    console.log(user_name);
+    console.log("key");
+    console.log(session_key);
+
+    getUser("user=" + user_name + "&key=" + session_key).then((response) => {
         if (response.status == true) {
           var obj = response.body;
           console.log("get user");
-          console.log(obj);
-          //this.setState({courses: obj.objects});
+          console.log(obj.objects[0]);
+          var params = obj.objects[0];
+          this.setState({role: params.role});
         } else {
           console.log("Failed to retrieve courses!");
         }
       }
     );
 
-    console.log("role");
-    console.log(role);
+    if (this.state.role) {
+      var existing = document.cookie;
+      document.cookie =  "assignmintz_role=" + this.state.role + "; " + existing;
+      console.log("added role to cookie");
+      console.log(document.cookie);
 
-    var existing = document.cookie;
-    document.cookie =  "assignmintz_role=" + role + "; " + existing;
-    // console.log("changed cookie");
-    // console.log(document.cookie);
+
     if (sign_in == true)
     {
       console.log("changed cookie");
       console.log(document.cookie);
 
-      loginUser(user_name, password).then((answer) =>
+      loginUser(user_name, password, this.state.role).then((answer) =>
       {
         if (answer.status == false) {
           this.setState({['errorMessage']: answer.body.message});
@@ -175,7 +199,7 @@ class Form extends React.Component {
       if (password == confirm_password) {
         var passwd = password;
         var name = first_name + " " + last_name;
-        createUser(user_name, name, email, passwd, role).then((answer) =>
+        createUser(user_name, name, email, passwd, this.state.role).then((answer) =>
         {
           console.log("created User");
           console.log(document.cookie);
@@ -187,6 +211,7 @@ class Form extends React.Component {
         });
       }
     }
+  }
   }
 
   signInSelected() {

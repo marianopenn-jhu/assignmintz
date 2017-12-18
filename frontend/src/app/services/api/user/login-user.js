@@ -4,7 +4,7 @@ const URL = __API__ + "/backend/v1/login/";
 
 export {loginUser};
 
-function loginUser(user_name, passwd)
+function loginUser(user_name, passwd, role)
 {
   var status = 200;
   return (fetch(URL, {
@@ -13,7 +13,7 @@ function loginUser(user_name, passwd)
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({user_name, passwd})
+    body: JSON.stringify({user_name, passwd, role})
   })).then((response) => {
     status = response.status;
     return response.json()
