@@ -351,8 +351,7 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
         self.invalid_oose_assignment_1 = {
             "session_key": "12344321",
             "user_name": "rhagrid",
-            "assignment_id": "1",
-            "assignment_name": "Iteration 1",
+            "assignment_name": "Iteration1",
             "assignment_type": "hw",
             "course": "/backend/v1/course/801.400/",
             "due_date": "2013-01-29T12:34:56.00Z",
@@ -372,7 +371,6 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "assignment_type": "",
             "course": "/backend/v1/course/601.421/",
             "due_date": "2013-01-29T12:34:56.00Z",
-            "expected_difficulty": "3",
             "expected_time": "3.4",
             "description": "Complete the iteration before time runs out"
         }
@@ -382,10 +380,8 @@ class UserResourceTest(ResourceTestCaseMixin, TestCase):
             "assignment_id": "",
             "assignment_name": "Iteration 1",
             "assignment_type": "hw",
-            "course": "",
             "due_date": "2013-01-29T12:34:56.00Z",
             "expected_difficulty": "",
-            "expected_time": "",
             "description": ""
         }
         resp1 = self.api_client.post(self.assignment_url, format='json', data=self.oose_assignment_1_empty_fields)

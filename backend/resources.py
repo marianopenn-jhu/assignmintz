@@ -12,6 +12,9 @@ from backend.authorization import UserAuthorization, AssignmentAuthorization, \
 import uuid
 import hashlib
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import IntegrityError
+from tastypie.exceptions import ImmediateHttpResponse
+from tastypie.http import HttpBadRequest
 # from django.contrib.auth.models import User
 
 
@@ -92,6 +95,7 @@ class CourseResource(ModelResource):
         bundle.data['session_key'] = bundle.data['session_key']
         return bundle
 
+
 class AddStudentToCourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
     students = fields.ManyToManyField(UserResource, 'students')
@@ -162,13 +166,17 @@ class AssignmentResource(ModelResource):
             return bundle
 
     def obj_create(self, bundle, request=None, **kwargs):
-        print('create called')
-        assignment_id = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
-        course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
+        try:
+            assignment_id = bundle.data['course'].split('/')[4] + '_' + bundle.data['assignment_name']
+            course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
+        except (ObjectDoesNotExist, KeyError):
+            raise ImmediateHttpResponse(HttpBadRequest("This course does not exist."))
         students = course.students.all()
-        Assignment.objects.create(assignment_id=assignment_id, assignment_name=bundle.data['assignment_name'], assignment_type=bundle.data['assignment_type'], course=course, due_date=bundle.data['due_date'], expected_difficulty=bundle.data['expected_difficulty'], expected_time=bundle.data['expected_time'], description=bundle.data['description'])
+        try:
+            Assignment.objects.create(assignment_id=assignment_id, assignment_name=bundle.data['assignment_name'], assignment_type=bundle.data['assignment_type'], course=course, due_date=bundle.data['due_date'], expected_difficulty=bundle.data['expected_difficulty'], expected_time=bundle.data['expected_time'], description=bundle.data['description'])
+        except (KeyError, IntegrityError):
+            raise ImmediateHttpResponse(HttpBadRequest("Duplicate assignment or you're forgetting something"))
         for stud in students:
-            print('trying to create')
             StudentAssignment.objects.create(student_assignment_id=assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=assignment_id))
         bundle = self.full_hydrate(bundle)
         return bundle
