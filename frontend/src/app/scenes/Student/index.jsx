@@ -6,6 +6,7 @@ import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx'
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
+import Modal from '../Layout/LeaderboardModal/index.jsx';
 //student can use gets from professor api
 const Container = styled.div`
 display:inline-block
@@ -20,6 +21,7 @@ class StudentView extends React.Component {
     this.returnToCalendar = this.returnToCalendar.bind(this);
     this.findClass = this.findClass.bind(this);
     this.openClass = this.openClass.bind(this);
+    this.openLeaderboard = this.openLeaderboard.bind(this);
     this.state = {
       courses:[],
       assignments:[],
@@ -63,7 +65,10 @@ findClass() {
   this.setState({viewState:1});
 }
 openClass(){
-  this.setState({viewState:3});
+  this.setState({viewState:2});
+}
+openLeaderboard(){
+  Modal
 }
 
 render() {
@@ -82,18 +87,19 @@ render() {
       <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
     );
     break;
-      case 2: // View single class
+    case 2: // View single class
       view = (
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
       );
     break;
+
     default:
     this.setState({viewState:0});
   }
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} session_key={this.props.session_key}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>
   );

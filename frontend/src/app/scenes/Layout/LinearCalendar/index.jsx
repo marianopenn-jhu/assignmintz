@@ -12,6 +12,7 @@ const ViewPane = styled.div`
   height: 100vh;
   overflow:hidden;
   overflow-y:auto;
+  z-index: -1;
 `;
 
 const TopBarContainer = styled.div`

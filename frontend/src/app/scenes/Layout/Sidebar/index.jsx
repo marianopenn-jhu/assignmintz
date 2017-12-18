@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
+//import Mintz from './components/MintzLeaderboard/index.jsx';
 
 const SidebarContainer = styled.div`
     height: auto;
@@ -115,6 +116,7 @@ class Sidebar extends React.Component {
                   {classes}
                 </ScrollDiv>
               </SidebarElementContainer>
+              <Mintz triggerEvent={this.props.showLeaderboard}/>
             </SidebarPanel>
           </SidebarContainer>
         );
