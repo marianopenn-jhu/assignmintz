@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
-import {getUser} from '../services/api/user/get-user.js';
+//import {getUser} from '../services/api/user/get-user.js';
 
 const cookie = new Cookies();
 

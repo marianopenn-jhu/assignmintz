@@ -62,6 +62,7 @@ const SidebarElementContainer = styled.ul`
     text-align:center;
     margin: 0;
     padding: 0;
+    overflow: scroll;
 `;
 
 class Sidebar extends React.Component {
