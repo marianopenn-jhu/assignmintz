@@ -57,7 +57,13 @@ class DeleteClassView extends React.Component {
 
   handleSubmit(event) {
     var filter = "?course_id=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key;
-    deleteCourse(filter);
+    deleteCourse(filter).then((response) => {
+      if (response.status) {
+        this.props.onClose();
+      } else {
+        // TODO: Handle response
+      }
+    })
   }
 
   render() {
