@@ -148,20 +148,30 @@ class AssignmentResource(ModelResource):
         }
 
     def hydrate(self, bundle):
+        print('in hydrate')
         if bundle.request.method == 'PUT':
             return bundle
         try:
             bundle.data['assignment_id'] = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
+            return bundle
         except IndexError:
-            pass
+            return bundle
+
+    def obj_create(self, bundle, request=None, **kwargs):
+        print('create called')
+        assignment_id = bundle.data['course'].split('/')[4] + '_'+ bundle.data['assignment_name']
+        course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
+        students = course.students.all()
+        Assignment.objects.create(assignment_id=assignment_id, assignment_name=bundle.data['assignment_name'], assignment_type=bundle.data['assignment_type'], course=course, due_date=bundle.data['due_date'], expected_difficulty=bundle.data['expected_difficulty'], expected_time=bundle.data['expected_time'], description=bundle.data['description'])
+        for stud in students:
+            print('trying to create')
+            StudentAssignment.objects.create(student_assignment_id=assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=assignment_id))
+        bundle = self.full_hydrate(bundle)
         return bundle
 
     def dehydrate(self, bundle):
+        print('in dehydrate')
         #Create instance of assignment for all students in this course
-        course = (Course.objects.all().get(course_id=bundle.data['course'].split('/')[4]))
-        students = course.students.all()
-        for stud in students:
-            StudentAssignment.objects.create(student_assignment_id=bundle.obj.assignment_id+'_'+stud.user_name, student=stud, assignment=Assignment.objects.all().get(assignment_id=bundle.obj.assignment_id))
         bundle.data["course"] = bundle.obj.course.course_id
         bundle.data['assignment_id'] = bundle.obj.assignment_id
         bundle.data.pop('expected_difficulty', None)
@@ -177,7 +187,6 @@ class AssignmentResource(ModelResource):
 
 
 class EditStudentAssignmentResource(ModelResource):
-
     class Meta:
         queryset = StudentAssignment.objects.all()
         resource_name = 'student/update/assignment'
@@ -223,7 +232,6 @@ class StudentAssignmentResource(ModelResource):
         }
 
     def hydrate(self, bundle):
-        print('in student hydrate')
         assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
         bundle.data['student_assignment_id'] = str(assignment.assignment_id) + '_'+bundle.data['student'].split('/')[4]
         return bundle
@@ -265,6 +273,7 @@ class SubTaskResource(ModelResource):
         return bundle
 
     def dehydrate(self, bundle):
+        print('in subtask dehydrate')
         bundle.data["assignment"] = bundle.obj.assignment.assignment_id
         return bundle
 
