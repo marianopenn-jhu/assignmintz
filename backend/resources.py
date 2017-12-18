@@ -67,7 +67,12 @@ class UserResource(ModelResource):
         bundle.data.pop('passwd', None)
         return bundle
 
-
+class TopFiveResource(ModelResource):
+    class Meta:
+        queryset = User.objects.all().order_by('-points')[:5]
+        resource_name = 'leaderboard'
+        authorization = Authorization()
+        allowed_methods = ['get']
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
