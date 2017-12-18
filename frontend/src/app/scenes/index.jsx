@@ -107,12 +107,7 @@ class App extends React.Component {
   }
 
   onLogin(answer, user_name, role) {
-<<<<<<< HEAD
     if (role == "Student") {
-=======
-
-    if (role == "student") {
->>>>>>> 1d666484e395c1e31ddab0550c488261ce6593a1
         this.setState({
           'user_state': 1,
           'current_user': user_name,

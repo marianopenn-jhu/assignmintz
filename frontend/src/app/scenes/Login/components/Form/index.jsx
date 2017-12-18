@@ -4,7 +4,6 @@ import Tab from './components/Tab/index.jsx';
 //import AccountButton from './components/AccountButton/index.jsx';
 import {createUser} from '../../../../services/api/user/create-user.js';
 import {loginUser} from '../../../../services/api/user/login-user.js';
-import {getUser} from '../../../../services/api/user/get-user.js';
 import Cookies from "universal-cookie";
 
 const cookie = document.cookie;
@@ -204,13 +203,8 @@ class Form extends React.Component {
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
-<<<<<<< HEAD
           <AccountButton name="role" type="select" value="Student" onClick={this.onChange}>Student</AccountButton>
           <AccountButton name="role" type="select" value="Professor" onClick={this.onChange}>Professor</AccountButton>
-=======
-          <AccountButton name="role" type="button" value="Student" selected={this.state.student_prof} className={roleSelected} className={hiddenField} onClick={this.onChange} onClick={this.onSelectStudent}>Student</AccountButton>
-          <AccountButton name="role" type="button" value="Professor" selected={this.state.student_prof} className={roleSelected} onClick={this.onChange} className={hiddenField} onClick={this.onSelectProfessor}>Professor</AccountButton>
->>>>>>> 1d666484e395c1e31ddab0550c488261ce6593a1
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
