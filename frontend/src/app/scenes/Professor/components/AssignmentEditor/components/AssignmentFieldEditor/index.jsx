@@ -99,7 +99,6 @@ class AssignmentFieldEditor extends React.Component {
   handleCalendarChange(value) {
     var formatted = value.utc().format();
     formatted = formatted.substring(0, formatted.length - 1) + ".00Z";
-    console.log(formatted);
     this.setState({['date']: formatted});
   }
 
@@ -117,9 +116,9 @@ class AssignmentFieldEditor extends React.Component {
     ).then((response) =>
     {
       if (response.status == false) {
-        console.log(response.body);
+        // TODO: Handle error
       } else {
-        this.onClose();
+        this.props.onClose();
       }
     })
   }

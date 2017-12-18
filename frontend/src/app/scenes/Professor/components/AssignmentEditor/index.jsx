@@ -60,6 +60,7 @@ class AssignmentEditor extends React.Component {
     super(props);
     this.onEditClick = this.onEditClick.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.onReturnClick = this.onReturnClick.bind(this);
 
     this.state = {
       editingState: 0, // 0 = Assignment Picker, 1 = Editing an Assignment, 2 = Deleting an assignment
@@ -79,6 +80,12 @@ class AssignmentEditor extends React.Component {
     this.forceUpdate();
   }
 
+  onReturnClick() {
+    this.setState({['editingState'] : 0});
+    this.setState({['selectedAssignment'] : null});
+    this.forceUpdate();
+  }
+
   render() {
     // Render the view with the current assignments
     let current = null;
@@ -89,7 +96,7 @@ class AssignmentEditor extends React.Component {
         var assignmentList = [];
         getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status) {
-            assignmentList = response.body;
+            assignmentList = response.body.objects;
 
             assignmentListHtml = assignmentList.map(function(assignment, index){
               return
@@ -103,7 +110,6 @@ class AssignmentEditor extends React.Component {
               })
           }  else {
             // TODO: Handle failure
-            console.log(response);
           }
         });
 
@@ -118,7 +124,7 @@ class AssignmentEditor extends React.Component {
         break;
       case 1:
         current = (
-          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment}/>
+          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
         );
         break;
       case 2:
