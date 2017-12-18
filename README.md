@@ -47,7 +47,7 @@ Navigate to 'localhost:8000/home/' to begin using the app.
 ### Deploy Process:
 
 - Make changes to current branch
-- Run 'npm run deploy'
+- Run 'npm run build:prod'
 - Add/commit changes
 - Run 'git push heroku master'
 - Run 'heroku run python manage.py collectstatic --noinput'
