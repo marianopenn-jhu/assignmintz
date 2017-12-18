@@ -23,11 +23,18 @@ media
 assignmintz/backend/__pycache__/
 assignmintz/assignmintz/__pycache__/
 
+.gitignore
+
 # Front-end ignores
 assignmintz/frontend/node_modules/
 frontend/public/transformed.js
-
+frontend/node_modules/
+.DS_Store
 ./backend/migrations/
+backend/migrations/
+frontend/src/public/transformed.js
+
+
 
 virtualEnv/
 

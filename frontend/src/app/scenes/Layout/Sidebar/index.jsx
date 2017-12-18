@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 //import TransitionGroup from 'react-addons-transition-group';
+import MintzModal from '../MintzModal/index.jsx';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
+
 
 const SidebarContainer = styled.div`
     height: auto;
@@ -31,6 +33,13 @@ const SidebarTitleContainer = styled.div`
   &:hover {
     cursor:pointer;
   }
+`;
+
+const ScrollDiv = styled.div`
+
+overflow-y: scroll;
+max-height: 50vh;
+
 `;
 
 // const SidebarTitle = styled.h1`
@@ -103,9 +112,12 @@ class Sidebar extends React.Component {
               </SidebarTitleContainer>
               <SidebarElementContainer>
                 <SidebarUserInfo data={this.props.user_data}/>
-                <SidebarClassesTitle triggerEvent={this.props.addClass}/>
-                {classes}
+                <ScrollDiv>
+                  <SidebarClassesTitle triggerEvent={this.props.addClass}/>
+                  {classes}
+                </ScrollDiv>
               </SidebarElementContainer>
+
             </SidebarPanel>
           </SidebarContainer>
         );
