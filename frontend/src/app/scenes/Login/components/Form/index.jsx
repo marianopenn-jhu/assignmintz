@@ -224,8 +224,8 @@ class Form extends React.Component {
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
-          <AccountButton name="role" type="button" value="Student" selected={this.state.student_prof} className={roleSelected} onClick={this.onChange} onClick={this.onSelectStudent}>Student</AccountButton>
-          <AccountButton name="role" type="button" value="Professor" selected={this.state.student_prof} className={roleSelected} onClick={this.onChange} onClick={this.onSelectProfessor}>Professor</AccountButton>
+          <AccountButton name="role" type="button" value="Student" selected={this.state.student_prof} className={roleSelected} className={hiddenField} onClick={this.onChange} onClick={this.onSelectStudent}>Student</AccountButton>
+          <AccountButton name="role" type="button" value="Professor" selected={this.state.student_prof} className={roleSelected} onClick={this.onChange} className={hiddenField} onClick={this.onSelectProfessor}>Professor</AccountButton>
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
