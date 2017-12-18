@@ -72,6 +72,10 @@ const SliderContainer = styled.div`
   display:inline-block;
 `;
 
+const Slider = styled.input`
+
+`;
+
 class AssignmentFieldEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -86,7 +90,8 @@ class AssignmentFieldEditor extends React.Component {
       date:"",
       expected_difficulty:"",
       expected_time:"",
-      description:""
+      description:"",
+      sliderValue:5
     }
   }
 
@@ -109,7 +114,7 @@ class AssignmentFieldEditor extends React.Component {
       this.state.assignment_type,
       "/backend/v1/course/" + this.props.course.course_id + "/",
       this.state.date,
-      "10",
+      this.state.sliderValue.toString(),
       this.state.expected_time,
       this.state.description
     ).then((response) =>
@@ -163,7 +168,7 @@ class AssignmentFieldEditor extends React.Component {
         <ItemLabel>
           <TextLabel>Expected Difficulty:</TextLabel>
           <SliderContainer>
-
+            <Slider name="sliderValue" type="range" min="1" max="10" value={this.state.sliderValue} onChange={this.handleChange}/>
           </SliderContainer>
         </ItemLabel>
         <ItemLabel>

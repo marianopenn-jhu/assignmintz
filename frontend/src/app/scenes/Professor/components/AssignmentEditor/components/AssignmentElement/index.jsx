@@ -28,7 +28,7 @@ const IconSpan = styled.span`
   float:right;
   &:hover {
     cursor:pointer;
-    color:gray;
+    color:lightgray;
   }
 `;
 

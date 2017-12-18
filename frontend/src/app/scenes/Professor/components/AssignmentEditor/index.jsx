@@ -5,6 +5,7 @@ import FaPencil from 'react-icons/lib/fa/pencil';
 import AssignmentElement from './components/AssignmentElement/index.jsx';
 import AddAssignmentElement from './components/AddAssignmentElement/index.jsx';
 import AssignmentFieldEditor from './components/AssignmentFieldEditor/index.jsx';
+import DeleteAssignmentView from './components/AddAssignmentElement/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
 
 //position: absolute;
@@ -127,6 +128,9 @@ class AssignmentEditor extends React.Component {
         );
         break;
       case 2:
+        current = (
+          <DeleteAssignmentView session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
+        );
         break;
       default:
         break;
