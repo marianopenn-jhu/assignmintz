@@ -9,7 +9,7 @@ const LoginWrapper = styled.div`
   top:50%;
   margin-left: -160px;
   margin-top: -160px;
-
+  border-radius: 8px;
   clear: both;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ class AccountChooser extends React.Component {
 
   onSignInSuccess(answer, user_name) {
     this.setState({['userName']: user_name});
-    this.props.onLogin(answer, user_name, this.state.selectedRole);
+    this.props.onLogin(answer, user_name, );
   }
 
   resetState() {
