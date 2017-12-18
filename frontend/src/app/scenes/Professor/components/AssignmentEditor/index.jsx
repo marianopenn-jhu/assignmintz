@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
+import FaPencil from 'react-icons/lib/fa/pencil';
+import AssignmentElement from './components/AssignmentElement/index.jsx';
+import AddAssignmentElement from './components/AddAssignmentElement/index.jsx';
+import AssignmentFieldEditor from './components/AssignmentFieldEditor/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
-import {addAssignment} from '../../../../services/api/professor/add-assignment.js'
+
 //position: absolute;
 const Container = styled.div`
   overflow:hidden;
@@ -34,133 +38,100 @@ const Header = styled.h1`
   padding-left:50px;
 `;
 
-const FormContainer = styled.div`
-  width:100%;
+const PencilSpan = styled.span`
+  font-size:40px;
+  padding:10px;
 `;
 
-const ItemLabel = styled.div
-`
-  display:block;
+const AssignmentsContainer = styled.div`
   width:85%;
-  padding-top:20px;
-  padding-bottom:20px;
-  text-align:center;
+  height:100%;
 `;
 
-const TextLabel = styled.div
-`
-  display:inline-block;
-  font-family:Avenir;
-  font-size:16px;
-  width:25%;
-  text-align:right;
-  padding-right:20px;
-`;
-
-const TextInput = styled.input
-`
-  display:inline-block;
-  width:70%;
-`;
-
-const BigTextInput = styled.textarea
-`
-  display:inline-block;
-  width:70%;
-  height:150px;
-  resize: none;
-`;
-
-const CreateButton = styled.button
-`
-
+const AssignmentList = styled.ul`
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  overflow-y:auto;
 `;
 
 class AssignmentEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.onEditClick = this.onEditClick.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
 
     this.state = {
-      assignment_id:"",
-      assignment_name:"",
-      due_date_year:"",
-      due_date_month:"",
-      due_date_day:"",
-      due_date_time:"",
-      description:""
-    }
+      editingState: 0, // 0 = Assignment Picker, 1 = Editing an Assignment, 2 = Deleting an assignment
+      selectedAssignment:null
+    };
   }
 
-  handleChange(e) {
-    this.setState({[e.target.name]: e.target.value});
+  onEditClick(assignment) {
+    this.setState({['editingState'] : 1});
+    this.setState({['selectedAssignment'] : assignment});
+    this.forceUpdate();
   }
 
-  handleSubmit(event) {
-    addAssignment(
-      this.props.session_key,
-      this.props.user_name,
-      this.state.assignment_id,
-      this.state.assignment_name,
-      "hw",
-      "/backend/v1/course/" + this.props.course.course_id + "/",
-      this.state.due_date_year + "-" + this.state.due_date_month + "-" + this.state.due_date_day + "T" + this.state.due_date_time + ":" + "00:00.00Z",
-      "3",
-      "4",
-      "3.4",
-      "5.6",
-      "5",
-      "33.3",
-      "True",
-      this.state.description
-    ).then((response) =>
-    {
-      if (response.status == false) {
-          console.log(response.body);
-      }
-    })
+  onDeleteClick(assignment) {
+    this.setState({['editingState'] : 2});
+    this.setState({['selectedAssignment'] : assignment});
+    this.forceUpdate();
   }
 
   render() {
+    // Render the view with the current assignments
+    let current = null;
+    switch (this.state.editingState) {
+      case 0:
+        // Get the current assignments
+        var assignmentListHtml = (<div></div>);
+        var assignmentList = [];
+        getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+          if (response.status) {
+            assignmentList = response.body;
+
+            assignmentListHtml = assignmentList.map(function(assignment, index){
+              return
+                (
+                  <AssignmentElement
+                    assignment={assignment}
+                    onEditClick={(assignment) => this.onEditClick(assignment)}
+                    onDeleteClick={(assignment) => this.onDeleteClick(assignment)}
+                  />
+                )
+              })
+          }  else {
+            // TODO: Handle failure
+            console.log(response);
+          }
+        });
+
+        current = (
+          <AssignmentsContainer>
+            <AssignmentList>
+              {assignmentListHtml}
+              <AddAssignmentElement onClick={() => this.onEditClick(null)}/>
+            </AssignmentList>
+          </AssignmentsContainer>
+        )
+        break;
+      case 1:
+        current = (
+          <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment}/>
+        );
+        break;
+      case 2:
+        break;
+      default:
+        break;
+    }
+
     return (
       <Container>
         <XOut onClick={this.props.onClose}><FaClose/></XOut>
-        <Header>Edit Assignments for {this.props.course.course_name}</Header>
-
-        <FormContainer>
-          <ItemLabel>
-            <TextLabel>Assignment Title:</TextLabel>
-            <TextInput name="assignment_name" type="text" onChange={this.handleChange} />
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Assignment ID:</TextLabel>
-            <TextInput name="assignment_id" type="text" onChange={this.handleChange} />
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Description:</TextLabel>
-            <BigTextInput name="description" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Year:</TextLabel>
-            <BigTextInput name="due_date_year" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Month:</TextLabel>
-            <BigTextInput name="due_date_month" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Day:</TextLabel>
-            <BigTextInput name="due_date_day" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel>
-            <TextLabel>Due Time:</TextLabel>
-            <BigTextInput name="due_date_time" onChange={this.handleChange}></BigTextInput>
-          </ItemLabel>
-          <ItemLabel onClick={this.handleSubmit}>
-            <CreateButton type="button">Create Course</CreateButton>
-          </ItemLabel>
-        </FormContainer>
+        <Header><PencilSpan><FaPencil/></PencilSpan>Edit Assignments for {this.props.course.course_name}</Header>
+        {current}
       </Container>
     )
   }

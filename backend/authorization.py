@@ -111,6 +111,83 @@ class StudentAssignmentAuthorization(Authorization):
 
     def delete_list(self, object_list, bundle):
         # This assumes a ``QuerySet`` from ``ModelResource``.
+        raise Unauthorized("Nope")
+
+    def delete_detail(self, object_list, bundle):
+        raise Unauthorized("Nope")
+
+class StudentSubTaskAuthorization(Authorization):
+
+    def read_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            session_key = bundle.request.GET["key"]
+            user = bundle.request.GET["user"]
+            user_name = User.objects.all().get(user_name=user)
+            if user_name.role.lower() == 'professor':
+                raise Unauthorized("Must be student")
+            LogIn.objects.all().get(user_name=user, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
+
+    def read_detail(self, object_list, bundle):
+        return True
+
+    def create_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'professor':
+                raise Unauthorized("Must be student")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
+
+    def create_detail(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'professor':
+                raise Unauthorized("Must be student")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return True
+
+    def update_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'professor':
+                raise Unauthorized("Must be student")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
+
+    def update_detail(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'professor':
+                raise Unauthorized("Must be student")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return True
+
+    def delete_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
         try:
             user_name = bundle.request.GET['user']
             session_key = bundle.request.GET['key']
@@ -136,99 +213,99 @@ class StudentAssignmentAuthorization(Authorization):
             raise Unauthorized("Need valid session key and username")
         return True
 
-    class AssignmentAuthorization(Authorization):
+class AssignmentAuthorization(Authorization):
 
-        def read_list(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                session_key = bundle.request.GET["key"]
-                user = bundle.request.GET["user"]
-                LogIn.objects.all().get(user_name=user, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return object_list
+    def read_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            session_key = bundle.request.GET["key"]
+            user = bundle.request.GET["user"]
+            LogIn.objects.all().get(user_name=user, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
 
-        def read_detail(self, object_list, bundle):
-            return True
+    def read_detail(self, object_list, bundle):
+        return True
 
-        def create_list(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return object_list
+    def create_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
 
-        def create_detail(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return True
+    def create_detail(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return True
 
-        def update_list(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return object_list
+    def update_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return object_list
 
-        def update_detail(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.data.get('user_name')
-                session_key = bundle.data.get('session_key')
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return True
+    def update_detail(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.data.get('user_name')
+            session_key = bundle.data.get('session_key')
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return True
 
-        def delete_list(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.request.GET['user']
-                session_key = bundle.request.GET['key']
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            # TODO filter on professor
-            return object_list
+    def delete_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        # TODO filter on professor
+        return object_list
 
-        def delete_detail(self, object_list, bundle):
-            # This assumes a ``QuerySet`` from ``ModelResource``.
-            try:
-                user_name = bundle.request.GET['user']
-                session_key = bundle.request.GET['key']
-                user = User.objects.all().get(user_name=user_name)
-                if user.role.lower() == 'student':
-                    raise Unauthorized("Must be professor")
-                LogIn.objects.all().get(user_name=user_name, session_key=session_key)
-            except (KeyError, ObjectDoesNotExist):
-                raise Unauthorized("Need valid session key and username")
-            return True
+    def delete_detail(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        try:
+            user_name = bundle.request.GET['user']
+            session_key = bundle.request.GET['key']
+            user = User.objects.all().get(user_name=user_name)
+            if user.role.lower() == 'student':
+                raise Unauthorized("Must be professor")
+            LogIn.objects.all().get(user_name=user_name, session_key=session_key)
+        except (KeyError, ObjectDoesNotExist):
+            raise Unauthorized("Need valid session key and username")
+        return True
 
 
 class StudentCourseAuthorization(Authorization):

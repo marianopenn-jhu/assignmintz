@@ -8,7 +8,7 @@ from tastypie import fields, bundle
 from backend.validation import UserValidation, CourseValidation, AssignmentValidation, \
     SubtaskValidation, LoginValidation, LogOutValidation, AssignmentUpdateValidation
 from backend.authorization import UserAuthorization, AssignmentAuthorization, \
-    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization
+    CourseAuthorization, StudentCourseAuthorization, StudentAssignmentAuthorization, StudentSubTaskAuthorization
 import uuid
 import hashlib
 from django.core.exceptions import ObjectDoesNotExist
@@ -32,7 +32,6 @@ class LogInResource(ModelResource):
 
     def dehydrate(self, bundle):
         bundle.data.pop('passwd', None)
-        bundle.data.pop('role', None)
         return bundle
 
 
@@ -64,6 +63,11 @@ class UserResource(ModelResource):
         salt = uuid.uuid4().hex
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
+    def dehydrate(self, bundle):
+        bundle.data.pop('passwd', None)
+        return bundle
+
+
 
 class CourseResource(ModelResource):
     professor = fields.ForeignKey(UserResource, 'professor')
@@ -174,15 +178,6 @@ class AssignmentResource(ModelResource):
         #Create instance of assignment for all students in this course
         bundle.data["course"] = bundle.obj.course.course_id
         bundle.data['assignment_id'] = bundle.obj.assignment_id
-        bundle.data.pop('expected_difficulty', None)
-        bundle.data.pop('expected_time', None)
-        bundle.data.pop('due_date', None)
-        bundle.data.pop('user_name', None)
-        bundle.data.pop('session_key', None)
-        bundle.data.pop('description', None)
-        bundle.data.pop('assignment_name', None)
-        bundle.data.pop('assignment_type', None)
-        bundle.data.pop('course', None)
         return bundle
 
 
@@ -214,6 +209,7 @@ class EditStudentAssignmentResource(ModelResource):
             pass
         return bundle
 
+
 class StudentAssignmentResource(ModelResource):
     student = fields.ForeignKey(UserResource, 'student')
     assignment = fields.ToOneField(AssignmentResource, 'assignment')
@@ -222,7 +218,7 @@ class StudentAssignmentResource(ModelResource):
         queryset = StudentAssignment.objects.all()
         resource_name = 'student/assignment'
         authorization = StudentAssignmentAuthorization()
-        allowed_methods = ['get', 'post', 'delete', 'put']
+        allowed_methods = ['get', 'post', 'put']
         validation = AssignmentUpdateValidation()
         always_return_data = True
         include_resource_uri = False
@@ -255,7 +251,7 @@ class SubTaskResource(ModelResource):
     class Meta:
             queryset = SubTask.objects.all()
             resource_name = 'subtask'
-            authorization = StudentAssignmentAuthorization()
+            authorization = StudentSubTaskAuthorization()
             allowed_methods = ['get', 'post', 'delete']
             validation = SubtaskValidation()
             excludes = []

@@ -62,6 +62,7 @@ class SidebarClassesTitle extends React.Component {
     constructor(props) {
         super(props);
         this.onClick = this.onClick.bind(this);
+        this.classesClick = this.classesClick.bind(this);
         this.onPlusHover = this.onPlusHover.bind(this);
         this.onPlusUnHover = this.onPlusUnHover.bind(this);
 
@@ -71,6 +72,11 @@ class SidebarClassesTitle extends React.Component {
     }
 
     onClick() {
+      if (this.props.triggerEvent) {
+          this.props.triggerEvent();
+      }
+    }
+    classesClick() {
       if (this.props.triggerEvent) {
           this.props.triggerEvent();
       }
@@ -99,13 +105,12 @@ class SidebarClassesTitle extends React.Component {
         }
 
         return (
-          <Container onClick={this.onClick}>
-            <LeftContainer>
+          <Container>
+            <LeftContainer classesClick={this.onClassesClick}>
               <Title>Classes</Title>
             </LeftContainer>
-            <RightContainer >
-              {/*tooltip*/}
-              <PlusSpan onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover}><FaPlusCircle/></PlusSpan>
+            <RightContainer>
+              <PlusSpan onMouseOver={this.onPlusHover} onMouseOut={this.onPlusUnHover} onClick={this.onClick}><FaPlusCircle/></PlusSpan>
             </RightContainer>
           </Container>
         );

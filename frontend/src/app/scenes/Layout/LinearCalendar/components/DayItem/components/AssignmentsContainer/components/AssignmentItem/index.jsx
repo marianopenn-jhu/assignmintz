@@ -38,7 +38,7 @@ class AssignmentItem extends React.Component {
       <Item>
         <Header>{this.props.data.assignment_name}: Due by 5 pm</Header>
         <BodyWrapper>
-          <Body>{this.props.data.assignment_type}</Body>
+          <Body>{this.props.data.description}</Body>
         </BodyWrapper>
       </Item>
     )
