@@ -97,10 +97,19 @@ DATABASES = {
         'TEST':  {
             'NAME': 'test_assignmintz',
         },
+    },
+    'heroku': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ddck90ov0amqgs',
+        'USER': 'exdjaouijtwhht',
+        'HOST': 'ec2-107-21-201-57.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'PASSWORD': 'bcb35094aa560aa688f161b9f84701f8bb99eba093c877fcb42b54662c8edb67'
     }
 }
 
 DATABASES['default'].update(db_from_env)
+DATABASES['heroku'].update(db_from_env)
 
 
 # Password validation
