@@ -33,6 +33,13 @@ const SidebarTitleContainer = styled.div`
   }
 `;
 
+const ScrollDiv = styled.div`
+
+overflow-y: scroll;
+max-height: 50vh;
+
+`;
+
 // const SidebarTitle = styled.h1`
 //   color: black;
 //   font-family: Avenir;
@@ -103,8 +110,10 @@ class Sidebar extends React.Component {
               </SidebarTitleContainer>
               <SidebarElementContainer>
                 <SidebarUserInfo data={this.props.user_data}/>
-                <SidebarClassesTitle triggerEvent={this.props.addClass}/>
-                {classes}
+                <ScrollDiv>
+                  <SidebarClassesTitle triggerEvent={this.props.addClass}/>
+                  {classes}
+                </ScrollDiv>
               </SidebarElementContainer>
             </SidebarPanel>
           </SidebarContainer>

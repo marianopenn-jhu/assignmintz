@@ -31,6 +31,10 @@ frontend/public/transformed.js
 frontend/node_modules/
 .DS_Store
 ./backend/migrations/
+backend/migrations/
+frontend/src/public/transformed.js
+
+
 
 virtualEnv/
 
