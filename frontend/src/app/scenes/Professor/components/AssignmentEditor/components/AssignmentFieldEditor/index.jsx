@@ -91,8 +91,6 @@ class AssignmentFieldEditor extends React.Component {
   }
 
   handleChange(e) {
-
-
     this.setState({[e.target.name]: e.target.value});
   }
 
@@ -103,6 +101,7 @@ class AssignmentFieldEditor extends React.Component {
   }
 
   handleSubmit(event) {
+    // Change date string to accomodate server
     addAssignment(
       this.props.session_key,
       this.props.user_name,
@@ -128,7 +127,8 @@ class AssignmentFieldEditor extends React.Component {
     if (this.props.assignment) {
       this.state.assignment_name = this.props.assignment.assignment_name;
       this.state.assignment_type = this.props.assignment.assignment_type;
-      this.state.date = this.props.assignment.date;
+      this.state.date = this.props.assignment.due_date;
+      console.log(this.state.date);
       this.state.expected_difficulty = this.props.assignment.expected_difficulty;
       this.state.expected_time = this.props.assignment.expected_time;
       this.state.description = this.props.assignment.description;
@@ -172,8 +172,7 @@ class AssignmentFieldEditor extends React.Component {
           </TextLabel>
           <DateContainer>
             <DateTime
-              default={this.state.date}
-              inputProps={{ placeholder: "Select a Due Date/Time"}}
+              defaultValue={this.state.date}
               onChange={(value) => this.handleCalendarChange(value)}
             />
           </DateContainer>

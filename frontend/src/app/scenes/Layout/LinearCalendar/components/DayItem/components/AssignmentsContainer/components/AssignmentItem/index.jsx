@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Moment from 'moment';
 
 const Item = styled.li`
   background-color:	white;
@@ -34,9 +35,11 @@ class AssignmentItem extends React.Component {
   }
 
   render() {
+    Moment.locale('en');
+    var localText = Moment.utc(this.props.data.due_date).local().format('hh:mm a');
     return(
       <Item>
-        <Header>{this.props.data.assignment_name}: Due by 5 pm</Header>
+        <Header>{this.props.data.assignment_name}: Due by {localText}</Header>
         <BodyWrapper>
           <Body>{this.props.data.description}</Body>
         </BodyWrapper>
