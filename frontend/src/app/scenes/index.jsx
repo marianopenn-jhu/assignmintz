@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
+import {getUser} from '../../services/api/user/get-user.js';
 
 const cookie = new Cookies();
 
@@ -91,15 +92,33 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    var user = cookie.get("assignmintz_user_name");
-    var session_key = cookie.get("assignmintz_session_key");
-    var role = cookie.get("assignmintz_role");
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    var user =  '';//cookie.get("assignmintz_user_name");
+    var session_key = '';// cookie.get("assignmintz_session_key");
+    var role = '';// = cookie.get("assignmintz_role");
     var answer = new Object();
+
+    getUser("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
+        if (response.status == true) {
+          var obj = response.body;
+          console.log("get user");
+          console.log(obj);
+          this.setState({courses: obj.objects});
+        } else {
+          console.log("Failed to retrieve courses!");
+        }
+      }
+    );
+
     answer.session_key = session_key;
+    console.log("top login");
+    console.log(role);
     this.onLogin(answer, user, role);
   }
 
   onLogin(answer, user_name, role) {
+
     if (role == "student") {
         this.setState({
           'user_state': 1,

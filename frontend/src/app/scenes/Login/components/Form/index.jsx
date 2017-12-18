@@ -133,8 +133,8 @@ class Form extends React.Component {
   onSubmit(event) {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     //const role = this.props.role;
-    // console.log("role");
-    // console.log(role);
+    console.log("role");
+    console.log(role);
 
     var existing = document.cookie;
     document.cookie =  "assignmintz_role=" + role + "; " + existing;
@@ -142,6 +142,9 @@ class Form extends React.Component {
     // console.log(document.cookie);
     if (sign_in == true)
     {
+      console.log("changed cookie");
+      console.log(document.cookie);
+
       loginUser(user_name, password).then((answer) =>
       {
         if (answer.status == false) {
@@ -158,7 +161,7 @@ class Form extends React.Component {
         var name = first_name + " " + last_name;
         createUser(user_name, name, email, passwd, role).then((answer) =>
         {
-          console.log("changed cookie");
+          console.log("created User");
           console.log(document.cookie);
           if (answer.status == false) {
             this.setState({['errorMessage']: answer.body.message});

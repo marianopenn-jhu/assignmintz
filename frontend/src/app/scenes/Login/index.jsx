@@ -85,7 +85,7 @@ class AccountChooser extends React.Component {
   }
 
   onSignUpSuccess(userName, email) {
-    console.log("changed cookie");
+    console.log("signed up");
     console.log(document.cookie);
     this.setState({['currentState']: 'createdUser'});
     this.setState({['userName']: userName});
@@ -93,6 +93,8 @@ class AccountChooser extends React.Component {
   }
 
   onSignInSuccess(answer, user_name) {
+    console.log("sign in");
+    console.log(document.cookie);
     this.setState({['userName']: user_name});
     this.props.onLogin(answer, user_name, );
   }
