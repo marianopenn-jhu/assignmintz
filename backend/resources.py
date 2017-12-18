@@ -246,14 +246,7 @@ class StudentAssignmentResource(ModelResource):
 
     #TODO write dehydrate method to call algorithm
     def dehydrate(self, bundle):
-        bundle.data.pop('actual_difficulty', None)
-        bundle.data.pop('actual_time', None)
-        bundle.data.pop('assignment_id', None)
-        bundle.data.pop('done', None)
-        bundle.data.pop('priority', None)
         bundle.data.pop('session_key', None)
-        bundle.data.pop('student', None)
-        bundle.data.pop('pk', None)
         return bundle
 
 
