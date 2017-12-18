@@ -9,7 +9,7 @@ const LoginWrapper = styled.div`
   top:50%;
   margin-left: -160px;
   margin-top: -160px;
-
+  border-radius: 8px;
   clear: both;
   display: flex;
   flex-direction: column;
@@ -84,15 +84,16 @@ class AccountChooser extends React.Component {
     this.setState({['selectedRole']: e.target.name});
   }
 
-  onSignUpSuccess(userName, email) {
+  onSignUpSuccess(userName, email, selectedRole) {
     this.setState({['currentState']: 'createdUser'});
     this.setState({['userName']: userName});
     this.setState({['email']: email});
   }
 
-  onSignInSuccess(answer, user_name) {
+  onSignInSuccess(answer, user_name, role) {
+    this.setState({['selectedRole']: role});
     this.setState({['userName']: user_name});
-    this.props.onLogin(answer, user_name, this.state.selectedRole);
+    this.props.onLogin(answer, user_name, role);
   }
 
   resetState() {
@@ -109,7 +110,7 @@ class AccountChooser extends React.Component {
       case 'loginScreen':
         current = (
           <FormWrapper>
-            <LoginForm role={this.state.selectedRole} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
+            <LoginForm role={''} onSignUp={this.onSignUpSuccess} onSignIn={this.onSignInSuccess}/>
           </FormWrapper>
         );
         break;

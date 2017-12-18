@@ -28,27 +28,30 @@ class StudentView extends React.Component {
 
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("user=" + this.props.user_name).then((response) => {
-        if (response.status == true) {
-          var obj = response.body;
-          this.setState({courses: obj.objects});
-        } else {
-          console.log("Failed to retrieve courses!");
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key + "&students=" + this.props.user_name).then((courseResponse) => {
+          if (courseResponse.status == true) {
+            var cs = courseResponse.body.objects;
+            this.setState({courses: cs});
+            // Retrieve assignments
+            for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
+              var c = cs[courseIndex];
+              getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
+                  if (assignmentResponse.status == true) {
+                    var as = assignmentResponse.body.objects;
+                    var currAssignments = this.state.assignments.concat(as);
+                    this.setState({assignments: currAssignments});
+                  } else {
+                    console.log("Failed to retrieve assignments");
+                  }
+                }
+              );
+            }
+          } else {
+            console.log("Failed to retrieve courses!");
+          }
         }
-      }
-    );
-
-    // Retrieve assignments
-    getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
-      if (response.status == true) {
-        var obj = response.body;
-        this.setState({assignments: obj.objects});
-      } else {
-        console.log("Failed to retrieve assignments");
-      }
+      );
     }
-  )
-}
 }
 
 returnToCalendar() {
@@ -90,7 +93,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} session_key={this.porps.session_key}/>
+      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} session_key={this.props.session_key}/>
         {view}
     </Container>
   );

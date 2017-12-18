@@ -72,6 +72,10 @@ const SliderContainer = styled.div`
   display:inline-block;
 `;
 
+const Slider = styled.input`
+
+`;
+
 class AssignmentFieldEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -86,24 +90,23 @@ class AssignmentFieldEditor extends React.Component {
       date:"",
       expected_difficulty:"",
       expected_time:"",
-      description:""
+      description:"",
+      sliderValue:5
     }
   }
 
   handleChange(e) {
-
-
     this.setState({[e.target.name]: e.target.value});
   }
 
   handleCalendarChange(value) {
     var formatted = value.utc().format();
     formatted = formatted.substring(0, formatted.length - 1) + ".00Z";
-    console.log(formatted);
     this.setState({['date']: formatted});
   }
 
   handleSubmit(event) {
+    // Change date string to accomodate server
     addAssignment(
       this.props.session_key,
       this.props.user_name,
@@ -111,15 +114,15 @@ class AssignmentFieldEditor extends React.Component {
       this.state.assignment_type,
       "/backend/v1/course/" + this.props.course.course_id + "/",
       this.state.date,
-      "10",
+      this.state.sliderValue.toString(),
       this.state.expected_time,
       this.state.description
     ).then((response) =>
     {
       if (response.status == false) {
-        console.log(response.body);
+        // TODO: Handle error
       } else {
-        this.onClose();
+        this.props.onClose();
       }
     })
   }
@@ -129,7 +132,8 @@ class AssignmentFieldEditor extends React.Component {
     if (this.props.assignment) {
       this.state.assignment_name = this.props.assignment.assignment_name;
       this.state.assignment_type = this.props.assignment.assignment_type;
-      this.state.date = this.props.assignment.date;
+      this.state.date = this.props.assignment.due_date;
+      console.log(this.state.date);
       this.state.expected_difficulty = this.props.assignment.expected_difficulty;
       this.state.expected_time = this.props.assignment.expected_time;
       this.state.description = this.props.assignment.description;
@@ -164,7 +168,7 @@ class AssignmentFieldEditor extends React.Component {
         <ItemLabel>
           <TextLabel>Expected Difficulty:</TextLabel>
           <SliderContainer>
-
+            <Slider name="sliderValue" type="range" min="1" max="10" value={this.state.sliderValue} onChange={this.handleChange}/>
           </SliderContainer>
         </ItemLabel>
         <ItemLabel>
@@ -173,8 +177,7 @@ class AssignmentFieldEditor extends React.Component {
           </TextLabel>
           <DateContainer>
             <DateTime
-              default={this.state.date}
-              inputProps={{ placeholder: "Select a Due Date/Time"}}
+              defaultValue={this.state.date}
               onChange={(value) => this.handleCalendarChange(value)}
             />
           </DateContainer>
