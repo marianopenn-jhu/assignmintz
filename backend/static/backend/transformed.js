@@ -7552,7 +7552,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
 
 exports.getCourses = getCourses;
 
@@ -8064,7 +8064,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
 
 exports.getAssignment = getAssignment;
 
@@ -41585,7 +41585,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/user/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/user/";
 exports.createUser = createUser;
 
 
@@ -41627,7 +41627,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var ERROR_STATUS = 400;
 
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/login/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/login/";
 
 exports.loginUser = loginUser;
 
@@ -42623,7 +42623,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/logout/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/logout/";
 
 exports.logoutUser = logoutUser;
 
@@ -43743,7 +43743,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
 
 exports.createCourse = createCourse;
 
@@ -43779,7 +43779,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/course/";
 
 exports.deleteCourse = deleteCourse;
 
@@ -46499,7 +46499,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERROR_STATUS = 400;
-var URL = "theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
 
 exports.addAssignment = addAssignment;
 
