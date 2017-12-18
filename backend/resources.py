@@ -63,6 +63,10 @@ class UserResource(ModelResource):
         salt = uuid.uuid4().hex
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
+    def dehydrate(self, bundle):
+        bundle.data.pop('passwd', None)
+        return bundle
+
 
 
 class CourseResource(ModelResource):
