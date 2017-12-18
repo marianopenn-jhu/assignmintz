@@ -128,8 +128,8 @@ class Mintz extends React.Component {
       }
 
       return (
-          <Element onClick={this.openLeaderboard}>
-            
+          <Element onClick={this.props.openLeaderboard}>
+
           </Element>
       );
     }

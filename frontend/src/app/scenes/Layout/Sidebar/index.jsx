@@ -35,6 +35,7 @@ const SidebarTitleContainer = styled.div`
   }
 `;
 
+
 const ScrollDiv = styled.div`
 
 overflow-y: scroll;
@@ -62,6 +63,30 @@ const SidebarTitle = styled.span`
     font-weight: lighter;
     text-align: center;
 `;
+
+const Mintz = styled.div`
+width:100%;
+list-style:none;
+background:#BEE6CC;
+color:#170912;
+padding-top:5px;
+padding-bottom:5px;
+padding-left:10px;
+padding-right:5px;
+font-size:18px;
+display:inline-block;
+margin-top: 7px;
+text-align: left;
+font-family:Courier;
+font-size:20px;
+
+&:hover {
+  background: #484848;
+  color:white;
+  cursor:pointer;
+}
+`;
+
 const SidebarTitleMintz = styled.span`
     font-family: Helvetica;
     color:rgba(167,224,165,1);
@@ -116,8 +141,10 @@ class Sidebar extends React.Component {
                   <SidebarClassesTitle triggerEvent={this.props.addClass}/>
                   {classes}
                 </ScrollDiv>
+                <Mintz onClick={this.props.showLeaderboard}>
+                  Mintz:
+                </Mintz>
               </SidebarElementContainer>
-
             </SidebarPanel>
           </SidebarContainer>
         );
