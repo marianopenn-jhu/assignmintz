@@ -36,6 +36,7 @@ class ProfessorView extends React.Component {
     this.deleteClassView = this.deleteClassView.bind(this);
     this.editAssignmentsView = this.editAssignmentsView.bind(this);
     this.returnToCalendar = this.returnToCalendar.bind(this);
+    this.getInfo = this.getInfo.bind(this);
 
     this.state = {
       courses:[],
@@ -44,32 +45,7 @@ class ProfessorView extends React.Component {
       selected_course:{course_name:'', course_id:''}
     };
 
-    if (this.props.user_name) {
-      // Retrieve courses
-      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key + "&professor=" + this.props.user_name).then((courseResponse) => {
-          if (courseResponse.status == true) {
-            var cs = courseResponse.body.objects;
-            this.setState({courses: cs});
-            // Retrieve assignments
-            for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
-              var c = cs[courseIndex];
-              getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
-                  if (assignmentResponse.status == true) {
-                    var as = assignmentResponse.body.objects;
-                    var currAssignments = this.state.assignments.concat(as);
-                    this.setState({assignments: currAssignments});
-                  } else {
-                    console.log("Failed to retrieve assignments");
-                  }
-                }
-              );
-            }
-          } else {
-            console.log("Failed to retrieve courses!");
-          }
-        }
-      );
-    }
+    this.getInfo();
 
     // Set dropdown elements for sidebar (this is bad code)
     var that = this;
@@ -129,32 +105,39 @@ class ProfessorView extends React.Component {
 
   returnToCalendar() {
     this.setState({viewState:0});
+    this.getInfo();
+    this.forceUpdate();
+  }
 
+  getInfo() {
     if (this.props.user_name) {
       // Retrieve courses
-      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
-          if (response.status == true) {
-            var obj = response.body;
-            this.setState({courses: obj.objects});
+      getCourses("user=" + this.props.user_name + "&key=" + this.props.session_key + "&professor=" + this.props.user_name).then((courseResponse) => {
+          if (courseResponse.status == true) {
+            var cs = courseResponse.body.objects;
+            this.setState({courses: cs});
+            this.forceUpdate();
+            // Retrieve assignments
+            for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
+              var c = cs[courseIndex];
+              getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&course=" + c.course_id).then((assignmentResponse) => {
+                  if (assignmentResponse.status == true) {
+                    var as = assignmentResponse.body.objects;
+                    var currAssignments = this.state.assignments.concat(as);
+                    this.setState({assignments: currAssignments});
+                    this.forceUpdate();
+                  } else {
+                    console.log("Failed to retrieve assignments");
+                  }
+                }
+              );
+            }
           } else {
             console.log("Failed to retrieve courses!");
           }
         }
       );
-
-      // Retrieve assignments
-      getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
-          if (response.status == true) {
-            var obj = response.body;
-            this.setState({assignments: obj.objects});
-          } else {
-            console.log("Failed to retrieve assignments");
-          }
-        }
-      )
     }
-
-    this.forceUpdate();
   }
 
   render() {
@@ -170,7 +153,7 @@ class ProfessorView extends React.Component {
       case 1:
         view = (
           // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseCreate={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
         );
         break;
       case 2:
@@ -182,13 +165,13 @@ class ProfessorView extends React.Component {
       case 3:
         view = (
           // <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseDelete={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={3}/>
         )
         break;
       case 4:
         view = (
           //<AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onCloseEditor={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={4}/>
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={4}/>
         );
         break;
       default:

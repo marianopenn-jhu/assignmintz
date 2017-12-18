@@ -36,7 +36,7 @@ class ViewPane extends React.Component {
       if (this.props.role == "Student") {
         if (this.props.case == 1) {
           view = (
-            <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={this.props.data}/>
+            <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose}/>
           )
         } else if (this.props.case == 2) { // View single class
           view = (
@@ -47,15 +47,15 @@ class ViewPane extends React.Component {
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {
           view = (
-            <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onCloseCreate} data={this.props.data}/>
+            <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose} data={this.props.data}/>
           )
         } else if (this.props.case == 3) {
           view = (
-            <DeleteClassView user_name={this.props.user_name} session_key={this.props.session_key} onClose={this.props.onCloseDelete} course={this.props.course}/>
+            <DeleteClassView user_name={this.props.user_name} session_key={this.props.session_key} onClose={this.props.onClose} course={this.props.course}/>
           )
         }else if (this.props.case == 4) {
           view = (
-            <AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onCloseEditor} course={this.props.course}/>
+            <AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose} course={this.props.course}/>
           )
         }
       }
