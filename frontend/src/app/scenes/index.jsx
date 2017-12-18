@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import Login from './Login/index.jsx';
 import StudentView from './Student/index.jsx';
 import ProfessorView from './Professor/index.jsx';
+//import {getUser} from '../services/api/user/get-user.js';
 
 const cookie = new Cookies();
 
@@ -88,19 +89,30 @@ class App extends React.Component {
       session_key:null,
       role:""
     };
+
   }
 
   componentWillMount() {
-    var user = cookie.get("assignmintz_user_name");
-    var session_key = cookie.get("assignmintz_session_key");
-    var role = cookie.get("assignmintz_role");
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    var user =  '';//cookie.get("assignmintz_user_name");
+    var session_key = '';// cookie.get("assignmintz_session_key");
+    var role = '';// = cookie.get("assignmintz_role");
     var answer = new Object();
+
     answer.session_key = session_key;
+    console.log("top login");
+    console.log(role);
     this.onLogin(answer, user, role);
   }
 
   onLogin(answer, user_name, role) {
+<<<<<<< HEAD
     if (role == "Student") {
+=======
+
+    if (role == "student") {
+>>>>>>> 1d666484e395c1e31ddab0550c488261ce6593a1
         this.setState({
           'user_state': 1,
           'current_user': user_name,

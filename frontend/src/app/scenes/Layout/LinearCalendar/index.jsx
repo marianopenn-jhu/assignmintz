@@ -17,7 +17,7 @@ const ViewPane = styled.div`
 const TopBarContainer = styled.div`
   overflow-x: hidden;
   height: 10vh;
-  width: 100%;
+  width: inherit;
   left: inherit;
   position:fixed;
   padding-top:10px;

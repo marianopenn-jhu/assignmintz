@@ -8,7 +8,7 @@ import {logoutUser} from '../../../../../services/api/user/logout-user.js';
 const Container = styled.div`
   padding: 10px 20px 10px 20px;
   color:#A9A9A9;
-  text-align: justify;
+  text-align: center;
   margin: 0 auto;
 `;
 

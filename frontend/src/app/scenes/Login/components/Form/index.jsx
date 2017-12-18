@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Tab from './components/Tab/index.jsx';
+//import AccountButton from './components/AccountButton/index.jsx';
 import {createUser} from '../../../../services/api/user/create-user.js';
 import {loginUser} from '../../../../services/api/user/login-user.js';
+import {getUser} from '../../../../services/api/user/get-user.js';
+import Cookies from "universal-cookie";
+
+const cookie = document.cookie;
+var clickedStudent = 'clicked';
+var clickedProfessor = '';
 
 const FormWrapper = styled.div`
   position: absolute;
@@ -72,7 +79,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-
 const AccountButton = styled.button`
   display: inline-block;
   border-radius: 4px;
@@ -84,13 +90,18 @@ const AccountButton = styled.button`
   color: rgb(177, 217, 231);
   padding: 4px;
 
+  .clicked {
+    color: orange;
+    background-color:white;
+  }
+
   &:hover, &:focus, &:active {
     color: #BEE6CC;
     box-shadow: 0px 0px 1px 1px #c6c6c6;
     background-color: #686868;
   }
-`;
 
+`;
 
 class Form extends React.Component {
   constructor(props) {
@@ -105,13 +116,19 @@ class Form extends React.Component {
       password: '',
       confirm_password: '',
       errorMessage: '',
+      student_prof: true
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSelectStudent = this.onSelectStudent.bind(this);
+    this.onSelectProfessor = this.onSelectProfessor.bind(this);
     this.signInSelected = this.signInSelected.bind(this);
     this.signUpSelected = this.signUpSelected.bind(this);
+
+
   }
+
 
   onChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -121,6 +138,9 @@ class Form extends React.Component {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     if (sign_in == true)
     {
+      console.log("changed cookie");
+      console.log(document.cookie);
+
       loginUser(user_name, password).then((answer) =>
       {
         if (answer.status == false) {
@@ -131,11 +151,14 @@ class Form extends React.Component {
       });
     }
     else {
+
       if (password == confirm_password) {
         var passwd = password;
         var name = first_name + " " + last_name;
         createUser(user_name, name, email, passwd, role).then((answer) =>
         {
+          console.log("created User");
+          console.log(document.cookie);
           if (answer.status == false) {
             this.setState({['errorMessage']: answer.body.message});
           } else if (this.props.onSignUp != null) {
@@ -147,26 +170,47 @@ class Form extends React.Component {
   }
 
   signInSelected() {
+    //console.log("signInSelected");
     this.setState({['sign_in']: true});
     this.setState({['errorMessage']: ''});
   }
 
   signUpSelected() {
+    //console.log("signUpSelected");
     this.setState({['sign_in']: false});
+    this.setState({['errorMessage']: ''});
+  }
+
+  onSelectStudent() {
+    // console.log("onSelectStudent");
+    this.setState({['role']: "Student"});
+    this.setState({['student_prof']: true});
+    this.setState({['errorMessage']: ''});
+  }
+  onSelectProfessor() {
+    // console.log("onSelectProfessor");
+    this.setState({['role']: "Professor"});
+    this.setState({['student_prof']: false});
     this.setState({['errorMessage']: ''});
   }
 
   render () {
     var hiddenField = this.state.sign_in ? 'hidden' : '';
     var buttonText = this.state.sign_in ? 'Sign In' : 'Sign Up';
+    var roleSelected = this.state.student_prof ? 'clicked' : '';
 
     return (
       <FormWrapper>
         <Tab title="Sign In" selected={this.state.sign_in} onClicked={this.signInSelected}/>
         <Tab title="Sign Up" selected={!this.state.sign_in} onClicked={this.signUpSelected}/>
         <InputWrapper>
+<<<<<<< HEAD
           <AccountButton name="role" type="select" value="Student" onClick={this.onChange}>Student</AccountButton>
           <AccountButton name="role" type="select" value="Professor" onClick={this.onChange}>Professor</AccountButton>
+=======
+          <AccountButton name="role" type="button" value="Student" selected={this.state.student_prof} className={roleSelected} className={hiddenField} onClick={this.onChange} onClick={this.onSelectStudent}>Student</AccountButton>
+          <AccountButton name="role" type="button" value="Professor" selected={this.state.student_prof} className={roleSelected} onClick={this.onChange} className={hiddenField} onClick={this.onSelectProfessor}>Professor</AccountButton>
+>>>>>>> 1d666484e395c1e31ddab0550c488261ce6593a1
       		<Input name="user_name" placeholder="User Name" type="text" onChange={this.onChange}/>
       		<Input name="first_name" placeholder="First Name" type="text" className={hiddenField} onChange={this.onChange}/>
           <Input name="last_name" placeholder="Last Name" type="text" className={hiddenField} onChange={this.onChange}/>
