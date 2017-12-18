@@ -100,14 +100,14 @@ class App extends React.Component {
   }
 
   onLogin(answer, user_name, role) {
-    if (role == "student") {
+    if (role == "Student") {
         this.setState({
           'user_state': 1,
           'current_user': user_name,
           'session_key': answer.session_key,
           'role': role
         })
-    }  else if (role == "professor") {
+    }  else if (role == "Professor") {
       this.setState({
         'user_state': 2,
         'current_user': user_name,

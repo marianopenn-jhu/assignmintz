@@ -84,15 +84,16 @@ class AccountChooser extends React.Component {
     this.setState({['selectedRole']: e.target.name});
   }
 
-  onSignUpSuccess(userName, email) {
+  onSignUpSuccess(userName, email, selectedRole) {
     this.setState({['currentState']: 'createdUser'});
     this.setState({['userName']: userName});
     this.setState({['email']: email});
   }
 
-  onSignInSuccess(answer, user_name) {
+  onSignInSuccess(answer, user_name, role) {
+    this.setState({['selectedRole']: role});
     this.setState({['userName']: user_name});
-    this.props.onLogin(answer, user_name, this.state.selectedRole);
+    this.props.onLogin(answer, user_name, role);
   }
 
   resetState() {
