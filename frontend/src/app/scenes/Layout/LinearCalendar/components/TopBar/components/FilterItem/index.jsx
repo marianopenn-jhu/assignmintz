@@ -7,7 +7,7 @@ const Container = styled.div`
   margin: 0px 10px 0px 10px;
   text-align: center;
   vertical-align: middle;
-  width:125px;
+  max-width:125px;
   border-radius:5px;
   -moz-border-radius:5px;
   -webkit-border-radius:5px;
