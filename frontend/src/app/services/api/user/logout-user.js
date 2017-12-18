@@ -6,6 +6,7 @@ export{logoutUser};
 
 function logoutUser(user_name, session_key)
 {
+  var status = 200;
   return fetch(URL, {
     method: 'POST',
     headers: {
@@ -13,14 +14,18 @@ function logoutUser(user_name, session_key)
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({user_name, session_key})
-  }) .then((response) => {
-    if(response.status >= ERROR_STATUS)
-    {
-      throw new Error(response.status + ": " + response.statusText + " in logoutUser()");
+  }).then((response) => {
+    status = response.status;
+    if (status >= ERROR_STATUS) {
+        return response.json()
     } else {
-      return {status: true, result: "Empty"};
+      return "Empty";
     }
-  }).catch((error) => {
-    return {status: false, result: error};
-  });
+  }).then((json) => {
+    if(status >= ERROR_STATUS) {
+      return {status: false, body: json};
+    } else {
+      return {status: true, body: json};
+    }
+  })
 }

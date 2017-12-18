@@ -56,7 +56,8 @@ class DeleteClassView extends React.Component {
   }
 
   handleSubmit(event) {
-    deleteCourse(this.props.course_id);
+    var filter = "?course_id=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key;
+    deleteCourse(filter);
   }
 
   render() {
@@ -65,7 +66,7 @@ class DeleteClassView extends React.Component {
           <XOut onClick={this.props.onClose}><FaClose/></XOut>
           <Header>Delete {this.props.course.course_name}?</Header>
           <ItemLabel onClick={this.handleSubmit}>
-            <DeleteButton type="button">Delete Course</DeleteButton>
+            <DeleteButton type="button" onClick={this.handleSubmit}>Delete Course</DeleteButton>
           </ItemLabel>
         </Container>
     )

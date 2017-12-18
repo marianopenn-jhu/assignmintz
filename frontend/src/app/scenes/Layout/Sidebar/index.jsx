@@ -6,7 +6,6 @@ import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
 
 const SidebarContainer = styled.div`
     height: auto;
-    overflow: hidden;
 `;
 
 const SidebarPanel = styled.div`
@@ -27,6 +26,10 @@ const SidebarTitleContainer = styled.div`
   left: 5%;
   right: 5%;
   text-align:center;
+
+  &:hover {
+    cursor:pointer;
+  }
 `;
 
 // const SidebarTitle = styled.h1`

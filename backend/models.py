@@ -46,7 +46,7 @@ class Course(models.Model):
 class Assignment(models.Model):
     assignment_id = models.CharField(primary_key=True, default='', max_length=256)
     assignment_name = models.CharField(max_length=36, default='')
-    assignment_type = models.CharField(max_length=5, default='')
+    assignment_type = models.CharField(max_length=15, default='')
     course = models.ForeignKey('Course', related_name='course', null=True, on_delete=models.CASCADE)
     due_date = models.DateTimeField(blank=True, null=True)
     expected_difficulty = models.IntegerField(default=0)
