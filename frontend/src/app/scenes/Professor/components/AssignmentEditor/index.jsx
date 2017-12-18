@@ -64,7 +64,8 @@ class AssignmentEditor extends React.Component {
 
     this.state = {
       editingState: 0, // 0 = Assignment Picker, 1 = Editing an Assignment, 2 = Deleting an assignment
-      selectedAssignment:null
+      selectedAssignment:null,
+      assignmentList: []
     };
   }
 
@@ -92,35 +93,33 @@ class AssignmentEditor extends React.Component {
     switch (this.state.editingState) {
       case 0:
         // Get the current assignments
-        var assignmentListHtml = (<div></div>);
-        var assignmentList = [];
+        var that = this;
         getAssignment("course=" + this.props.course.course_id + "&user=" + this.props.user_name + "&key=" + this.props.session_key).then((response) => {
           if (response.status) {
-            assignmentList = response.body.objects;
-
-            assignmentListHtml = assignmentList.map(function(assignment, index){
-              return
-                (
-                  <AssignmentElement
-                    assignment={assignment}
-                    onEditClick={(assignment) => this.onEditClick(assignment)}
-                    onDeleteClick={(assignment) => this.onDeleteClick(assignment)}
-                  />
-                )
-              })
+            that.state.assignmentList = response.body.objects;
+            that.forceUpdate();
           }  else {
             // TODO: Handle failure
           }
         });
 
+
         current = (
           <AssignmentsContainer>
             <AssignmentList>
-              {assignmentListHtml}
+              {this.state.assignmentList.map((item, index) => (
+                <AssignmentElement
+                  key={index}
+                  assignment={item}
+                  onEditClick={(a) => this.onEditClick(a)}
+                  onDeleteClick={(a) => this.onDeleteClick(a)}
+                />
+              ))}
               <AddAssignmentElement onClick={() => this.onEditClick(null)}/>
             </AssignmentList>
           </AssignmentsContainer>
-        )
+        );
+
         break;
       case 1:
         current = (
