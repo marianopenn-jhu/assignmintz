@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 152);
+/******/ 	return __webpack_require__(__webpack_require__.s = 151);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(185)("./" + name);
+            __webpack_require__(184)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4585,7 +4585,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(184)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183)(module)))
 
 /***/ }),
 /* 1 */
@@ -4595,9 +4595,9 @@ return hooks;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(153);
+  module.exports = __webpack_require__(152);
 } else {
-  module.exports = __webpack_require__(154);
+  module.exports = __webpack_require__(153);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -4615,17 +4615,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withTheme", function() { return wrapWithTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServerStyleSheet", function() { return ServerStyleSheet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StyleSheetManager", function() { return StyleSheetManager; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_is_plain_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_is_plain_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_stylis___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_stylis__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_is_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_is_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_hoist_non_react_statics__);
 
 
@@ -6870,7 +6870,7 @@ var styled = _styled(StyledComponent, constructWithOptions);
 
 /* harmony default export */ __webpack_exports__["default"] = (styled);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(164)(module)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(163)(module)))
 
 /***/ }),
 /* 3 */
@@ -7345,7 +7345,7 @@ module.exports = invariant;
 
 
 var React = __webpack_require__(1);
-var factory = __webpack_require__(211);
+var factory = __webpack_require__(215);
 
 if (typeof React === 'undefined') {
   throw Error(
@@ -7534,9 +7534,9 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(155);
+  module.exports = __webpack_require__(154);
 } else {
-  module.exports = __webpack_require__(158);
+  module.exports = __webpack_require__(157);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -8044,11 +8044,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(168)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(167)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(169)();
+  module.exports = __webpack_require__(168)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -8341,7 +8341,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(156);
+var isTextNode = __webpack_require__(155);
 
 /*eslint-disable no-bitwise */
 
@@ -8409,7 +8409,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Cookies = __webpack_require__(172);
+var _Cookies = __webpack_require__(171);
 
 var _Cookies2 = _interopRequireDefault(_Cookies);
 
@@ -8431,7 +8431,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  left: 25vw;\n  width: 75vw;\n  height: 100vh;\n  overflow:hidden;\n  overflow-y:auto;\n'], ['\n  position: relative;\n  float: left;\n  left: 25vw;\n  width: 75vw;\n  height: 100vh;\n  overflow:hidden;\n  overflow-y:auto;\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  position: relative;\n  float: left;\n  left: 25vw;\n  width: 75vw;\n  height: 100vh;\n  overflow:hidden;\n  overflow-y:auto;\n  z-index: -1;\n'], ['\n  position: relative;\n  float: left;\n  left: 25vw;\n  width: 75vw;\n  height: 100vh;\n  overflow:hidden;\n  overflow-y:auto;\n  z-index: -1;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow-x: hidden;\n  height: 10vh;\n  width: inherit;\n  left: inherit;\n  position:fixed;\n  padding-top:10px;\n  background:white;\n'], ['\n  overflow-x: hidden;\n  height: 10vh;\n  width: inherit;\n  left: inherit;\n  position:fixed;\n  padding-top:10px;\n  background:white;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  margin-top: 10vh;\n  padding-top:10px;\n  background:white;\n  height:100%;\n'], ['\n  margin-top: 10vh;\n  padding-top:10px;\n  background:white;\n  height:100%;\n']);
 
@@ -8443,11 +8443,11 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(181);
+var _index = __webpack_require__(180);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(186);
+var _index3 = __webpack_require__(185);
 
 var _index4 = _interopRequireDefault(_index3);
 
@@ -8502,8 +8502,8 @@ var LinearCalendar = function (_React$Component) {
 
       // Sort the dictionary by due date
       this.props.data.sort(function (left, right) {
-        var left_dd = _moment2.default.utc(left.due_date).local();
-        var right_dd = _moment2.default.utc(right.due_date).local();
+        var left_dd = _moment2.default.utc(left.due_date);
+        var right_dd = _moment2.default.utc(right.due_date);
         return left_dd.diff(right_dd);
       });
 
@@ -19997,9 +19997,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n    height: auto;\n'], ['\n    height: auto;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n    background-color: #303030;\n    height: 100%;\n    min-width: 25vw;\n    position: absolute;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n'], ['\n    background-color: #303030;\n    height: 100%;\n    min-width: 25vw;\n    position: absolute;\n    left: 0;\n    top: 0;\n    -moz-border-radius-bottomright: 3px;\n    border-bottom-right-radius: 3px;\n    -moz-border-radius-topright: 3px;\n    border-top-right-radius: 3px;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n\n  &:hover {\n    cursor:pointer;\n  }\n'], ['\n  width:90%;\n  left: 5%;\n  right: 5%;\n  text-align:center;\n\n  &:hover {\n    cursor:pointer;\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n'], ['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n'], ['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n'], ['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\noverflow-y:scroll;\nmax-height: 50vh;\n\n'], ['\noverflow-y:scroll;\nmax-height: 50vh;\n\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n'], ['\n    background-color: rgba(0,0,0,0);\n    width: inherit;\n    font-size: 34px;\n    line-height: 123px;\n    letter-spacing: 0px;\n    color: rgb(177, 217, 231);\n    font-family: Helvetica;\n    font-style: italic;\n    font-weight: lighter;\n    text-align: center;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\nwidth:100%;\nlist-style:none;\nbackground:#BEE6CC;\ncolor:#170912;\npadding-top:5px;\npadding-bottom:5px;\npadding-left:10px;\npadding-right:5px;\nfont-size:18px;\ndisplay:inline-block;\nmargin-top: 7px;\ntext-align: left;\nfont-family:Courier;\nfont-size:20px;\n\n&:hover {\n  background: #484848;\n  color:white;\n  cursor:pointer;\n}\n'], ['\nwidth:100%;\nlist-style:none;\nbackground:#BEE6CC;\ncolor:#170912;\npadding-top:5px;\npadding-bottom:5px;\npadding-left:10px;\npadding-right:5px;\nfont-size:18px;\ndisplay:inline-block;\nmargin-top: 7px;\ntext-align: left;\nfont-family:Courier;\nfont-size:20px;\n\n&:hover {\n  background: #484848;\n  color:white;\n  cursor:pointer;\n}\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n'], ['\n    font-family: Helvetica;\n    color:rgba(167,224,165,1);\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n'], ['\n    width:100%;\n    text-align:center;\n    margin: 0;\n    padding: 0;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -20009,17 +20011,23 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(191);
+var _index = __webpack_require__(190);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(192);
+var _index3 = __webpack_require__(191);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(194);
+var _index5 = __webpack_require__(193);
 
 var _index6 = _interopRequireDefault(_index5);
+
+var _index7 = __webpack_require__(195);
+
+var _index8 = _interopRequireDefault(_index7);
+
+var _getUser = __webpack_require__(197);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20039,6 +20047,8 @@ var SidebarPanel = _styledComponents2.default.div(_templateObject2);
 
 var SidebarTitleContainer = _styledComponents2.default.div(_templateObject3);
 
+var ScrollDiv = _styledComponents2.default.div(_templateObject4);
+
 // const SidebarTitle = styled.h1`
 //   color: black;
 //   font-family: Avenir;
@@ -20047,10 +20057,13 @@ var SidebarTitleContainer = _styledComponents2.default.div(_templateObject3);
 //   font-size: 34px;
 //   text-align: center;
 // `;
-var SidebarTitle = _styledComponents2.default.span(_templateObject4);
-var SidebarTitleMintz = _styledComponents2.default.span(_templateObject5);
+var SidebarTitle = _styledComponents2.default.span(_templateObject5);
 
-var SidebarElementContainer = _styledComponents2.default.ul(_templateObject6);
+var Mintz = _styledComponents2.default.div(_templateObject6);
+
+var SidebarTitleMintz = _styledComponents2.default.span(_templateObject7);
+
+var SidebarElementContainer = _styledComponents2.default.ul(_templateObject8);
 
 var Sidebar = function (_React$Component) {
   _inherits(Sidebar, _React$Component);
@@ -20058,7 +20071,18 @@ var Sidebar = function (_React$Component) {
   function Sidebar(props) {
     _classCallCheck(this, Sidebar);
 
-    return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
+
+    _this.state = {
+      mintCount: 0
+    };
+
+    (0, _getUser.getUser)(_this.props.user_name, _this.props.session_key).then(function (response) {
+      if (response.status) {
+        _this.state.mintCount = response.body.points;
+      }
+    });
+    return _this;
   }
 
   _createClass(Sidebar, [{
@@ -20086,7 +20110,7 @@ var Sidebar = function (_React$Component) {
       );
       if (this.props.data != null) {
         classes = this.props.data.map(function (e, i) {
-          return _react2.default.createElement(_index2.default, { key: i, course: e, dropdown_elements: _this2.props.dropdown_elements, triggerEvent: _this2.props.viewClass });
+          return _react2.default.createElement(_index4.default, { key: i, course: e, dropdown_elements: _this2.props.dropdown_elements, triggerEvent: _this2.props.viewClass });
         });
       };
 
@@ -20113,9 +20137,19 @@ var Sidebar = function (_React$Component) {
           _react2.default.createElement(
             SidebarElementContainer,
             null,
-            _react2.default.createElement(_index4.default, { data: this.props.user_data }),
-            _react2.default.createElement(_index6.default, { triggerEvent: this.props.addClass }),
-            classes
+            _react2.default.createElement(_index6.default, { data: this.props.user_name }),
+            _react2.default.createElement(
+              ScrollDiv,
+              null,
+              _react2.default.createElement(_index8.default, { triggerEvent: this.props.addClass }),
+              classes
+            ),
+            _react2.default.createElement(
+              Mintz,
+              { onClick: this.props.showLeaderboard },
+              'Mintz: ',
+              this.state.mintCount
+            )
           )
         )
       );
@@ -20129,44 +20163,6 @@ exports.default = Sidebar;
 
 /***/ }),
 /* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactIconBase = __webpack_require__(4);
-
-var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var FaEllipsisV = function FaEllipsisV(props) {
-    return _react2.default.createElement(
-        _reactIconBase2.default,
-        _extends({ viewBox: '0 0 40 40' }, props),
-        _react2.default.createElement(
-            'g',
-            null,
-            _react2.default.createElement('path', { d: 'm24.1 27.9v4.2q0 0.9-0.7 1.6t-1.5 0.6h-4.3q-0.9 0-1.5-0.6t-0.6-1.6v-4.2q0-0.9 0.6-1.6t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.6z m0-11.5v4.3q0 0.9-0.7 1.5t-1.5 0.7h-4.3q-0.9 0-1.5-0.7t-0.6-1.5v-4.3q0-0.9 0.6-1.5t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.5z m0-11.4v4.3q0 0.9-0.7 1.5t-1.5 0.6h-4.3q-0.9 0-1.5-0.6t-0.6-1.5v-4.3q0-0.9 0.6-1.5t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.5z' })
-        )
-    );
-};
-
-exports.default = FaEllipsisV;
-module.exports = exports['default'];
-
-/***/ }),
-/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20188,27 +20184,27 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _reactFadeIn = __webpack_require__(196);
+var _reactFadeIn = __webpack_require__(198);
 
 var _reactFadeIn2 = _interopRequireDefault(_reactFadeIn);
 
-var _index = __webpack_require__(198);
+var _index = __webpack_require__(200);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(200);
+var _index3 = __webpack_require__(204);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(148);
+var _index5 = __webpack_require__(147);
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = __webpack_require__(149);
+var _index7 = __webpack_require__(148);
 
 var _index8 = _interopRequireDefault(_index7);
 
-var _index9 = __webpack_require__(150);
+var _index9 = __webpack_require__(149);
 
 var _index10 = _interopRequireDefault(_index9);
 
@@ -20252,18 +20248,18 @@ var ViewPane = function (_React$Component) {
       var view = null;
       if (this.props.role == "Student") {
         if (this.props.case == 1) {
-          view = _react2.default.createElement(_index2.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: this.props.data });
+          view = _react2.default.createElement(_index2.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose });
         } else if (this.props.case == 2) {
           // View single class
-          view = _react2.default.createElement(_index4.default, null);
+          view = _react2.default.createElement(_index4.default, { course: this.props.course, session_key: this.props.session_key, user_name: this.props.user_name });
         }
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {
-          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onCloseCreate, data: this.props.data });
+          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose, data: this.props.data });
         } else if (this.props.case == 3) {
-          view = _react2.default.createElement(_index8.default, { user_name: this.props.user_name, session_key: this.props.session_key, onClose: this.props.onCloseDelete, course: this.props.course });
+          view = _react2.default.createElement(_index8.default, { user_name: this.props.user_name, session_key: this.props.session_key, onClose: this.props.onClose, course: this.props.course });
         } else if (this.props.case == 4) {
-          view = _react2.default.createElement(_index10.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onCloseEditor, course: this.props.course });
+          view = _react2.default.createElement(_index10.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose, course: this.props.course });
         }
       }
       return _react2.default.createElement(
@@ -20284,7 +20280,7 @@ var ViewPane = function (_React$Component) {
 exports.default = ViewPane;
 
 /***/ }),
-/* 148 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20319,7 +20315,7 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _createCourse = __webpack_require__(201);
+var _createCourse = __webpack_require__(205);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20471,7 +20467,7 @@ var CreateClassView = function (_React$Component) {
 exports.default = CreateClassView;
 
 /***/ }),
-/* 149 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20502,7 +20498,7 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _deleteCourse = __webpack_require__(202);
+var _deleteCourse = __webpack_require__(206);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20590,7 +20586,7 @@ var DeleteClassView = function (_React$Component) {
 exports.default = DeleteClassView;
 
 /***/ }),
-/* 150 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20621,23 +20617,25 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _pencil = __webpack_require__(203);
+var _pencil = __webpack_require__(207);
 
 var _pencil2 = _interopRequireDefault(_pencil);
 
-var _index = __webpack_require__(204);
+var _index = __webpack_require__(208);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(207);
+var _index3 = __webpack_require__(211);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(209);
+var _index5 = __webpack_require__(213);
 
 var _index6 = _interopRequireDefault(_index5);
 
 var _getAssignment = __webpack_require__(18);
+
+var _deleteAssignment = __webpack_require__(225);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20694,8 +20692,8 @@ var AssignmentEditor = function (_React$Component) {
   }, {
     key: 'onDeleteClick',
     value: function onDeleteClick(assignment) {
-      this.setState(_defineProperty({}, 'editingState', 2));
-      this.setState(_defineProperty({}, 'selectedAssignment', assignment));
+      // Delete the assignment
+      (0, _deleteAssignment.deleteAssignment)(assignment.assignment_id, "user=" + this.props.user_name + "&key=" + this.props.session_key);
       this.forceUpdate();
     }
   }, {
@@ -20703,7 +20701,6 @@ var AssignmentEditor = function (_React$Component) {
     value: function onReturnClick() {
       this.setState(_defineProperty({}, 'editingState', 0));
       this.setState(_defineProperty({}, 'selectedAssignment', null));
-      this.forceUpdate();
     }
   }, {
     key: 'render',
@@ -20755,11 +20752,6 @@ var AssignmentEditor = function (_React$Component) {
               return _this2.onReturnClick();
             } });
           break;
-        case 2:
-          current = _react2.default.createElement(_index4.default, { session_key: this.props.session_key, user_name: this.props.user_name, course: this.props.course, assignment: this.state.selectedAssignment, onClose: function onClose() {
-              return _this2.onReturnClick();
-            } });
-          break;
         default:
           break;
       }
@@ -20794,7 +20786,7 @@ var AssignmentEditor = function (_React$Component) {
 exports.default = AssignmentEditor;
 
 /***/ }),
-/* 151 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20840,7 +20832,7 @@ module.exports = Object.assign || function (target, source) {
 
 
 /***/ }),
-/* 152 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20854,7 +20846,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _index = __webpack_require__(163);
+var _index = __webpack_require__(162);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -20865,7 +20857,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(_index2.default, null), document.getElementById('app'));
 
 /***/ }),
-/* 153 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20893,7 +20885,7 @@ isValidElement:K,version:"16.2.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_F
 
 
 /***/ }),
-/* 154 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22258,7 +22250,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 155 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22494,7 +22486,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 156 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22509,7 +22501,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(157);
+var isNode = __webpack_require__(156);
 
 /**
  * @param {*} object The object to check.
@@ -22522,7 +22514,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 157 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22550,7 +22542,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 158 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22584,8 +22576,8 @@ var containsNode = __webpack_require__(23);
 var focusNode = __webpack_require__(24);
 var emptyObject = __webpack_require__(9);
 var checkPropTypes = __webpack_require__(15);
-var hyphenateStyleName = __webpack_require__(159);
-var camelizeStyleName = __webpack_require__(161);
+var hyphenateStyleName = __webpack_require__(158);
+var camelizeStyleName = __webpack_require__(160);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -37952,7 +37944,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 159 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -37967,7 +37959,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(160);
+var hyphenate = __webpack_require__(159);
 
 var msPattern = /^ms-/;
 
@@ -37994,7 +37986,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 160 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38030,7 +38022,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 161 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38045,7 +38037,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(162);
+var camelize = __webpack_require__(161);
 
 var msPattern = /^-ms-/;
 
@@ -38073,7 +38065,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 162 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38108,7 +38100,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 163 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38139,15 +38131,15 @@ var _universalCookie = __webpack_require__(25);
 
 var _universalCookie2 = _interopRequireDefault(_universalCookie);
 
-var _index = __webpack_require__(175);
+var _index = __webpack_require__(174);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(180);
+var _index3 = __webpack_require__(179);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(220);
+var _index5 = __webpack_require__(227);
 
 var _index6 = _interopRequireDefault(_index5);
 
@@ -38333,7 +38325,7 @@ var App = function (_React$Component) {
 exports.default = App;
 
 /***/ }),
-/* 164 */
+/* 163 */
 /***/ (function(module, exports) {
 
 module.exports = function(originalModule) {
@@ -38363,7 +38355,7 @@ module.exports = function(originalModule) {
 
 
 /***/ }),
-/* 165 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38376,7 +38368,7 @@ module.exports = function(originalModule) {
 
 
 
-var isObject = __webpack_require__(166);
+var isObject = __webpack_require__(165);
 
 function isObjectObject(o) {
   return isObject(o) === true
@@ -38407,7 +38399,7 @@ module.exports = function isPlainObject(o) {
 
 
 /***/ }),
-/* 166 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38426,7 +38418,7 @@ module.exports = function isObject(val) {
 
 
 /***/ }),
-/* 167 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -40040,7 +40032,7 @@ module.exports = function isObject(val) {
 
 
 /***/ }),
-/* 168 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40590,7 +40582,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 169 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40655,7 +40647,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 170 */
+/* 169 */
 /***/ (function(module, exports) {
 
 module.exports = isFunction
@@ -40676,7 +40668,7 @@ function isFunction (fn) {
 
 
 /***/ }),
-/* 171 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40733,7 +40725,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 /***/ }),
-/* 172 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40747,7 +40739,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _cookie = __webpack_require__(173);
+var _cookie = __webpack_require__(172);
 
 var _cookie2 = _interopRequireDefault(_cookie);
 
@@ -40755,7 +40747,7 @@ var _objectAssign = __webpack_require__(6);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _utils = __webpack_require__(174);
+var _utils = __webpack_require__(173);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40879,7 +40871,7 @@ function readCookie(value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 173 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41081,7 +41073,7 @@ function tryDecode(str, decode) {
 
 
 /***/ }),
-/* 174 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41111,7 +41103,7 @@ function cleanCookies() {
 }
 
 /***/ }),
-/* 175 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41137,7 +41129,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(176);
+var _index = __webpack_require__(175);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -41262,7 +41254,7 @@ var AccountChooser = function (_React$Component) {
 exports.default = AccountChooser;
 
 /***/ }),
-/* 176 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41289,13 +41281,13 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(177);
+var _index = __webpack_require__(176);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _createUser = __webpack_require__(178);
+var _createUser = __webpack_require__(177);
 
-var _loginUser = __webpack_require__(179);
+var _loginUser = __webpack_require__(178);
 
 var _universalCookie = __webpack_require__(25);
 
@@ -41313,7 +41305,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var cookie = document.cookie;
 var clickedStudent = 'clicked';
 var clickedProfessor = '';
 
@@ -41381,8 +41372,6 @@ var Form = function (_React$Component) {
           confirm_password = _state.confirm_password;
 
       if (sign_in == true) {
-        console.log("changed cookie");
-        console.log(document.cookie);
 
         (0, _loginUser.loginUser)(user_name, password).then(function (answer) {
           if (answer.status == false) {
@@ -41397,8 +41386,6 @@ var Form = function (_React$Component) {
           var passwd = password;
           var name = first_name + " " + last_name;
           (0, _createUser.createUser)(user_name, name, email, passwd, role).then(function (answer) {
-            console.log("created User");
-            console.log(document.cookie);
             if (answer.status == false) {
               _this2.setState(_defineProperty({}, 'errorMessage', answer.body.message));
             } else if (_this2.props.onSignUp != null) {
@@ -41490,7 +41477,7 @@ var Form = function (_React$Component) {
 exports.default = Form;
 
 /***/ }),
-/* 177 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41575,7 +41562,7 @@ var Tab = function (_React$Component) {
 exports.default = Tab;
 
 /***/ }),
-/* 178 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41616,7 +41603,7 @@ function createUser(user_name, name, email, passwd, role) {
 }
 
 /***/ }),
-/* 179 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41654,7 +41641,7 @@ function loginUser(user_name, passwd) {
 }
 
 /***/ }),
-/* 180 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41666,7 +41653,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\ndisplay:inline-block\nvertical-align:top;\nwidth:100%;\n'], ['\ndisplay:inline-block\nvertical-align:top;\nwidth:100%;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display:inline-block\n  vertical-align:top;\n  width:100%;\n'], ['\n  display:inline-block\n  vertical-align:top;\n  width:100%;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -41684,7 +41671,7 @@ var _index3 = __webpack_require__(145);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(147);
+var _index5 = __webpack_require__(146);
 
 var _index6 = _interopRequireDefault(_index5);
 
@@ -41692,7 +41679,11 @@ var _getCourse = __webpack_require__(13);
 
 var _getAssignment = __webpack_require__(18);
 
+var _getAssignment2 = __webpack_require__(226);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41705,6 +41696,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 
 //student can use gets from professor api
+
 var Container = _styledComponents2.default.div(_templateObject);
 
 var StudentView = function (_React$Component) {
@@ -41718,43 +41710,71 @@ var StudentView = function (_React$Component) {
     _this.returnToCalendar = _this.returnToCalendar.bind(_this);
     _this.findClass = _this.findClass.bind(_this);
     _this.openClass = _this.openClass.bind(_this);
+    _this.getInfo = _this.getInfo.bind(_this);
+    _this.openLeaderboard = _this.openLeaderboard.bind(_this);
     _this.state = {
       courses: [],
       assignments: [],
-      viewState: 0 // 0 = Calendar, 1 = Find a Class
+      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      selected_course: null
     };
 
-    if (_this.props.user_name) {
-      // Retrieve courses
-      (0, _getCourse.getCourses)("user=" + _this.props.user_name + "&key=" + _this.props.session_key + "&students=" + _this.props.user_name).then(function (courseResponse) {
-        if (courseResponse.status == true) {
-          var cs = courseResponse.body.objects;
-          _this.setState({ courses: cs });
-          // Retrieve assignments
-          for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
-            var c = cs[courseIndex];
-            (0, _getAssignment.getAssignment)("user=" + _this.props.user_name + "&key=" + _this.props.session_key + "&course=" + c.course_id).then(function (assignmentResponse) {
-              if (assignmentResponse.status == true) {
-                var as = assignmentResponse.body.objects;
-                var currAssignments = _this.state.assignments.concat(as);
-                _this.setState({ assignments: currAssignments });
-              } else {
-                console.log("Failed to retrieve assignments");
-              }
-            });
-          }
-        } else {
-          console.log("Failed to retrieve courses!");
-        }
-      });
-    }
+    var class_description = new Object();
+    class_description.name = "See Description";
+    var that = _this;
+    class_description.onClick = function (course_title, course_id) {
+      that.openClass(course_id);
+    };
+
+    _this.dropdown_elements = [class_description];
+
+    _this.getInfo();
     return _this;
   }
 
   _createClass(StudentView, [{
+    key: 'getInfo',
+    value: function getInfo() {
+      var _this2 = this;
+
+      if (this.props.user_name) {
+        // Retrieve courses
+        (0, _getCourse.getCourses)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&students=" + this.props.user_name).then(function (courseResponse) {
+          if (courseResponse.status == true) {
+            var cs = courseResponse.body.objects;
+            _this2.setState({ courses: cs });
+            _this2.forceUpdate();
+          } else {
+            console.log("Failed to retrieve courses!");
+          }
+        });
+
+        // Retrieve assignments
+        (0, _getAssignment2.getStudentAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&student=" + this.props.user_name).then(function (assignmentResponse) {
+          if (assignmentResponse.status == true) {
+
+            for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
+              var a = assignmentResponse.body.objects[aIndex];
+
+              var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+              (0, _getAssignment.getAssignment)("user=" + _this2.props.user_name + "&key=" + _this2.props.session_key + "&assignment_id=" + assignment_id).then(function (actualResponse) {
+                var as = actualResponse.body.objects;
+                var currAssignments = _this2.state.assignments.concat(as);
+                _this2.setState({ assignments: currAssignments });
+                _this2.forceUpdate();
+              });
+            }
+          } else {
+            console.log("Failed to retrieve assignments");
+          }
+        });
+      }
+    }
+  }, {
     key: 'returnToCalendar',
     value: function returnToCalendar() {
       this.setState({ viewState: 0 });
+      this.getInfo();
       this.forceUpdate();
     }
   }, {
@@ -41764,8 +41784,20 @@ var StudentView = function (_React$Component) {
     }
   }, {
     key: 'openClass',
-    value: function openClass() {
-      this.setState({ viewState: 3 });
+    value: function openClass(course_id) {
+      var courses = this.state.courses;
+      for (var index = 0; index < courses.length; index++) {
+        var course = courses[index];
+        if (course.course_id == course_id) {
+          this.setState(_defineProperty({}, 'selected_course', course));
+          this.setState({ viewState: 2 });
+        }
+      }
+    }
+  }, {
+    key: 'openLeaderboard',
+    value: function openLeaderboard() {
+      console.log("hey");
     }
   }, {
     key: 'render',
@@ -41779,22 +41811,21 @@ var StudentView = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { data: state.assignments, user_data: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout });
           break;
         case 1:
-          view = //Find Class to add to class list/schedule
-          // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
+          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
           break;
         case 2:
-          // View single class
-          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 2 });
+          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, course: state.selected_course, 'case': 2 });
           break;
         default:
           this.setState({ viewState: 0 });
+          this.forceUpdate();
+          break;
       }
 
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index4.default, { data: state.courses, user_data: this.props.user_name, addClass: this.findClass, viewClass: this.openClass, session_key: this.props.session_key }),
+        _react2.default.createElement(_index4.default, { data: state.courses, user_name: this.props.user_name, addClass: this.findClass, dropdown_elements: this.dropdown_elements, showLeaderboard: this.openLeaderboard, session_key: this.props.session_key }),
         view
       );
     }
@@ -41806,7 +41837,7 @@ var StudentView = function (_React$Component) {
 exports.default = StudentView;
 
 /***/ }),
-/* 181 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41829,7 +41860,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(182);
+var _index = __webpack_require__(181);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -41890,7 +41921,7 @@ var DayItem = function (_React$Component) {
 exports.default = DayItem;
 
 /***/ }),
-/* 182 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41910,7 +41941,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(183);
+var _index = __webpack_require__(182);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -41967,7 +41998,7 @@ var AssignmentsContainer = function (_React$Component) {
 exports.default = AssignmentsContainer;
 
 /***/ }),
-/* 183 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41981,8 +42012,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  background-color:\twhite;\n  color: black;\n  list-style:none;\n  padding-top:5px;\n  padding-left:15px;\n  padding-right:15px;\n  padding-bottom:10px;\n'], ['\n  background-color:\twhite;\n  color: black;\n  list-style:none;\n  padding-top:5px;\n  padding-left:15px;\n  padding-right:15px;\n  padding-bottom:10px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n'], ['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n']);
 
 var _react = __webpack_require__(1);
 
@@ -42010,9 +42043,13 @@ var Item = _styledComponents2.default.li(_templateObject);
 
 var Header = _styledComponents2.default.h1(_templateObject2);
 
-var BodyWrapper = _styledComponents2.default.div(_templateObject3);
+var InfoWrapper = _styledComponents2.default.div(_templateObject3);
 
-var Body = _styledComponents2.default.p(_templateObject4);
+var Info = _styledComponents2.default.div(_templateObject4);
+
+var BodyWrapper = _styledComponents2.default.div(_templateObject5);
+
+var Body = _styledComponents2.default.p(_templateObject6);
 
 var AssignmentItem = function (_React$Component) {
   _inherits(AssignmentItem, _React$Component);
@@ -42027,7 +42064,8 @@ var AssignmentItem = function (_React$Component) {
     key: 'render',
     value: function render() {
       _moment2.default.locale('en');
-      var localText = _moment2.default.utc(this.props.data.due_date).local().format('hh:mm a');
+      var localText = _moment2.default.utc(this.props.data.due_date).format('hh:mm a');
+      console.log(this.props.data);
       return _react2.default.createElement(
         Item,
         null,
@@ -42039,11 +42077,62 @@ var AssignmentItem = function (_React$Component) {
           localText
         ),
         _react2.default.createElement(
+          InfoWrapper,
+          null,
+          _react2.default.createElement(
+            Info,
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Course '
+            ),
+            this.props.data.course
+          ),
+          _react2.default.createElement(
+            Info,
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Difficulty '
+            ),
+            ' ',
+            this.props.data.expected_difficulty,
+            ' out of 10'
+          ),
+          _react2.default.createElement(
+            Info,
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Assignment Type '
+            ),
+            this.props.data.assignment_type
+          ),
+          _react2.default.createElement(
+            Info,
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Expected Time '
+            ),
+            this.props.data.expected_time
+          )
+        ),
+        _react2.default.createElement(
           BodyWrapper,
           null,
           _react2.default.createElement(
             Body,
             null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Description '
+            ),
             this.props.data.description
           )
         )
@@ -42057,7 +42146,7 @@ var AssignmentItem = function (_React$Component) {
 exports.default = AssignmentItem;
 
 /***/ }),
-/* 184 */
+/* 183 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -42085,7 +42174,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 185 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -42340,10 +42429,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 185;
+webpackContext.id = 184;
 
 /***/ }),
-/* 186 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42367,19 +42456,19 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _search = __webpack_require__(187);
+var _search = __webpack_require__(186);
 
 var _search2 = _interopRequireDefault(_search);
 
-var _index = __webpack_require__(188);
+var _index = __webpack_require__(187);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _cog = __webpack_require__(189);
+var _cog = __webpack_require__(188);
 
 var _cog2 = _interopRequireDefault(_cog);
 
-var _logoutUser = __webpack_require__(190);
+var _logoutUser = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42449,7 +42538,7 @@ var TopBar = function (_React$Component) {
 exports.default = TopBar;
 
 /***/ }),
-/* 187 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42487,7 +42576,7 @@ exports.default = FaSearch;
 module.exports = exports['default'];
 
 /***/ }),
-/* 188 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42574,7 +42663,7 @@ var FilterItem = function (_React$Component) {
 exports.default = FilterItem;
 
 /***/ }),
-/* 189 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42612,7 +42701,7 @@ exports.default = FaCog;
 module.exports = exports['default'];
 
 /***/ }),
-/* 190 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42654,6 +42743,77 @@ function logoutUser(user_name, session_key) {
 }
 
 /***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\nposition: relative;\nfloat: left;\nleft: 25vw;\nwidth: 75vw;\nheight: 100vh;\ncolor: green;\n'], ['\nposition: relative;\nfloat: left;\nleft: 25vw;\nwidth: 75vw;\nheight: 100vh;\ncolor: green;\n']);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(2);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+//**  MIDDLE MAN FOR RHS PANEL  **//
+//ensures panel dimensions correct//
+
+var ViewPaneContainer = _styledComponents2.default.div(_templateObject);
+
+var MintzModal = function (_React$Component) {
+  _inherits(MintzModal, _React$Component);
+
+  function MintzModal(props) {
+    _classCallCheck(this, MintzModal);
+
+    var _this = _possibleConstructorReturn(this, (MintzModal.__proto__ || Object.getPrototypeOf(MintzModal)).call(this, props));
+
+    _this.state = {
+      // demo props
+      run: false,
+      // fade props
+      in: true,
+      interval: 50,
+      delay: 500
+    };
+    return _this;
+  }
+
+  _createClass(MintzModal, [{
+    key: 'render',
+    value: function render() {
+      var view = null;
+
+      return _react2.default.createElement(ViewPaneContainer, null);
+    }
+  }]);
+
+  return MintzModal;
+}(_react2.default.Component);
+
+exports.default = MintzModal;
+
+/***/ }),
 /* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42666,10 +42826,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n  border-top:1px solid #303030;\n  position: relative;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n  border-top:1px solid #303030;\n  position: relative;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: none;\n  position: absolute;\n  right: -125px;\n  top: 3px;\n  background-color: #959595;\n  min-width: 130px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n  font-size:12px;\n'], ['\n  display: none;\n  position: absolute;\n  right: -125px;\n  top: 3px;\n  background-color: #959595;\n  min-width: 130px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n  font-size:12px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  color: black;\n  padding: 8px 0px;\n  text-decoration: none;\n  display: block;\n\n  &:hover {\n    background-color: #f1f1f1;\n    color: #484848;\n    text-decoration:none;\n  }\n'], ['\n  color: black;\n  padding: 8px 0px;\n  text-decoration: none;\n  display: block;\n\n  &:hover {\n    background-color: #f1f1f1;\n    color: #484848;\n    text-decoration:none;\n  }\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  right: 0;\n  margin-right: 2px;\n'], ['\n  position: absolute;\n  right: 0;\n  margin-right: 2px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n  border-top:1px solid #303030;\n  position: relative;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n'], ['\n  width:100%;\n  list-style:none;\n  //mint green #BEE6CC\n  background: #686868;\n  color: #BEE6CC;\n  //dark grey #4f1e3e;\n  padding: 0;\n\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n  border-top:1px solid #303030;\n  position: relative;\n\n  &:hover {\n    // blah green #80cc9b;\n    // color: #170912;\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n    //greyy #686868;\n  }\n\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\nheight: 10px;\n'], ['\nheight: 10px;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  display: none;\n  width: 20vw;\n  background-color: #959595;\n  min-width: 130px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n  font-size:12px;\n'], ['\n  display: none;\n  width: 20vw;\n  background-color: #959595;\n  min-width: 130px;\n  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);\n  z-index: 1;\n  font-size:12px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  color: black;\n  border-top:1px solid #303030;\n  padding: 8px 0px;\n  text-decoration: none;\n  display: block;\n  width: inherit;\n  margin-left: 3vw;\n\n  &:hover {\n    background-color: #f1f1f1;\n    color: #484848;\n    text-decoration:none;\n  }\n'], ['\n  color: black;\n  border-top:1px solid #303030;\n  padding: 8px 0px;\n  text-decoration: none;\n  display: block;\n  width: inherit;\n  margin-left: 3vw;\n\n  &:hover {\n    background-color: #f1f1f1;\n    color: #484848;\n    text-decoration:none;\n  }\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  position: absolute;\n  right: 0;\n  margin-right: 2px;\n'], ['\n  position: absolute;\n  right: 0;\n  margin-right: 2px;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -42683,7 +42844,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _ellipsisV = __webpack_require__(146);
+var _ellipsisV = __webpack_require__(192);
 
 var _ellipsisV2 = _interopRequireDefault(_ellipsisV);
 
@@ -42701,11 +42862,13 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Element = _styledComponents2.default.li(_templateObject);
 
-var Dropdown = _styledComponents2.default.div(_templateObject2);
+var Padding = _styledComponents2.default.div(_templateObject2);
 
-var DropdownElement = _styledComponents2.default.a(_templateObject3);
+var Dropdown = _styledComponents2.default.div(_templateObject3);
 
-var ElipseSpan = _styledComponents2.default.span(_templateObject4);
+var DropdownElement = _styledComponents2.default.a(_templateObject4);
+
+var ElipseSpan = _styledComponents2.default.span(_templateObject5);
 
 var styles = {
   hidden: {
@@ -42798,7 +42961,8 @@ var SidebarElement = function (_React$Component) {
           Dropdown,
           { style: this.state.hidden ? styles.hidden : styles.none },
           dropdown_elements
-        )
+        ),
+        _react2.default.createElement(Padding, null)
       );
     }
   }]);
@@ -42810,6 +42974,44 @@ exports.default = SidebarElement;
 
 /***/ }),
 /* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactIconBase = __webpack_require__(4);
+
+var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FaEllipsisV = function FaEllipsisV(props) {
+    return _react2.default.createElement(
+        _reactIconBase2.default,
+        _extends({ viewBox: '0 0 40 40' }, props),
+        _react2.default.createElement(
+            'g',
+            null,
+            _react2.default.createElement('path', { d: 'm24.1 27.9v4.2q0 0.9-0.7 1.6t-1.5 0.6h-4.3q-0.9 0-1.5-0.6t-0.6-1.6v-4.2q0-0.9 0.6-1.6t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.6z m0-11.5v4.3q0 0.9-0.7 1.5t-1.5 0.7h-4.3q-0.9 0-1.5-0.7t-0.6-1.5v-4.3q0-0.9 0.6-1.5t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.5z m0-11.4v4.3q0 0.9-0.7 1.5t-1.5 0.6h-4.3q-0.9 0-1.5-0.6t-0.6-1.5v-4.3q0-0.9 0.6-1.5t1.5-0.6h4.3q0.9 0 1.5 0.6t0.7 1.5z' })
+        )
+    );
+};
+
+exports.default = FaEllipsisV;
+module.exports = exports['default'];
+
+/***/ }),
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42832,7 +43034,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _caretDown = __webpack_require__(193);
+var _caretDown = __webpack_require__(194);
 
 var _caretDown2 = _interopRequireDefault(_caretDown);
 
@@ -42885,7 +43087,7 @@ var SidebarUserInfo = function (_React$Component) {
 exports.default = SidebarUserInfo;
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42923,7 +43125,7 @@ exports.default = FaCaretDown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42950,7 +43152,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _plusSquareO = __webpack_require__(195);
+var _plusSquareO = __webpack_require__(196);
 
 var _plusSquareO2 = _interopRequireDefault(_plusSquareO);
 
@@ -43069,7 +43271,7 @@ var SidebarClassesTitle = function (_React$Component) {
 exports.default = SidebarClassesTitle;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43107,7 +43309,44 @@ exports.default = FaPlusSquareO;
 module.exports = exports['default'];
 
 /***/ }),
-/* 196 */
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/user/";
+
+exports.getUser = getUser;
+
+
+function getUser(user_name, session_key) {
+	var status = 200;
+	var filters = "?user=" + user_name + "&key=" + session_key;
+	return fetch(URL + user_name + "/" + filters, {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		}
+	}).then(function (response) {
+		status = response.status;
+		return response.json();
+	}).then(function (json) {
+		if (status >= ERROR_STATUS) {
+			return { status: false, body: json };
+		} else {
+			return { status: true, body: json };
+		}
+	});
+}
+
+/***/ }),
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43117,7 +43356,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _FadeIn = __webpack_require__(197);
+var _FadeIn = __webpack_require__(199);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -43129,7 +43368,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43224,7 +43463,7 @@ var FadeIn = function (_Component) {
 exports.default = FadeIn;
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43239,7 +43478,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  margin: 30px;\n'], ['\n  margin: 30px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n'], ['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n  background:grey;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n'], ['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  width:100%;\n'], ['\n  width:100%;\n']),
@@ -43248,7 +43487,8 @@ var _templateObject = _taggedTemplateLiteral(['\n  margin: 30px;\n'], ['\n  marg
     _templateObject10 = _taggedTemplateLiteral(['\n  display:block;\n  padding: 20px 50px;\n  text-align:center;\n'], ['\n  display:block;\n  padding: 20px 50px;\n  text-align:center;\n']),
     _templateObject11 = _taggedTemplateLiteral(['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:16px;\n  width:25%;\n  text-align:right;\n  padding-right:20px;\n'], ['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:16px;\n  width:25%;\n  text-align:right;\n  padding-right:20px;\n']),
     _templateObject12 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n'], ['\n  display:inline-block;\n  width:70%;\n']),
-    _templateObject13 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n'], ['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n']);
+    _templateObject13 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n'], ['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n']),
+    _templateObject14 = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
 
 var _react = __webpack_require__(1);
 
@@ -43262,13 +43502,17 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _index = __webpack_require__(199);
+var _index = __webpack_require__(201);
 
 var _index2 = _interopRequireDefault(_index);
 
 var _getCourse = __webpack_require__(13);
 
+var _addToCourse = __webpack_require__(203);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43304,6 +43548,8 @@ var TextInput = _styledComponents2.default.input(_templateObject12);
 
 var BigTextInput = _styledComponents2.default.textarea(_templateObject13);
 
+var CreateButton = _styledComponents2.default.button(_templateObject14);
+
 var FindClassView = function (_React$Component) {
   _inherits(FindClassView, _React$Component);
 
@@ -43316,60 +43562,71 @@ var FindClassView = function (_React$Component) {
 
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.toggleSelected = _this.toggleSelected.bind(_this);
 
     _this.state = {
-      course_id: '',
-      courses: ''
+      number: '',
+      title: '',
+      availableCourses: [],
+      selectedCourses: []
     };
+
+    (0, _getCourse.getCourses)("user=" + _this.props.user_name + "&key=" + _this.props.session_key).then(function (response) {
+      if (response.status == true) {
+        _this.setState({ availableCourses: response.body.objects });
+      } else {
+        console.log("Failed to retrieve courses!");
+      }
+    });
     return _this;
   }
 
   _createClass(FindClassView, [{
     key: 'handleChange',
     value: function handleChange(e) {
-      this.setState({ course_id: e.target.value });
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      this.forceUpdate();
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
-      var course_id = this.state.course_id.course_id;
-
-      // getCourses(course_id).then((response) => {
-      //   if (response.status) {
-      //     {this.props.onClose};
-      //   }
-      //   else {
-      //     alert(response.body);
-      //   }
-      // });
+      for (var index = 0; index < this.state.selectedCourses.length; index++) {
+        (0, _addToCourse.addToCourse)(this.state.selectedCourses[index], this.props.session_key, this.props.user_name, ["/backend/v1/user/" + this.props.user_name + "/"]);
+      }
+      this.props.onClose();
     }
   }, {
-    key: 'if',
-    value: function _if(course_id) {
-      var _this2 = this;
-
-      (0, _getCourse.getCourses)(this.state.course_id).then(function (response) {
-        if (response.status == true) {
-          var obj = response.body;
-          _this2.setState({ courses: obj.objects });
-        } else {
-          console.log("Failed to retrieve courses!");
-        }
-      });
+    key: 'toggleSelected',
+    value: function toggleSelected(course_id) {
+      var index = this.state.selectedCourses.indexOf(course_id);
+      if (index > -1) {
+        this.state.selectedCourses.splice(index, 1);
+      } else {
+        this.state.selectedCourses.push(course_id);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var classes = _react2.default.createElement(
         'div',
         null,
         'N/A'
       );
-      if (this.state.course_id != null) {
-        classes = this.props.data.map(function (e, i) {
-          return _react2.default.createElement(_index2.default, { key: i, course: e });
+      if (this.state.availableCourses) {
+        classes = this.state.availableCourses.map(function (course, index) {
+          var index = _this2.state.selectedCourses.indexOf(course.course_id);
+          var selected = false;
+          if (index > -1) {
+            selected = true;
+          }
+          return _react2.default.createElement(_index2.default, { key: index, course: course, filter_id: _this2.state.number, filter_title: _this2.state.title, onClick: function onClick(course_id) {
+              return _this2.toggleSelected(course_id);
+            } });
         });
-      };
+      }
 
       return _react2.default.createElement(
         PanelContainer,
@@ -43401,7 +43658,17 @@ var FindClassView = function (_React$Component) {
                   null,
                   'Course Number:'
                 ),
-                _react2.default.createElement(TextInput, { name: this.state.course_id, type: 'text', onChange: this.handleChange, disabled: true })
+                _react2.default.createElement(TextInput, { name: 'number', type: 'text', onChange: this.handleChange })
+              ),
+              _react2.default.createElement(
+                ItemLabel,
+                null,
+                _react2.default.createElement(
+                  TextLabel,
+                  null,
+                  'Course Title:'
+                ),
+                _react2.default.createElement(TextInput, { name: 'title', type: 'text', onChange: this.handleChange })
               )
             )
           )
@@ -43427,6 +43694,23 @@ var FindClassView = function (_React$Component) {
               )
             )
           )
+        ),
+        _react2.default.createElement(
+          Panel,
+          null,
+          _react2.default.createElement(
+            Container,
+            null,
+            _react2.default.createElement(
+              ItemLabel,
+              null,
+              _react2.default.createElement(
+                CreateButton,
+                { type: 'button', onClick: this.handleSubmit },
+                'Sign Up for Selected'
+              )
+            )
+          )
         )
       );
     }
@@ -43438,7 +43722,7 @@ var FindClassView = function (_React$Component) {
 exports.default = FindClassView;
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43450,8 +43734,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  background: #686868;\n  color: #BEE6CC;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  background: #686868;\n  color: #BEE6CC;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n    background: #484848;\n    color: rgb(177, 217, 231);\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  font-size:20px;\n'], ['\n  font-size:20px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  width:100%;\n  list-style:none;\n  background: #484848;\n  color: #BEE6CC;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n    color: rgb(177, 217, 231);\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n'], ['\n  width:100%;\n  list-style:none;\n  background: #484848;\n  color: #BEE6CC;\n  padding: 0;\n  padding-bottom:10px;\n  padding-top:10px;\n  font-family:Avenir;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n    color: rgb(177, 217, 231);\n  }\n\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n\n'], ['\n\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  font-size:24px;\n  padding-left:20px;\n'], ['\n  font-size:24px;\n  padding-left:20px;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -43465,11 +43750,13 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _ellipsisV = __webpack_require__(146);
+var _check = __webpack_require__(202);
 
-var _ellipsisV2 = _interopRequireDefault(_ellipsisV);
+var _check2 = _interopRequireDefault(_check);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -43481,7 +43768,19 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var FindClassElementDiv = _styledComponents2.default.li(_templateObject);
 
-var ElipseSpan = _styledComponents2.default.span(_templateObject2);
+var ContentContainer = _styledComponents2.default.span(_templateObject2);
+
+var FaCheckContainer = _styledComponents2.default.span(_templateObject3);
+
+var styles = {
+  hidden: {
+    'color': 'green'
+  },
+
+  none: {
+    'color': '#484848'
+  }
+};
 
 var FindClassElement = function (_React$Component) {
   _inherits(FindClassElement, _React$Component);
@@ -43491,24 +43790,43 @@ var FindClassElement = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (FindClassElement.__proto__ || Object.getPrototypeOf(FindClassElement)).call(this, props));
 
+    _this.onClick = _this.onClick.bind(_this);
     _this.state = {
-      course: _this.props.course,
-      course_id: _this.props.course.course_id
+      selected: false
     };
     return _this;
   }
 
   _createClass(FindClassElement, [{
+    key: 'onClick',
+    value: function onClick() {
+      this.setState(_defineProperty({}, 'selected', !this.state.selected));
+      this.props.onClick(this.props.course.course_id);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var id = this.state.course_id;
-      // var FindClassElements = [];
 
-      return _react2.default.createElement(
-        FindClassElementDiv,
-        null,
-        id
-      );
+      if (this.props.course.course_id.toLowerCase().indexOf(this.props.filter_id.toLowerCase()) > -1 && this.props.course.course_title.toLowerCase().indexOf(this.props.filter_title.toLowerCase()) > -1) {
+        return _react2.default.createElement(
+          FindClassElementDiv,
+          { onClick: this.onClick },
+          _react2.default.createElement(
+            ContentContainer,
+            null,
+            this.props.course.course_id,
+            ': ',
+            this.props.course.course_title
+          ),
+          _react2.default.createElement(
+            FaCheckContainer,
+            { style: this.state.selected ? styles.hidden : styles.none },
+            _react2.default.createElement(_check2.default, null)
+          )
+        );
+      } else {
+        return _react2.default.createElement('div', null);
+      }
     }
   }]);
 
@@ -43518,7 +43836,89 @@ var FindClassElement = function (_React$Component) {
 exports.default = FindClassElement;
 
 /***/ }),
-/* 200 */
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactIconBase = __webpack_require__(4);
+
+var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var FaCheck = function FaCheck(props) {
+    return _react2.default.createElement(
+        _reactIconBase2.default,
+        _extends({ viewBox: '0 0 40 40' }, props),
+        _react2.default.createElement(
+            'g',
+            null,
+            _react2.default.createElement('path', { d: 'm37.3 12.6q0 0.9-0.6 1.6l-19.2 19.1q-0.6 0.7-1.5 0.7t-1.6-0.7l-11.1-11.1q-0.6-0.6-0.6-1.5t0.6-1.5l3.1-3q0.6-0.7 1.5-0.7t1.5 0.7l6.6 6.5 14.6-14.6q0.6-0.6 1.5-0.6t1.5 0.6l3.1 3q0.6 0.6 0.6 1.5z' })
+        )
+    );
+};
+
+exports.default = FaCheck;
+module.exports = exports['default'];
+
+/***/ }),
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/student/course/";
+
+exports.addToCourse = addToCourse;
+
+/*
+  Return the courses given the particular filters
+*/
+
+function addToCourse(course_id, session_key, user_name, students) {
+  var status = 200;
+  return fetch(URL + course_id + "/", {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ session_key: session_key, user_name: user_name, students: students })
+  }).then(function (response) {
+    status = response.status;
+    if (status >= ERROR_STATUS) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
+  }).then(function (json) {
+    if (status >= ERROR_STATUS) {
+      return { status: false, body: json };
+    } else {
+      return { status: true, body: json };
+    }
+  });
+}
+
+/***/ }),
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43733,7 +44133,7 @@ var StudentClassView = function (_React$Component) {
 exports.default = StudentClassView;
 
 /***/ }),
-/* 201 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43769,7 +44169,7 @@ function createCourse(session_key, user_name, course_id, course_title, descripti
 }
 
 /***/ }),
-/* 202 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43804,7 +44204,7 @@ function deleteCourse(filter) {
 }
 
 /***/ }),
-/* 203 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43842,7 +44242,7 @@ exports.default = FaPencil;
 module.exports = exports['default'];
 
 /***/ }),
-/* 204 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43868,11 +44268,11 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _pencilSquare = __webpack_require__(205);
+var _pencilSquare = __webpack_require__(209);
 
 var _pencilSquare2 = _interopRequireDefault(_pencilSquare);
 
-var _minusSquare = __webpack_require__(206);
+var _minusSquare = __webpack_require__(210);
 
 var _minusSquare2 = _interopRequireDefault(_minusSquare);
 
@@ -43957,7 +44357,7 @@ var AssignmentElement = function (_React$Component) {
 exports.default = AssignmentElement;
 
 /***/ }),
-/* 205 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43995,7 +44395,7 @@ exports.default = FaPencilSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 206 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44033,7 +44433,7 @@ exports.default = FaMinusSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 207 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44058,7 +44458,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _plusSquare = __webpack_require__(208);
+var _plusSquare = __webpack_require__(212);
 
 var _plusSquare2 = _interopRequireDefault(_plusSquare);
 
@@ -44123,7 +44523,7 @@ var AddAssignmentElement = function (_React$Component) {
 exports.default = AddAssignmentElement;
 
 /***/ }),
-/* 208 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44161,7 +44561,7 @@ exports.default = FaPlusSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 209 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44193,19 +44593,21 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _reactDatetime = __webpack_require__(210);
+var _reactDatetime = __webpack_require__(214);
 
 var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
 
-var _calendar = __webpack_require__(217);
+var _calendar = __webpack_require__(221);
 
 var _calendar2 = _interopRequireDefault(_calendar);
 
-var _arrowLeft = __webpack_require__(218);
+var _arrowLeft = __webpack_require__(222);
 
 var _arrowLeft2 = _interopRequireDefault(_arrowLeft);
 
-var _addAssignment = __webpack_require__(219);
+var _addAssignment = __webpack_require__(223);
+
+var _editAssignment = __webpack_require__(224);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44260,8 +44662,21 @@ var AssignmentFieldEditor = function (_React$Component) {
       expected_difficulty: "",
       expected_time: "",
       description: "",
-      sliderValue: 5
+      sliderValue: 5,
+      button_title: ""
     };
+
+    if (_this.props.assignment) {
+      _this.state.assignment_name = _this.props.assignment.assignment_name;
+      _this.state.assignment_type = _this.props.assignment.assignment_type;
+      _this.state.date = _this.props.assignment.due_date;
+      _this.state.expected_difficulty = _this.props.assignment.expected_difficulty;
+      _this.state.expected_time = _this.props.assignment.expected_time;
+      _this.state.description = _this.props.assignment.description;
+      _this.state.button_title = "Update Assignment";
+    } else {
+      _this.state.button_title = "Create Assignment";
+    }
     return _this;
   }
 
@@ -44273,9 +44688,9 @@ var AssignmentFieldEditor = function (_React$Component) {
   }, {
     key: 'handleCalendarChange',
     value: function handleCalendarChange(value) {
-      var formatted = value.utc().format();
-      formatted = formatted.substring(0, formatted.length - 1) + ".00Z";
-      this.setState(_defineProperty({}, 'date', formatted));
+      var local = value.local();
+      var utc = local.utc().format('YYYY-MM-DDThh:mm:ss') + "Z";
+      this.setState(_defineProperty({}, 'date', utc));
     }
   }, {
     key: 'handleSubmit',
@@ -44283,33 +44698,29 @@ var AssignmentFieldEditor = function (_React$Component) {
       var _this2 = this;
 
       // Change date string to accomodate server
-      (0, _addAssignment.addAssignment)(this.props.session_key, this.props.user_name, this.state.assignment_name, this.state.assignment_type, "/backend/v1/course/" + this.props.course.course_id + "/", this.state.date, this.state.sliderValue.toString(), this.state.expected_time, this.state.description).then(function (response) {
-        if (response.status == false) {
-          // TODO: Handle error
-        } else {
-          _this2.props.onClose();
-        }
-      });
+      if (this.props.assignment) {
+        (0, _editAssignment.editAssignment)(this.props.assignment.assignment_id, this.props.session_key, this.props.user_name, this.state.assignment_name, this.state.assignment_type, "/backend/v1/course/" + this.props.course.course_id + "/", this.state.date, this.state.sliderValue.toString(), this.state.expected_time, this.state.description).then(function (response) {
+          if (response.status == false) {
+            // TODO: Handle error
+            console.log("Here");
+          } else {
+            _this2.props.onClose();
+          }
+        });
+      } else {
+        (0, _addAssignment.addAssignment)(this.props.session_key, this.props.user_name, this.state.assignment_name, this.state.assignment_type, "/backend/v1/course/" + this.props.course.course_id + "/", this.state.date, this.state.sliderValue.toString(), this.state.expected_time, this.state.description).then(function (response) {
+          if (response.status == false) {
+            // TODO: Handle error
+          } else {
+            _this2.props.onClose();
+          }
+        });
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
-
-      var button_title = "";
-      if (this.props.assignment) {
-        this.state.assignment_name = this.props.assignment.assignment_name;
-        this.state.assignment_type = this.props.assignment.assignment_type;
-        this.state.date = this.props.assignment.due_date;
-        console.log(this.state.date);
-        this.state.expected_difficulty = this.props.assignment.expected_difficulty;
-        this.state.expected_time = this.props.assignment.expected_time;
-        this.state.description = this.props.assignment.description;
-        button_title = "Update Assignment";
-      } else {
-
-        button_title = "Create Assignment";
-      }
 
       return _react2.default.createElement(
         FormContainer,
@@ -44322,7 +44733,7 @@ var AssignmentFieldEditor = function (_React$Component) {
             null,
             'Assignment Title:'
           ),
-          _react2.default.createElement(TextInput, { name: 'assignment_name', type: 'text', onChange: this.handleChange, placeholder: this.state.assignment_name })
+          _react2.default.createElement(TextInput, { name: 'assignment_name', type: 'text', onChange: this.handleChange, value: this.state.assignment_name })
         ),
         _react2.default.createElement(
           ItemLabel,
@@ -44360,7 +44771,7 @@ var AssignmentFieldEditor = function (_React$Component) {
             null,
             'Description:'
           ),
-          _react2.default.createElement(BigTextInput, { name: 'description', onChange: this.handleChange, placeholder: this.state.description })
+          _react2.default.createElement(BigTextInput, { name: 'description', onChange: this.handleChange, value: this.state.description })
         ),
         _react2.default.createElement(
           ItemLabel,
@@ -44370,7 +44781,7 @@ var AssignmentFieldEditor = function (_React$Component) {
             null,
             'Expected Time:'
           ),
-          _react2.default.createElement(TextInput, { name: 'expected_time', type: 'text', onChange: this.handleChange, placeholder: this.state.expected_time })
+          _react2.default.createElement(TextInput, { name: 'expected_time', type: 'text', onChange: this.handleChange, value: this.state.expected_time })
         ),
         _react2.default.createElement(
           ItemLabel,
@@ -44398,7 +44809,7 @@ var AssignmentFieldEditor = function (_React$Component) {
             DateContainer,
             null,
             _react2.default.createElement(_reactDatetime2.default, {
-              defaultValue: this.state.date,
+              value: this.state.date,
               onChange: function onChange(value) {
                 return _this3.handleCalendarChange(value);
               }
@@ -44411,7 +44822,7 @@ var AssignmentFieldEditor = function (_React$Component) {
           _react2.default.createElement(
             CreateButton,
             { onClick: this.handleSubmit },
-            button_title
+            this.state.button_title
           )
         )
       );
@@ -44424,18 +44835,18 @@ var AssignmentFieldEditor = function (_React$Component) {
 exports.default = AssignmentFieldEditor;
 
 /***/ }),
-/* 210 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assign = __webpack_require__(151),
+var assign = __webpack_require__(150),
 	PropTypes = __webpack_require__(17),
 	createClass = __webpack_require__(8),
 	moment = __webpack_require__(0),
 	React = __webpack_require__(1),
-	CalendarContainer = __webpack_require__(212)
+	CalendarContainer = __webpack_require__(216)
 	;
 
 var TYPES = PropTypes;
@@ -44885,7 +45296,7 @@ module.exports = Datetime;
 
 
 /***/ }),
-/* 211 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45763,7 +46174,7 @@ module.exports = factory;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 212 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45771,10 +46182,10 @@ module.exports = factory;
 
 var React = __webpack_require__(1),
 	createClass = __webpack_require__(8),
-	DaysView = __webpack_require__(213),
-	MonthsView = __webpack_require__(214),
-	YearsView = __webpack_require__(215),
-	TimeView = __webpack_require__(216)
+	DaysView = __webpack_require__(217),
+	MonthsView = __webpack_require__(218),
+	YearsView = __webpack_require__(219),
+	TimeView = __webpack_require__(220)
 	;
 
 var CalendarContainer = createClass({
@@ -45794,7 +46205,7 @@ module.exports = CalendarContainer;
 
 
 /***/ }),
-/* 213 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45945,7 +46356,7 @@ module.exports = DateTimePickerDays;
 
 
 /***/ }),
-/* 214 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46059,7 +46470,7 @@ module.exports = DateTimePickerMonths;
 
 
 /***/ }),
-/* 215 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46171,7 +46582,7 @@ module.exports = DateTimePickerYears;
 
 
 /***/ }),
-/* 216 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46179,7 +46590,7 @@ module.exports = DateTimePickerYears;
 
 var React = __webpack_require__(1),
 	createClass = __webpack_require__(8),
-	assign = __webpack_require__(151),
+	assign = __webpack_require__(150),
 	onClickOutside = __webpack_require__(14).default
 	;
 
@@ -46413,7 +46824,7 @@ module.exports = DateTimePickerTime;
 
 
 /***/ }),
-/* 217 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46451,7 +46862,7 @@ exports.default = FaCalendar;
 module.exports = exports['default'];
 
 /***/ }),
-/* 218 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46489,7 +46900,7 @@ exports.default = FaArrowLeft;
 module.exports = exports['default'];
 
 /***/ }),
-/* 219 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46540,7 +46951,140 @@ function addAssignment(session_key, user_name, assignment_name, assignment_type,
 }
 
 /***/ }),
-/* 220 */
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
+
+exports.editAssignment = editAssignment;
+
+
+function editAssignment(assignment_id, session_key, user_name, assignment_name, assignment_type, course, due_date, expected_difficulty, expected_time, description) {
+  var status = 200;
+  return fetch(URL + assignment_id + "/", {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      session_key: session_key,
+      user_name: user_name,
+      assignment_name: assignment_name,
+      assignment_type: assignment_type,
+      course: course,
+      due_date: due_date,
+      expected_difficulty: expected_difficulty,
+      expected_time: expected_time,
+      description: description
+    })
+  }).then(function (response) {
+    status = response.status;
+    if (status >= ERROR_STATUS) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
+  }).then(function (json) {
+    if (status >= ERROR_STATUS) {
+      return { status: false, body: json };
+    } else {
+      return { status: true, body: json };
+    }
+  });
+}
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/professor/assignment/";
+
+exports.deleteAssignment = deleteAssignment;
+
+/*
+  Return the assignments given the particular filters
+*/
+
+function deleteAssignment(assignment_id, filters) {
+  var status = 200;
+  return fetch(URL + assignment_id + "/" + "?" + filters, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    status = response.status;
+    if (status >= 400) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
+  }).then(function (json) {
+    if (status >= ERROR_STATUS) {
+      return { status: false, body: json };
+    } else {
+      return { status: true, body: json };
+    }
+  });
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/student/assignment/";
+
+exports.getStudentAssignment = getStudentAssignment;
+
+/*
+  Return the assignments given the particular filters
+*/
+
+function getStudentAssignment(filters) {
+  var status = 200;
+  return fetch(URL + "?" + filters, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    status = response.status;
+    return response.json();
+  }).then(function (json) {
+    if (status >= ERROR_STATUS) {
+      return { status: false, body: json };
+    } else {
+      return { status: true, body: json };
+    }
+  });
+}
+
+/***/ }),
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46552,8 +47096,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  display:inline-block;\n  vertical-align:top;\n  width:100%;\n'], ['\n  display:inline-block;\n  vertical-align:top;\n  width:100%;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  position: relative;\n  float: right;\n  left: 25vw;\n  width: 75vw;\n'], ['\n  position: relative;\n  float: right;\n  left: 25vw;\n  width: 75vw;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  display:inline-block\n  vertical-align:top;\n  width:100%;\n'], ['\n  display:inline-block\n  vertical-align:top;\n  width:100%;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -46567,15 +47110,15 @@ var _index = __webpack_require__(26);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(148);
+var _index3 = __webpack_require__(147);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(149);
+var _index5 = __webpack_require__(148);
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = __webpack_require__(150);
+var _index7 = __webpack_require__(149);
 
 var _index8 = _interopRequireDefault(_index7);
 
@@ -46583,7 +47126,7 @@ var _index9 = __webpack_require__(145);
 
 var _index10 = _interopRequireDefault(_index9);
 
-var _index11 = __webpack_require__(147);
+var _index11 = __webpack_require__(146);
 
 var _index12 = _interopRequireDefault(_index11);
 
@@ -46592,6 +47135,8 @@ var _getCourse = __webpack_require__(13);
 var _getAssignment = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -46604,7 +47149,6 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 //import {addClass} from '../../services/api/professor/course/add-class.js';
 
 var Container = _styledComponents2.default.div(_templateObject);
-var Wrapper = _styledComponents2.default.div(_templateObject2);
 
 /*
   The professor will have props with:
@@ -46625,6 +47169,7 @@ var ProfessorView = function (_React$Component) {
     _this.deleteClassView = _this.deleteClassView.bind(_this);
     _this.editAssignmentsView = _this.editAssignmentsView.bind(_this);
     _this.returnToCalendar = _this.returnToCalendar.bind(_this);
+    _this.getInfo = _this.getInfo.bind(_this);
 
     _this.state = {
       courses: [],
@@ -46633,30 +47178,7 @@ var ProfessorView = function (_React$Component) {
       selected_course: { course_name: '', course_id: '' }
     };
 
-    if (_this.props.user_name) {
-      // Retrieve courses
-      (0, _getCourse.getCourses)("user=" + _this.props.user_name + "&key=" + _this.props.session_key + "&professor=" + _this.props.user_name).then(function (courseResponse) {
-        if (courseResponse.status == true) {
-          var cs = courseResponse.body.objects;
-          _this.setState({ courses: cs });
-          // Retrieve assignments
-          for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
-            var c = cs[courseIndex];
-            (0, _getAssignment.getAssignment)("user=" + _this.props.user_name + "&key=" + _this.props.session_key + "&course=" + c.course_id).then(function (assignmentResponse) {
-              if (assignmentResponse.status == true) {
-                var as = assignmentResponse.body.objects;
-                var currAssignments = _this.state.assignments.concat(as);
-                _this.setState({ assignments: currAssignments });
-              } else {
-                console.log("Failed to retrieve assignments");
-              }
-            });
-          }
-        } else {
-          console.log("Failed to retrieve courses!");
-        }
-      });
-    }
+    _this.getInfo();
 
     // Set dropdown elements for sidebar (this is bad code)
     var that = _this;
@@ -46686,66 +47208,71 @@ var ProfessorView = function (_React$Component) {
   _createClass(ProfessorView, [{
     key: 'addClassView',
     value: function addClassView() {
-      this.setState({ viewState: 1 });
+      this.setState(_defineProperty({}, 'viewState', 1));
       this.forceUpdate();
     }
   }, {
     key: 'showClasses',
     value: function showClasses() {
-      this.setState({ viewState: 0 });
+      this.setState(_defineProperty({}, 'viewState', 0));
       this.forceUpdate();
     }
   }, {
     key: 'editClassView',
     value: function editClassView(course_title, course_id) {
-      this.setState({ viewState: 2 });
+      this.setState(_defineProperty({}, 'viewState', 2));
       this.setState({ selected_course: { course_name: course_title, course_id: course_id } });
       this.forceUpdate();
     }
   }, {
     key: 'deleteClassView',
     value: function deleteClassView(course_title, course_id) {
-      this.setState({ viewState: 3 });
+      this.setState(_defineProperty({}, 'viewState', 3));
       this.setState({ selected_course: { course_name: course_title, course_id: course_id } });
       this.forceUpdate();
     }
   }, {
     key: 'editAssignmentsView',
     value: function editAssignmentsView(course_title, course_id) {
-      this.setState({ viewState: 4 });
+      this.setState(_defineProperty({}, 'viewState', 4));
       this.setState({ selected_course: { course_name: course_title, course_id: course_id } });
       this.forceUpdate();
     }
   }, {
     key: 'returnToCalendar',
     value: function returnToCalendar() {
+      this.setState(_defineProperty({}, 'viewState', 0));
+      this.getInfo();
+    }
+  }, {
+    key: 'getInfo',
+    value: function getInfo() {
       var _this2 = this;
-
-      this.setState({ viewState: 0 });
 
       if (this.props.user_name) {
         // Retrieve courses
-        (0, _getCourse.getCourses)("user=" + this.props.user_name + "&key=" + this.props.session_key).then(function (response) {
-          if (response.status == true) {
-            var obj = response.body;
-            _this2.setState({ courses: obj.objects });
+        (0, _getCourse.getCourses)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&professor=" + this.props.user_name).then(function (courseResponse) {
+          if (courseResponse.status == true) {
+            var cs = courseResponse.body.objects;
+            _this2.setState({ courses: cs });
+            // Retrieve assignments
+            for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
+              var c = cs[courseIndex];
+              (0, _getAssignment.getAssignment)("user=" + _this2.props.user_name + "&key=" + _this2.props.session_key + "&course=" + c.course_id).then(function (assignmentResponse) {
+                if (assignmentResponse.status == true) {
+                  var as = assignmentResponse.body.objects;
+                  var currAssignments = _this2.state.assignments.concat(as);
+                  _this2.setState({ assignments: currAssignments });
+                } else {
+                  console.log("Failed to retrieve assignments");
+                }
+              });
+            }
           } else {
             console.log("Failed to retrieve courses!");
           }
         });
-
-        // Retrieve assignments
-        (0, _getAssignment.getAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key).then(function (response) {
-          if (response.status == true) {
-            var obj = response.body;
-            _this2.setState({ assignments: obj.objects });
-          } else {
-            console.log("Failed to retrieve assignments");
-          }
-        });
       }
-
-      this.forceUpdate();
     }
   }, {
     key: 'render',
@@ -46760,7 +47287,7 @@ var ProfessorView = function (_React$Component) {
         case 1:
           view =
           // <CreateClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onCloseCreate: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
+          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
           break;
         case 2:
           //what case is this...?
@@ -46769,21 +47296,23 @@ var ProfessorView = function (_React$Component) {
         case 3:
           view =
           // <DeleteClassView session_key={this.props.session_key} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onCloseDelete: this.returnToCalendar, course: this.state.selected_course, role: this.props.role, 'case': 3 });
+          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, course: this.state.selected_course, role: this.props.role, 'case': 3 });
           break;
         case 4:
           view =
           //<AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course}/>
-          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onCloseEditor: this.returnToCalendar, course: this.state.selected_course, role: this.props.role, 'case': 4 });
+          _react2.default.createElement(_index12.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, course: this.state.selected_course, role: this.props.role, 'case': 4 });
           break;
         default:
           this.setState({ viewState: 0 });
+          this.forceUpdate();
+          break;
       }
 
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index10.default, { data: state.courses, user_data: this.props.user_name, session_key: this.props.session_key, clickClasses: this.showClasses, addClass: this.addClassView, dropdown_elements: this.dropdown_elements }),
+        _react2.default.createElement(_index10.default, { data: state.courses, user_name: this.props.user_name, session_key: this.props.session_key, clickClasses: this.showClasses, addClass: this.addClassView, dropdown_elements: this.dropdown_elements }),
         view
       );
     }
