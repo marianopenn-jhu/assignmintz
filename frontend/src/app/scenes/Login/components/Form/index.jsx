@@ -5,7 +5,6 @@ import {createUser} from '../../../../services/api/user/create-user.js';
 import {loginUser} from '../../../../services/api/user/login-user.js';
 import Cookies from "universal-cookie";
 
-const cookie = document.cookie;
 var clickedStudent = 'clicked';
 var clickedProfessor = '';
 
@@ -136,8 +135,6 @@ class Form extends React.Component {
     const {sign_in, user_name, role, first_name, last_name, email, password, confirm_password} = this.state;
     if (sign_in == true)
     {
-      console.log("changed cookie");
-      console.log(document.cookie);
 
       loginUser(user_name, password).then((answer) =>
       {
@@ -155,8 +152,6 @@ class Form extends React.Component {
         var name = first_name + " " + last_name;
         createUser(user_name, name, email, passwd, role).then((answer) =>
         {
-          console.log("created User");
-          console.log(document.cookie);
           if (answer.status == false) {
             this.setState({['errorMessage']: answer.body.message});
           } else if (this.props.onSignUp != null) {

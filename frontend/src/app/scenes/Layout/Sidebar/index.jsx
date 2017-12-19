@@ -37,8 +37,7 @@ const SidebarTitleContainer = styled.div`
 
 
 const ScrollDiv = styled.div`
-
-overflow-y: scroll;
+overflow-y:scroll;
 max-height: 50vh;
 
 `;

@@ -1,5 +1,5 @@
 const ERROR_STATUS = 400;
-const URL = __API__ + "/backend/v1/course/";
+const URL = __API__ + "/backend/v1/student/course/";
 
 export {addToCourse};
 
@@ -19,7 +19,7 @@ function addToCourse(course_id, session_key, user_name, students)
   })).then((response) => {
     status = response.status;
     if (status >= ERROR_STATUS) {
-        return response.json()
+        return response.json();
     } else {
       return "Empty";
     }
