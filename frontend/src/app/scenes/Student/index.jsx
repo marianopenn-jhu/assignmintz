@@ -62,6 +62,7 @@ getActualInfo(aIndex, a) {
     }
 
     var assignments = this.state.assignments;
+    console.log(assignments);
     assignments[aIndex] = as[0];
     this.setState({['assignments']: assignments}, function () { // Wait until the new assignments are set, then add the user_assignment
       var more_assignments = this.state.assignments;
