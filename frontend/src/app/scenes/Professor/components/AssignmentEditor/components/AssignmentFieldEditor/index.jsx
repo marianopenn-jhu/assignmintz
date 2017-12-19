@@ -100,9 +100,9 @@ class AssignmentFieldEditor extends React.Component {
   }
 
   handleCalendarChange(value) {
-    var formatted = value.utc().format();
-    formatted = formatted.substring(0, formatted.length - 1) + ".00Z";
-    this.setState({['date']: formatted});
+    var local = value.local();
+    var utc = local.utc().format('YYYY-MM-DDThh:mm:ss') + "Z";
+    this.setState({['date']: utc});
   }
 
   handleSubmit(event) {
@@ -133,7 +133,6 @@ class AssignmentFieldEditor extends React.Component {
       this.state.assignment_name = this.props.assignment.assignment_name;
       this.state.assignment_type = this.props.assignment.assignment_type;
       this.state.date = this.props.assignment.due_date;
-      console.log(this.state.date);
       this.state.expected_difficulty = this.props.assignment.expected_difficulty;
       this.state.expected_time = this.props.assignment.expected_time;
       this.state.description = this.props.assignment.description;

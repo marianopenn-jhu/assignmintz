@@ -36,7 +36,7 @@ class AssignmentItem extends React.Component {
 
   render() {
     Moment.locale('en');
-    var localText = Moment.utc(this.props.data.due_date).local().format('hh:mm a');
+    var localText = Moment.utc(this.props.data.due_date).format('hh:mm a');
     return(
       <Item>
         <Header>{this.props.data.assignment_name}: Due by {localText}</Header>

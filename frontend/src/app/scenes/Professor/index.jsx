@@ -82,18 +82,21 @@ class ProfessorView extends React.Component {
   editClassView(course_title, course_id) {
     this.setState({viewState:2});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
+    this.getInfo();
     this.forceUpdate();
   }
 
   deleteClassView(course_title, course_id) {
     this.setState({viewState:3});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
+    this.getInfo();
     this.forceUpdate();
   }
 
   editAssignmentsView(course_title, course_id) {
     this.setState({viewState:4});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
+    this.getInfo();
     this.forceUpdate();
   }
 
