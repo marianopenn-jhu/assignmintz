@@ -6,14 +6,13 @@ export {getUser};
 function getUser(user_name, session_key)
 {
 	var status = 200;
-	var filters = user_name + "&" + session_key;
-  	return (fetch(URL + "?" + filters, {
+	var filters = "?user=" + user_name + "&key=" + session_key;
+  	return (fetch(URL + user_name + "/" + filters, {
 	    method: 'GET',
 	    headers: {
 	      'Accept': 'application/json',
 	      'Content-Type': 'application/json'
-	    },
-			body: undefined
+	    }
 	  })).then((response) => {
 	    status = response.status;
 	    return response.json()

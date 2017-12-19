@@ -5,7 +5,7 @@ import MintzModal from '../MintzModal/index.jsx';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
-
+import {getUser} from '../../../services/api/user/get-user.js';
 
 const SidebarContainer = styled.div`
     height: auto;
@@ -101,6 +101,15 @@ const SidebarElementContainer = styled.ul`
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+          mintCount: 0
+        }
+
+        getUser(this.props.user_name, this.props.session_key).then((response) => {
+          console.log("Here");
+          console.log(response);
+        });
     }
 
     componentWillEnter (callback) {
@@ -135,13 +144,13 @@ class Sidebar extends React.Component {
                 </SidebarTitle>
               </SidebarTitleContainer>
               <SidebarElementContainer>
-                <SidebarUserInfo data={this.props.user_data}/>
+                <SidebarUserInfo data={this.props.user_name}/>
                 <ScrollDiv>
                   <SidebarClassesTitle triggerEvent={this.props.addClass}/>
                   {classes}
                 </ScrollDiv>
                 <Mintz onClick={this.props.showLeaderboard}>
-                  Mintz:
+                  Mintz: {this.state.mintCount}
                 </Mintz>
               </SidebarElementContainer>
             </SidebarPanel>
