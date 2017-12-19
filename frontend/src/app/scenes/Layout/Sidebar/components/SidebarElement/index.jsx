@@ -11,7 +11,7 @@ const Element = styled.li`
   color: #BEE6CC;
   //dark grey #4f1e3e;
   padding: 0;
-  padding-bottom:10px;
+
   padding-top:10px;
   font-family:Avenir;
   font-size:15px;
@@ -27,20 +27,15 @@ const Element = styled.li`
     //greyy #686868;
   }
 
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+`;
+
+const Padding = styled.div`
+height: 10px;
 `;
 
 const Dropdown = styled.div`
   display: none;
-  position: absolute;
-  right: -125px;
-  top: 3px;
+  width: 20vw;
   background-color: #959595;
   min-width: 130px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -50,9 +45,12 @@ const Dropdown = styled.div`
 
 const DropdownElement = styled.a`
   color: black;
+  border-top:1px solid #303030;
   padding: 8px 0px;
   text-decoration: none;
   display: block;
+  width: inherit;
+  margin-left: 3vw;
 
   &:hover {
     background-color: #f1f1f1;
@@ -134,6 +132,7 @@ class SidebarElement extends React.Component {
             <Dropdown style={this.state.hidden ? styles.hidden : styles.none}>
               {dropdown_elements}
             </Dropdown>
+            <Padding/>
           </Element>
       );
     }

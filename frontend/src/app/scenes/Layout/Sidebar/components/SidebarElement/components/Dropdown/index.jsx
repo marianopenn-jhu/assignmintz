@@ -7,6 +7,7 @@ const Dropdown = styled.div`
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
   z-index: 1;
 `;
 
@@ -46,7 +47,7 @@ class Dropdown extends React.Component {
       this.props.items.map(function(e, index)
       {
         current = (
-          <DropdownElementkey={index} href={e.link}>{e.name}/DropdownElement>
+          <DropdownElement key={index} href={e.link}>{e.name}/DropdownElement>
         );
       });
 

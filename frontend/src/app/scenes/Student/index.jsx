@@ -115,7 +115,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_data={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
+      <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>
   );

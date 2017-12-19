@@ -5,7 +5,7 @@ import MintzModal from '../MintzModal/index.jsx';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
-
+import {getUser} from '../../../services/api/user/get-user.js';
 
 const SidebarContainer = styled.div`
     height: auto;
@@ -35,8 +35,9 @@ const SidebarTitleContainer = styled.div`
   }
 `;
 
-const ScrollDiv = styled.div`
 
+const ScrollDiv = styled.div`
+overflow-y:scroll;
 max-height: 50vh;
 
 `;
@@ -61,6 +62,30 @@ const SidebarTitle = styled.span`
     font-weight: lighter;
     text-align: center;
 `;
+
+const Mintz = styled.div`
+width:100%;
+list-style:none;
+background:#BEE6CC;
+color:#170912;
+padding-top:5px;
+padding-bottom:5px;
+padding-left:10px;
+padding-right:5px;
+font-size:18px;
+display:inline-block;
+margin-top: 7px;
+text-align: left;
+font-family:Courier;
+font-size:20px;
+
+&:hover {
+  background: #484848;
+  color:white;
+  cursor:pointer;
+}
+`;
+
 const SidebarTitleMintz = styled.span`
     font-family: Helvetica;
     color:rgba(167,224,165,1);
@@ -76,6 +101,15 @@ const SidebarElementContainer = styled.ul`
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+          mintCount: 0
+        }
+
+        getUser(this.props.user_name, this.props.session_key).then((response) => {
+          console.log("Here");
+          console.log(response);
+        });
     }
 
     componentWillEnter (callback) {
@@ -110,13 +144,15 @@ class Sidebar extends React.Component {
                 </SidebarTitle>
               </SidebarTitleContainer>
               <SidebarElementContainer>
-                <SidebarUserInfo data={this.props.user_data}/>
+                <SidebarUserInfo data={this.props.user_name}/>
                 <ScrollDiv>
                   <SidebarClassesTitle triggerEvent={this.props.addClass}/>
                   {classes}
                 </ScrollDiv>
+                <Mintz onClick={this.props.showLeaderboard}>
+                  Mintz: {this.state.mintCount}
+                </Mintz>
               </SidebarElementContainer>
-
             </SidebarPanel>
           </SidebarContainer>
         );
