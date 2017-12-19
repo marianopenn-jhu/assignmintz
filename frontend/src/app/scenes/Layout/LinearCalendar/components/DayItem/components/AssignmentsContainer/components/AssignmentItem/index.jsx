@@ -126,7 +126,7 @@ class AssignmentItem extends React.Component {
   }
 
   finishAssignment() {
-    var data = this.props.data;
+    var data = this.props.data.user_assignment;
 
     editAssignment(
       data.student_assignment_id,
@@ -144,11 +144,11 @@ class AssignmentItem extends React.Component {
     var localText = Moment.utc(this.props.data.due_date).format('hh:mm a');
 
     let current = null;
-    if (this.props.data.student_assignment_id != null) {
-      console.log(this.props.data);
+    if (this.props.data.user_assignment != null) {
+      console.log(this.props.data.user_assignment);
       current = (
         <div>
-          <Header onMouseEnter={this.onHover} onMouseLeave={this.onUnhover} onClick={this.onClick} style={this.props.data.done ? styles.done : styles.none}>{this.props.data.assignment_name}: Due by {localText} <QSpan>{this.state.ask_question}</QSpan></Header>
+          <Header onMouseEnter={this.onHover} onMouseLeave={this.onUnhover} onClick={this.onClick} style={this.props.data.user_assignment.done ? styles.done : styles.none}>{this.props.data.assignment_name}: Due by {localText} <QSpan>{this.state.ask_question}</QSpan></Header>
           <InfoWrapper style={this.state.confirming ? styles.none : styles.hidden}>
             <Info>
               <TextLabel>Difficulty</TextLabel>
@@ -166,13 +166,13 @@ class AssignmentItem extends React.Component {
             </ButtonContainer>
             </Info>
           </InfoWrapper>
-          <InfoWrapper style={this.props.data.hidden ? styles.done : styles.none}>
+          <InfoWrapper style={this.props.data.user_assignment.hidden ? styles.done : styles.none}>
             <Info><b>Course </b>{this.props.data.course}</Info>
             <Info><b>Difficulty </b> {this.props.data.expected_difficulty} out of 10</Info>
             <Info><b>Assignment Type </b>{this.props.data.assignment_type}</Info>
             <Info><b>Expected Time </b>{this.props.data.expected_time}</Info>
           </InfoWrapper>
-          <BodyWrapper style={this.props.data.done ? styles.done : styles.none}>
+          <BodyWrapper style={this.props.data.user_assignment.done ? styles.done : styles.none}>
             <Body><b>Description </b>{this.props.data.description}</Body>
           </BodyWrapper>
         </div>
