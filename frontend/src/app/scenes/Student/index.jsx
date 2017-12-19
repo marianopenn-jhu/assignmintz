@@ -47,13 +47,21 @@ class StudentView extends React.Component {
     this.getInfo();
 }
 
-getActualInfo(aIndex, a) {
+getActualInfo(aIndex) {
   if (aIndex == this.state.studentAssignments.length) {
+    // We have set the assignment for each student assignment, so return.
     this.forceUpdate();
     return;
   }
 
+  // Get the corresponding student assignment
+  var a = this.state.studentAssignments[aIndex];
+  console.log(a);
+
+  // Get the id associated with the student assignment
   var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+
+  // Get the assignment using the student assignment
   getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
     var as = actualResponse.body.objects;
 
@@ -62,17 +70,13 @@ getActualInfo(aIndex, a) {
     }
 
     var assignments = this.state.assignments;
-    console.log(assignments);
     assignments[aIndex] = as[0];
     this.setState({['assignments']: assignments}, function () { // Wait until the new assignments are set, then add the user_assignment
       var more_assignments = this.state.assignments;
-      console.log(more_assignments);
-      console.log(more_assignments[aIndex]);
-      console.log(a);
       more_assignments[aIndex].user_assignment = a;
 
       this.setState({['assignments']: more_assignments}, function () {
-        this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+        this.getActualInfo(aIndex + 1);
       });
     });
   });
@@ -92,13 +96,12 @@ getInfo() {
       }
     );
 
-    // Retrieve assignments
+    // Retrieve the student assignments fromt he server
     getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
           this.setState({['studentAssignments']: assignmentResponse.body.objects}, function() { // Wait until the student's assignments are populated
-            this.setState({['assignments']: new Array(this.state.studentAssignments.length)}, function() { // Wait until the assignment has n assignment
-              var a = assignmentResponse.body.objects[0];
-              this.getActualInfo(0, a);
+            this.setState({['assignments']: new Array(this.state.studentAssignments.length)}, function() { // Wait until the assignment list is the right size
+              this.getActualInfo(0);
             });
           });
 
