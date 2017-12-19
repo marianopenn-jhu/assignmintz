@@ -1,23 +1,27 @@
 const ERROR_STATUS = 400;
-const URL = __API__ + "/backend/v1/student/assignment/";
+const URL = __API__ + "/backend/v1/professor/assignment/";
 
-export {getStudentAssignment};
+export {deleteAssignment};
 
 /*
   Return the assignments given the particular filters
 */
-function getStudentAssignment(filters)
+function deleteAssignment(assignment_id, filters)
 {
   var status = 200;
-  return (fetch(URL + "?" + filters, {
-    method: 'GET',
+  return (fetch(URL + assignment_id + "/" + "?" + filters, {
+    method: 'DELETE',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
   })).then((response) => {
     status = response.status;
-    return response.json()
+    if (status >= 400) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
   }).then((json) => {
     if(status >= ERROR_STATUS) {
       return {status: false, body: json};

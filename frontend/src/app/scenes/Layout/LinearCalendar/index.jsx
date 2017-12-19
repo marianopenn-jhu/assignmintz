@@ -58,8 +58,8 @@ class LinearCalendar extends React.Component {
 
     // Sort the dictionary by due date
     this.props.data.sort(function (left, right) {
-      var left_dd = Moment.utc(left.due_date).local();
-      var right_dd = Moment.utc(right.due_date).local();
+      var left_dd = Moment.utc(left.due_date);
+      var right_dd = Moment.utc(right.due_date);
       return left_dd.diff(right_dd);
     });
 

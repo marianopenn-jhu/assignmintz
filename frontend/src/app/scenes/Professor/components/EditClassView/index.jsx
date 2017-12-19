@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import FaClose from 'react-icons/lib/fa/close';
 
 const Wrapper = styled.div`
-overflow:hidden;
-overflow-y:auto;
-height: 100%;
-right: 0;
-top: 0;
-margin: 0;
-padding: 0;
-padding-top:10px;
-background:white;
+  overflow:hidden;
+  overflow-y:auto;
+  height: 100%;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  padding-top:10px;
+  background:white;
 `;
 
 const Container = styled.div`
@@ -93,16 +93,6 @@ class EditClassView extends React.Component {
       description:''
     }
   }
-  //
-  // titleDidUpdate() {
-  //   if (this.didSwitchTitle) {
-  //     this.didSwitchTitle = false;
-  //     this.refs.givenTitle.value = this.state.course_title;
-  //   }
-  // }
-  // givenTitleChange(){
-  //   this.setState ({givenTitle: event.target.value});
-  // }
 
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});

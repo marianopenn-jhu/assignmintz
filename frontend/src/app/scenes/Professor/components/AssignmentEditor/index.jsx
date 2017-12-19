@@ -7,6 +7,8 @@ import AddAssignmentElement from './components/AddAssignmentElement/index.jsx';
 import AssignmentFieldEditor from './components/AssignmentFieldEditor/index.jsx';
 import DeleteAssignmentView from './components/AddAssignmentElement/index.jsx';
 import {getAssignment} from '../../../../services/api/professor/get-assignment.js'
+import {deleteAssignment} from '../../../../services/api/professor/delete-assignment.js'
+
 
 //position: absolute;
 const Container = styled.div`
@@ -77,15 +79,14 @@ class AssignmentEditor extends React.Component {
   }
 
   onDeleteClick(assignment) {
-    this.setState({['editingState'] : 2});
-    this.setState({['selectedAssignment'] : assignment});
+    // Delete the assignment
+    deleteAssignment(assignment.assignment_id, "user=" + this.props.user_name + "&key=" + this.props.session_key);
     this.forceUpdate();
   }
 
   onReturnClick() {
     this.setState({['editingState'] : 0});
     this.setState({['selectedAssignment'] : null});
-    this.forceUpdate();
   }
 
   render() {
@@ -103,7 +104,6 @@ class AssignmentEditor extends React.Component {
             // TODO: Handle failure
           }
         });
-
 
         current = (
           <AssignmentsContainer>
@@ -125,11 +125,6 @@ class AssignmentEditor extends React.Component {
       case 1:
         current = (
           <AssignmentFieldEditor session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
-        );
-        break;
-      case 2:
-        current = (
-          <DeleteAssignmentView session_key={this.props.session_key} user_name={this.props.user_name} course={this.props.course} assignment={this.state.selectedAssignment} onClose={() => this.onReturnClick()}/>
         );
         break;
       default:
