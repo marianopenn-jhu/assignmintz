@@ -70,40 +70,36 @@ class ProfessorView extends React.Component {
   }
 
   addClassView() {
-    this.setState({viewState:1});
+    this.setState({['viewState']:1});
     this.forceUpdate();
   }
 
   showClasses() {
-    this.setState({viewState:0});
+    this.setState({['viewState']:0});
     this.forceUpdate();
   }
 
   editClassView(course_title, course_id) {
-    this.setState({viewState:2});
+    this.setState({['viewState']:2});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
-    this.getInfo();
     this.forceUpdate();
   }
 
   deleteClassView(course_title, course_id) {
-    this.setState({viewState:3});
+    this.setState({['viewState']:3});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
-    this.getInfo();
     this.forceUpdate();
   }
 
   editAssignmentsView(course_title, course_id) {
-    this.setState({viewState:4});
+    this.setState({['viewState']:4});
     this.setState({selected_course:{course_name:course_title, course_id:course_id}});
-    this.getInfo();
     this.forceUpdate();
   }
 
   returnToCalendar() {
-    this.setState({viewState:0});
+    this.setState({['viewState']:0});
     this.getInfo();
-    this.forceUpdate();
   }
 
   getInfo() {
@@ -113,7 +109,6 @@ class ProfessorView extends React.Component {
           if (courseResponse.status == true) {
             var cs = courseResponse.body.objects;
             this.setState({courses: cs});
-            this.forceUpdate();
             // Retrieve assignments
             for (var courseIndex = 0; courseIndex < cs.length; courseIndex++) {
               var c = cs[courseIndex];
@@ -122,7 +117,6 @@ class ProfessorView extends React.Component {
                     var as = assignmentResponse.body.objects;
                     var currAssignments = this.state.assignments.concat(as);
                     this.setState({assignments: currAssignments});
-                    this.forceUpdate();
                   } else {
                     console.log("Failed to retrieve assignments");
                   }

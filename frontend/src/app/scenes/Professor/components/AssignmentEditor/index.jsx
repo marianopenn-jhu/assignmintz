@@ -87,7 +87,6 @@ class AssignmentEditor extends React.Component {
   onReturnClick() {
     this.setState({['editingState'] : 0});
     this.setState({['selectedAssignment'] : null});
-    this.forceUpdate();
   }
 
   render() {

@@ -4,7 +4,7 @@ import DateTime from 'react-datetime';
 import FaCalendar from 'react-icons/lib/fa/calendar';
 import FaArrow from 'react-icons/lib/fa/arrow-left';
 import {addAssignment} from '../../../../../../services/api/professor/add-assignment.js'
-
+import {editAssignment} from '../../../../../../services/api/professor/edit-assignment.js'
 
 const FormContainer = styled.div`
   width:100%;
@@ -91,7 +91,20 @@ class AssignmentFieldEditor extends React.Component {
       expected_difficulty:"",
       expected_time:"",
       description:"",
-      sliderValue:5
+      sliderValue:5,
+      button_title:""
+    }
+
+    if (this.props.assignment) {
+      this.state.assignment_name = this.props.assignment.assignment_name;
+      this.state.assignment_type = this.props.assignment.assignment_type;
+      this.state.date = this.props.assignment.due_date;
+      this.state.expected_difficulty = this.props.assignment.expected_difficulty;
+      this.state.expected_time = this.props.assignment.expected_time;
+      this.state.description = this.props.assignment.description;
+      this.state.button_title = "Update Assignment";
+    } else {
+      this.state.button_title ="Create Assignment";
     }
   }
 
@@ -107,46 +120,56 @@ class AssignmentFieldEditor extends React.Component {
 
   handleSubmit(event) {
     // Change date string to accomodate server
-    addAssignment(
-      this.props.session_key,
-      this.props.user_name,
-      this.state.assignment_name,
-      this.state.assignment_type,
-      "/backend/v1/course/" + this.props.course.course_id + "/",
-      this.state.date,
-      this.state.sliderValue.toString(),
-      this.state.expected_time,
-      this.state.description
-    ).then((response) =>
-    {
-      if (response.status == false) {
-        // TODO: Handle error
-      } else {
-        this.props.onClose();
-      }
-    })
+    if (this.props.assignment) {
+      editAssignment(
+        this.props.assignment.assignment_id,
+        this.props.session_key,
+        this.props.user_name,
+        this.state.assignment_name,
+        this.state.assignment_type,
+        "/backend/v1/course/" + this.props.course.course_id + "/",
+        this.state.date,
+        this.state.sliderValue.toString(),
+        this.state.expected_time,
+        this.state.description
+      ).then((response) =>
+      {
+        if (response.status == false) {
+          // TODO: Handle error
+          console.log("Here");
+        } else {
+          this.props.onClose();
+        }
+      })
+    }
+    else {
+      addAssignment(
+        this.props.session_key,
+        this.props.user_name,
+        this.state.assignment_name,
+        this.state.assignment_type,
+        "/backend/v1/course/" + this.props.course.course_id + "/",
+        this.state.date,
+        this.state.sliderValue.toString(),
+        this.state.expected_time,
+        this.state.description
+      ).then((response) =>
+      {
+        if (response.status == false) {
+          // TODO: Handle error
+        } else {
+          this.props.onClose();
+        }
+      })
+    }
   }
 
   render() {
-    var button_title = "";
-    if (this.props.assignment) {
-      this.state.assignment_name = this.props.assignment.assignment_name;
-      this.state.assignment_type = this.props.assignment.assignment_type;
-      this.state.date = this.props.assignment.due_date;
-      this.state.expected_difficulty = this.props.assignment.expected_difficulty;
-      this.state.expected_time = this.props.assignment.expected_time;
-      this.state.description = this.props.assignment.description;
-      button_title = "Update Assignment";
-    } else {
-
-      button_title ="Create Assignment";
-    }
-
     return (
       <FormContainer>
         <ItemLabel>
           <TextLabel>Assignment Title:</TextLabel>
-          <TextInput name="assignment_name" type="text" onChange={this.handleChange} placeholder={this.state.assignment_name}/>
+          <TextInput name="assignment_name" type="text" onChange={this.handleChange} value={this.state.assignment_name}/>
         </ItemLabel>
         <ItemLabel>
           <TextLabel>Assignment Type:</TextLabel>
@@ -158,11 +181,11 @@ class AssignmentFieldEditor extends React.Component {
         </ItemLabel>
         <ItemLabel>
           <TextLabel>Description:</TextLabel>
-          <BigTextInput name="description" onChange={this.handleChange} placeholder={this.state.description}></BigTextInput>
+          <BigTextInput name="description" onChange={this.handleChange} value={this.state.description}></BigTextInput>
         </ItemLabel>
         <ItemLabel>
           <TextLabel>Expected Time:</TextLabel>
-          <TextInput name="expected_time" type="text" onChange={this.handleChange} placeholder={this.state.expected_time}/>
+          <TextInput name="expected_time" type="text" onChange={this.handleChange} value={this.state.expected_time}/>
         </ItemLabel>
         <ItemLabel>
           <TextLabel>Expected Difficulty:</TextLabel>
@@ -176,13 +199,13 @@ class AssignmentFieldEditor extends React.Component {
           </TextLabel>
           <DateContainer>
             <DateTime
-              defaultValue={this.state.date}
+              value={this.state.date}
               onChange={(value) => this.handleCalendarChange(value)}
             />
           </DateContainer>
         </ItemLabel>
         <ItemLabel>
-          <CreateButton onClick={this.handleSubmit}>{button_title}</CreateButton>
+          <CreateButton onClick={this.handleSubmit}>{this.state.button_title}</CreateButton>
         </ItemLabel>
       </FormContainer>
     );
