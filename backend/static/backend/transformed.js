@@ -41683,6 +41683,8 @@ var _getAssignment2 = __webpack_require__(226);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -41713,8 +41715,18 @@ var StudentView = function (_React$Component) {
     _this.state = {
       courses: [],
       assignments: [],
-      viewState: 0 // 0 = Calendar, 1 = Find a Class
+      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      selected_course: null
     };
+
+    var class_description = new Object();
+    class_description.name = "See Description";
+    var that = _this;
+    class_description.onClick = function (course_title, course_id) {
+      that.openClass(course_id);
+    };
+
+    _this.dropdown_elements = [class_description];
 
     _this.getInfo();
     return _this;
@@ -41772,8 +41784,17 @@ var StudentView = function (_React$Component) {
     }
   }, {
     key: 'openClass',
-    value: function openClass() {
-      this.setState({ viewState: 2 });
+    value: function openClass(course_id) {
+      console.log(this.state.courses);
+      for (var course in this.state.courses) {
+        console.log(course_id);
+        console.log(course.course_id);
+        if (course.course_id == course_id) {
+          console.log(course);
+          this.setState(_defineProperty({}, 'selected_course', course));
+          this.setState({ viewState: 2 });
+        }
+      }
     }
   }, {
     key: 'openLeaderboard',
@@ -41792,13 +41813,10 @@ var StudentView = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { data: state.assignments, user_data: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout });
           break;
         case 1:
-          view = //Find Class to add to class list/schedule
-          // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
-          _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
+          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
           break;
         case 2:
-          // View single class
-          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 2 });
+          view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, course: state.selected_course, 'case': 2 });
           break;
         default:
           this.setState({ viewState: 0 });
@@ -41809,7 +41827,7 @@ var StudentView = function (_React$Component) {
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index4.default, { data: state.courses, user_name: this.props.user_name, addClass: this.findClass, viewClass: this.openClass, showLeaderboard: this.openLeaderboard, session_key: this.props.session_key }),
+        _react2.default.createElement(_index4.default, { data: state.courses, user_name: this.props.user_name, addClass: this.findClass, dropdown_elements: this.dropdown_elements, showLeaderboard: this.openLeaderboard, session_key: this.props.session_key }),
         view
       );
     }
