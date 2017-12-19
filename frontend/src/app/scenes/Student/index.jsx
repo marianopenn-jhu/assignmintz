@@ -63,9 +63,13 @@ getActualInfo(aIndex, a) {
 
     var assignments = this.state.assignments;
     assignments[aIndex] = as[0];
-    this.setState(assignments, function () { // Wait until the new assignments are set, then add the user_assignment
-      this.state.assignments[aIndex].user_assignment = a;
-      this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+    this.setState({['assignments']: assignments}, function () { // Wait until the new assignments are set, then add the user_assignment
+      var more_assignments = this.state.assignments;
+      more_assignments[aIndex].user_assignment = a;
+
+      this.setState({['assignments']: more_assignments}, function () {
+        this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+      });
     });
   });
 }
@@ -87,8 +91,8 @@ getInfo() {
     // Retrieve assignments
     getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
-          this.setState({studentAssignments: assignmentResponse.body.objects}, function() { // Wait until the student's assignments are populated
-            this.setState({assignments: new Array(this.state.studentAssignments.length)}, function() { // Wait until the assignment has n assignment
+          this.setState({['studentAssignments']: assignmentResponse.body.objects}, function() { // Wait until the student's assignments are populated
+            this.setState({['assignments']: new Array(this.state.studentAssignments.length)}, function() { // Wait until the assignment has n assignment
               var a = assignmentResponse.body.objects[0];
               this.getActualInfo(0, a);
             });

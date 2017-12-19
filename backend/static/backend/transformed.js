@@ -41762,10 +41762,14 @@ var StudentView = function (_React$Component) {
 
         var assignments = _this2.state.assignments;
         assignments[aIndex] = as[0];
-        _this2.setState(assignments, function () {
+        _this2.setState(_defineProperty({}, 'assignments', assignments), function () {
           // Wait until the new assignments are set, then add the user_assignment
-          this.state.assignments[aIndex].user_assignment = a;
-          this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+          var more_assignments = this.state.assignments;
+          more_assignments[aIndex].user_assignment = a;
+
+          this.setState(_defineProperty({}, 'assignments', more_assignments), function () {
+            this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+          });
         });
       });
     }
@@ -41789,9 +41793,9 @@ var StudentView = function (_React$Component) {
         // Retrieve assignments
         (0, _getAssignment2.getStudentAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&student=" + this.props.user_name).then(function (assignmentResponse) {
           if (assignmentResponse.status == true) {
-            _this3.setState({ studentAssignments: assignmentResponse.body.objects }, function () {
+            _this3.setState(_defineProperty({}, 'studentAssignments', assignmentResponse.body.objects), function () {
               // Wait until the student's assignments are populated
-              this.setState({ assignments: new Array(this.state.studentAssignments.length) }, function () {
+              this.setState(_defineProperty({}, 'assignments', new Array(this.state.studentAssignments.length)), function () {
                 // Wait until the assignment has n assignment
                 var a = assignmentResponse.body.objects[0];
                 this.getActualInfo(0, a);
