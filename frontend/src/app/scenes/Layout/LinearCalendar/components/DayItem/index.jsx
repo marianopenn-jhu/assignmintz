@@ -78,7 +78,7 @@ class DayItem extends React.Component {
     return(
       <Container>
         <Day onClick={this.onClick}>{this.props.day}</Day>
-        <AssignmentsContainer hidden={this.state.hidden} assignments={this.props.assignments}/>
+        <AssignmentsContainer hidden={this.state.hidden} assignments={this.props.assignments} session_key={this.props.session_key} user_name={this.props.user_name}/>
       </Container>
     );
   }

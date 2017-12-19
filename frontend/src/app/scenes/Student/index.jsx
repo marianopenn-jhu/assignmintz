@@ -23,10 +23,12 @@ class StudentView extends React.Component {
     this.findClass = this.findClass.bind(this);
     this.openClass = this.openClass.bind(this);
     this.getInfo = this.getInfo.bind(this);
+    this.getActualInfo = this.getActualInfo.bind(this);
     this.openLeaderboard = this.openLeaderboard.bind(this);
     this.state = {
       courses:[],
       assignments:[],
+      studentAssignments:[],
       viewState: 0, // 0 = Calendar, 1 = Find a Class
       selected_course: null
     };
@@ -43,6 +45,22 @@ class StudentView extends React.Component {
     ];
 
     this.getInfo();
+}
+
+getActualInfo(aIndex, a) {
+  var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+  getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
+    var as = actualResponse.body.objects;
+
+    if (as.length > 1) {
+      console.log("Unexpected query!");
+    }
+
+    this.state.assignments[aIndex] = as[0];
+    this.state.assignments[aIndex].user_assignment = a;
+
+    this.forceUpdate();
+  });
 }
 
 getInfo() {
@@ -62,17 +80,12 @@ getInfo() {
     // Retrieve assignments
     getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
+          this.setState({studentAssignments: assignmentResponse.body.objects});
+          this.state.assignments = new Array(this.state.studentAssignments.length);
 
           for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
             var a = assignmentResponse.body.objects[aIndex];
-
-            var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
-            getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
-              var as = actualResponse.body.objects;
-              var currAssignments = this.state.assignments.concat(as);
-              this.setState({assignments: currAssignments});
-              this.forceUpdate();
-            });
+            this.getActualInfo(aIndex, a);
           }
         } else {
           console.log("Failed to retrieve assignments");
@@ -114,7 +127,7 @@ render() {
   switch (state.viewState) {
     case 0: //Full Calendar
     view = (
-      <LinearCalendar data={state.assignments} user_data={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+      <LinearCalendar data={state.assignments} user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
     );
     break;
     case 1:
