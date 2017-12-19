@@ -67,6 +67,7 @@ class UserResource(ModelResource):
         bundle.data['passwd'] = hashlib.sha256(salt.encode() + bundle.data['passwd'].encode()).hexdigest() + ':' + salt
         return bundle
     def dehydrate(self, bundle):
+        bundle.data['points'] = bundle.obj.points
         bundle.data.pop('passwd', None)
         return bundle
 
