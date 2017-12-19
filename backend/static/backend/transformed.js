@@ -42185,6 +42185,7 @@ var AssignmentItem = function (_React$Component) {
       var localText = _moment2.default.utc(this.props.data.due_date).format('hh:mm a');
 
       var current = null;
+      console.log(this.props.data);
       if (this.props.data.user_assignment != null) {
         current = _react2.default.createElement(
           'div',
