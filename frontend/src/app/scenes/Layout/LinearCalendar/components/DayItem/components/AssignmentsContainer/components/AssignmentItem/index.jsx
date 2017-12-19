@@ -148,7 +148,6 @@ class AssignmentItem extends React.Component {
     var localText = Moment.utc(this.props.data.due_date).format('hh:mm a');
 
     let current = null;
-    console.log(this.props.data);
     if (this.props.data.user_assignment != null) {
       current = (
         <div>
