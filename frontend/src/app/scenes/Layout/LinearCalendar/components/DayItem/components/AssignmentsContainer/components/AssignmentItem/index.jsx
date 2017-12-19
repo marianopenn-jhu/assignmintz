@@ -105,7 +105,8 @@ class AssignmentItem extends React.Component {
       confirming: false,
       ask_question:"",
       actual_difficulty:0,
-      actual_time:0
+      actual_time:0,
+      assign_info:this.props.data.user_assignment
     }
   }
 
@@ -120,7 +121,7 @@ class AssignmentItem extends React.Component {
   }
 
   onClick() {
-    if (!this.props.data.user_assignment.done) {
+    if (!this.state.assign_info.done) {
       this.setState({['confirming']: !this.state.confirming});
     }
   }
@@ -130,7 +131,7 @@ class AssignmentItem extends React.Component {
   }
 
   finishAssignment() {
-    var data = this.props.data.user_assignment;
+    var data = this.state.assign_info;
 
     editAssignment(
       data.student_assignment_id,
@@ -140,7 +141,13 @@ class AssignmentItem extends React.Component {
       this.state.actual_difficulty,
       this.state.actual_time,
       "True"
-    );
+    ).then((result) => {
+      if (result.status == true) {
+        this.setState({['assign_info'] : result.body});
+        this.setState({['ask_question']: ""});
+        this.setState({['confirming']: false});
+      }
+    })
   }
 
   render() {
@@ -148,10 +155,10 @@ class AssignmentItem extends React.Component {
     var localText = Moment.utc(this.props.data.due_date).format('hh:mm a');
 
     let current = null;
-    if (this.props.data.user_assignment != null) {
+    if (this.state.assign_info != null) {
       current = (
         <div>
-          <Header onMouseEnter={this.onHover} onMouseLeave={this.onUnhover} onClick={this.onClick} style={this.props.data.user_assignment.done ? styles.done : styles.none}>{this.props.data.assignment_name}: Due by {localText} <QSpan>{this.state.ask_question}</QSpan></Header>
+          <Header onMouseEnter={this.onHover} onMouseLeave={this.onUnhover} onClick={this.onClick} style={this.state.assign_info.done ? styles.done : styles.none}>{this.props.data.assignment_name}: Due by {localText} <QSpan>{this.state.ask_question}</QSpan></Header>
           <InfoWrapper style={this.state.confirming ? styles.none : styles.hidden}>
             <Info>
               <TextLabel>Difficulty</TextLabel>
@@ -169,13 +176,13 @@ class AssignmentItem extends React.Component {
             </ButtonContainer>
             </Info>
           </InfoWrapper>
-          <InfoWrapper style={this.props.data.user_assignment.hidden ? styles.done : styles.none}>
+          <InfoWrapper style={this.state.assign_info.done ? styles.done : styles.none}>
             <Info><b>Course </b>{this.props.data.course}</Info>
             <Info><b>Difficulty </b> {this.props.data.expected_difficulty} out of 10</Info>
             <Info><b>Assignment Type </b>{this.props.data.assignment_type}</Info>
             <Info><b>Expected Time </b>{this.props.data.expected_time}</Info>
           </InfoWrapper>
-          <BodyWrapper style={this.props.data.user_assignment.done ? styles.done : styles.none}>
+          <BodyWrapper style={this.state.assign_info.done ? styles.done : styles.none}>
             <Body><b>Description </b>{this.props.data.description}</Body>
           </BodyWrapper>
         </div>
