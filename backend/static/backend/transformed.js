@@ -42297,15 +42297,18 @@ var AssignmentItem = function (_React$Component) {
       ask_question: "",
       actual_difficulty: 0,
       actual_time: 0,
-      assign_info: _this.props.data.user_assignment
+      assign_info: _this.props.data.user_assignment,
+      sliderValue: 0
     };
+
+    console.log(_this.state.assign_info);
     return _this;
   }
 
   _createClass(AssignmentItem, [{
     key: 'onHover',
     value: function onHover() {
-      if (!this.props.data.user_assignment.done) {
+      if (!this.state.assign_info.done) {
         this.setState(_defineProperty({}, 'ask_question', "Mark as Complete?"));
       }
     }
@@ -42338,6 +42341,7 @@ var AssignmentItem = function (_React$Component) {
           _this2.setState(_defineProperty({}, 'assign_info', result.body));
           _this2.setState(_defineProperty({}, 'ask_question', ""));
           _this2.setState(_defineProperty({}, 'confirming', false));
+          _this2.forceUpdate();
         }
       });
     }
@@ -43806,7 +43810,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  margin: 30px;\n'], ['\n  margin: 30px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n'], ['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  height:300px;\n  width: 100%;\n  padding-top:10px;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  height:300px;\n  width: 100%;\n  padding-top:10px;\n']),
     _templateObject5 = _taggedTemplateLiteral(['\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  width:100%;\n'], ['\n  width:100%;\n']),
