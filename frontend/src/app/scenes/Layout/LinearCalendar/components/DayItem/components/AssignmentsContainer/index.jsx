@@ -24,7 +24,7 @@ class AssignmentsContainer extends React.Component {
 
       var assignmentNodes = this.props.assignments.map(function(a, i){
         return (
-          <AssignmentItem key={i} data={a}/>
+          <AssignmentItem key={i} data={a} session_key={that.props.session_key} user_name={that.props.user_name}/>
         );
       });
 
