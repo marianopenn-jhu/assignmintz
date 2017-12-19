@@ -107,8 +107,9 @@ class Sidebar extends React.Component {
         }
 
         getUser(this.props.user_name, this.props.session_key).then((response) => {
-          console.log("Here");
-          console.log(response);
+          if (response.status) {
+              this.state.mintCount = response.body.points;
+          }
         });
     }
 
