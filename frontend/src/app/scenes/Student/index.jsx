@@ -48,6 +48,11 @@ class StudentView extends React.Component {
 }
 
 getActualInfo(aIndex, a) {
+  if (aIndex == this.state.studentAssignments.length) {
+    this.forceUpdate();
+    return;
+  }
+
   var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
   getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
     var as = actualResponse.body.objects;
@@ -56,10 +61,12 @@ getActualInfo(aIndex, a) {
       console.log("Unexpected query!");
     }
 
-    this.state.assignments[aIndex] = as[0];
-    this.state.assignments[aIndex].user_assignment = a;
-
-    this.forceUpdate();
+    var assignments = this.state.assignments;
+    assignments[aIndex] = as[0];
+    this.setState(assignments, function () { // Wait until the new assignments are set, then add the user_assignment
+      this.state.assignments[aIndex].user_assignment = a;
+      this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+    });
   });
 }
 
@@ -80,13 +87,13 @@ getInfo() {
     // Retrieve assignments
     getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
-          this.state.studentAssignments = assignmentResponse.body.objects;
-          this.state.assignments = new Array(assignmentResponse.body.objects.length);
+          this.setState({studentAssignments: assignmentResponse.body.objects}, function() { // Wait until the student's assignments are populated
+            this.setState({assignments: new Array(this.state.studentAssignments.length)}, function() { // Wait until the assignment has n assignment
+              var a = assignmentResponse.body.objects[0];
+              this.getActualInfo(0, a);
+            });
+          });
 
-          for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
-            var a = assignmentResponse.body.objects[aIndex];
-            this.getActualInfo(aIndex, a);
-          }
         } else {
           console.log("Failed to retrieve assignments");
         }

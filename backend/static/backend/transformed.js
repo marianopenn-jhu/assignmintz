@@ -7345,7 +7345,7 @@ module.exports = invariant;
 
 
 var React = __webpack_require__(1);
-var factory = __webpack_require__(215);
+var factory = __webpack_require__(216);
 
 if (typeof React === 'undefined') {
   throw Error(
@@ -8447,7 +8447,7 @@ var _index = __webpack_require__(180);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(185);
+var _index3 = __webpack_require__(186);
 
 var _index4 = _interopRequireDefault(_index3);
 
@@ -8496,6 +8496,8 @@ var LinearCalendar = function (_React$Component) {
   _createClass(LinearCalendar, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       // Create a dictionary with dates corresponding to assignments
       var assignmentDict = {};
       var arrayLength = this.props.data.length;
@@ -8508,8 +8510,14 @@ var LinearCalendar = function (_React$Component) {
       });
 
       for (var i = 0; i < arrayLength; i++) {
-        var e = this.props.data[i];
+        if (this.props.data[i] == null) {
+          continue;
+        }
 
+        var e = this.props.data[i];
+        if (e.due_date == null) {
+          continue;
+        }
         var due_date = e.due_date;
 
         // Find month and year
@@ -8546,7 +8554,7 @@ var LinearCalendar = function (_React$Component) {
 
       var current = _react2.default.createElement(_index2.default, { day: 'Your schedule is free!' });
       var current = Object.keys(assignmentDict).map(function (key, index) {
-        return _react2.default.createElement(_index2.default, { key: index, day: key, assignments: assignmentDict[key] });
+        return _react2.default.createElement(_index2.default, { key: index, day: key, assignments: assignmentDict[key], session_key: _this2.props.session_key, user_name: _this2.props.user_name });
       });
 
       return _react2.default.createElement(
@@ -20011,23 +20019,23 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _index = __webpack_require__(190);
+var _index = __webpack_require__(191);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(191);
+var _index3 = __webpack_require__(192);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(193);
+var _index5 = __webpack_require__(194);
 
 var _index6 = _interopRequireDefault(_index5);
 
-var _index7 = __webpack_require__(195);
+var _index7 = __webpack_require__(196);
 
 var _index8 = _interopRequireDefault(_index7);
 
-var _getUser = __webpack_require__(197);
+var _getUser = __webpack_require__(198);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20184,15 +20192,15 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _reactFadeIn = __webpack_require__(198);
+var _reactFadeIn = __webpack_require__(199);
 
 var _reactFadeIn2 = _interopRequireDefault(_reactFadeIn);
 
-var _index = __webpack_require__(200);
+var _index = __webpack_require__(201);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(204);
+var _index3 = __webpack_require__(205);
 
 var _index4 = _interopRequireDefault(_index3);
 
@@ -20251,7 +20259,7 @@ var ViewPane = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose });
         } else if (this.props.case == 2) {
           // View single class
-          view = _react2.default.createElement(_index4.default, { course: this.props.course, session_key: this.props.session_key, user_name: this.props.user_name });
+          view = _react2.default.createElement(_index4.default, { course: this.props.course, session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose });
         }
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {
@@ -20315,7 +20323,7 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _createCourse = __webpack_require__(205);
+var _createCourse = __webpack_require__(206);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20498,7 +20506,7 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _deleteCourse = __webpack_require__(206);
+var _deleteCourse = __webpack_require__(207);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20617,25 +20625,25 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _pencil = __webpack_require__(207);
+var _pencil = __webpack_require__(208);
 
 var _pencil2 = _interopRequireDefault(_pencil);
 
-var _index = __webpack_require__(208);
+var _index = __webpack_require__(209);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _index3 = __webpack_require__(211);
+var _index3 = __webpack_require__(212);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(213);
+var _index5 = __webpack_require__(214);
 
 var _index6 = _interopRequireDefault(_index5);
 
 var _getAssignment = __webpack_require__(18);
 
-var _deleteAssignment = __webpack_require__(225);
+var _deleteAssignment = __webpack_require__(226);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -38139,7 +38147,7 @@ var _index3 = __webpack_require__(179);
 
 var _index4 = _interopRequireDefault(_index3);
 
-var _index5 = __webpack_require__(227);
+var _index5 = __webpack_require__(228);
 
 var _index6 = _interopRequireDefault(_index5);
 
@@ -41679,7 +41687,7 @@ var _getCourse = __webpack_require__(13);
 
 var _getAssignment = __webpack_require__(18);
 
-var _getAssignment2 = __webpack_require__(226);
+var _getAssignment2 = __webpack_require__(227);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41711,10 +41719,12 @@ var StudentView = function (_React$Component) {
     _this.findClass = _this.findClass.bind(_this);
     _this.openClass = _this.openClass.bind(_this);
     _this.getInfo = _this.getInfo.bind(_this);
+    _this.getActualInfo = _this.getActualInfo.bind(_this);
     _this.openLeaderboard = _this.openLeaderboard.bind(_this);
     _this.state = {
       courses: [],
       assignments: [],
+      studentAssignments: [],
       viewState: 0, // 0 = Calendar, 1 = Find a Class
       selected_course: null
     };
@@ -41733,17 +41743,54 @@ var StudentView = function (_React$Component) {
   }
 
   _createClass(StudentView, [{
+    key: 'getActualInfo',
+    value: function (_getActualInfo) {
+      function getActualInfo(_x, _x2) {
+        return _getActualInfo.apply(this, arguments);
+      }
+
+      getActualInfo.toString = function () {
+        return _getActualInfo.toString();
+      };
+
+      return getActualInfo;
+    }(function (aIndex, a) {
+      var _this2 = this;
+
+      if (aIndex == this.state.studentAssignments.length) {
+        return;
+      }
+
+      var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+      (0, _getAssignment.getAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then(function (actualResponse) {
+        var as = actualResponse.body.objects;
+
+        if (as.length > 1) {
+          console.log("Unexpected query!");
+        }
+
+        var assignments = _this2.state.assignments;
+        assignments[aIndex] = as[0];
+        _this2.setState(assignments, function () {
+          // Wait until the new assignments are set, then add the user_assignment
+          this.state.assignments[aIndex].user_assignment = a;
+          getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+          this.forceUpdate();
+        });
+      });
+    })
+  }, {
     key: 'getInfo',
     value: function getInfo() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.props.user_name) {
         // Retrieve courses
         (0, _getCourse.getCourses)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&students=" + this.props.user_name).then(function (courseResponse) {
           if (courseResponse.status == true) {
             var cs = courseResponse.body.objects;
-            _this2.setState({ courses: cs });
-            _this2.forceUpdate();
+            _this3.setState({ courses: cs });
+            _this3.forceUpdate();
           } else {
             console.log("Failed to retrieve courses!");
           }
@@ -41752,18 +41799,14 @@ var StudentView = function (_React$Component) {
         // Retrieve assignments
         (0, _getAssignment2.getStudentAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&student=" + this.props.user_name).then(function (assignmentResponse) {
           if (assignmentResponse.status == true) {
-
-            for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
-              var a = assignmentResponse.body.objects[aIndex];
-
-              var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
-              (0, _getAssignment.getAssignment)("user=" + _this2.props.user_name + "&key=" + _this2.props.session_key + "&assignment_id=" + assignment_id).then(function (actualResponse) {
-                var as = actualResponse.body.objects;
-                var currAssignments = _this2.state.assignments.concat(as);
-                _this2.setState({ assignments: currAssignments });
-                _this2.forceUpdate();
+            _this3.setState({ studentAssignments: assignmentResponse.body.objects }, function () {
+              // Wait until the student's assignments are populated
+              this.setState({ assignments: new Array(this.state.studentAssignments.length) }, function () {
+                // Wait until the assignment has n assignment
+                var a = assignmentResponse.body.objects[0];
+                this.getActualInfo(aIndex, a);
               });
-            }
+            });
           } else {
             console.log("Failed to retrieve assignments");
           }
@@ -41808,7 +41851,7 @@ var StudentView = function (_React$Component) {
       switch (state.viewState) {
         case 0:
           //Full Calendar
-          view = _react2.default.createElement(_index2.default, { data: state.assignments, user_data: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout });
+          view = _react2.default.createElement(_index2.default, { data: state.assignments, user_name: this.props.user_name, session_key: this.props.session_key, onLogout: this.props.onLogout });
           break;
         case 1:
           view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, 'case': 1 });
@@ -41910,7 +41953,7 @@ var DayItem = function (_React$Component) {
           { onClick: this.onClick },
           this.props.day
         ),
-        _react2.default.createElement(_index2.default, { hidden: this.state.hidden, assignments: this.props.assignments })
+        _react2.default.createElement(_index2.default, { hidden: this.state.hidden, assignments: this.props.assignments, session_key: this.props.session_key, user_name: this.props.user_name })
       );
     }
   }]);
@@ -41977,7 +42020,7 @@ var AssignmentsContainer = function (_React$Component) {
         var that = this;
 
         var assignmentNodes = this.props.assignments.map(function (a, i) {
-          return _react2.default.createElement(_index2.default, { key: i, data: a });
+          return _react2.default.createElement(_index2.default, { key: i, data: a, session_key: that.props.session_key, user_name: that.props.user_name });
         });
 
         return _react2.default.createElement(
@@ -42011,11 +42054,15 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  background-color:\twhite;\n  color: black;\n  list-style:none;\n  padding-top:5px;\n  padding-left:15px;\n  padding-right:15px;\n  padding-bottom:10px;\n'], ['\n  background-color:\twhite;\n  color: black;\n  list-style:none;\n  padding-top:5px;\n  padding-left:15px;\n  padding-right:15px;\n  padding-bottom:10px;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n'], ['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n  }\n'], ['\n  font-family: Avenir;\n  color:#4f1e3e;\n  font-size:15px;\n\n  &:hover {\n    cursor:pointer;\n  }\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  color:#dca3c9;\n'], ['\n  color:#dca3c9;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n  padding-top:1%;\n  padding-bottom:1%;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  margin-left:2%;\n  margin-right:2%;\n'], ['\n  margin-left:2%;\n  margin-right:2%;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n  color:black\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:14px;\n  width:25%;\n'], ['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:14px;\n  width:25%;\n']),
+    _templateObject9 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n'], ['\n  display:inline-block;\n  width:70%;\n']),
+    _templateObject10 = _taggedTemplateLiteral(['\n  padding:10px;\n  padding-right:50px;\n  float:right;\n'], ['\n  padding:10px;\n  padding-right:50px;\n  float:right;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -42029,7 +42076,11 @@ var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _editAssignment = __webpack_require__(185);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -42043,13 +42094,35 @@ var Item = _styledComponents2.default.li(_templateObject);
 
 var Header = _styledComponents2.default.h1(_templateObject2);
 
-var InfoWrapper = _styledComponents2.default.div(_templateObject3);
+var QSpan = _styledComponents2.default.span(_templateObject3);
 
-var Info = _styledComponents2.default.div(_templateObject4);
+var InfoWrapper = _styledComponents2.default.div(_templateObject4);
 
-var BodyWrapper = _styledComponents2.default.div(_templateObject5);
+var Info = _styledComponents2.default.div(_templateObject5);
 
-var Body = _styledComponents2.default.p(_templateObject6);
+var BodyWrapper = _styledComponents2.default.div(_templateObject6);
+
+var Body = _styledComponents2.default.p(_templateObject7);
+
+var styles = {
+  done: {
+    'textDecoration': 'line-through'
+  },
+
+  hidden: {
+    'display': 'none'
+  },
+
+  none: {}
+};
+
+var TextLabel = _styledComponents2.default.div(_templateObject8);
+
+var TextInput = _styledComponents2.default.input(_templateObject9);
+
+var SliderContainer = _styledComponents2.default.div(_templateObject9);
+
+var ButtonContainer = _styledComponents2.default.div(_templateObject10);
 
 var AssignmentItem = function (_React$Component) {
   _inherits(AssignmentItem, _React$Component);
@@ -42057,85 +42130,254 @@ var AssignmentItem = function (_React$Component) {
   function AssignmentItem(props) {
     _classCallCheck(this, AssignmentItem);
 
-    return _possibleConstructorReturn(this, (AssignmentItem.__proto__ || Object.getPrototypeOf(AssignmentItem)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AssignmentItem.__proto__ || Object.getPrototypeOf(AssignmentItem)).call(this, props));
+
+    _this.onClick = _this.onClick.bind(_this);
+    _this.onHover = _this.onHover.bind(_this);
+    _this.onUnhover = _this.onUnhover.bind(_this);
+    _this.finishAssignment = _this.finishAssignment.bind(_this);
+    _this.handleChange = _this.handleChange.bind(_this);
+
+    _this.state = {
+      confirming: false,
+      ask_question: "",
+      actual_difficulty: 0,
+      actual_time: 0
+    };
+    return _this;
   }
 
   _createClass(AssignmentItem, [{
+    key: 'onHover',
+    value: function onHover() {
+      if (!this.props.data.user_assignment.done) {
+        this.setState(_defineProperty({}, 'ask_question', "Mark as Complete?"));
+      }
+    }
+  }, {
+    key: 'onUnhover',
+    value: function onUnhover() {
+      this.setState(_defineProperty({}, 'ask_question', ""));
+    }
+  }, {
+    key: 'onClick',
+    value: function onClick() {
+      if (!this.props.data.user_assignment.done) {
+        this.setState(_defineProperty({}, 'confirming', !this.state.confirming));
+      }
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: 'finishAssignment',
+    value: function finishAssignment() {
+      var data = this.props.data.user_assignment;
+
+      (0, _editAssignment.editAssignment)(data.student_assignment_id, this.props.session_key, this.props.user_name, this.props.user_name, this.state.actual_difficulty, this.state.actual_time, "True");
+    }
+  }, {
     key: 'render',
     value: function render() {
       _moment2.default.locale('en');
       var localText = _moment2.default.utc(this.props.data.due_date).format('hh:mm a');
-      console.log(this.props.data);
+
+      var current = null;
+      if (this.props.data.user_assignment != null) {
+        current = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            Header,
+            { onMouseEnter: this.onHover, onMouseLeave: this.onUnhover, onClick: this.onClick, style: this.props.data.user_assignment.done ? styles.done : styles.none },
+            this.props.data.assignment_name,
+            ': Due by ',
+            localText,
+            ' ',
+            _react2.default.createElement(
+              QSpan,
+              null,
+              this.state.ask_question
+            )
+          ),
+          _react2.default.createElement(
+            InfoWrapper,
+            { style: this.state.confirming ? styles.none : styles.hidden },
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                TextLabel,
+                null,
+                'Difficulty'
+              ),
+              _react2.default.createElement(
+                SliderContainer,
+                null,
+                _react2.default.createElement('input', { name: 'sliderValue', type: 'range', min: '1', max: '10', value: this.state.sliderValue, onChange: this.handleChange })
+              )
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                TextLabel,
+                null,
+                'Time'
+              ),
+              _react2.default.createElement(TextInput, { name: 'actual_time', type: 'text', onChange: this.handleChange })
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                ButtonContainer,
+                null,
+                _react2.default.createElement('input', { onClick: this.finishAssignment, type: 'button', value: 'Complete Assignment' })
+              )
+            )
+          ),
+          _react2.default.createElement(
+            InfoWrapper,
+            { style: this.props.data.user_assignment.hidden ? styles.done : styles.none },
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Course '
+              ),
+              this.props.data.course
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Difficulty '
+              ),
+              ' ',
+              this.props.data.expected_difficulty,
+              ' out of 10'
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Assignment Type '
+              ),
+              this.props.data.assignment_type
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Expected Time '
+              ),
+              this.props.data.expected_time
+            )
+          ),
+          _react2.default.createElement(
+            BodyWrapper,
+            { style: this.props.data.user_assignment.done ? styles.done : styles.none },
+            _react2.default.createElement(
+              Body,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Description '
+              ),
+              this.props.data.description
+            )
+          )
+        );
+      } else {
+        current = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            Header,
+            null,
+            this.props.data.assignment_name,
+            ': Due by ',
+            localText
+          ),
+          _react2.default.createElement(
+            InfoWrapper,
+            null,
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Course '
+              ),
+              this.props.data.course
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Difficulty '
+              ),
+              ' ',
+              this.props.data.expected_difficulty,
+              ' out of 10'
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Assignment Type '
+              ),
+              this.props.data.assignment_type
+            ),
+            _react2.default.createElement(
+              Info,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Expected Time '
+              ),
+              this.props.data.expected_time
+            )
+          ),
+          _react2.default.createElement(
+            BodyWrapper,
+            null,
+            _react2.default.createElement(
+              Body,
+              null,
+              _react2.default.createElement(
+                'b',
+                null,
+                'Description '
+              ),
+              this.props.data.description
+            )
+          )
+        );
+      }
+
       return _react2.default.createElement(
         Item,
         null,
-        _react2.default.createElement(
-          Header,
-          null,
-          this.props.data.assignment_name,
-          ': Due by ',
-          localText
-        ),
-        _react2.default.createElement(
-          InfoWrapper,
-          null,
-          _react2.default.createElement(
-            Info,
-            null,
-            _react2.default.createElement(
-              'b',
-              null,
-              'Course '
-            ),
-            this.props.data.course
-          ),
-          _react2.default.createElement(
-            Info,
-            null,
-            _react2.default.createElement(
-              'b',
-              null,
-              'Difficulty '
-            ),
-            ' ',
-            this.props.data.expected_difficulty,
-            ' out of 10'
-          ),
-          _react2.default.createElement(
-            Info,
-            null,
-            _react2.default.createElement(
-              'b',
-              null,
-              'Assignment Type '
-            ),
-            this.props.data.assignment_type
-          ),
-          _react2.default.createElement(
-            Info,
-            null,
-            _react2.default.createElement(
-              'b',
-              null,
-              'Expected Time '
-            ),
-            this.props.data.expected_time
-          )
-        ),
-        _react2.default.createElement(
-          BodyWrapper,
-          null,
-          _react2.default.createElement(
-            Body,
-            null,
-            _react2.default.createElement(
-              'b',
-              null,
-              'Description '
-            ),
-            this.props.data.description
-          )
-        )
+        current
       );
     }
   }]);
@@ -42441,6 +42683,50 @@ webpackContext.id = 184;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var ERROR_STATUS = 400;
+var URL = "http://theassignmintzapp.herokuapp.com" + "/backend/v1/student/update/assignment/";
+
+exports.editAssignment = editAssignment;
+
+/*
+  Return the assignments given the particular filters
+*/
+
+function editAssignment(assignment_id, session_key, user_name, student, actual_difficulty, actual_time, done) {
+  var status = 200;
+  return fetch(URL + assignment_id + "/", {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ session_key: session_key, user_name: user_name, student: student, actual_difficulty: actual_difficulty, actual_time: actual_time, done: done })
+  }).then(function (response) {
+    status = response.status;
+    if (status >= ERROR_STATUS) {
+      return response.json();
+    } else {
+      return "Empty";
+    }
+  }).then(function (json) {
+    if (status >= ERROR_STATUS) {
+      return { status: false, body: json };
+    } else {
+      return { status: true, body: json };
+    }
+  });
+}
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -42456,19 +42742,19 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _search = __webpack_require__(186);
+var _search = __webpack_require__(187);
 
 var _search2 = _interopRequireDefault(_search);
 
-var _index = __webpack_require__(187);
+var _index = __webpack_require__(188);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _cog = __webpack_require__(188);
+var _cog = __webpack_require__(189);
 
 var _cog2 = _interopRequireDefault(_cog);
 
-var _logoutUser = __webpack_require__(189);
+var _logoutUser = __webpack_require__(190);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42538,7 +42824,7 @@ var TopBar = function (_React$Component) {
 exports.default = TopBar;
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42576,7 +42862,7 @@ exports.default = FaSearch;
 module.exports = exports['default'];
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42663,7 +42949,7 @@ var FilterItem = function (_React$Component) {
 exports.default = FilterItem;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42701,7 +42987,7 @@ exports.default = FaCog;
 module.exports = exports['default'];
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42743,7 +43029,7 @@ function logoutUser(user_name, session_key) {
 }
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42814,7 +43100,7 @@ var MintzModal = function (_React$Component) {
 exports.default = MintzModal;
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42844,7 +43130,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _ellipsisV = __webpack_require__(192);
+var _ellipsisV = __webpack_require__(193);
 
 var _ellipsisV2 = _interopRequireDefault(_ellipsisV);
 
@@ -42973,7 +43259,7 @@ var SidebarElement = function (_React$Component) {
 exports.default = SidebarElement;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43011,7 +43297,7 @@ exports.default = FaEllipsisV;
 module.exports = exports['default'];
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43034,7 +43320,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _caretDown = __webpack_require__(194);
+var _caretDown = __webpack_require__(195);
 
 var _caretDown2 = _interopRequireDefault(_caretDown);
 
@@ -43087,7 +43373,7 @@ var SidebarUserInfo = function (_React$Component) {
 exports.default = SidebarUserInfo;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43125,7 +43411,7 @@ exports.default = FaCaretDown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43152,7 +43438,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _plusSquareO = __webpack_require__(196);
+var _plusSquareO = __webpack_require__(197);
 
 var _plusSquareO2 = _interopRequireDefault(_plusSquareO);
 
@@ -43271,7 +43557,7 @@ var SidebarClassesTitle = function (_React$Component) {
 exports.default = SidebarClassesTitle;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43309,7 +43595,7 @@ exports.default = FaPlusSquareO;
 module.exports = exports['default'];
 
 /***/ }),
-/* 197 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43346,7 +43632,7 @@ function getUser(user_name, session_key) {
 }
 
 /***/ }),
-/* 198 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43356,7 +43642,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _FadeIn = __webpack_require__(199);
+var _FadeIn = __webpack_require__(200);
 
 Object.defineProperty(exports, 'default', {
   enumerable: true,
@@ -43368,7 +43654,7 @@ Object.defineProperty(exports, 'default', {
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 199 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43463,7 +43749,7 @@ var FadeIn = function (_Component) {
 exports.default = FadeIn;
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43502,13 +43788,13 @@ var _close = __webpack_require__(11);
 
 var _close2 = _interopRequireDefault(_close);
 
-var _index = __webpack_require__(201);
+var _index = __webpack_require__(202);
 
 var _index2 = _interopRequireDefault(_index);
 
 var _getCourse = __webpack_require__(13);
 
-var _addToCourse = __webpack_require__(203);
+var _addToCourse = __webpack_require__(204);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43722,7 +44008,7 @@ var FindClassView = function (_React$Component) {
 exports.default = FindClassView;
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43750,7 +44036,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _check = __webpack_require__(202);
+var _check = __webpack_require__(203);
 
 var _check2 = _interopRequireDefault(_check);
 
@@ -43836,7 +44122,7 @@ var FindClassElement = function (_React$Component) {
 exports.default = FindClassElement;
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43874,7 +44160,7 @@ exports.default = FaCheck;
 module.exports = exports['default'];
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43918,7 +44204,7 @@ function addToCourse(course_id, session_key, user_name, students) {
 }
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43933,16 +44219,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  margin: 30px;\n'], ['\n  margin: 30px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n'], ['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n  background:grey;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
-    _templateObject6 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
-    _templateObject7 = _taggedTemplateLiteral(['\n  width:100%;\n'], ['\n  width:100%;\n']),
-    _templateObject8 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n'], ['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n']),
-    _templateObject9 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:  25px;\n  padding-left:50px;\n'], ['\n  font-family:Avenir;\n  font-size:  25px;\n  padding-left:50px;\n']),
-    _templateObject10 = _taggedTemplateLiteral(['\n  display:block;\n  padding: 20px 50px;\n  text-align:center;\n'], ['\n  display:block;\n  padding: 20px 50px;\n  text-align:center;\n']),
-    _templateObject11 = _taggedTemplateLiteral(['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:16px;\n  width:25%;\n  text-align:right;\n  padding-right:20px;\n'], ['\n  display:inline-block;\n  font-family:Avenir;\n  font-size:16px;\n  width:25%;\n  text-align:right;\n  padding-right:20px;\n']),
-    _templateObject12 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n'], ['\n  display:inline-block;\n  width:70%;\n']),
-    _templateObject13 = _taggedTemplateLiteral(['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n'], ['\n  display:inline-block;\n  width:70%;\n  height:150px;\n  resize: none;\n']);
+    _templateObject4 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
+    _templateObject6 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n'], ['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n']),
+    _templateObject7 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:  25px;\n  padding-left:50px;\n'], ['\n  font-family:Avenir;\n  font-size:  25px;\n  padding-left:50px;\n']),
+    _templateObject8 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:14px;\n  padding-left:50px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n'], ['\n  font-family:Avenir;\n  font-size:14px;\n  padding-left:50px;\n  padding-top: 20px;\n  padding-bottom: 20px;\n']);
 
 var _react = __webpack_require__(1);
 
@@ -43974,25 +44255,15 @@ var Panel = _styledComponents2.default.div(_templateObject2);
 
 var TopBarContainer = _styledComponents2.default.div(_templateObject3);
 
-var ResultElementContainer = _styledComponents2.default.div(_templateObject4);
+var Container = _styledComponents2.default.div(_templateObject4);
 
-var Container = _styledComponents2.default.div(_templateObject5);
+var XOut = _styledComponents2.default.span(_templateObject5);
 
-var XOut = _styledComponents2.default.span(_templateObject6);
+var Header = _styledComponents2.default.h1(_templateObject6);
 
-var Form = _styledComponents2.default.form(_templateObject7);
+var Header2 = _styledComponents2.default.h1(_templateObject7);
 
-var Header = _styledComponents2.default.h1(_templateObject8);
-
-var Header2 = _styledComponents2.default.h1(_templateObject9);
-
-var ItemLabel = _styledComponents2.default.div(_templateObject10);
-
-var TextLabel = _styledComponents2.default.div(_templateObject11);
-
-var TextInput = _styledComponents2.default.input(_templateObject12);
-
-var BigTextInput = _styledComponents2.default.textarea(_templateObject13);
+var Content = _styledComponents2.default.p(_templateObject8);
 
 var StudentClassView = function (_React$Component) {
   _inherits(StudentClassView, _React$Component);
@@ -44002,69 +44273,15 @@ var StudentClassView = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (StudentClassView.__proto__ || Object.getPrototypeOf(StudentClassView)).call(this, props));
 
-    _this.state = { value: '' };
-
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-
     _this.state = {
-      course_id: '',
-      courses: ''
+      assignments: []
     };
     return _this;
   }
 
   _createClass(StudentClassView, [{
-    key: 'handleChange',
-    value: function handleChange(e) {
-      this.setState({ course_id: e.target.value });
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      var course_id = this.state.course_id.course_id;
-
-      // getCourses(course_id).then((response) => {
-      //   if (response.status) {
-      //     {this.props.onClose};
-      //   }
-      //   else {
-      //     alert(response.body);
-      //   }
-      // });
-    }
-  }, {
-    key: 'if',
-    value: function _if(course_id) {
-      var _this2 = this;
-
-      (0, _getCourse.getCourses)(this.state.course_id).then(function (response) {
-        if (response.status == true) {
-          var obj = response.body;
-          _this2.setState({ courses: obj.objects });
-        } else {
-          console.log("Failed to retrieve courses!");
-        }
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var classes = _react2.default.createElement(
-        'div',
-        null,
-        'N/A'
-      );
-      if (this.state.course_id != null) {
-        // classes = this.props.data.map((e, i) => {
-        //   return (
-        //     <FindClassElement key={i} course={e}/>
-        //   )
-        // });
-        assignments = this.props.data.map(function (e, i) {
-          return _react2.default.createElement(AssignmentElement, { key: i, course: e });
-        });
-      };
 
       return _react2.default.createElement(
         PanelContainer,
@@ -44083,43 +44300,20 @@ var StudentClassView = function (_React$Component) {
             _react2.default.createElement(
               Header,
               null,
-              'Add a Class'
+              this.props.course.course_title,
+              ': ',
+              this.props.course.course_id
             ),
             _react2.default.createElement(
-              Form,
-              { onSubmit: this.handleSubmit },
-              _react2.default.createElement(
-                ItemLabel,
-                null,
-                _react2.default.createElement(
-                  TextLabel,
-                  null,
-                  'Course Number:'
-                ),
-                _react2.default.createElement(TextInput, { name: this.state.course_id, type: 'text', onChange: this.handleChange, disabled: true })
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          Panel,
-          null,
-          _react2.default.createElement(
-            Container,
-            null,
-            _react2.default.createElement(
-              Header2,
-              null,
-              'Results'
-            ),
-            _react2.default.createElement(
-              ItemLabel,
+              Content,
               null,
               _react2.default.createElement(
-                ResultElementContainer,
+                'b',
                 null,
-                classes
-              )
+                'Description '
+              ),
+              ' ',
+              this.props.course.description
             )
           )
         )
@@ -44133,7 +44327,7 @@ var StudentClassView = function (_React$Component) {
 exports.default = StudentClassView;
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44169,7 +44363,7 @@ function createCourse(session_key, user_name, course_id, course_title, descripti
 }
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44204,7 +44398,7 @@ function deleteCourse(filter) {
 }
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44242,7 +44436,7 @@ exports.default = FaPencil;
 module.exports = exports['default'];
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44268,11 +44462,11 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _pencilSquare = __webpack_require__(209);
+var _pencilSquare = __webpack_require__(210);
 
 var _pencilSquare2 = _interopRequireDefault(_pencilSquare);
 
-var _minusSquare = __webpack_require__(210);
+var _minusSquare = __webpack_require__(211);
 
 var _minusSquare2 = _interopRequireDefault(_minusSquare);
 
@@ -44357,7 +44551,7 @@ var AssignmentElement = function (_React$Component) {
 exports.default = AssignmentElement;
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44395,7 +44589,7 @@ exports.default = FaPencilSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44433,7 +44627,7 @@ exports.default = FaMinusSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44458,7 +44652,7 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _plusSquare = __webpack_require__(212);
+var _plusSquare = __webpack_require__(213);
 
 var _plusSquare2 = _interopRequireDefault(_plusSquare);
 
@@ -44523,7 +44717,7 @@ var AddAssignmentElement = function (_React$Component) {
 exports.default = AddAssignmentElement;
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44561,7 +44755,7 @@ exports.default = FaPlusSquare;
 module.exports = exports['default'];
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44593,21 +44787,21 @@ var _styledComponents = __webpack_require__(2);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _reactDatetime = __webpack_require__(214);
+var _reactDatetime = __webpack_require__(215);
 
 var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
 
-var _calendar = __webpack_require__(221);
+var _calendar = __webpack_require__(222);
 
 var _calendar2 = _interopRequireDefault(_calendar);
 
-var _arrowLeft = __webpack_require__(222);
+var _arrowLeft = __webpack_require__(223);
 
 var _arrowLeft2 = _interopRequireDefault(_arrowLeft);
 
-var _addAssignment = __webpack_require__(223);
+var _addAssignment = __webpack_require__(224);
 
-var _editAssignment = __webpack_require__(224);
+var _editAssignment = __webpack_require__(225);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44835,7 +45029,7 @@ var AssignmentFieldEditor = function (_React$Component) {
 exports.default = AssignmentFieldEditor;
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -44846,7 +45040,7 @@ var assign = __webpack_require__(150),
 	createClass = __webpack_require__(8),
 	moment = __webpack_require__(0),
 	React = __webpack_require__(1),
-	CalendarContainer = __webpack_require__(216)
+	CalendarContainer = __webpack_require__(217)
 	;
 
 var TYPES = PropTypes;
@@ -45296,7 +45490,7 @@ module.exports = Datetime;
 
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46174,7 +46368,7 @@ module.exports = factory;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46182,10 +46376,10 @@ module.exports = factory;
 
 var React = __webpack_require__(1),
 	createClass = __webpack_require__(8),
-	DaysView = __webpack_require__(217),
-	MonthsView = __webpack_require__(218),
-	YearsView = __webpack_require__(219),
-	TimeView = __webpack_require__(220)
+	DaysView = __webpack_require__(218),
+	MonthsView = __webpack_require__(219),
+	YearsView = __webpack_require__(220),
+	TimeView = __webpack_require__(221)
 	;
 
 var CalendarContainer = createClass({
@@ -46205,7 +46399,7 @@ module.exports = CalendarContainer;
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46356,7 +46550,7 @@ module.exports = DateTimePickerDays;
 
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46470,7 +46664,7 @@ module.exports = DateTimePickerMonths;
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46582,7 +46776,7 @@ module.exports = DateTimePickerYears;
 
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46824,7 +47018,7 @@ module.exports = DateTimePickerTime;
 
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46862,7 +47056,7 @@ exports.default = FaCalendar;
 module.exports = exports['default'];
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46900,7 +47094,7 @@ exports.default = FaArrowLeft;
 module.exports = exports['default'];
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46951,7 +47145,7 @@ function addAssignment(session_key, user_name, assignment_name, assignment_type,
 }
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47002,7 +47196,7 @@ function editAssignment(assignment_id, session_key, user_name, assignment_name, 
 }
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47045,7 +47239,7 @@ function deleteAssignment(assignment_id, filters) {
 }
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47084,7 +47278,7 @@ function getStudentAssignment(filters) {
 }
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
