@@ -64,8 +64,14 @@ class LinearCalendar extends React.Component {
     });
 
     for (var i = 0; i < arrayLength; i++) {
-        var e = this.props.data[i];
+        if (this.props.data[i] == null) {
+          continue;
+        }
 
+        var e = this.props.data[i];
+        if (e.due_date == null) {
+          continue;
+        }
         var due_date = e.due_date;
 
         // Find month and year
@@ -102,7 +108,7 @@ class LinearCalendar extends React.Component {
 
     var current = (<DayItem day="Your schedule is free!"/>);
     var current = Object.keys(assignmentDict).map((key, index) => (
-       <DayItem key={index} day={key} assignments={assignmentDict[key]}/>
+       <DayItem key={index} day={key} assignments={assignmentDict[key]} session_key={this.props.session_key} user_name={this.props.user_name}/>
     ));
 
     return(
