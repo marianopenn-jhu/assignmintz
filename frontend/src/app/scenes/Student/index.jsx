@@ -80,8 +80,8 @@ getInfo() {
     // Retrieve assignments
     getStudentAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key  + "&student=" + this.props.user_name).then((assignmentResponse) => {
         if (assignmentResponse.status == true) {
-          this.setState({studentAssignments: assignmentResponse.body.objects});
-          this.state.assignments = new Array(this.state.studentAssignments.length);
+          this.state.studentAssignments = assignmentResponse.body.objects;
+          this.state.assignments = new Array(assignmentResponse.body.objects.length);
 
           for (var aIndex = 0; aIndex < assignmentResponse.body.objects.length; aIndex++) {
             var a = assignmentResponse.body.objects[aIndex];

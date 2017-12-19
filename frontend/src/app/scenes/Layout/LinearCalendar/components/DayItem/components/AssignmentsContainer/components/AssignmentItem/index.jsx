@@ -52,7 +52,7 @@ const Body=styled.p`
 
 var styles = {
   done : {
-    'text-decoration' : 'line-through'
+    'textDecoration' : 'line-through'
   },
 
   hidden : {
@@ -110,7 +110,9 @@ class AssignmentItem extends React.Component {
   }
 
   onHover() {
-    this.setState({['ask_question']: "Mark as Complete?"});
+    if (!this.props.data.user_assignment.done) {
+        this.setState({['ask_question']: "Mark as Complete?"});
+    }
   }
 
   onUnhover() {
@@ -118,7 +120,9 @@ class AssignmentItem extends React.Component {
   }
 
   onClick() {
-    this.setState({['confirming']: !this.state.confirming});
+    if (!this.props.data.user_assignment.done) {
+      this.setState({['confirming']: !this.state.confirming});
+    }
   }
 
   handleChange(e) {
@@ -145,7 +149,6 @@ class AssignmentItem extends React.Component {
 
     let current = null;
     if (this.props.data.user_assignment != null) {
-      console.log(this.props.data.user_assignment);
       current = (
         <div>
           <Header onMouseEnter={this.onHover} onMouseLeave={this.onUnhover} onClick={this.onClick} style={this.props.data.user_assignment.done ? styles.done : styles.none}>{this.props.data.assignment_name}: Due by {localText} <QSpan>{this.state.ask_question}</QSpan></Header>
