@@ -33,6 +33,7 @@ const ResultElementContainer = styled.div
   overflow:hidden;
   overflow-y:auto;
   min-height: 70px;
+  height:300px;
   width: 100%;
   padding-top:10px;
 `;
