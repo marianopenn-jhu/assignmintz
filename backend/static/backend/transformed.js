@@ -20251,7 +20251,7 @@ var ViewPane = function (_React$Component) {
           view = _react2.default.createElement(_index2.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.props.onClose });
         } else if (this.props.case == 2) {
           // View single class
-          view = _react2.default.createElement(_index4.default, null);
+          view = _react2.default.createElement(_index4.default, { course: this.props.course, session_key: this.props.session_key, user_name: this.props.user_name });
         }
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {
@@ -41785,12 +41785,10 @@ var StudentView = function (_React$Component) {
   }, {
     key: 'openClass',
     value: function openClass(course_id) {
-      console.log(this.state.courses);
-      for (var course in this.state.courses) {
-        console.log(course_id);
-        console.log(course.course_id);
+      var courses = this.state.courses;
+      for (var index = 0; index < courses.length; index++) {
+        var course = courses[index];
         if (course.course_id == course_id) {
-          console.log(course);
           this.setState(_defineProperty({}, 'selected_course', course));
           this.setState({ viewState: 2 });
         }
@@ -47314,7 +47312,7 @@ var ProfessorView = function (_React$Component) {
       return _react2.default.createElement(
         Container,
         null,
-        _react2.default.createElement(_index10.default, { data: state.courses, user_data: this.props.user_name, session_key: this.props.session_key, clickClasses: this.showClasses, addClass: this.addClassView, dropdown_elements: this.dropdown_elements }),
+        _react2.default.createElement(_index10.default, { data: state.courses, user_name: this.props.user_name, session_key: this.props.session_key, clickClasses: this.showClasses, addClass: this.addClassView, dropdown_elements: this.dropdown_elements }),
         view
       );
     }
