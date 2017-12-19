@@ -173,7 +173,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_data={this.props.user_name} session_key={this.props.session_key} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
+        <Sidebar data={state.courses} user_name={this.props.user_name} session_key={this.props.session_key} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
         {view}
       </Container>
     );

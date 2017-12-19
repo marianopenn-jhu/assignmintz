@@ -93,12 +93,10 @@ findClass() {
 }
 
 openClass(course_id){
-  console.log(this.state.courses);
-  for (var course in this.state.courses) {
-    console.log(course_id);
-    console.log(course.course_id);
+  var courses = this.state.courses;
+  for (var index = 0; index < courses.length; index++) {
+    var course = courses[index];
     if (course.course_id == course_id) {
-      console.log(course);
       this.setState({['selected_course'] : course});
       this.setState({viewState:2});
     }

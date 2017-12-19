@@ -40,7 +40,7 @@ class ViewPane extends React.Component {
           )
         } else if (this.props.case == 2) { // View single class
           view = (
-            <StudentClassView/>
+            <StudentClassView course={this.props.course} session_key={this.props.session_key} user_name={this.props.user_name}/>
           )
         }
 
