@@ -106,12 +106,15 @@ class AssignmentItem extends React.Component {
       ask_question:"",
       actual_difficulty:0,
       actual_time:0,
-      assign_info:this.props.data.user_assignment
+      assign_info:this.props.data.user_assignment,
+      sliderValue:0
     }
+
+    console.log(this.state.assign_info);
   }
 
   onHover() {
-    if (!this.props.data.user_assignment.done) {
+    if (!this.state.assign_info.done) {
         this.setState({['ask_question']: "Mark as Complete?"});
     }
   }
@@ -146,6 +149,7 @@ class AssignmentItem extends React.Component {
         this.setState({['assign_info'] : result.body});
         this.setState({['ask_question']: ""});
         this.setState({['confirming']: false});
+        this.forceUpdate();
       }
     })
   }
