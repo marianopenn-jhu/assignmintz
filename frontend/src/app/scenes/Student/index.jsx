@@ -55,11 +55,10 @@ getActualInfo(aIndex) {
   }
 
   // Get the corresponding student assignment
-  var a = this.state.studentAssignments[aIndex];
-  console.log(a);
+  var studentAssignment = this.state.studentAssignments[aIndex];
 
   // Get the id associated with the student assignment
-  var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+  var assignment_id = studentAssignment.student_assignment_id.substring(0, studentAssignment.student_assignment_id.lastIndexOf("_"));
 
   // Get the assignment using the student assignment
   getAssignment("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then((actualResponse) => {
@@ -73,7 +72,7 @@ getActualInfo(aIndex) {
     assignments[aIndex] = as[0];
     this.setState({['assignments']: assignments}, function () { // Wait until the new assignments are set, then add the user_assignment
       var more_assignments = this.state.assignments;
-      more_assignments[aIndex].user_assignment = a;
+      more_assignments[aIndex].user_assignment = studentAssignment;
 
       this.setState({['assignments']: more_assignments}, function () {
         this.getActualInfo(aIndex + 1);

@@ -41744,15 +41744,22 @@ var StudentView = function (_React$Component) {
 
   _createClass(StudentView, [{
     key: 'getActualInfo',
-    value: function getActualInfo(aIndex, a) {
+    value: function getActualInfo(aIndex) {
       var _this2 = this;
 
       if (aIndex == this.state.studentAssignments.length) {
+        // We have set the assignment for each student assignment, so return.
         this.forceUpdate();
         return;
       }
 
-      var assignment_id = a.student_assignment_id.substring(0, a.student_assignment_id.indexOf("_student"));
+      // Get the corresponding student assignment
+      var studentAssignment = this.state.studentAssignments[aIndex];
+
+      // Get the id associated with the student assignment
+      var assignment_id = studentAssignment.student_assignment_id.substring(0, studentAssignment.student_assignment_id.lastIndexOf("_"));
+
+      // Get the assignment using the student assignment
       (0, _getAssignment.getAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&assignment_id=" + assignment_id).then(function (actualResponse) {
         var as = actualResponse.body.objects;
 
@@ -41761,18 +41768,14 @@ var StudentView = function (_React$Component) {
         }
 
         var assignments = _this2.state.assignments;
-        console.log(assignments);
         assignments[aIndex] = as[0];
         _this2.setState(_defineProperty({}, 'assignments', assignments), function () {
           // Wait until the new assignments are set, then add the user_assignment
           var more_assignments = this.state.assignments;
-          console.log(more_assignments);
-          console.log(more_assignments[aIndex]);
-          console.log(a);
-          more_assignments[aIndex].user_assignment = a;
+          more_assignments[aIndex].user_assignment = studentAssignment;
 
           this.setState(_defineProperty({}, 'assignments', more_assignments), function () {
-            this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
+            this.getActualInfo(aIndex + 1);
           });
         });
       });
@@ -41794,15 +41797,14 @@ var StudentView = function (_React$Component) {
           }
         });
 
-        // Retrieve assignments
+        // Retrieve the student assignments fromt he server
         (0, _getAssignment2.getStudentAssignment)("user=" + this.props.user_name + "&key=" + this.props.session_key + "&student=" + this.props.user_name).then(function (assignmentResponse) {
           if (assignmentResponse.status == true) {
             _this3.setState(_defineProperty({}, 'studentAssignments', assignmentResponse.body.objects), function () {
               // Wait until the student's assignments are populated
               this.setState(_defineProperty({}, 'assignments', new Array(this.state.studentAssignments.length)), function () {
-                // Wait until the assignment has n assignment
-                var a = assignmentResponse.body.objects[0];
-                this.getActualInfo(0, a);
+                // Wait until the assignment list is the right size
+                this.getActualInfo(0);
               });
             });
           } else {
