@@ -42296,7 +42296,8 @@ var AssignmentItem = function (_React$Component) {
       confirming: false,
       ask_question: "",
       actual_difficulty: 0,
-      actual_time: 0
+      actual_time: 0,
+      assign_info: _this.props.data.user_assignment
     };
     return _this;
   }
@@ -42316,7 +42317,7 @@ var AssignmentItem = function (_React$Component) {
   }, {
     key: 'onClick',
     value: function onClick() {
-      if (!this.props.data.user_assignment.done) {
+      if (!this.state.assign_info.done) {
         this.setState(_defineProperty({}, 'confirming', !this.state.confirming));
       }
     }
@@ -42328,9 +42329,17 @@ var AssignmentItem = function (_React$Component) {
   }, {
     key: 'finishAssignment',
     value: function finishAssignment() {
-      var data = this.props.data.user_assignment;
+      var _this2 = this;
 
-      (0, _editAssignment.editAssignment)(data.student_assignment_id, this.props.session_key, this.props.user_name, this.props.user_name, this.state.actual_difficulty, this.state.actual_time, "True");
+      var data = this.state.assign_info;
+
+      (0, _editAssignment.editAssignment)(data.student_assignment_id, this.props.session_key, this.props.user_name, this.props.user_name, this.state.actual_difficulty, this.state.actual_time, "True").then(function (result) {
+        if (result.status == true) {
+          _this2.setState(_defineProperty({}, 'assign_info', result.body));
+          _this2.setState(_defineProperty({}, 'ask_question', ""));
+          _this2.setState(_defineProperty({}, 'confirming', false));
+        }
+      });
     }
   }, {
     key: 'render',
@@ -42339,13 +42348,13 @@ var AssignmentItem = function (_React$Component) {
       var localText = _moment2.default.utc(this.props.data.due_date).format('hh:mm a');
 
       var current = null;
-      if (this.props.data.user_assignment != null) {
+      if (this.state.assign_info != null) {
         current = _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             Header,
-            { onMouseEnter: this.onHover, onMouseLeave: this.onUnhover, onClick: this.onClick, style: this.props.data.user_assignment.done ? styles.done : styles.none },
+            { onMouseEnter: this.onHover, onMouseLeave: this.onUnhover, onClick: this.onClick, style: this.state.assign_info.done ? styles.done : styles.none },
             this.props.data.assignment_name,
             ': Due by ',
             localText,
@@ -42395,7 +42404,7 @@ var AssignmentItem = function (_React$Component) {
           ),
           _react2.default.createElement(
             InfoWrapper,
-            { style: this.props.data.user_assignment.hidden ? styles.done : styles.none },
+            { style: this.state.assign_info.done ? styles.done : styles.none },
             _react2.default.createElement(
               Info,
               null,
@@ -42441,7 +42450,7 @@ var AssignmentItem = function (_React$Component) {
           ),
           _react2.default.createElement(
             BodyWrapper,
-            { style: this.props.data.user_assignment.done ? styles.done : styles.none },
+            { style: this.state.assign_info.done ? styles.done : styles.none },
             _react2.default.createElement(
               Body,
               null,
@@ -42857,11 +42866,7 @@ function editAssignment(assignment_id, session_key, user_name, student, actual_d
     body: JSON.stringify({ session_key: session_key, user_name: user_name, student: student, actual_difficulty: actual_difficulty, actual_time: actual_time, done: done })
   }).then(function (response) {
     status = response.status;
-    if (status >= ERROR_STATUS) {
-      return response.json();
-    } else {
-      return "Empty";
-    }
+    return response.json();
   }).then(function (json) {
     if (status >= ERROR_STATUS) {
       return { status: false, body: json };
@@ -43801,8 +43806,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _templateObject = _taggedTemplateLiteral(['\n  margin: 30px;\n'], ['\n  margin: 30px;\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n'], ['\n  overflow:hidden;\n  position:relative;\n  height: 100%;\n  width: 100%;\n']),
     _templateObject3 = _taggedTemplateLiteral(['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n'], ['\n  overflow-x: hidden;\n  min-height: 70px;\n  height: 10%;\n  width: 100%;\n  left: inherit;\n  padding-top:10px;\n  background:grey;\n']),
-    _templateObject4 = _taggedTemplateLiteral(['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n'], ['\n  overflow-x: auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n']),
-    _templateObject5 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n'], ['\n  overflow:hidden;\n  overflow-y:auto;\n  min-height: 70px;\n  width: 100%;\n  padding-top:10px;\n']),
+    _templateObject5 = _taggedTemplateLiteral(['\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n'], ['\n  height: 100%;\n  width: 100%;\n  right: 0;\n  top: 0;\n  margin: 0;\n  padding: 0;\n  padding-top:10px;\n  background:white;\n']),
     _templateObject6 = _taggedTemplateLiteral(['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n'], ['\n  font-size:40px;\n  float:right;\n  padding-right:10%;\n\n  &:hover {\n    color:gray;\n    cursor:pointer;\n  }\n']),
     _templateObject7 = _taggedTemplateLiteral(['\n  width:100%;\n'], ['\n  width:100%;\n']),
     _templateObject8 = _taggedTemplateLiteral(['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n'], ['\n  font-family:Avenir;\n  font-size:30px;\n  padding-left:50px;\n']),
