@@ -10,11 +10,11 @@ import AssignmentEditor from '../../Professor/components/AssignmentEditor/index.
 //ensures panel dimensions correct//
 
 const ViewPaneContainer = styled.div`
-position: relative;
-float: left;
-left: 25vw;
-width: 75vw;
-height: 100vh;
+  position: relative;
+  float: left;
+  left: 25vw;
+  width: 75vw;
+  height: 100vh;
 `;
 
 class ViewPane extends React.Component {

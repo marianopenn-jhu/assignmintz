@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import FadeIn from 'react-fade-in';
 import DayItem from './components/DayItem/index.jsx';
 import TopBar from './components/TopBar/index.jsx';
 import Moment from 'moment';
@@ -112,14 +113,16 @@ class LinearCalendar extends React.Component {
     ));
 
     return(
-      <ViewPane>
-        <TopBarContainer>
-          <TopBar user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
-        </TopBarContainer>
-        <ScrollableList>
-          {current}
-        </ScrollableList>
-      </ViewPane>
+      <FadeIn>
+        <ViewPane>
+          <TopBarContainer>
+            <TopBar user_name={this.props.user_name} session_key={this.props.session_key} onLogout={this.props.onLogout}/>
+          </TopBarContainer>
+          <ScrollableList>
+            {current}
+          </ScrollableList>
+        </ViewPane>
+      </FadeIn>
     );
   }
 }

@@ -4,6 +4,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 // import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx';
+import FaSmile from 'react-icons/lib/fa/smile-o';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
@@ -13,6 +14,33 @@ const Container = styled.div`
   display:inline-block
   vertical-align:top;
   width:100%;
+`;
+
+const ViewPaneContainer = styled.div`
+  position: relative;
+  float: left;
+  left: 25vw;
+  width: 75vw;
+  height: 100vh;
+  overflow:hidden;
+  overflow-y:auto;
+  z-index: -1;
+  background:white;
+`;
+
+const Inner = styled.div`
+position: absolute;
+   margin: auto;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   width: 100px;
+   height: 100px;
+`;
+
+const SmileDiv = styled.span`
+  font-size:50px;
 `;
 
 class StudentView extends React.Component {
@@ -159,6 +187,11 @@ render() {
       );
       break;
     case 3:
+      view = (
+        <ViewPaneContainer>
+          <Inner><SmileDiv><FaSmile/></SmileDiv></Inner>
+        </ViewPaneContainer>
+      );
       break;
     default:
       this.setState({viewState:0});
