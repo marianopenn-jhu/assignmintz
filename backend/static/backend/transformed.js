@@ -41744,20 +41744,11 @@ var StudentView = function (_React$Component) {
 
   _createClass(StudentView, [{
     key: 'getActualInfo',
-    value: function (_getActualInfo) {
-      function getActualInfo(_x, _x2) {
-        return _getActualInfo.apply(this, arguments);
-      }
-
-      getActualInfo.toString = function () {
-        return _getActualInfo.toString();
-      };
-
-      return getActualInfo;
-    }(function (aIndex, a) {
+    value: function getActualInfo(aIndex, a) {
       var _this2 = this;
 
       if (aIndex == this.state.studentAssignments.length) {
+        this.forceUpdate();
         return;
       }
 
@@ -41774,11 +41765,10 @@ var StudentView = function (_React$Component) {
         _this2.setState(assignments, function () {
           // Wait until the new assignments are set, then add the user_assignment
           this.state.assignments[aIndex].user_assignment = a;
-          getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
-          this.forceUpdate();
+          this.getActualInfo(aIndex + 1, this.state.studentAssignments[aIndex + 1]);
         });
       });
-    })
+    }
   }, {
     key: 'getInfo',
     value: function getInfo() {
@@ -41804,7 +41794,7 @@ var StudentView = function (_React$Component) {
               this.setState({ assignments: new Array(this.state.studentAssignments.length) }, function () {
                 // Wait until the assignment has n assignment
                 var a = assignmentResponse.body.objects[0];
-                this.getActualInfo(aIndex, a);
+                this.getActualInfo(0, a);
               });
             });
           } else {
