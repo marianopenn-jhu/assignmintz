@@ -206,8 +206,15 @@ class EditStudentAssignmentResource(ModelResource):
         filtering = {
             'student': ALL
         }
+
+    def hydrate(self, bundle):
+        return bundle
+    def dehydrate(self, bundle):
+        return bundle
+
     def obj_update(self, bundle, request=None, **kwargs):
         try:
+            print('in update')
             curr_student = User.objects.all().get(user_name=bundle.data['user_name'])
             student_assignment = StudentAssignment.objects.all().get(student_assignment_id=bundle.request.path.split('/')[6], student=curr_student)
             points = 0.0
@@ -215,11 +222,13 @@ class EditStudentAssignmentResource(ModelResource):
                 points =points +5.0
                 if bundle.data['actual_difficulty'] is not None and bundle.data['actual_time'] is not None:
                     points = points+ 10.0
-                User.objects.filter(user_name=curr_student.user_name).update(points=curr_student.points+points)
+                    User.objects.filter(user_name=curr_student.user_name).update(points=curr_student.points+points)
+                    StudentAssignment.objects.all().filter(student_assignment_id=bundle.request.path.split('/')[6], student=curr_student).update(done=True, actual_time=bundle.data['actual_time'], actual_difficulty=int(bundle.data['actual_difficulty']))
             bundle = self.full_hydrate(bundle)
+            return bundle
         except (KeyError, ObjectDoesNotExist):
             pass
-        return bundle
+            return bundle
 
 
 class StudentAssignmentResource(ModelResource):
