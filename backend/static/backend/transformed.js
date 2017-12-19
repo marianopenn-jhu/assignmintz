@@ -41765,6 +41765,9 @@ var StudentView = function (_React$Component) {
         _this2.setState(_defineProperty({}, 'assignments', assignments), function () {
           // Wait until the new assignments are set, then add the user_assignment
           var more_assignments = this.state.assignments;
+          console.log(more_assignments);
+          console.log(more_assignments[aIndex]);
+          console.log(a);
           more_assignments[aIndex].user_assignment = a;
 
           this.setState(_defineProperty({}, 'assignments', more_assignments), function () {
