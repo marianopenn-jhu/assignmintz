@@ -27,8 +27,20 @@ class StudentView extends React.Component {
     this.state = {
       courses:[],
       assignments:[],
-      viewState: 0 // 0 = Calendar, 1 = Find a Class
+      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      selected_course: null
     };
+
+    var class_description = new Object();
+    class_description.name = "See Description";
+    var that = this;
+    class_description.onClick = ((course_title, course_id) => {
+      that.openClass(course_id);
+    });
+
+    this.dropdown_elements = [
+      class_description
+    ];
 
     this.getInfo();
 }
@@ -79,9 +91,20 @@ returnToCalendar() {
 findClass() {
   this.setState({viewState:1});
 }
-openClass(){
-  this.setState({viewState:2});
+
+openClass(course_id){
+  console.log(this.state.courses);
+  for (var course in this.state.courses) {
+    console.log(course_id);
+    console.log(course.course_id);
+    if (course.course_id == course_id) {
+      console.log(course);
+      this.setState({['selected_course'] : course});
+      this.setState({viewState:2});
+    }
+  }
 }
+
 openLeaderboard(){
   console.log("hey");
 }
@@ -97,14 +120,13 @@ render() {
     );
     break;
     case 1:
-    view = (  //Find Class to add to class list/schedule
-      // <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar}/>
+    view = (
       <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={1}/>
     );
     break;
-    case 2: // View single class
+    case 2:
       view = (
-        <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} case={2}/>
+        <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} course={state.selected_course} case={2}/>
       );
     break;
     default:
@@ -115,7 +137,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} viewClass={this.openClass} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
+      <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} dropdown_elements={this.dropdown_elements} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>
   );
