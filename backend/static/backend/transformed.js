@@ -41725,7 +41725,7 @@ var StudentView = function (_React$Component) {
       courses: [],
       assignments: [],
       studentAssignments: [],
-      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      viewState: 3, // 0 = Calendar, 1 = Find a Class, 2 = Viewing Class, 3 = Loading
       selected_course: null
     };
 
@@ -41749,6 +41749,7 @@ var StudentView = function (_React$Component) {
 
       if (aIndex == this.state.studentAssignments.length) {
         // We have set the assignment for each student assignment, so return.
+        this.setState(_defineProperty({}, 'viewState', 0));
         this.forceUpdate();
         return;
       }
@@ -41858,6 +41859,8 @@ var StudentView = function (_React$Component) {
           break;
         case 2:
           view = _react2.default.createElement(_index6.default, { session_key: this.props.session_key, user_name: this.props.user_name, onClose: this.returnToCalendar, data: state.courses, role: this.props.role, course: state.selected_course, 'case': 2 });
+          break;
+        case 3:
           break;
         default:
           this.setState({ viewState: 0 });

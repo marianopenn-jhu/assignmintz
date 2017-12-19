@@ -29,7 +29,7 @@ class StudentView extends React.Component {
       courses:[],
       assignments:[],
       studentAssignments:[],
-      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      viewState: 3, // 0 = Calendar, 1 = Find a Class, 2 = Viewing Class, 3 = Loading
       selected_course: null
     };
 
@@ -50,6 +50,7 @@ class StudentView extends React.Component {
 getActualInfo(aIndex) {
   if (aIndex == this.state.studentAssignments.length) {
     // We have set the assignment for each student assignment, so return.
+    this.setState({['viewState'] : 0})
     this.forceUpdate();
     return;
   }
@@ -156,7 +157,9 @@ render() {
       view = (
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} course={state.selected_course} case={2}/>
       );
-    break;
+      break;
+    case 3:
+      break;
     default:
       this.setState({viewState:0});
       this.forceUpdate();
