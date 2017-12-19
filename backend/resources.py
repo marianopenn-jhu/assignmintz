@@ -256,15 +256,15 @@ class StudentAssignmentResource(ModelResource):
 
     #TODO write dehydrate method to call algorithm
     def dehydrate(self, bundle):
-        assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
-        bundle.data['assignment_id'] = assignment.assignment_id
-        bundle.data['description'] = assignment.description
-        bundle.data['due_date'] = assignment.due_date
-        bundle.data['course'] = assignment.course
-        bundle.data['assignment_name'] = assignment.assignment_name
-        bundle.data['assignment_type'] = assignment.assignment_type
-        bundle.data['expected_time'] = assignment.expected_time
-        bundle.data['expected_difficulty'] = assignment.expected_difficulty
+        # assignment = Assignment.objects.all().get(assignment_id=bundle.data['assignment'].split('/')[5])
+        # bundle.data['assignment_id'] = assignment.assignment_id
+        # bundle.data['description'] = assignment.description
+        # bundle.data['due_date'] = assignment.due_date
+        # bundle.data['course'] = assignment.course
+        # bundle.data['assignment_name'] = assignment.assignment_name
+        # bundle.data['assignment_type'] = assignment.assignment_type
+        # bundle.data['expected_time'] = assignment.expected_time
+        # bundle.data['expected_difficulty'] = assignment.expected_difficulty
         bundle.data.pop('session_key', None)
         return bundle
 
