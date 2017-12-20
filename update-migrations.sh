@@ -1,3 +1,4 @@
+rm -rf backend/migrations/
 python3 manage.py makemigrations backend                                            
 python3 manage.py migrate backend
 python3 manage.py makemigrations                                              
