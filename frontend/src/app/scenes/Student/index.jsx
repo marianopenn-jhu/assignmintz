@@ -8,12 +8,49 @@ import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
 //student can use gets from professor api
+import Modal from 'react-bootstrap/lib/Modal';
 
 const Container = styled.div`
   display:inline-block
   vertical-align:top;
   width:100%;
 `;
+
+const Button = styled.button`
+  background: #69FF7A;
+  box-shadow: 0px 2px 10px 2px #3f9949;
+  border-radius: 8px;
+  padding: 15px 30px;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  float: left;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+`;
+
+const modalInstance = (
+  <div className="static-modal">
+    <Modal.Dialog>
+      <Modal.Header>
+        <Modal.Title>Modal title</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+        One fine body...
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button>Close</Button>
+        <Button bsStyle="primary">Save changes</Button>
+      </Modal.Footer>
+
+    </Modal.Dialog>
+  </div>
+);
 
 class StudentView extends React.Component {
   constructor(props) {
@@ -165,6 +202,7 @@ render() {
 
   return (
     <Container>
+    <modalInstance/>
       <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} dropdown_elements={this.dropdown_elements} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>

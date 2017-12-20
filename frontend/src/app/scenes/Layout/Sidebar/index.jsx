@@ -76,14 +76,18 @@ font-size:18px;
 display:inline-block;
 margin-top: 7px;
 text-align: left;
-font-family:Courier;
-font-size:20px;
+font-family:Tahoma, Geneva, sans-serif;
 
 &:hover {
   background: #484848;
   color:white;
   cursor:pointer;
 }
+`;
+
+const MintzStats = styled.div`
+  font-family: Tahoma, Geneva, sans-serif;
+  text-align: center;
 `;
 
 const SidebarTitleMintz = styled.span`
@@ -103,12 +107,16 @@ class Sidebar extends React.Component {
         super(props);
 
         this.state = {
-          mintCount: 0
+          mintCount: 0,
+          student: true
         }
 
         getUser(this.props.user_name, this.props.session_key).then((response) => {
           if (response.status) {
               this.state.mintCount = response.body.points;
+              if (this.state.role == "Professor") {
+                  this.state.student = false;
+              }
           }
         });
     }
@@ -124,6 +132,7 @@ class Sidebar extends React.Component {
     }
 
     render() {
+      var myHiddenField = this.state.student ? 'hidden' : '';
         // Retrieve the classes from the props
         let classes = (
           <div>N/A</div>
@@ -151,7 +160,12 @@ class Sidebar extends React.Component {
                   {classes}
                 </ScrollDiv>
                 <Mintz onClick={this.props.showLeaderboard}>
-                  Mintz: {this.state.mintCount}
+                  <div className={myHiddenField}>
+                    Mintz: {this.state.mintCount}
+                  </div>
+                  <MintzStats className={!myHiddenField}>
+                  Mintz
+                  </MintzStats>
                 </Mintz>
               </SidebarElementContainer>
             </SidebarPanel>

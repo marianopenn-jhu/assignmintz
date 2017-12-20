@@ -5,12 +5,12 @@ import styled from 'styled-components';
 //ensures panel dimensions correct//
 
 const ViewPaneContainer = styled.div`
-position: relative;
-float: left;
-left: 25vw;
-width: 75vw;
-height: 100vh;
-color: green;
+    position: relative;
+    float: left;
+    left: 25vw;
+    width: 75vw;
+    height: 100vh;
+    color: green;
 `;
 
 class MintzModal extends React.Component {
@@ -33,7 +33,7 @@ class MintzModal extends React.Component {
 
         return (
           <ViewPaneContainer>
-            
+            hellow
 
           </ViewPaneContainer>
         );

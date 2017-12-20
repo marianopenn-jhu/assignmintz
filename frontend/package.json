@@ -17,6 +17,7 @@
     "moment": "^2.19.4",
     "rc-slider": "^8.5.0",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.31.5",
     "react-datetime": "^2.11.1",
     "react-dom": "^16.2.0",
     "react-fade": "^1.1.1",

@@ -13,7 +13,7 @@ const Element = styled.li`
   display:inline-block;
   margin-bottom: 7px;
 
-  font-family:Avenir;
+  font-family:Tahoma, Geneva, sans-serif;
   font-size:20px;
 
   &:hover {
