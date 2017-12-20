@@ -19,8 +19,9 @@ named 'assignmintz' and initialize the database with the required tables.
 ### Frontend Build:  
 1. Install npm onto your machine  
 2. Navigate to assignmintz/frontend  
-3. Type 'npm run static' in your terminal for local development and
-    'npm run deploy' for a deployment version
+3. Type 'npm run build:static' in your terminal for local development and
+    'npm run build:prod' for a deployment version. The transformed.js file 
+    will be placed into the static file directory for the backend.
 
 
 ### To build and run for local development (localhost:8000/home/):  
@@ -46,8 +47,10 @@ Navigate to 'localhost:8000/home/' to begin using the app.
 
 ### Deploy Process:
 
+- You must have the heroku CLI installed. 
+- Add the assignmintz app heroku remote with the following command:
+    - heroku git:remote -a theassignmintzapp
 - Make changes to current branch
 - Run 'npm run build:prod'
-- Add/commit changes
+- Add/commit changes (must add and commit the transformed.js file)
 - Run 'git push heroku master'
-- Run 'heroku run python manage.py collectstatic --noinput'
