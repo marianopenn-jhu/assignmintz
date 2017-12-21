@@ -30,15 +30,15 @@ const TopBarContainer = styled.div
 
 const ResultElementContainer = styled.div
 `
-  overflow-x: auto;
+  overflow:hidden;
+  overflow-y:auto;
   min-height: 70px;
+  height:300px;
   width: 100%;
   padding-top:10px;
 `;
 
 const Container = styled.div`
-  overflow:hidden;
-  overflow-y:auto;
   height: 100%;
   width: 100%;
   right: 0;

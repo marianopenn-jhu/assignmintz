@@ -4,7 +4,11 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 // import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx';
+<<<<<<< HEAD
 import MintzModal from '../Layout/MintzModal/index.jsx';
+=======
+import FaSmile from 'react-icons/lib/fa/smile-o';
+>>>>>>> 84c9404c991bbb4649c672ed9de386ec55f7ee63
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
@@ -33,6 +37,33 @@ const Button = styled.button`
 `;
 
 
+const ViewPaneContainer = styled.div`
+  position: relative;
+  float: left;
+  left: 25vw;
+  width: 75vw;
+  height: 100vh;
+  overflow:hidden;
+  overflow-y:auto;
+  z-index: -1;
+  background:white;
+`;
+
+const Inner = styled.div`
+position: absolute;
+   margin: auto;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   width: 100px;
+   height: 100px;
+`;
+
+const SmileDiv = styled.span`
+  font-size:50px;
+`;
+
 class StudentView extends React.Component {
   constructor(props) {
     super(props);
@@ -47,7 +78,7 @@ class StudentView extends React.Component {
       courses:[],
       assignments:[],
       studentAssignments:[],
-      viewState: 0, // 0 = Calendar, 1 = Find a Class
+      viewState: 3, // 0 = Calendar, 1 = Find a Class, 2 = Viewing Class, 3 = Loading
       selected_course: null
     };
 
@@ -69,6 +100,7 @@ class StudentView extends React.Component {
 getActualInfo(aIndex) {
   if (aIndex == this.state.studentAssignments.length) {
     // We have set the assignment for each student assignment, so return.
+    this.setState({['viewState'] : 0})
     this.forceUpdate();
     return;
   }
@@ -176,7 +208,14 @@ render() {
       view = (
         <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} data={state.courses} role={this.props.role} course={state.selected_course} case={2}/>
       );
-    break;
+      break;
+    case 3:
+      view = (
+        <ViewPaneContainer>
+          <Inner><SmileDiv><FaSmile/></SmileDiv></Inner>
+        </ViewPaneContainer>
+      );
+      break;
     default:
       this.setState({viewState:0});
       this.forceUpdate();

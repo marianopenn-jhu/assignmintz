@@ -44,7 +44,7 @@ class ViewPane extends React.Component {
           view = (
             <StudentClassView course={this.props.course} session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose}/>
           )
-        } 
+        }
 
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {

@@ -18,11 +18,7 @@ function editAssignment(assignment_id, session_key, user_name, student, actual_d
     body: JSON.stringify({session_key, user_name, student, actual_difficulty, actual_time, done})
   })).then((response) => {
     status = response.status;
-    if (status >= ERROR_STATUS) {
-      return response.json()
-    } else {
-      return "Empty";
-    }
+    return response.json()
   }).then((json) => {
     if(status >= ERROR_STATUS) {
       return {status: false, body: json};
