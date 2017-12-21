@@ -122,7 +122,7 @@ class MintzModal extends React.Component {
                 <Header>Leaderboard</Header>
                 <ItemLabel>
                 <ResultElementContainer>
-                  heya
+                  leaders
                 </ResultElementContainer>
                 </ItemLabel>
               </Container>

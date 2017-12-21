@@ -225,7 +225,7 @@ render() {
 
   return (
     <Container>
-      <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} dropdown_elements={this.dropdown_elements} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
+      <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} dropdown_elements={this.dropdown_elements}  onClose={this.returnToCalendar} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>
   );

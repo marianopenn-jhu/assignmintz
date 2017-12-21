@@ -49,7 +49,6 @@ class ViewPane extends React.Component {
           view = (
             <MintzModal />
           )
-          console.log("we got a case 4");
         }
 
       } else if (this.props.role == "Professor") {
@@ -64,6 +63,10 @@ class ViewPane extends React.Component {
         }else if (this.props.case == 4) {
           view = (
             <AssignmentEditor session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose} course={this.props.course}/>
+          )
+        } else if (this.props.case == 5) { //leaderboard
+          view = (
+            <MintzModal />
           )
         }
       }

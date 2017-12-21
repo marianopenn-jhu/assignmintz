@@ -31,6 +31,7 @@ class ProfessorView extends React.Component {
     this.editAssignmentsView = this.editAssignmentsView.bind(this);
     this.returnToCalendar = this.returnToCalendar.bind(this);
     this.getInfo = this.getInfo.bind(this);
+    this.openLeaderboard = this.openLeaderboard.bind(this);
 
     this.state = {
       courses:[],
@@ -67,6 +68,10 @@ class ProfessorView extends React.Component {
       delete_class,
       edit_assignments
     ];
+  }
+
+  openLeaderboard(){
+    this.setState({viewState:5});
   }
 
   addClassView() {
@@ -131,6 +136,7 @@ class ProfessorView extends React.Component {
     }
   }
 
+
   render() {
     const state = this.state;
 
@@ -165,6 +171,11 @@ class ProfessorView extends React.Component {
           <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} course={this.state.selected_course} role={this.props.role} case={4}/>
         );
         break;
+      case 5:
+        view = (
+          <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} role={this.props.role} case={5}/>
+        );
+        break;
       default:
         this.setState({viewState:0});
         this.forceUpdate();
@@ -173,7 +184,7 @@ class ProfessorView extends React.Component {
 
     return(
       <Container>
-        <Sidebar data={state.courses} user_name={this.props.user_name} session_key={this.props.session_key} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
+        <Sidebar data={state.courses} user_name={this.props.user_name} session_key={this.props.session_key} showLeaderboard={this.openLeaderboard} clickClasses={this.showClasses} addClass={this.addClassView} dropdown_elements={this.dropdown_elements}/>
         {view}
       </Container>
     );
