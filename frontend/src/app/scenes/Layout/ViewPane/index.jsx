@@ -36,6 +36,7 @@ class ViewPane extends React.Component {
     render() {
       let view = null;
       if (this.props.role == "Student") {
+        console.log("got to student");
         if (this.props.case == 1) {
           view = (
             <FindClassView session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose}/>
@@ -44,6 +45,9 @@ class ViewPane extends React.Component {
           view = (
             <StudentClassView course={this.props.course} session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose}/>
           )
+        } else if (this.props.case == 4) { //leaderboard
+          <MintzModal />
+          console.log("we got a case 4");
         }
 
       } else if (this.props.role == "Professor") {

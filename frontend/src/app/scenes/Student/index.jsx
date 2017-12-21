@@ -4,11 +4,7 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 // import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx';
-<<<<<<< HEAD
-import MintzModal from '../Layout/MintzModal/index.jsx';
-=======
 import FaSmile from 'react-icons/lib/fa/smile-o';
->>>>>>> 84c9404c991bbb4649c672ed9de386ec55f7ee63
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
@@ -186,7 +182,7 @@ openClass(course_id){
 
 openLeaderboard(){
 
-  this.setState({viewState:3});
+  this.setState({viewState:4});
 }
 
 render() {
@@ -214,6 +210,11 @@ render() {
         <ViewPaneContainer>
           <Inner><SmileDiv><FaSmile/></SmileDiv></Inner>
         </ViewPaneContainer>
+      );
+      break;
+    case 4:
+      view = (
+        <ViewPane session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.returnToCalendar} role={this.props.role} case={4}/>
       );
       break;
     default:
