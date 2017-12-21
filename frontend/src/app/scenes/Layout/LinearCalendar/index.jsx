@@ -29,7 +29,6 @@ const ScrollableList=styled.ul`
   margin-top: 10vh;
   padding-top:10px;
   background:white;
-  height:100%;
 `;
 
 var obj = {

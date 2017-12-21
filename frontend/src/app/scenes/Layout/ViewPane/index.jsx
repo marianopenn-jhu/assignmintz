@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
+import MintzModal from '../MintzModal/index.jsx';
 import FindClassView from '../../Student/components/FindClassView/index.jsx';
 import StudentClassView from '../../Student/components/StudentClassView/index.jsx';
 import CreateClassView from '../../Professor/components/CreateClassView/index.jsx';
@@ -15,6 +16,7 @@ float: left;
 left: 25vw;
 width: 75vw;
 height: 100vh;
+overflow: scroll;
 `;
 
 class ViewPane extends React.Component {
@@ -42,7 +44,7 @@ class ViewPane extends React.Component {
           view = (
             <StudentClassView course={this.props.course} session_key={this.props.session_key} user_name={this.props.user_name} onClose={this.props.onClose}/>
           )
-        }
+        } 
 
       } else if (this.props.role == "Professor") {
         if (this.props.case == 1) {

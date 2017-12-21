@@ -18,6 +18,7 @@ const LoginWrapper = styled.div`
 `;
 
 const FormWrapper = styled.div`
+overflow-y: scroll;
 `;
 
 const ButtonWrapper = styled.div`

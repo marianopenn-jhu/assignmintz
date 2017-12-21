@@ -17,6 +17,7 @@ const FormWrapper = styled.div`
   transition: all 0.5s;
   box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.21);
   text-align:center;
+
 `;
 
 const InputWrapper = styled.div`

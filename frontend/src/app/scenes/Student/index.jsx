@@ -4,10 +4,11 @@ import LinearCalendar from '../Layout/LinearCalendar/index.jsx';
 // import FindClassView from './components/FindClassView/index.jsx';
 import Sidebar from '../Layout/Sidebar/index.jsx';
 import ViewPane from '../Layout/ViewPane/index.jsx';
+import MintzModal from '../Layout/MintzModal/index.jsx';
 import {getCourses} from '../../services/api/course/get-course.js';
 import {getAssignment} from '../../services/api/professor/get-assignment.js';
 import {getStudentAssignment} from '../../services/api/student/get-assignment.js';
-//student can use gets from professor api
+
 import Modal from 'react-bootstrap/lib/Modal';
 
 const Container = styled.div`
@@ -15,7 +16,6 @@ const Container = styled.div`
   vertical-align:top;
   width:100%;
 `;
-
 const Button = styled.button`
   background: #69FF7A;
   box-shadow: 0px 2px 10px 2px #3f9949;
@@ -32,25 +32,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const modalInstance = (
-  <div className="static-modal">
-    <Modal.Dialog>
-      <Modal.Header>
-        <Modal.Title>Modal title</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        One fine body...
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button>Close</Button>
-        <Button bsStyle="primary">Save changes</Button>
-      </Modal.Footer>
-
-    </Modal.Dialog>
-  </div>
-);
 
 class StudentView extends React.Component {
   constructor(props) {
@@ -83,6 +64,7 @@ class StudentView extends React.Component {
 
     this.getInfo();
 }
+
 
 getActualInfo(aIndex) {
   if (aIndex == this.state.studentAssignments.length) {
@@ -171,7 +153,8 @@ openClass(course_id){
 }
 
 openLeaderboard(){
-  console.log("hey");
+
+  this.setState({viewState:3});
 }
 
 render() {
@@ -202,7 +185,6 @@ render() {
 
   return (
     <Container>
-    <modalInstance/>
       <Sidebar data={state.courses} user_name={this.props.user_name} addClass={this.findClass} dropdown_elements={this.dropdown_elements} showLeaderboard={this.openLeaderboard} session_key={this.props.session_key}/>
         {view}
     </Container>

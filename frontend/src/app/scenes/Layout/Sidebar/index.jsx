@@ -1,7 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-//import TransitionGroup from 'react-addons-transition-group';
-import MintzModal from '../MintzModal/index.jsx';
 import SidebarElement from './components/SidebarElement/index.jsx';
 import SidebarUserInfo from './components/SidebarUserInfo/index.jsx';
 import SidebarClassesTitle from './components/SidebarClassesTitle/index.jsx';
@@ -88,6 +87,11 @@ font-family:Tahoma, Geneva, sans-serif;
 const MintzStats = styled.div`
   font-family: Tahoma, Geneva, sans-serif;
   text-align: center;
+
+  .hidden {
+    display: none;
+    transition: opacity 500ms ease-in;
+  }
 `;
 
 const SidebarTitleMintz = styled.span`
@@ -102,13 +106,31 @@ const SidebarElementContainer = styled.ul`
     padding: 0;
 `;
 
+var styles = {
+  hidden: {
+    display:'none'
+  },
+
+  none: {
+    display:'inline'
+  }
+};
+
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
 
+        this.handleClick = this.handleClick.bind(this);
+        this.componentWillEnter = this.componentWillEnter.bind(this);
+        this.componentWillLeave = this.componentWillLeave.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
         this.state = {
           mintCount: 0,
-          student: true
+          student: true,
+          hidden: true
         }
 
         getUser(this.props.user_name, this.props.session_key).then((response) => {
@@ -121,18 +143,38 @@ class Sidebar extends React.Component {
         });
     }
 
-    componentWillEnter (callback) {
-      const el = this.container;
-      TweenMax.fromTo(el, 0.3, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: callback});
-    }
+componentWillEnter (callback) {
+  const el = this.container;
+  TweenMax.fromTo(el, 0.3, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: callback});
+}
 
-    componentWillLeave (callback) {
-      const el = this.container;
-      TweenMax.fromTo(el, 0.3, {y: 0, opacity: 1}, {y: -100, opacity: 0, onComplete: callback});
-    }
+componentWillLeave (callback) {
+  const el = this.container;
+  TweenMax.fromTo(el, 0.3, {y: 0, opacity: 1}, {y: -100, opacity: 0, onComplete: callback});
+}
+
+
+componentWillMount() {
+  document.addEventListener('click', this.handleClick, false);
+}
+
+componentWillUnmount() {
+  document.removeEventListener('click', this.handleClick, false);
+}
+
+handleClick(e) {
+  if(!ReactDOM.findDOMNode(this).contains(e.target)) {
+    this.setState({['hidden']: true});
+  }
+  else {
+    const {hidden} = this.state;
+    this.setState({['hidden']: !hidden});
+  }
+}
 
     render() {
-      var myHiddenField = this.state.student ? 'hidden' : '';
+      var hide = this.state.board  ? "hidden" : "";
+      var BlahWork = this.state.student ? 'hidden' : 'none';
         // Retrieve the classes from the props
         let classes = (
           <div>N/A</div>
@@ -140,7 +182,7 @@ class Sidebar extends React.Component {
         if (this.props.data != null) {
           classes = this.props.data.map((e, i) => {
             return (
-              <SidebarElement key={i} course={e} dropdown_elements={this.props.dropdown_elements} triggerEvent={this.props.viewClass}/>
+              <SidebarElement key={i} course={e} dropdown_elements={this.props.dropdown_elements}/>
             )
           });
         };
@@ -160,13 +202,18 @@ class Sidebar extends React.Component {
                   {classes}
                 </ScrollDiv>
                 <Mintz onClick={this.props.showLeaderboard}>
-                  <div className={myHiddenField}>
+                  <MintzStats className={!BlahWork}>
                     Mintz: {this.state.mintCount}
-                  </div>
-                  <MintzStats className={!myHiddenField}>
+                  </MintzStats>
+                  <MintzStats className={BlahWork}>
                   Mintz
                   </MintzStats>
                 </Mintz>
+
+                <ScrollDiv style={this.state.hidden ? styles.hidden : styles.none}>
+                  leaderbord
+                </ScrollDiv>
+
               </SidebarElementContainer>
             </SidebarPanel>
           </SidebarContainer>
