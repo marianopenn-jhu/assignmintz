@@ -78,6 +78,23 @@ const Header = styled.h1`
   padding-left:50px;
 `;
 
+const ItemLabel = styled.div
+`
+  display:block;
+  padding: 20px 50px;
+  text-align:center;
+`;
+
+const ResultElementContainer = styled.div
+`
+  overflow:hidden;
+  overflow-y:auto;
+  min-height: 70px;
+  height:300px;
+  width: 100%;
+  padding-top:10px;
+`;
+
 
 class MintzModal extends React.Component {
     constructor(props) {
@@ -102,10 +119,15 @@ class MintzModal extends React.Component {
             <Panel>
               <Container>
                 <XOut onClick={this.props.onClose}><FaClose/></XOut>
-                <Header>Add a Class</Header>
-
+                <Header>Leaderboard</Header>
+                <ItemLabel>
+                <ResultElementContainer>
+                  heya
+                </ResultElementContainer>
+                </ItemLabel>
               </Container>
             </Panel>
+
           </PanelContainer>
         );
 
