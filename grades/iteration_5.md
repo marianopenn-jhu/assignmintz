@@ -9,12 +9,21 @@ Right now the demo isn't working. Lots of bugs! I'm not even able to perform bas
 
 (-15 points)
 
+**Edit**
+
+(-7.5 points)
+
 #### Code Quality
 [30 points] (Good use of object-oriented design principles in codebase?  Absence of smells in code?)
 
 I really don't see a whole lot of code for the final iteration. I don't think a lot of your API endpoints from the documentation aren't working. Apart from that the code that you have is okay.
 
 (-10 points)
+
+**Edit**
+
+(-5 points)
+
 
 ### Testing and Coverage
 [20 points] (Continue to write more tests for new features and improve coverage?)
@@ -47,5 +56,5 @@ Looks good!
 
 You need to get done with CRUD API's and UI integrated asap.
 
-**Grade: 75/100**
+**Grade: 87.5/100**
 

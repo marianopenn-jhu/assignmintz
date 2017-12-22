@@ -41,6 +41,10 @@ I could not get the app to work after following your README instructions. I have
 
 (-10 points)
 
+**Edit**
+
+(-5 points)
+
 #### Top-level file CHANGELOG.md present in your repo and describes progress in this iteration well
 
 All good here!
@@ -53,4 +57,4 @@ Looks good!
 ### Other Remarks
 
 
-**Grade: 90/100**
+**Grade: 95/100**

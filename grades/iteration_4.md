@@ -19,6 +19,10 @@ You seemed to have missed adding the tear down methods. You should always restor
 
 (-3 points)
 
+**Edit**
+
+(-0 points)
+
 #### Test coverage
 [10 points] Good coverage with tests?
 
@@ -39,12 +43,18 @@ Deployment doesn't really work right now. You should try fixing it ASAP.
 
 (-2 points)
 
+**Edit**
+
+(-1 points)
+
+
 ### Advanced Git usage
 [10 points] (Still being good about regular commits, pull requests, etc?  Additionally, development primarily taking place on feature branches, no personal-named branches, good git workflow overall?)
 
 You guys aren't making pull requests. You should make a new feature branch, commit to it and then create a PR to master. Apart from that everything looks fine.
 
 (-3 points)
+
 
 ### Iteration submission and reporting
 
@@ -55,8 +65,13 @@ In future, you should document what you've done for each iteration.
 
 Changelog isn't being updated after iteration 3. Please do keep it updated.
 (-5 Points)
+
+**Edit**
+
+(-2.5 points)
+
 ### Other Remarks
 
 
-**Grade: 87/100**
+**Grade: 93.5/100**
 

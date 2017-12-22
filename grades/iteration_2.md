@@ -28,6 +28,10 @@ Architecture is good but you still haven't taken your SIS key and prototyped sen
 
 (-5 Point)
 
+**Edit**
+
+(-2.5 point)
+
 ### Initial code
 (Challenging libraries prototyped?  Server stood up and some basic code written?  Frontend prototyped? 100+ lines of original code, not just pasting in a tutorial?)
 
@@ -40,9 +44,13 @@ I can see some frontend and some backend code which is a good sign!
 
 (-5 Point)
 
+**Edit**
+
+(-0 point)
+
 ### Other General Remarks
 
 Good progress but you need to get the SIS key and prototype to figure out if that solves all your usecases.
 
-**Grade: 90/100**
+**Grade: 97.5/100**
 
